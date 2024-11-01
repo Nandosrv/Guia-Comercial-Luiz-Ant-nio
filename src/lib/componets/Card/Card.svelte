@@ -1,5 +1,7 @@
 <script lang="ts">
-	import Call from "../call.svelte";
+	import Avaliacao from "../avaliacao.svelte";
+import Call from "../call.svelte";
+	import Review from "../Review.svelte";
 
      type Product = {
 		slug: string;
@@ -32,7 +34,7 @@
 
 
 
-<section class="py-14 flex h-[500px] ">
+<section class="py-14 flex h-[500px] border border-red-500 ">
     <div class="flex  w-full">
       
       <div class="mt-4 flex ">
@@ -65,18 +67,19 @@
                       </a>
                 </div>
                 <div class="w-[200px] ">
-                    <a href="tel:{product?.telefone}">
-                        <Call />
-                      </a>
+                <Avaliacao />
                 </div>
                 <div>
-                  
+                
+                
+                 
                 </div>
                
             </div>
-            <div>
-              <!-- <h1> {product?.hours} </h1> -->
+            <div class="w-[100%] border border-blue-500">
+              <Review />
             </div>
+            
             </li>
           {/each}
         </ul>
