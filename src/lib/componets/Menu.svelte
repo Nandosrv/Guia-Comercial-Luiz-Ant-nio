@@ -5,7 +5,6 @@
 	
 	const items = [
 		{ href: '/', Label: 'Home'},
-		{ href: '/contatos', Label: 'Contatos'},
 		{ href: '/Comercios', Label: 'Comercios'},
 		{ href: '/Blog', Label: 'Blog'},
 		{ href: '/Eventos', Label: 'Eventos'},
