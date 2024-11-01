@@ -6,8 +6,8 @@
 	const items = [
 		{ href: '/', Label: 'Home'},
 		{ href: '/Comercios', Label: 'Comercios'},
-		{ href: '/Blog', Label: 'Blog'},
-		{ href: '/Eventos', Label: 'Eventos'},
+		
+		
         
 		
 	]
