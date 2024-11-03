@@ -12,6 +12,12 @@
 	
 </script>
 
+
+<main>
+	<h1>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, veritatis similique et accusantium obcaecati nihil voluptas rerum amet rem distinctio cupiditate quasi, iure eum maxime velit ratione tenetur dolores aliquid.
+	</h1>
+</main>
 <!-- <section class="flex h-2/4 w-full justify-around border border-red-500 bg-zinc-900">
 
 	<div class="al flex w-2/5 border border-red-400">

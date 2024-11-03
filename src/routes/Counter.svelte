@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { spring } from 'svelte/motion';
 
 	let count = $state(0);
@@ -103,4 +103,4 @@
 		top: -100%;
 		user-select: none;
 	}
-</style>
+</style> -->

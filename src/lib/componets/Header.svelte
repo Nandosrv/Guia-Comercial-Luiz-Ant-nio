@@ -1,5 +1,5 @@
 <script>
-	import Hamburge from './hamburge.svelte';
+	
 import Logo from './Logo.svelte';
 	import Menu from './Menu.svelte';
 </script>
