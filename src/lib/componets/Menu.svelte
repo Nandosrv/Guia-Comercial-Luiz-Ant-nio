@@ -6,7 +6,7 @@
 
 	const items = [
 		{ href: '/', Label: 'Home' },
-		{ href: '/Comercios', Label: 'Comercios' }
+		{ href: '../../routes/Comercios/+page.svelte', Label: 'Comercios' }
 	];
 	let isOpen = false;
 
