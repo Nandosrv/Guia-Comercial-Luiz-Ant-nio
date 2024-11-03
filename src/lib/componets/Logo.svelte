@@ -1,5 +1,5 @@
 <script>
-	import img from '../images/antonio.png';
+	import img from '../images/icon.png';
 </script>
 
 <!-- <a href="/">
@@ -7,5 +7,5 @@
 
 </a> -->
 <a href="/">
-	<img src={img} class="h-15 w-14 cursor-pointer" alt="Logo" />
+	<img src={img} class="h-10 w-10 cursor-pointer" alt="Logo" />
 </a>
