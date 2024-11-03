@@ -12,8 +12,7 @@
 	
 </script>
 
-<section class="flex h-2/4 w-full justify-around border border-red-500 bg-zinc-900">
-	<!-- <img src={city} class=" flex bg-center bg-repeat bg-cover" alt="Vista aérea da cidade ao entardecer" /> -->
+<!-- <section class="flex h-2/4 w-full justify-around border border-red-500 bg-zinc-900">
 
 	<div class="al flex w-2/5 border border-red-400">
 		<div class="border border-red-400 w-96 mt-8">
@@ -54,7 +53,7 @@
 	<div class="h-full w-96 border border-red-500"></div>
 	<div class="h-full w-96 border border-red-500"></div>
 </section>
-<h1 class="text-3x1 text-red-500">Home</h1>
+<h1 class="text-3x1 text-red-500">Home</h1> -->
 
 <!-- <svelte:head>
 	<title>Home</title>

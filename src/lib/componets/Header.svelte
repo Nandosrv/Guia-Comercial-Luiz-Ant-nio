@@ -7,6 +7,7 @@
 	<div class="  flex items-center justify-center p-4 capitalize text-gray-600 dark:text-gray-300">
 		<Menu />
 	</div>
+	<!-- <img src={city} class=" flex bg-center bg-repeat bg-cover" alt="Vista aérea da cidade ao entardecer" /> -->
 	
 </nav>
 

@@ -21,7 +21,7 @@
 	<Logo />
 
 
-<div class="m-8">
+<div class="m-8 ">
 {#each items as {href, Label}}
 {#if $page.url.pathname == href}
 <a {href} class="font-['Inter'] text-gray-800 transition-colors duration-300 transform dark:text-gray-200 border-b-2 border-blue-500 mx-1.5 sm:mx-6">{Label}</a>
