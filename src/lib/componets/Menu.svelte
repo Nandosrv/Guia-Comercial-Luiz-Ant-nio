@@ -7,7 +7,8 @@
 
 	const items = [
 		{ href: '/', Label: 'Home' },
-		{ href: '../../routes/user/+page.svelte', Label: 'user' },
+		{ href: '../../routes/Comercios/+page.svelte', Label: 'Comercios' },
+
 
 	];
 	let isOpen = false;
