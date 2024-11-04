@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Lest from './../lib/componets/lest.svelte';
 	import city from '$lib/images/city.jpg';
 	import Allura from '$lib/images/Allura.png';
 	import Counter from './Counter.svelte';
@@ -13,11 +14,29 @@
 </script>
 
 
-<main>
-	<h1>
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, veritatis similique et accusantium obcaecati nihil voluptas rerum amet rem distinctio cupiditate quasi, iure eum maxime velit ratione tenetur dolores aliquid.
-	</h1>
+<main class="w-full  flex ">
+	<div class="w-full flex justify-center">
+		<div class="flex">
+			<Pesquisa />
+		</div>
+	</div>
+	
 </main>
+<div class="flex w-full justify-center mt-4">
+	<div class="w-[304px] flex font-['Inter']  rounded-xl bg-[#7BECEE] items-center">
+		<h2>
+			CONECTANDO VOCÊ AOS MELHORES
+			  COMÉRCIOS DE LUIZ ANTÔNIO!
+		</h2>
+	</div>
+</div>
+<main class="w-full h-[600px] mt-10">
+
+		<Lest />
+
+	
+</main>
+
 <!-- <section class="flex h-2/4 w-full justify-around border border-red-500 bg-zinc-900">
 
 	<div class="al flex w-2/5 border border-red-400">

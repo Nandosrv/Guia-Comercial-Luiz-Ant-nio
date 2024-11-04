@@ -11,7 +11,7 @@ import Logo from './Logo.svelte';
 		<Menu />
 		
 	</div>
-	<!-- <img src={city} class=" flex bg-center bg-repeat bg-cover" alt="Vista aérea da cidade ao entardecer" /> -->
+	
 	
 </nav>
 
