@@ -26,6 +26,7 @@
                 <!-- <p>Hover Me</p> -->
             </div>
             <div class="flip-card-back absolute">
+                
                 <p class="title">Assistencia</p>
                 <p>Tecnica</p>
             </div>
@@ -139,7 +140,6 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border: 1px solid coral;
   border-radius: 1rem;
 }
 
