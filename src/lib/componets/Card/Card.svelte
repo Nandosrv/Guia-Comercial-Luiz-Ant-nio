@@ -1,41 +1,60 @@
 <script lang="ts">
-	import Avaliacao from "../avaliacao.svelte";
-import Call from "../call.svelte";
-	import Review from "../Review.svelte";
-	import Whatsapp from "../whatsapp.svelte";
+	import Avaliacao from '../avaliacao.svelte';
+	import Call from '../call.svelte';
+	import Liga from '../Liga.svelte';
+	import Review from '../Review.svelte';
+	import Whatsapp from '../whatsapp.svelte';
 
-     type Product = {
+	type Product = {
 		slug: string;
 		title: string;
 		telefone: string;
 		image: string;
-      
-        
-
 	};
-    type IProps = {
-        product?: Product
-    }
-    let {product}: IProps = $props()
+	type IProps = {
+		product?: Product;
+	};
+	let { product }: IProps = $props();
 
-    let team = [
-        {
-      name: "Martiana dialan",
-      titlle: "Product designer",
-      
-            
-    },
-    
-    
-    ]
-
+	let team = [
+		{
+			name: 'Martiana dialan',
+			titlle: 'Product designer'
+		}
+	];
 </script>
 
+<section class="flex h-[700px] w-[500px] rounded-[12px] py-14">
+	<main class="w-full rounded-[12px] border border-red-950">
+		<img src={product?.image} class="h-[300px] w-full rounded-[12px]" alt="" />
+		<main class="flex h-16 w-full items-center justify-between">
+			<div class="flex w-[50%] items-center border-4 border-indigo-200">
+				<Liga />
+				<p class="m-auto flex items-center">
+					{product?.telefone}
+				</p>
+			</div>
+			<div class="flex w-[50%] justify-end border-4 border-indigo-200">
+				<Whatsapp />
+			</div>
+		</main>
+		<section class="h-[250px] w-[100%] border border-red-800">
+			<div class="mt-2 flex w-full">
+				<Avaliacao />
+			</div>
+			<div>
+				<p class="m-2 text-xl">
+					{product?.title}
+				</p>
+			</div>
+		</section>
+		<div>
+			<Review />
+		</div>
+	</main>
+</section>
 
-
-
-<section class="py-14 flex h-[500px] border border-red-500 ">
-    <div class="flex  w-full">
+<!-- <div class="flex  w-full">
       
       <div class="mt-4 flex ">
         
@@ -84,8 +103,4 @@ import Call from "../call.svelte";
           {/each}
         </ul>
       </div>
-    </div>
-  </section>
-
-
- 
+    </div> -->

@@ -3,10 +3,12 @@
 	import Logo from '$lib/componets/Logo.svelte';
 	import Pesquisa from './pesquisa.svelte';
 	import img from '$lib/images/antonio.png';
+	import user from '$lib/images/usuário.png'
 
 	const items = [
 		{ href: '/', Label: 'Home' },
-		{ href: '../../routes/Comercios/+page.svelte', Label: 'Comercios' }
+		{ href: '../../routes/user/+page.svelte', Label: 'user' },
+
 	];
 	let isOpen = false;
 
@@ -71,7 +73,7 @@
 					>Inico</a
 				>
 				<a
-					href={'Comercios'}
+					href='/'
 					class="transform rounded-lg px-2.5 py-2 text-gray-700 transition-colors duration-300 hover:bg-gray-100 md:mx-2 dark:text-gray-200 dark:hover:bg-gray-700"
 					>Comercios</a
 				>
@@ -80,6 +82,9 @@
 					class="transform rounded-lg px-2.5 py-2 text-gray-700 transition-colors duration-300 hover:bg-gray-100 md:mx-2 dark:text-gray-200 dark:hover:bg-gray-700"
 					>ofertas</a
 				>
+				<!-- <a href=" {user} ">
+					<img class="p-1" src=" {user} " alt="">
+				</a> -->
 			</div>
 
 			<div class="relative mt-4 md:mt-0">

@@ -10,29 +10,29 @@
     .whatsapp-button {
         display: flex;
         align-items: center;
-        padding: 10px 20px;
-        background-color: #25D366;
-        color: white;
-        border-radius: 8px;
-        font-weight: bold;
-        text-decoration: none;
+        justify-content: center; /* Centraliza o ícone */
+        padding: 10px;
+        background-color: #25D366; /* Cor de fundo do botão */
+        border-radius: 50%; /* Botão circular */
         transition: background-color 0.3s;
+        width: 50px; /* Largura do botão */
+        height: 50px; /* Altura do botão */
     }
+
     .whatsapp-button:hover {
-        background-color: #1ebe5d;
+        background-color: #1ebe5d; /* Cor de fundo ao passar o mouse */
     }
+
     .whatsapp-icon {
-        margin-right: 10px;
-        width: 20px;
-        height: 20px;
+        width: 24px; /* Largura do ícone */
+        height: 24px; /* Altura do ícone */
     }
 </style>
 
-<a class="whatsapp-button" href={whatsappLink} target="_blank">
+<a class="whatsapp-button" href={whatsappLink} target="_blank" aria-label="Entrar em contato via WhatsApp">
     <img
         class="whatsapp-icon"
         src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
         alt="WhatsApp"
     />
-    Fale Conosco
 </a>
