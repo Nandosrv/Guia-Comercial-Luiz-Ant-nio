@@ -22,7 +22,7 @@
         <div class="flip-card-inner ">
             <div class="flip-card-front">
                 <img class="h-[254px] object-cover rounded-xl" src="{ASSSSIS} " alt="">
-                <p class="z-10 title flex justify-center items-center w-[200px] absolute">Assistência</p>
+                <p class="title flex justify-center items-center w-[200px] absolute">Assistência</p>
                 <!-- <p>Hover Me</p> -->
             </div>
             <div class="flip-card-back absolute">
@@ -35,7 +35,7 @@
         <div class="flip-card-inner">
             <div class="flip-card-front ">
                 <img class="h-[254px] object-cover rounded-xl" src="{ELETR} " alt="">
-                <p class="title z-10 title flex justify-center items-center w-[200px] absolute">Eletricista</p>
+                <p class="title title flex justify-center items-center w-[200px] absolute">Eletricista</p>
                 <!-- <p>Hover Me</p> -->
             </div>
             <div class="flip-card-back">
@@ -48,7 +48,7 @@
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img class="h-[254px] object-cover rounded-xl" src="{Saude} " alt="">
-                <p class="title z-10 title flex justify-center items-center w-[200px] absolute">Saúde</p>
+                <p class="title title flex justify-center items-center w-[200px] absolute">Saúde</p>
                 <!-- <p>Hover Me</p> -->
             </div>
             <div class="flip-card-back">
@@ -61,7 +61,7 @@
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img class="h-[254px] object-cover rounded-xl" src="{MARCENEIRO} " alt="">
-                <p class="title z-10 title flex justify-center items-center w-[200px] absolute">Marceneiro</p>
+                <p class="title title flex justify-center items-center w-[200px] absolute">Marceneiro</p>
                 <!-- <p>Hover Me</p> -->
             </div>
             <div class="flip-card-back">
@@ -74,11 +74,11 @@
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img class="h-[254px] object-cover rounded-xl" src="{ADVOCACIA} " alt="">
-                <p class="title z-10 title flex justify-center items-center w-[200px] absolute">Advocacia</p>
+                <p class="title flex justify-center items-center w-[200px] absolute">Advocacia</p>
                 <!-- <p>Hover Me</p> -->
             </div>
             <div class="flip-card-back">
-                <p class="title">Consultoria e serviços jurídicos</p>
+                <p class="title1">Consultoria e serviços jurídicos</p>
               
             </div>
         </div>
@@ -87,7 +87,7 @@
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img class="h-[254px] object-cover rounded-xl" src="{image2} " alt="">
-                <p class="title z-10 title flex justify-center items-center w-[200px] absolute">Outro Serviço</p>
+                <p class="title title flex justify-center items-center w-[200px] absolute">Outro Serviço</p>
                 <!-- <p>Hover Me</p> -->
             </div>
             <div class="flip-card-back">
