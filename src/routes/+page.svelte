@@ -17,6 +17,7 @@
 	import Cartas from '$lib/images/55638e4e-9618.png';
 	import Pops from '$lib/images/icon-pos.png';
 	import Cardcity from '$lib/images/51e8cf29-30c9-4bfe-bc52-2afbab085d5c.png';
+	import Muda from '$lib/componets/muda.svelte';
     
 
 	
@@ -38,15 +39,8 @@
 			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
 		</div>
 		<!-- Tamnho do content -->
-		<div class="w-[100%] h-[340px] flex flex-col bg-[#09052D]">
-			<!-- Divis -->
-			
-			<div class="w-[360px] flex justify-end ">
-				<!-- <div class="w-[121px] h-[12px] bg-white "> -->
-			
-
-				<!-- </div> -->
-			</div>
+		<div class="w-[100%] h-[340px] flex flex-col bg-[#09052D] ">
+		
 			<div class="mt-5 w-[350px] flex justify-end ">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
@@ -104,12 +98,12 @@
 			</div>
 			
 			<div class="w-full h-[75px] absolute  justify-end flex mt-14 ">
-				<div class="z-10 w-full h-[75px] justify-center flex ">
-					<div class="w-[340px] h-[70px] flex justify-center items-center">
+				<div class="z-10 w-full h-[75px] justify-center flex  md:justify-end">
+					<div class="w-[340px] h-[70px] flex justify-center items-center md:w-[500px] ">
 						<!-- icon -->
-						<div class="w-[250px] h-[50px] flex justify-between gap-6 items-center ">
+						<div class="w-[250px] h-[50px] flex justify-between gap-6 items-center  md:w-[280px] ">
 						<!-- icon -->
-							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl justify-center items-center">
+							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl justify-center items-center ">
 								<a href="/">
 								<img class="w-[41px] h-[35px] " src="{Homes}" alt="">
 								</a>
@@ -149,22 +143,27 @@
 		
 		</div>
 		
-		<div class="bg-[#09052D] w-[100%] h-[360px]  relative ">
+		<div class="bg-[#09052D] w-[100%] h-[100px]  relative ">
 			<div class="w-full flex justify-end ">
-				<img class="flex mt-4" src=" {Pops} " alt="">
 
 			</div>
 				
 			<div class="w-full h-10  bg-[#FCDF1D] ">
 					
-					<div class="w-full flex justify-end">
+					<div class="w-full h-14 mt-1 flex bg-[#FCDF1D] justify-between items-center border-b-4">
 						
-						<h2>EM ALTA</h2>
+						<h2 class="font-['Inter'] text-[22px] ">MAIS PESQUISADOS</h2>
+				<img class="flex" src=" {Pops} " alt="">
+
 					</div>
-					<div class="">
-					</div>
+					
 				</div>
+				
+		</div>
+		<div class="w-full h-full bg-[#09052D] border border-[#09052D]">
+			<Muda />
 		</div>
 	</div>
+	
 	
 	
