@@ -39,18 +39,6 @@
 
 				</div>
 			</div>
-			<div class="mt-5 w-[380px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[370px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
 			<div class="mt-5 w-[360px] flex justify-end ">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
@@ -75,7 +63,7 @@
 
 				</div>
 			</div>
-			<div class="mt-5 w-[320px] flex justify-end">
+			<div class="mt-5 w-[320px] flex justify-end ">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
 
@@ -87,24 +75,13 @@
 
 				</div>
 			</div>
-			<div class="mt-5 w-[300px] flex justify-end ">
+			<div class="mt-5 w-[300px] flex justify-end">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
 
 				</div>
 			</div>
-			<div class="mt-5 w-[290px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
 			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[280px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
 			
 		
 		</div>
