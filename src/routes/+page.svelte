@@ -33,13 +33,7 @@
 			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
 		</div>
 		<div class="w-[100%] h-[400px] flex flex-col bg-[#09052D]">
-			<div class="w-[390px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[360px] flex justify-end ">
+			<div class="w-[360px] flex justify-end ">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
 
@@ -63,19 +57,25 @@
 
 				</div>
 			</div>
-			<div class="mt-5 w-[320px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
 			<div class="mt-5 w-[310px] flex justify-end ">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
 
 				</div>
 			</div>
-			<div class="mt-5 w-[300px] flex justify-end">
+			<div class="mt-5 w-[300px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[290px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[280px] flex justify-end">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
 
