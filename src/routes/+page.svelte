@@ -15,13 +15,15 @@
 	import Cash from '$lib/images/icons8-cash-80.png';
 	import Sos from '$lib/images/icons8-sos-48.png';
 	import Cartas from '$lib/images/55638e4e-9618.png';
+	import Pops from '$lib/images/icon-pos.png';
+	import Cardcity from '$lib/images/51e8cf29-30c9-4bfe-bc52-2afbab085d5c.png';
     
 
 	
 </script>
 <main class="flex justify-center bg-[#09052D] w-[100%] h-[300px] overflow-hidden  ">
 	<div class="flex justify-center w-[340px] h-[300px]  ">
-	<img class="w-[315px] h-[300px] object-cover" src="{City} " alt="">
+	<img class="w-[315px] h-[300px] object-cover" src="{Cardcity} " alt="">
 	<div class="flex justify-center items-end w-[320px] h-[290px] absolute ">
 	</div>
 	</div>
@@ -35,12 +37,15 @@
 			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
 			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
 		</div>
-		<div class="w-[100%] h-[400px] flex flex-col bg-[#09052D]">
+		<!-- Tamnho do content -->
+		<div class="w-[100%] h-[340px] flex flex-col bg-[#09052D]">
+			<!-- Divis -->
+			
 			<div class="w-[360px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
+				<!-- <div class="w-[121px] h-[12px] bg-white "> -->
 			
 
-				</div>
+				<!-- </div> -->
 			</div>
 			<div class="mt-5 w-[350px] flex justify-end ">
 				<div class="w-[121px] h-[12px] bg-white ">
@@ -54,7 +59,14 @@
 
 				</div>
 			</div>
+			
 			<div class="mt-5 w-[330px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[320px] flex justify-end ">
 				<div class="w-[121px] h-[12px] bg-white ">
 			
 
@@ -78,17 +90,31 @@
 
 				</div>
 			</div>
+			<div class="mt-5 w-[280px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
 			
-			<div class="w-full h-[230px] absolute  justify-end flex mt-14">
-				<div class="z-10 w-full h-[50px] justify-end flex ">
-					<div class="w-[240px] h-[50px] ">
-						<div class="mr-[11px] [200px] h-[50px] flex justify-center gap-3 items-center">
-							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl ">
+
+				</div>
+			</div>
+			<div class="mt-5 w-[250px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			
+			<div class="w-full h-[75px] absolute  justify-end flex mt-14 ">
+				<div class="z-10 w-full h-[75px] justify-center flex ">
+					<div class="w-[340px] h-[70px] flex justify-center items-center">
+						<!-- icon -->
+						<div class="w-[250px] h-[50px] flex justify-between gap-6 items-center ">
+						<!-- icon -->
+							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl justify-center items-center">
 								<a href="/">
 								<img class="w-[41px] h-[35px] " src="{Homes}" alt="">
 								</a>
 							</div>
-							<div class="w-[39px] h-[40px] object-cover bg-yellow-400 rounded-2xl ">
+							<div class="w-[39px] h-[40px] object-cover bg-yellow-400 rounded-2xl hover:text-red-500 ">
 								<a href="/">
 									<img class="w-[41px] h-[35px] " src="{Schop}" alt="">
 									</a>
@@ -107,13 +133,13 @@
 						</div>
 					</div>
 				</div>
-				<img class="w-[265px] h-[165px] absolute " src="{Cartas}" alt="">
+				<img class="w-[449px] h-[271px] absolute " src="{Cartas}" alt="">
 
 			</div>
 			
 			<div class="mt-5 w-[100%] flex justify-end ">
 
-				<div class="w-[100%] h-[12px] bg-white ">
+				<div class="w-[100%] h-[22px] bg-white ">
 					
 
 				</div>
@@ -122,109 +148,23 @@
 			
 		
 		</div>
-		<div class="bg-[#09052D] w-[100%] h-[360px] ">
-				
-		</div>
-	</div>
-	
+		
+		<div class="bg-[#09052D] w-[100%] h-[360px]  relative ">
+			<div class="w-full flex justify-end ">
+				<img class="flex mt-4" src=" {Pops} " alt="">
 
-<!-- <section class="flex h-2/4 w-full justify-around border border-red-500 bg-zinc-900">
-
-	<div class="al flex w-2/5 border border-red-400">
-		<div class="border border-red-400 w-96 mt-8">
-			<h1 class="font-['inter'] text-4xl font-bold text-white mb-4">Bem-vindo ao Catálogo de Comércios de Luiz Antônio!</h1>
-			<p class="text-lg text-white mb-2 text-center max-w-md">
-			  Encontre facilmente os números de contato dos comércios da sua região. Nosso catálogo foi criado para ajudar você a acessar informações de forma rápida e prática.
-			</p>
-			<p class="text-lg text-white text-center max-w-md">
-			  Explore nossas categorias e descubra lojas, serviços e ofertas disponíveis perto de você!
-			</p>
-			<div class="border border-red-400 h-14">
-				<Search />
-				
 			</div>
-			
+				
+			<div class="w-full h-10  bg-[#FCDF1D] ">
+					
+					<div class="w-full flex justify-end">
+						
+						<h2>EM ALTA</h2>
+					</div>
+					<div class="">
+					</div>
+				</div>
 		</div>
 	</div>
-	<div class="w-2/5 border border-red-400 ">
-		<img
-			src={Allura}
-			class=" flex bg-cover bg-center bg-repeat"
-			alt="Vista aérea da cidade ao entardecer"
-		/>
-	</div>
-</section>
-<section class=" flex h-96 w-full justify-center gap-4 border border-red-500 p-1">
-	<div class="flex h-full w-96 items-center justify-center border border-red-500">
-		<div class="flex h-4/5 w-4/5 items-center border border-blue-500">
-			<h2 class="flex font-['Inter'] text-lg text-white">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores nostrum veritatis a
-				asperiores repellendus optio quam, molestias inventore incidunt blanditiis? Porro maiores
-				nulla quis, ipsam sed dignissimos excepturi aliquam? Earum!
-			</h2>
-		</div>
-	</div>
-	<div class="h-full w-96 border border-red-500"></div>
-	<div class="h-full w-96 border border-red-500"></div>
-	<div class="h-full w-96 border border-red-500"></div>
-	<div class="h-full w-96 border border-red-500"></div>
-</section>
-<h1 class="text-3x1 text-red-500">Home</h1> -->
-
-<!-- <svelte:head>
-	<title>Home</title>
 	
-	<meta name="description" content="Svelte demo app" />
-</svelte:head> -->
-
-<!-- <section> -->
-
-<!-- <h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcomeFallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1> -->
-
-<!-- <Nav /> -->
-
-<!-- <h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2> -->
-
-<!-- <Counter /> -->
-<!-- </section> -->
-
-<!-- <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style> -->
+	
