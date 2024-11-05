@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import Logo from '$lib/componets/Logo.svelte';
 	import Pesquisa from './pesquisa.svelte';
-	import img from '$lib/images/icon-lui.png';
+	import img from '$lib/images/new.png';
 	import user from '$lib/images/usuário.png'
 
 	const items = [
@@ -19,18 +19,19 @@
 	
 </script>
 
-<nav class="w-full h-[50px] flex justify-center relative bg-white shadow dark:bg-gray-800">
-	<div class="flex w-full container mx-auto px-6 py-3 bg-white md:flex rounded-xl">
-		<div class="flex items-center w-full justify-between  ">
+<nav class="w-full h-[50px] flex relative justify-between ">
+	<div class="flex container mx-auto px-6 py-3  md:flex rounded-xl">
+		<div class="flex items-center w-[400px] justify-between  ">
 			<a href="/">
-				<img class="w-auto" src=" {img} " alt="" />
+				<img class="w-[100px] mb-5 flex" src=" {img} " alt="" />
 			</a>
 
-			<div class="flex lg:hidden ">
+			<div class="flex lg:hidden justify-between ">
+				<Pesquisa />
 				<button
 					on:click={toggleMenu}
 					type="button"
-					class=" text-gray-500  hover:text-gray-600 focus:outline-none dark:text-white-200 dark:hover:text-gray-400 "
+					class=" text-gray-500 ml-3 hover:text-gray-600 focus:outline-none dark:text-white-200 dark:hover:text-gray-400 "
 					aria-label="toggle menu"
 				>
 					{#if !isOpen}

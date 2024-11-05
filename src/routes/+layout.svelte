@@ -1,16 +1,15 @@
 <script lang="ts">
 	import Header from '$lib/componets/Header.svelte';
 	import '../app.css';
-	import city from '$lib/images/city.jpg'
 	import Menu from '$lib/componets/Menu.svelte'
+	import Luizantonio from '../routes/luizantonio/luizantonio.svelte';
 	let { children } = $props();
 </script>
-<div class="p-4 border w-full relative flex justify-center ">
+<div class=" p-4 w-full relative flex justify-between bg-[#09052D]">
 	<Header />
 	
 </div>
 
-	
 	
 	<main>
 		{@render children()}

@@ -4,9 +4,9 @@ import Logo from './Logo.svelte';
 	import Menu from './Menu.svelte';
 </script>
 
-<nav class=" flex rounded-xl w-full bg-white shadow dark:bg-gray-800">
+<nav class=" flex w-full justify-between shadow bg-[#09052D]">
 	
-	<div class="  flex w-full items-center justify-center p-4 capitalize text-gray-600 dark:text-gray-300">
+	<div class="  flex w-full text-gray-600 dark:text-gray-300 bg-[#09052D] ">
 		
 		<Menu />
 		

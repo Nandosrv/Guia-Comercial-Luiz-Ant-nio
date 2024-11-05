@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Lest from './../lib/componets/lest.svelte';
-	import city from '$lib/images/city.jpg';
 	import Allura from '$lib/images/Allura.png';
 	import Counter from './Counter.svelte';
 	import welcome from '$lib/images/svelte-welcome.webp';
@@ -9,33 +8,111 @@
 	import Header from '$lib/componets/Header.svelte';
 	import Pesquisa from '$lib/componets/pesquisa.svelte';
 	import Search from '$lib/componets/Search.svelte';
+	// img
+	import City from '$lib/images/nova-img1.png';
+	import Cartas from '$lib/images/55638e4e-9618.png';
+    
 
 	
 </script>
+<main class="flex justify-center bg-[#09052D] w-[100%] h-[300px] overflow-hidden  ">
+	<div class="flex justify-center w-[340px] h-[300px]  ">
+	<img class="w-[315px] h-[300px] object-cover" src="{City} " alt="">
+	<div class="flex justify-center items-end w-[320px] h-[290px] absolute ">
+		<img class="w-[265px] h-[165px]  " src="{Cartas}" alt="">
+	</div>
+	</div>
+	
+	</main>
+	<!-- Rua -->
+	<div class="bg-[#09052D] w-[100%] h-[360px] ">
+		<div class="flex justify-between items-center  w-[100%] h-14 border border-black bg-[#4B4444] ">
+			<div class=" w-16 h-2 rounded-2xl  bg-yellow-400 border border-yellow-400"></div>
+			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
+			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
+			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
+		</div>
+		<div class="w-[100%] h-[400px] flex flex-col bg-[#09052D]">
+			<div class="w-[390px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
 
+				</div>
+			</div>
+			<div class="mt-5 w-[380px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
 
-<main class="w-full  flex ">
-	<div class="w-full flex justify-center">
-		<div class="flex">
-			<Pesquisa />
+				</div>
+			</div>
+			<div class="mt-5 w-[370px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[360px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[350px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[340px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[330px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[320px] flex justify-end">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[310px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[300px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[290px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			<div class="mt-5 w-[280px] flex justify-end ">
+				<div class="w-[121px] h-[12px] bg-white ">
+			
+
+				</div>
+			</div>
+			
+		
+		</div>
+		<div class="bg-[#09052D] w-[100%] h-[360px] ">
+				
 		</div>
 	</div>
 	
-</main>
-<div class="flex w-full justify-center mt-4">
-	<div class="w-[304px] flex font-['Inter']  rounded-xl bg-[#7BECEE] items-center">
-		<h2>
-			CONECTANDO VOCÊ AOS MELHORES
-			  COMÉRCIOS DE LUIZ ANTÔNIO!
-		</h2>
-	</div>
-</div>
-<main class="w-full h-[600px] mt-10">
-
-		<Lest />
-
-	
-</main>
 
 <!-- <section class="flex h-2/4 w-full justify-around border border-red-500 bg-zinc-900">
 
