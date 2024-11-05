@@ -40,7 +40,7 @@
 
 <div class="relative max-w-md mx-auto" bind:this={searchBox}>
     <span class="absolute inset-y-0 left-0 flex items-center pl-3 h-[40px]">
-        <svg class="w-5 h-5 text-gray-400 flex items-center mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg class="w-5 h-5 text-blue-500 flex items-center mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.134 17 3 13.866 3 10C3 6.134 6.134 3 10 3C13.866 3 17 6.134 17 10Z" />
         </svg>
     </span>
@@ -50,12 +50,12 @@
         bind:value={searchQuery}
         on:input={filterComercios}
         on:focus={() => (isDropdownOpen = true)}
-        class="w-[200px] h-[30px]  flex rounded-[12px] border border-gray-300 bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 dark:border-gray-600 dark:bg-white dark:text-gray-300 dark:focus:border-blue-500"
+        class="w-[200px] h-[30px] rounded-[12px] border border-gray-300 bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 dark:border-blue-600 dark:bg-yellow-400 dark:text-blue-500 dark:focus:border-blue-500"
         placeholder="Busca Rápida"
     />
 
     {#if isDropdownOpen && searchQuery}
-        <div class="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-700">
+        <div class=" absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-700">
             {#if filteredComercios.length > 0}
                 {#each filteredComercios as comercio}
                     <a href={comercio.href} class="block p-4 hover:bg-gray-100 dark:hover:bg-gray-700">

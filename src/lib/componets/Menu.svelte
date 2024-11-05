@@ -65,7 +65,7 @@
 
 		<!-- Menu Mobile -->
 		<div
-			class={`absolute mt-16 inset-x-0 z-20 w-full  px-6 py-4 transition-all duration-300 ease-in-out md:relative md:mt-0 md:flex md:translate-x-0 md:items-center md:justify-between md:p-0 md:opacity-100 bg-[#EDF3EE] ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}
+			class={` flex justify-center flex-col absolute mt-16 inset-x-0 z-20 w-full  px-6 py-4 transition-all duration-300 ease-in-out md:relative md:mt-0 md:flex md:translate-x-0 md:items-center md:justify-between md:p-0 md:opacity-100 bg-[#EDF3EE] ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}
 		>
 			<div class="-mx-4 h-[200px] flex flex-col items-center justify-centerpx-2 md:mx-10 md:flex-row md:py-0 ">
 				
@@ -89,8 +89,11 @@
 				</a> -->
 			</div>
 
-			<div class="relative mt-4 md:mt-0">
-				<Pesquisa />
+			<div class="justify-center  relative mt-4 md:mt-0">
+				<div class="flex">
+					<Pesquisa />
+
+				</div>
 			</div>
 			
 		</div>

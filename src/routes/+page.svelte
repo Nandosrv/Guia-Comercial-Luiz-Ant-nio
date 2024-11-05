@@ -10,6 +10,10 @@
 	import Search from '$lib/componets/Search.svelte';
 	// img
 	import City from '$lib/images/nova-img1.png';
+	import Homes from '$lib/images/icons8-home-50.png';
+	import Schop from '$lib/images/icons8-shop-50.png';
+	import Cash from '$lib/images/icons8-cash-80.png';
+	import Sos from '$lib/images/icons8-sos-48.png';
 	import Cartas from '$lib/images/55638e4e-9618.png';
     
 
@@ -19,7 +23,6 @@
 	<div class="flex justify-center w-[340px] h-[300px]  ">
 	<img class="w-[315px] h-[300px] object-cover" src="{City} " alt="">
 	<div class="flex justify-center items-end w-[320px] h-[290px] absolute ">
-		<img class="w-[265px] h-[165px]  " src="{Cartas}" alt="">
 	</div>
 	</div>
 	
@@ -75,9 +78,43 @@
 
 				</div>
 			</div>
-			<div class="mt-5 w-[280px] flex justify-end">
-				<div class="w-[121px] h-[12px] bg-white ">
 			
+			<div class="w-full h-[230px] absolute  justify-end flex mt-14">
+				<div class="z-10 w-full h-[50px] justify-end flex ">
+					<div class="w-[240px] h-[50px] ">
+						<div class="mr-[11px] [200px] h-[50px] flex justify-center gap-3 items-center">
+							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl ">
+								<a href="/">
+								<img class="w-[41px] h-[35px] " src="{Homes}" alt="">
+								</a>
+							</div>
+							<div class="w-[39px] h-[40px] object-cover bg-yellow-400 rounded-2xl ">
+								<a href="/">
+									<img class="w-[41px] h-[35px] " src="{Schop}" alt="">
+									</a>
+							</div>
+							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl ">
+								<a href="/">
+									<img class="w-[41px] h-[35px] " src="{Cash}" alt="">
+									</a>
+							</div>
+							<div class="w-[39px] h-[40px]  bg-yellow-400 rounded-2xl ">
+								<a href="/">
+									<img class="w-[41px] h-[35px] " src="{Sos}" alt="">
+									</a>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<img class="w-[265px] h-[165px] absolute " src="{Cartas}" alt="">
+
+			</div>
+			
+			<div class="mt-5 w-[100%] flex justify-end ">
+
+				<div class="w-[100%] h-[12px] bg-white ">
+					
 
 				</div>
 			</div>
