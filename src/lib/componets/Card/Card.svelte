@@ -32,7 +32,7 @@
 	];
 </script>
 
-<main class="mt-1 w-[100%]   h-[420px] justify-center flex ">
+<main class="mt-3 w-[100%]   h-[420px] justify-center flex ">
 	<!-- card -->
 	<div class="flex justify-center w-[85%] h-[400px] rounded-[12px] bg-[#D1D5D9] border border-black">
 		<div class="w-[75%] h-[180px] flex  rounded-[12px] ">
