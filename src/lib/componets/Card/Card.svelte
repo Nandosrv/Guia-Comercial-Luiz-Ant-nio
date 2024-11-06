@@ -4,12 +4,12 @@
 	import Liga from '../Liga.svelte';
 	import Review from '../Review.svelte';
 	import Whatsapp from '../whatsapp.svelte';
-	
+	import Avalie from '../../../routes/Avalie/+page.svelte'
 
-	import Callme from '$lib/images/callcomer.png'
-	import Whats from '$lib/images/whats.png'
-	import Face from '$lib/images/icons8-facebook-novo-48.png'
-	import Insta from '$lib/images/icons8-instagram-64.png'
+	import Callme from '$lib/images/callcomer.png';
+	import Whats from '$lib/images/whats.png';
+	import Face from '$lib/images/icons8-facebook-novo-48.png';
+	import Insta from '$lib/images/icons8-instagram-64.png';
 
 	type Product = {
 		slug: string;
@@ -18,6 +18,7 @@
 		image: string;
 		whatsapp: string;
 		facebook: string;
+		maps: string;
 	};
 	type IProps = {
 		product?: Product;
@@ -32,83 +33,108 @@
 	];
 </script>
 
-<main class="mt-3 w-[100%]   h-[420px] justify-center flex ">
+<main class="mt-3 flex h-[400px] w-[100%] justify-center">
 	<!-- card -->
-	<div class="flex justify-center w-[85%] h-[400px] rounded-[12px] bg-[#D1D5D9] border border-black">
-		<div class="w-[75%] h-[180px] flex  rounded-[12px] ">
-			<img class="rounded-[12px] w-[100%] object-cover " src="{product?.image} " alt="">
+	<div
+		class="flex h-[400px] w-[85%] justify-center rounded-[12px]  bg-[#D1D5D9]"
+	>
+		<div class="flex h-[180px] w-[75%] rounded-[12px]">
+			<img class="w-[100%] rounded-[12px] object-cover" src="{product?.image} " alt="" />
 		</div>
-		<div class="w-full h-[290px]  absolute flex justify-end items-end ">
-			<div class=" justify-center w-full h-[100px] flex">
-				<div class="flex w-[380px] ">
-					<div class=" w-[360px] h-[70px] justify-center  flex items-center ">
-						<div class=" flex w-10 h-10">
-							<img class="rounded-full object-cover" src="{product?.image} " alt="">
-							
+		<div class="absolute flex h-[290px] w-full items-end justify-end">
+			<div class=" flex h-[100px] w-full justify-center">
+				<div class="flex w-[380px]">
+					<div class=" flex h-[70px] w-[360px] items-center justify-center">
+						<div
+							class=" flex h-[70px] w-[250px] items-center justify-center rounded-[12px] font-serif text-lg"
+						>
+							<p class="text-wrap font-serif text-lg">{product?.title}</p>
 						</div>
-						<div class=" flex text-lg font-serif w-[250px] h-[70px] justify-center items-center border border-black rounded-[12px] ">
-							<p class="text-lg font-serif text-wrap ">{product?.title} </p>
-							</div>
-							
 					</div>
-					
 				</div>
-				
 			</div>
-			<div class="flex justify-start absolute w-[100%] h-[50px]">
-				<div class="w-[85%] mt-3 ">
+			<div class="absolute flex h-[50px] w-[100%] justify-start">
+				<div class="mt-3 w-[85%] z-50">
 					<Avaliacao />
-
 				</div>
-				
 			</div>
 		</div>
-		
 	</div>
-	<div class="w-[100%] h-[400px] flex justify-end items-end absolute  ">
-		<div class="w-[100%] h-[100px] flex justify-center items-center ">
-			<div class="w-[82%] h-[100px] flex justify-center items-center ">
-				<div class="w-[100%] h-[50px] flex justify-around ">
+	<div class="absolute flex h-[400px] w-[100%] items-end justify-end">
+		<div class="flex h-[100px] w-[100%] items-center justify-center">
+			<div class="flex h-[100px] w-[82%] items-center justify-center">
+				<div class="flex h-[50px] w-[100%] justify-around z-[1000]  ">
 					<div>
 						<a href={`tel:${product?.telefone}`}>
-						<img class="w-10 h-10" src="{Callme}" alt="">
-
+							<img class="h-10 w-10" src={Callme} alt="" />
 						</a>
 					</div>
 					<div>
-						<a href={`https://wa.me/${product?.whatsapp}`} target="_blank" rel="noopener noreferrer">
-						<img class="w-10 h-10" src="{Whats}" alt="">
-
+						<a
+							href={`https://wa.me/${product?.whatsapp}`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img class="h-10 w-10" src={Whats} alt="" />
 						</a>
 					</div>
-					<div>
+					<div class="z-[999999] flex relative ">
 						<a href={product?.facebook} target="_blank" rel="noopener noreferrer">
-						<img class="w-10 h-10" src="{Face}" alt="">
-
-					</a>
+							<img class="h-10 w-10 " src={Face} alt="" />
+						</a>
 					</div>
 					<div>
-						<img class="w-10 h-10" src="{Insta}" alt="">
+						<img class="h-10 w-10" src={Insta} alt="" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </main>
+<main class="absolute flex h-[1280px] w-[100%] items-center justify-center ">
+	<div class="flex h-[400px] w-full ">
+		<!-- Div Do Meio -->
+		<div class="flex h-16 w-full flex-col items-center justify-center">
+			<!-- <div class="w-[80%] h-[50px] flex justify-center items-center bg-[#FCDF1D] rounded-[12px] ">
+				<p class="text-[20px] font-serif font-bold ">COMENTÁRIOS</p>
+			</div> -->
+			<div class="flex h-[400px] w-full items-center justify-center">
+				<div class="flex h-10 w-[80%] items-center justify-center rounded-[12px] bg-[#FCDF1D]">
+					<p class="flex font-serif text-[20px] font-bold text-black">LOCALIZE AQUI</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div
+		class="absolute mt-5 flex h-[300px] w-full items-center justify-center "
+	>
+		<div class="flex h-[290px] w-full items-center justify-center ">
+			<section class="map-section my-5 h-[400px] w-full md:h-[450px] md:w-[600px]">
+				<iframe
+					src={product?.maps}
+					width="100%"
+					height="100%"
+					style="border:0; margin-top:6rem; border-radius: 12px;"
+					allowfullscreen
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					title="Mapa de localização para {product?.title}"
+				>
+				</iframe>
+			</section>
+			<div class="w-full h-[900px]  absolute flex justify-end items-end">
+				<div class="w-full h-14  justify-center items-center flex">
+					<div class="w-[80%] h-full bg-[#FCDF1D] rounded-[12px] flex justify-center items-center">
+						<a class="list-none no-underline" href="/Avalie">
+						<p class="flex font-serif text-[20px] font-bold text-black hover:text-yellow-100">AVALIE NOSSO SITE</p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
 
 
 <!-- <section class="flex h-[700px] w-[500px] rounded-[12px] py-14">

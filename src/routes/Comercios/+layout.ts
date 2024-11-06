@@ -41,7 +41,7 @@ export function load() {
         ],
         items: [
                // Prefeitura
-               { slug: 'Prefeitura-Municipal-de-Luiz-Antônio', title: 'Prefeitura Municipal de Luiz Antônio', category: 'Prefeitura',telefone:'(16) 3983-9000', whatsapp:'16991916526',facebook:'https://www.facebook.com/imprensaluizantonio?locale=pt_BR', hours: "Seg-Sex: 08:00 -12:00 13:00 - 17:00", image: Prefeitura },
+               { slug: 'Prefeitura-Municipal-de-Luiz-Antônio', title: 'Prefeitura Municipal de Luiz Antônio',facebook:'https://www.facebook.com/imprensaluizantonio?locale=pt_BR', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14843.441507219095!2d-47.716506835028355!3d-21.55231413369815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375a54b9c06f%3A0xac861ac6ace6c6e8!2sPrefeitura%20Municipal%20de%20Luiz%20Ant%C3%B4nio!5e0!3m2!1spt-BR!2sbr!4v1730902932362!5m2!1spt-BR!2sbr', hours: "Seg-Sex: 08:00 -12:00 13:00 - 17:00", image: Prefeitura },
             //Supermercado
             {slug:  'FERA Supermercado', title: 'FERA Supermercado', category: 'Supermercado',telefone:'(16) 99630-5735',whatsapp:'16996305735', hours: "Seg-Sex: 	07:00–21:00", image: Fera },
             // Farmacia
