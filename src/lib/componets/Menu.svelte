@@ -20,25 +20,27 @@
 </script>
 
 <nav class="w-full h-[50px] flex relative justify-between ">
-	<div class="flex container mx-auto px-6 py-3  md:flex rounded-xl">
-		<div class="flex items-center w-[400px] justify-between  ">
-			<a href="/">
-				<img class="w-[100px] mb-5 flex" src=" {img} " alt="" />
-			</a>
-
-			<div class="flex lg:hidden justify-between ">
+	<div class="flex container mx-auto px-6 py-3 md:flex rounded-xl">
+		
+			<!-- md:hidden -->
+			
+			<div class="flex lg:hidden justify-center border border-red-500 items-center">
+				<div class="flex items-center w-[100%] ">
+					<a href="/">
+						<img class="w-[100px] mb-5 flex" src=" {img} " alt="" />
+					</a>
 				<Pesquisa />
 				<button
 					on:click={toggleMenu}
 					type="button"
-					class=" text-gray-500 ml-3 hover:text-gray-600 focus:outline-none dark:text-white-200 dark:hover:text-gray-400 "
+					class=" text-yellow-400  ml-3 hover:text-gray-600 focus:outline-none dark:text-white-200 dark:hover:text-gray-400 "
 					aria-label="toggle menu"
 				>
 					{#if !isOpen}
 						<!-- Ícone de hambúrguer -->
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
+							class="h-10 w-10 "
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
@@ -50,7 +52,7 @@
 						<!-- Ícone de fechar -->
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							class="h-6 w-6"
+							class="h-10 w-10"
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"

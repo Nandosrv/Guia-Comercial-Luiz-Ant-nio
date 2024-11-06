@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
 
     let searchQuery: string = '';
     const comercios = [
@@ -7,13 +7,13 @@
         { nome: 'Joalheria Luxo', id: 2, href: '/Comercios/joalheria-luxo' },
         { nome: 'Bar do João', id: 3, href: '/Comercios/bar-do-joao' },
         { nome: 'Restaurante Saboroso', id: 4, href: '/Comercios/restaurante-saboroso' },
-        { nome: 'Farmácia e Advogados', id: 5, href: '/Comercios/farmacia-advogados' },
+        { nome: 'Farmcia Advogados', id: 5, href: '/Comercios/farmcia-Advogados' },
         { nome: 'Farmácia e Advogados 2', id: 6, href: '/Comercios/farmacia-advogados-2' },
     ];
 
     let filteredComercios = comercios;
     let isDropdownOpen = false;
-    let searchBox: HTMLDivElement | null = null; // Define o tipo de searchBox como HTMLDivElement
+    let searchBox: HTMLDivElement | null = null;
 
     // Filtra os comércios conforme o usuário digita
     function filterComercios() {
@@ -25,11 +25,16 @@
     }
 
     // Fecha dropdown ao clicar fora da área de pesquisa
-    function handleClickOutside(event: MouseEvent) { // Define o tipo de event como MouseEvent
+    function handleClickOutside(event: MouseEvent) {
         if (searchBox && !searchBox.contains(event.target as Node)) {
             isDropdownOpen = false;
         }
     }
+
+    // Apaga o texto da pesquisa ao sair da página
+    onDestroy(() => {
+        searchQuery = ''; // Reseta o valor da pesquisa
+    });
 
     // Adiciona o evento ao montar o componente
     onMount(() => {
@@ -50,12 +55,12 @@
         bind:value={searchQuery}
         on:input={filterComercios}
         on:focus={() => (isDropdownOpen = true)}
-        class="w-[200px] h-[30px] rounded-[12px] border border-gray-300 bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 dark:border-blue-600 dark:bg-yellow-400 dark:text-blue-500 dark:focus:border-blue-500"
+        class="w-[200px] h-[30px] rounded-[12px] border border-gray-300 bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 dark:border-blue-600 dark:bg-yellow-400 dark:text-blue-500 dark:focus:border-blue-500 "
         placeholder="Busca Rápida"
     />
 
     {#if isDropdownOpen && searchQuery}
-        <div class=" absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-700">
+        <div class="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-700">
             {#if filteredComercios.length > 0}
                 {#each filteredComercios as comercio}
                     <a href={comercio.href} class="block p-4 hover:bg-gray-100 dark:hover:bg-gray-700">
