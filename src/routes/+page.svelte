@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { comercios } from './../data.js';
 	import Lest from './../lib/componets/lest.svelte';
 	import Allura from '$lib/images/Allura.png';
 	import Counter from './Counter.svelte';
@@ -18,152 +19,120 @@
 	import Pops from '$lib/images/icon-pos.png';
 	import Cardcity from '$lib/images/51e8cf29-30c9-4bfe-bc52-2afbab085d5c.png';
 	import Muda from '$lib/componets/muda.svelte';
-    
-
-	
 </script>
-<main class="flex justify-center bg-[#09052D] w-[100%] h-[300px] overflow-hidden  ">
-	<div class="flex justify-center w-[340px] h-[300px]  ">
-	<img class="w-[315px] h-[300px] object-cover" src="{Cardcity} " alt="">
-	<div class="flex justify-center items-end w-[320px] h-[290px] absolute ">
+
+<main class="flex h-[300px] w-[100%] justify-center overflow-hidden bg-[#09052D]">
+	<div class="flex h-[300px] w-[340px] justify-center">
+		<img class="h-[300px] w-[315px] object-cover" src="{Cardcity} " alt="" />
+		<div class="absolute flex h-[290px] w-[320px] items-end justify-center"></div>
 	</div>
+</main>
+<!-- Rua -->
+<div class="h-[360px] w-[100%] bg-[#09052D]">
+	<div class="flex h-14 w-[100%] items-center justify-between border border-black bg-[#4B4444]">
+		<div class=" h-2 w-16 rounded-2xl border border-yellow-400 bg-yellow-400"></div>
+		<div class=" h-2 w-16 rounded-2xl border border-yellow-400 bg-yellow-400"></div>
+		<div class=" h-2 w-16 rounded-2xl border border-yellow-400 bg-yellow-400"></div>
+		<div class=" h-2 w-16 rounded-2xl border border-yellow-400 bg-yellow-400"></div>
 	</div>
-	
-	</main>
-	<!-- Rua -->
-	<div class="bg-[#09052D] w-[100%] h-[360px] ">
-		<div class="flex justify-between items-center  w-[100%] h-14 border border-black bg-[#4B4444] ">
-			<div class=" w-16 h-2 rounded-2xl  bg-yellow-400 border border-yellow-400"></div>
-			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
-			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
-			<div class=" w-16 h-2 rounded-2xl bg-yellow-400 border border-yellow-400"></div>
+	<!-- Tamnho do content -->
+	<div class="flex h-[340px] w-[100%] flex-col bg-[#09052D]">
+		<div class="mt-5 flex w-[350px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
 		</div>
-		<!-- Tamnho do content -->
-		<div class="w-[100%] h-[340px] flex flex-col bg-[#09052D] ">
-		
-			<div class="mt-5 w-[350px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
+		<div class="mt-5 flex w-[340px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
 
-				</div>
-			</div>
-			<div class="mt-5 w-[340px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
+		<div class="mt-5 flex w-[330px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
+		<div class="mt-5 flex w-[320px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
+		<div class="mt-5 flex w-[310px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
+		<div class="mt-5 flex w-[300px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
+		<div class="mt-5 flex w-[290px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
+		<div class="mt-5 flex w-[280px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
+		<div class="mt-5 flex w-[250px] justify-end">
+			<div class="h-[12px] w-[121px] bg-white"></div>
+		</div>
 
-				</div>
-			</div>
-			
-			<div class="mt-5 w-[330px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[320px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[310px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[300px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[290px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[280px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			<div class="mt-5 w-[250px] flex justify-end ">
-				<div class="w-[121px] h-[12px] bg-white ">
-			
-
-				</div>
-			</div>
-			
-			<div class="w-full h-[75px] absolute  justify-end flex mt-14 ">
-				<div class="z-10 w-full h-[75px] justify-center flex  md:justify-end">
-					<div class="w-[340px] h-[70px] flex justify-center items-center md:w-[500px] ">
+		<div class="absolute mt-14 flex h-[75px] w-full justify-end">
+			<div class="z-10 flex h-[75px] w-full justify-center md:justify-end">
+				<div class="flex h-[70px] w-[340px] items-center justify-center md:w-[500px]">
+					<!-- icon -->
+					<div class="flex h-[50px] w-[250px] items-center justify-between gap-10 md:w-[280px]">
 						<!-- icon -->
-						<div class="w-[250px] h-[50px] flex justify-between gap-6 items-center  md:w-[280px] ">
-						<!-- icon -->
-							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl justify-center items-center ">
-								<a href="/">
-								<img class="w-[41px] h-[35px] " src="{Homes}" alt="">
-								</a>
-							</div>
-							<div class="w-[39px] h-[40px] object-cover bg-yellow-400 rounded-2xl hover:text-red-500 ">
-								<a href="/">
-									<img class="w-[41px] h-[35px] " src="{Schop}" alt="">
-									</a>
-							</div>
-							<div class="w-[40px] h-[40px]  bg-yellow-400 rounded-2xl ">
-								<a href="/">
-									<img class="w-[41px] h-[35px] " src="{Cash}" alt="">
-									</a>
-							</div>
-							<div class="w-[39px] h-[40px]  bg-yellow-400 rounded-2xl ">
-								<a href="/">
-									<img class="w-[41px] h-[35px] " src="{Sos}" alt="">
-									</a>
-							</div>
-							
+						<div class="h-[40px] w-[40px] items-center justify-center rounded-2xl bg-yellow-400">
+							<a href="/">
+								<img class="h-[35px] w-[41px]" src={Homes} alt="" />
+							</a>
+							<p class="text-blue-400 font-['Inter'] font-medium">Inicio</p>
 						</div>
-					</div>
-				</div>
-				<img class="w-[449px] h-[271px] absolute " src="{Cartas}" alt="">
-
-			</div>
-			
-			<div class="mt-5 w-[100%] flex justify-end ">
-
-				<div class="w-[100%] h-[22px] bg-white ">
-					
-
-				</div>
-			</div>
-			
-			
-		
-		</div>
-		
-		<div class="bg-[#09052D] w-[100%] h-[100px]  relative ">
-			<div class="w-full flex justify-end ">
-
-			</div>
+						<div
+							class="h-[40px] w-[39px] rounded-2xl bg-yellow-400 object-cover hover:text-red-500"
+						>
+							<a href="/Comercios">
+								<img class="h-[35px] w-[41px]" src={Schop} alt="" />
+							</a>
+							<div class="flex mr-[100px] ">
+								<p class="text-blue-400  flex w-full font-['Inter'] font-medium">Contatos</p>
+							</div>
+						</div>
 				
-			<div class="w-full h-10  bg-[#FCDF1D] ">
-					
-					<div class="w-full h-14 mt-1 flex bg-[#FCDF1D] justify-between items-center border-b-4">
+						<div class="h-[40px] w-[40px] rounded-2xl bg-yellow-400">
+							<a href="/">
+								<img class="h-[35px] w-[41px]" src={Cash} alt="" />
+							</a>
+							<div class="flex mr-[100px] font-['Inter'] font-medium ">
+								<p class="text-blue-400">Vaquinha</p>
+							</div>
+						</div>
+						<div class="h-[40px] w-[39px] rounded-2xl bg-yellow-400">
+							<a href="/">
+								<img class="h-[35px] w-[41px]" src={Sos} alt="" />
+							</a>
+							<div class="flex mr-[100px] ">
+								<p class="text-blue-400 mr-10 font-['Inter'] font-medium">Socorro</p>
+							</div>
+						</div>
 						
-						<h2 class="font-['Inter'] text-[22px] ">MAIS PESQUISADOS</h2>
-				<img class="flex" src=" {Pops} " alt="">
-
 					</div>
 					
 				</div>
 				
+			</div>
+			
+			<img class="absolute h-[271px] w-[449px]" src={Cartas} alt="" />
 		</div>
-		<div class="w-full h-full bg-[#09052D] border border-[#09052D]">
-			<Muda />
+
+		<div class="mt-5 flex w-[100%] justify-end">
+			<div class="h-[22px] w-[100%] bg-white"></div>
+		
+		</div>
+
+	</div>
+
+	<div class="relative h-[100px] w-[100%] bg-[#09052D]">
+		<div class="flex w-full justify-end"></div>
+
+		<div class="h-10 w-full bg-[#FCDF1D]">
+			<div class="mt-1 flex h-14 w-full items-center justify-between border-b-4 bg-[#FCDF1D]">
+				<h2 class="font-['Inter'] text-[22px]">MAIS PESQUISADOS</h2>
+				<img class="flex" src=" {Pops} " alt="" />
+			</div>
 		</div>
 	</div>
-	
-	
-	
+	<div class="h-full w-full border border-[#09052D] bg-[#09052D]">
+		<Muda />
+	</div>
+</div>

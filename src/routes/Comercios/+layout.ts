@@ -41,17 +41,17 @@ export function load() {
         ],
         items: [
                // Prefeitura
-               { slug: 'Prefeitura-Municipal-de-Luiz-Antônio', title: 'Prefeitura Municipal de Luiz Antônio', category: 'Prefeitura',telefone:'(16) 3983-9000',hours: "Seg-Sex: 08:00 -12:00 13:00 - 17:00", image: Prefeitura },
+               { slug: 'Prefeitura-Municipal-de-Luiz-Antônio', title: 'Prefeitura Municipal de Luiz Antônio', category: 'Prefeitura',telefone:'(16) 3983-9000', whatsapp:'16991916526',facebook:'https://www.facebook.com/imprensaluizantonio?locale=pt_BR', hours: "Seg-Sex: 08:00 -12:00 13:00 - 17:00", image: Prefeitura },
             //Supermercado
-            {slug:  'FERA Supermercado', title: 'FERA Supermercado', category: 'Supermercado',telefone:'(16) 99630-5735', hours: "Seg-Sex: 	07:00–21:00", image: Fera },
+            {slug:  'FERA Supermercado', title: 'FERA Supermercado', category: 'Supermercado',telefone:'(16) 99630-5735',whatsapp:'16996305735', hours: "Seg-Sex: 	07:00–21:00", image: Fera },
             // Farmacia
-            { slug:  'Drogaria-Total-Unipharma-I', title: 'Drogaria Total - Unipharma I', category: 'Farmacia',telefone:'(16) 3983-2066',hours: "Seg-Sex: 08h às 18h", image: DrogariaTotal },
+            { slug:  'Drogaria-Total-Unipharma-I', title: 'Drogaria Total - Unipharma I', category: 'Farmacia',telefone:'(16) 3983-2066',whatsapp:'16996305735', hours : "Seg-Sex: 08h às 18h", image: DrogariaTotal },
             { slug:  'Drogaria-Total-Farmavip-3', title: 'Drogaria Total - Farmavip 3', category: 'Farmacia',telefone:'(16) 3983-1235',hours: "Seg-Sex: 08h às 18h", image: DrogariaTotalVip },
             { slug:  'Drogaria-Total-Unipharma-II', title: 'Drogaria Total - Unipharma II', category: 'Farmacia',telefone:'(16) 3983-1577',hours: "Seg-Sex: 08h às 18h", image: UnipharmaII },
             { slug:  'Drogaria-Brasil', title: 'Drogaria Brasil', category: 'Farmacia',telefone:'(16) 3983-6439',hours: "Seg-Sex: 08h às 20h", image: DrogariaBrasil },
 
             // Deposito de bebidas
-            { slug:  'Deposito-de-bebidas-e-mercado-no-grau', title: 'Deposito de bebidas e mercado no grau', category: 'Deposito de bebidas',telefone:' (16) 99734-7340',hours: "Seg-Sex: 08h às 22h", image: Grau},
+            { slug:  'Deposito-de-bebidas-e-mercado-no-grau', title: 'Deposito de bebidas e mercado no grau', category: 'Deposito de bebidas',telefone:' (16) 99734-7340',whatsapp:'16997347340', hours: "Seg-Sex: 08h às 22h", image: Grau},
             { slug:  'Mercado-Bebidas-Em-Geral', title: 'Mercado Bebidas Em Geral', category: 'Deposito de bebidas',telefone:'555555555',hours: "Seg-Sex: 08h às 22h", image: MercadoBebidas},
            
             // Saúde

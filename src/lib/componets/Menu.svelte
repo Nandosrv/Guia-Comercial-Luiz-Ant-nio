@@ -24,8 +24,8 @@
 		
 			<!-- md:hidden -->
 			
-			<div class="flex lg:hidden justify-center border border-red-500 items-center">
-				<div class="flex items-center w-[100%] ">
+			<div class="flex lg:hidden justify-between items-center">
+				<div class="flex items-center w-[350px] ">
 					<a href="/">
 						<img class="w-[100px] mb-5 flex" src=" {img} " alt="" />
 					</a>

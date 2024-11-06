@@ -4,12 +4,20 @@
 	import Liga from '../Liga.svelte';
 	import Review from '../Review.svelte';
 	import Whatsapp from '../whatsapp.svelte';
+	
+
+	import Callme from '$lib/images/callcomer.png'
+	import Whats from '$lib/images/whats.png'
+	import Face from '$lib/images/icons8-facebook-novo-48.png'
+	import Insta from '$lib/images/icons8-instagram-64.png'
 
 	type Product = {
 		slug: string;
 		title: string;
 		telefone: string;
 		image: string;
+		whatsapp: string;
+		facebook: string;
 	};
 	type IProps = {
 		product?: Product;
@@ -24,7 +32,86 @@
 	];
 </script>
 
-<section class="flex h-[700px] w-[500px] rounded-[12px] py-14">
+<main class="mt-1 w-[100%]   h-[420px] justify-center flex ">
+	<!-- card -->
+	<div class="flex justify-center w-[85%] h-[400px] rounded-[12px] bg-[#D1D5D9] border border-black">
+		<div class="w-[75%] h-[180px] flex  rounded-[12px] ">
+			<img class="rounded-[12px] w-[100%] object-cover " src="{product?.image} " alt="">
+		</div>
+		<div class="w-full h-[290px]  absolute flex justify-end items-end ">
+			<div class=" justify-center w-full h-[100px] flex">
+				<div class="flex w-[380px] ">
+					<div class=" w-[370px] h-[70px] flex items-center ">
+						<div class=" flex w-10 h-10  ">
+							<img class="rounded-full object-cover" src="{product?.image} " alt="">
+							
+						</div>
+						<div class="flex text-lg font-serif w-[300px] h-[70px] justify-center items-center border border-black rounded-[12px] ">
+							<p class="text-lg font-serif  ">{product?.title} </p>
+							</div>
+							
+					</div>
+					
+				</div>
+				
+			</div>
+			<div class="flex justify-start absolute w-[100%] h-[50px]">
+				<div class="w-[85%] mt-3 ">
+					<Avaliacao />
+
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+	<div class="w-[100%] h-[400px] flex justify-end items-end absolute  ">
+		<div class="w-[100%] h-[100px] flex justify-center items-center ">
+			<div class="w-[82%] h-[100px] flex justify-center items-center ">
+				<div class="w-[100%] h-[50px] flex justify-around ">
+					<div>
+						<a href={`tel:${product?.telefone}`}>
+						<img class="w-10 h-10" src="{Callme}" alt="">
+
+						</a>
+					</div>
+					<div>
+						<a href={`https://wa.me/${product?.whatsapp}`} target="_blank" rel="noopener noreferrer">
+						<img class="w-10 h-10" src="{Whats}" alt="">
+
+						</a>
+					</div>
+					<div>
+						<a href={product?.facebook} target="_blank" rel="noopener noreferrer">
+						<img class="w-10 h-10" src="{Face}" alt="">
+
+					</a>
+					</div>
+					<div>
+						<img class="w-10 h-10" src="{Insta}" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section class="flex h-[700px] w-[500px] rounded-[12px] py-14">
 	<main class="w-full rounded-[12px] border border-red-950">
 		<img src={product?.image} class="h-[300px] w-full rounded-[12px]" alt="" />
 		<main class="flex h-16 w-full items-center justify-between">
@@ -52,7 +139,7 @@
 			<Review />
 		</div>
 	</main>
-</section>
+</section> -->
 
 <!-- <div class="flex  w-full">
       
