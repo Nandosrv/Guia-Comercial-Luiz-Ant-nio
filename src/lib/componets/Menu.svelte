@@ -19,12 +19,12 @@
 	
 </script>
 
-<nav class="w-full h-[50px] flex relative justify-between ">
-	<div class="flex container mx-auto px-6 py-3 md:flex rounded-xl">
+<nav class="w-[360px] h-[50px] flex relative justify-between ">
+	<div class="flex container mx-auto px-6 py-3 md:flex rounded-xl ">
 		
 			<!-- md:hidden -->
 			
-			<div class="flex lg:hidden justify-between items-center">
+			<div class="w-[360px] flex lg:hidden justify-center items-center">
 				<div class="flex items-center w-[350px] ">
 					<a href="/">
 						<img class="w-[100px] mb-5 flex" src=" {img} " alt="" />
@@ -40,7 +40,7 @@
 						<!-- Ícone de hambúrguer -->
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
-							class="h-10 w-10 "
+							class="h-10 w-20 "
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"

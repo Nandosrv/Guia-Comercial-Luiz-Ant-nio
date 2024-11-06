@@ -5,7 +5,7 @@
 	import Luizantonio from '../routes/luizantonio/luizantonio.svelte';
 	let { children } = $props();
 </script>
-<div class=" p-4 w-full relative flex justify-between bg-[#09052D]">
+<div class="w-full  relative flex justify-between bg-[#09052D]">
 	<Header />
 	
 </div>

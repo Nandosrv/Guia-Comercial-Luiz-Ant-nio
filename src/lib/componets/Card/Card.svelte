@@ -41,13 +41,13 @@
 		<div class="w-full h-[290px]  absolute flex justify-end items-end ">
 			<div class=" justify-center w-full h-[100px] flex">
 				<div class="flex w-[380px] ">
-					<div class=" w-[370px] h-[70px] flex items-center ">
-						<div class=" flex w-10 h-10  ">
+					<div class=" w-[360px] h-[70px] justify-center  flex items-center ">
+						<div class=" flex w-10 h-10">
 							<img class="rounded-full object-cover" src="{product?.image} " alt="">
 							
 						</div>
-						<div class="flex text-lg font-serif w-[300px] h-[70px] justify-center items-center border border-black rounded-[12px] ">
-							<p class="text-lg font-serif  ">{product?.title} </p>
+						<div class=" flex text-lg font-serif w-[250px] h-[70px] justify-center items-center border border-black rounded-[12px] ">
+							<p class="text-lg font-serif text-wrap ">{product?.title} </p>
 							</div>
 							
 					</div>
