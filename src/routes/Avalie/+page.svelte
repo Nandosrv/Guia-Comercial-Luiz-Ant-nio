@@ -56,7 +56,7 @@
 				SUA AVALIAÇÃO É   IMPORTANTE PARA NÓS!
 			</p>
 				<div class="w-full  h-[100px] justify-center items-center flex-col ">
-					<p class="text-[#09052D] w-[95%] flex ml-5 text-[19px] font-serif">PARA MELHORIAS OU ATÉ MESMO AVALIAÇÕES POSITIVAS, SERÃO MUITO BEM-VINDAS AO NOSSO SITE!</p>
+					<p class="text-[#09052D] w-[95%] flex ml-5 text-[16px] font-serif">PARA MELHORIAS OU ATÉ<br /> MESMO AVALIAÇÕES POSITIVAS, SERÃO MUITO BEM-VINDAS AO NOSSO SITE!</p>
 
 				</div>
 				<div class="w-full  h-[100px] justify-center items-center flex-col ">
