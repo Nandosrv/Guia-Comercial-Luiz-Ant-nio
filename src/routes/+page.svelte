@@ -19,7 +19,9 @@
 	import Pops from '$lib/images/icon-pos.png';
 	import Cardcity from '$lib/images/51e8cf29-30c9-4bfe-bc52-2afbab085d5c.png';
 	import Muda from '$lib/componets/muda.svelte';
+	import CookieConsent from '$lib/componets/CookieConsent.svelte';
 </script>
+<CookieConsent />
 
 <main class="flex h-[300px] w-[100%] justify-center overflow-hidden bg-[#09052D]">
 	<div class="flex h-[300px] w-[340px] justify-center">
