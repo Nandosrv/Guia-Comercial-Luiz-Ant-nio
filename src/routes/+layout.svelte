@@ -10,7 +10,6 @@
 	
 </div>
 
-	
 	<main>
 		{@render children()}
 	</main>
