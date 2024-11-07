@@ -70,13 +70,12 @@
 			<div class="z-10 flex h-[75px] w-full justify-center md:justify-end">
 				<div class="flex h-[70px] w-[340px] items-center justify-center md:w-[500px]">
 					<!-- icon -->
-					<div class="flex h-[50px] w-[250px] items-center justify-between gap-10 md:w-[280px]">
+					<div class="flex h-[50px] w-[250px] items-center justify-between md:w-[280px]">
 						<!-- icon -->
 						<div class="h-[40px] w-[40px] items-center justify-center rounded-2xl bg-yellow-400">
 							<a href="/">
 								<img class="h-[35px] w-[41px]" src={Homes} alt="" />
 							</a>
-							<p class="text-blue-400 font-['Inter'] font-medium">Inicio</p>
 						</div>
 						<div
 							class="h-[40px] w-[39px] rounded-2xl bg-yellow-400 object-cover hover:text-red-500"
@@ -85,7 +84,6 @@
 								<img class="h-[35px] w-[41px]" src={Schop} alt="" />
 							</a>
 							<div class="flex mr-[100px] ">
-								<p class="text-blue-400  flex w-full font-['Inter'] font-medium">Contatos</p>
 							</div>
 						</div>
 				
@@ -94,7 +92,6 @@
 								<img class="h-[35px] w-[41px]" src={Cash} alt="" />
 							</a>
 							<div class="flex mr-[100px] font-['Inter'] font-medium ">
-								<p class="text-blue-400">Vaquinha</p>
 							</div>
 						</div>
 						<div class="h-[40px] w-[39px] rounded-2xl bg-yellow-400">
@@ -102,7 +99,6 @@
 								<img class="h-[35px] w-[41px]" src={Sos} alt="" />
 							</a>
 							<div class="flex mr-[100px] ">
-								<p class="text-blue-400 mr-10 font-['Inter'] font-medium">Socorro</p>
 							</div>
 						</div>
 						
