@@ -21,13 +21,14 @@
 	import Muda from '$lib/componets/muda.svelte';
 	import CookieConsent from '$lib/componets/CookieConsent.svelte';
 </script>
-<CookieConsent />
 
 <main class="flex h-[300px] w-[100%] justify-center overflow-hidden bg-[#09052D]">
 	<div class="flex h-[300px] w-[340px] justify-center">
 		<img class="h-[300px] w-[315px] object-cover" src="{Cardcity} " alt="" />
 		<div class="absolute flex h-[290px] w-[320px] items-end justify-center"></div>
 	</div>
+	<CookieConsent />
+
 </main>
 <!-- Rua -->
 <div class="h-[360px] w-[100%] bg-[#09052D]">
