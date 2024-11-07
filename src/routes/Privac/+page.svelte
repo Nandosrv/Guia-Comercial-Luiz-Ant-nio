@@ -215,7 +215,7 @@
     </div>
   </div>
   <div class="footer">
-    <p>&copy; 2024 Sua Empresa. Todos os direitos reservados.</p>
+    <p>&copy; 2024 Guia Luiz Antônio. Todos os direitos reservados.</p>
     <p><a href="/terms-of-service" class="button-link">Termos de Serviço</a> | <a href="/contact" class="button-link">Contato</a></p>
   </div>
   

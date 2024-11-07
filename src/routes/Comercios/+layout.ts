@@ -21,6 +21,10 @@
     import Prefeitura  from '$lib/images/2020-11-19.jpg';
     import Construção  from '$lib/images/Loja-da-Construção.jpg';
     import rodrigues   from '$lib/images/rodrigues-mat-deposito-renato.jpg';
+    // lanchonet
+    import Kilanche   from '$lib/images/kilanchão.jpg';
+    import Trailerjoao   from '$lib/images/Trailer-do-João.jpg';
+
 
 
 
@@ -37,11 +41,14 @@ export function load() {
             'Deposito de bebidas',
             'Saúde',
             'Loja da Construção',
+            'Lanchonete',
+            'Restaurante',
+
             
         ],
         items: [
                // Prefeitura
-               { slug: 'Prefeitura-Municipal-de-Luiz-Antônio', title: 'Prefeitura Municipal de Luiz Antônio',facebook:'https://www.facebook.com/imprensaluizantonio?locale=pt_BR', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14843.441507219095!2d-47.716506835028355!3d-21.55231413369815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375a54b9c06f%3A0xac861ac6ace6c6e8!2sPrefeitura%20Municipal%20de%20Luiz%20Ant%C3%B4nio!5e0!3m2!1spt-BR!2sbr!4v1730902932362!5m2!1spt-BR!2sbr', hours: "Seg-Sex: 08:00 -12:00 13:00 - 17:00", image: Prefeitura },
+               { slug: 'Prefeitura-Municipal-de-Luiz-Antônio', title: 'Prefeitura Municipal de Luiz Antônio', category: 'Prefeitura', facebook:'https://www.facebook.com/imprensaluizantonio?locale=pt_BR', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14843.441507219095!2d-47.716506835028355!3d-21.55231413369815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375a54b9c06f%3A0xac861ac6ace6c6e8!2sPrefeitura%20Municipal%20de%20Luiz%20Ant%C3%B4nio!5e0!3m2!1spt-BR!2sbr!4v1730902932362!5m2!1spt-BR!2sbr', hours: "Seg-Sex: 08:00 -12:00 13:00 - 17:00", image: Prefeitura },
             //Supermercado
             {slug:  'FERA Supermercado', title: 'FERA Supermercado', category: 'Supermercado',telefone:'(16) 99630-5735',whatsapp:'16996305735', hours: "Seg-Sex: 	07:00–21:00", image: Fera },
             // Farmacia
@@ -64,8 +71,13 @@ export function load() {
             { slug: 'Loja-da-Construção', title: 'Receitas Macarrônicas', category: 'Loja da Construção',telefone:'(16) 3983-1223',hours: "Seg-Sex: 07:30h às 17:00", image: Construção },
             { slug: 'rodrigues-mat-deposito-renato', title: 'rodrigues mat deposito renato', category: 'Loja da Construção',telefone:'(16) 3983-1223',hours: "Seg-Sex: 07:30h às 17:00", image: rodrigues},
            
-           
-            {slug: 'Receitas Macarrônicas', title: 'Loja da Construção', category: 'Blogss',telefone:'(16) 3954-2001',hours: "Seg-Sex: 08h às 18h", image: 'https://placehold.co/600x400/EEE/31343C' },
+            //    Lanchonete
+            {slug: 'Kilanchao', title: 'Kilanchao', category: 'Lanchonete',telefone:'(16) 3983-6945',hours: "Seg-Sex: 18h às 01:30", image: Kilanche, facebook:'https://www.facebook.com/cleufasazedo75/?locale=pt_BR', instagram:'https://www.instagram.com/killanchao/'},
+            {slug: 'Trailer-do-João', title: 'Trailer do João', category: 'Lanchonete',telefone:'(16) 99230-5994', whatsapp:'16992305994',hours: "Seg-Sex: 18h às 01:30", image: Trailerjoao, facebook:'https://www.facebook.com/cleufasazedo75/?locale=pt_BR', instagram:'https://www.instagram.com/killanchao/'},
+          
+          
+          
+          
             { slug: 'farmacia-do-joao', title: 'farmacia do joao', category: 'Farmacia', telefone:'(16) 3954-2001',hours: "Seg-Sex: 08h às 18h", image: lorm },
             { slug: 'Receitas-Macarrônicas', title: 'Receitas Macarrônicas', category: 'Blogss',telefone:'(16) 3954-2001',hours: "Seg-Sex: 08h às 18h", image: 'https://placehold.co/600x400/EEE/31343C' },
             { slug: 'Receitas Macarrônicas', title: 'Receitas Macarrônicas', category: 'Blogss',telefone:'(16) 3954-2001',hours: "Seg-Sex: 08h às 18h", image: 'https://placehold.co/600x400/EEE/31343C' },

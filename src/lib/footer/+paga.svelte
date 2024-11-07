@@ -12,19 +12,21 @@
            <div class="w-[95%]   h-[240px] flex flex-col gap-2 justify-center items-center">
             <div class="w-[100%] h-[150px] flex justify-center items-center ">
                 <div class="w-[150px] h-[150px]  justify-center items-center flex flex-col gap-4">
-                    <img src="{logos} " alt="">
-                    <p class="text-white">Guia Luiz Antônio</p>
+                    <a href="/">
+                        <img class="w-[100px] h-[100px] " src="{logos} " alt="">
+                    </a>
+                    <p class="text-white  ">Guia Luiz Antônio</p>
 
-                        <div class="flex ">
-                            <a href="/"><img class="w-[20px] " src="{Whatz}" alt=""></a>
-                        <a href="/"><img class="w-[20px] " src="{Instagram}" alt=""></a>
+                        <div class="flex gap-4">
+                            <a href="/"><img class="w-[40px] " src="{Whatz}" alt=""></a>
+                        <a href="/"><img class="w-[40px] " src="{Instagram}" alt=""></a>
     
-                        <a href="/"><img class="w-[20px] " src="{Facebook}" alt=""></a>
+                        <a href="/"><img class="w-[40px] " src="{Facebook}" alt=""></a>
                         </div>
                 </div>
 
             </div>
-            <div class="w-[100%] h-[50px] flex justify-center items-center">
+            <div class="mt-5 w-[100%] h-[50px] flex justify-center items-center">
                 <p class="text-white">© 2024 Todos os direitos reservados.</p>
             </div>
            </div>
