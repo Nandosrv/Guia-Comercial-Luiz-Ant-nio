@@ -9,6 +9,7 @@
 	import Header from '$lib/componets/Header.svelte';
 	import Pesquisa from '$lib/componets/pesquisa.svelte';
 	import Search from '$lib/componets/Search.svelte';
+	import Footer from '$lib/footer/+paga.svelte'
 	// img
 	import City from '$lib/images/nova-img1.png';
 	import Homes from '$lib/images/icons8-home-50.png';
@@ -135,3 +136,4 @@
 		<Muda />
 	</div>
 </div>
+<Footer />

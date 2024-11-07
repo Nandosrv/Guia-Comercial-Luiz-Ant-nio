@@ -1,4 +1,6 @@
 <script>
+
+    import Privac from '../../routes/Privac/+page.svelte'
     // Verifica se estamos no ambiente do navegador
     let showModal = true;
 
@@ -35,7 +37,7 @@
                 serviços, para auxiliar nossas campanhas e fornecer conteúdo personalizado.
                 <br />
                 Para mais informações, consulte nossa
-                <a href="/" class="font-semibold text-sm underline hover:text-[#634647]">
+                <a href="/Privac" class="font-semibold text-sm underline hover:text-[#634647]">
                     Política de privacidade
                 </a>
             </p>
