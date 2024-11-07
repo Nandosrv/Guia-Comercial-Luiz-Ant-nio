@@ -7,7 +7,7 @@
 </script>
 
 <main class="flex h-[500px] w-[100%] flex-col bg-[#09052D] ">
-	<div class="flex h-[130px] w-[95%] flex-col items-center justify-center ">
+	<div class="flex h-[130px] w-[100%] flex-col items-center justify-center ">
 		<Alerty />
 	</div>
 	<div class="flex h-[400px] w-[100%] justify-center">
@@ -22,15 +22,17 @@
 			<div
 				class="bg-[#D1D5D2] flex h-[340px] w-[85%] flex-col items-center justify-center gap-4 rounded-[12px] "
 			>	<p class="mt-2 flex rounded-[12px] bg-[#D1D5D2] font-serif text-[20px] text-lg text-[#FE1804] ">ANÚNCIE SEU NEGÓCIO AQUI!</p>
-				<div class="flex h-[200px] w-[75%] items-center justify-center rounded-[12px] bg-black">
+				<div class="flex h-[200px] w-[75%] items-center justify-center rounded-[12px] ">
 					<img class="h-40 w-40" src="{mt} " alt="" />
 				</div>
-				<div class=" flex h-[81px] w-[75%] items-center justify-center rounded-[12px] bg-[#FF2B2B]">
-					<a href={`https://wa.me/${phone}`}>
-						<p class="flex p-1 font-serif text-[18px] m-1 text-lg text-black hover:text-yellow-100">
-							VENHA FAZER PARTE DO NOSSO TIME
-						</p>
-					</a>
+				<div class=" flex h-[81px] w-[85%] items-center justify-center rounded-[12px] bg-[#FF2B2B]">
+					<div class="w-[100%]  flex justify-center items-center">
+						<a href={`https://wa.me/${phone}`}>
+							<p class=" flex p-1 font-serif text-[17px] m-1 text-black hover:text-yellow-100">
+								FAÇA PARTE DO TIME
+							</p>
+						</a>
+					</div>
 				</div>
 				<div class="mb-2 route h-[10px] w-[50%] rounded-[12px] bg-[#FCDF1D] "></div>
 			</div>
@@ -58,8 +60,8 @@
 
 				</div>
 				<div class="w-full  h-[100px] justify-center items-center flex-col ">
-					<p class="text-[#09052D] w-[95%] flex ml-5 text-[19px] font-serif ">FIQUE À VONTADE!
-						ESTE LUGAR FOI RESERVADO ESPECIALMENTE PARA VOCÊ!</p>
+					<p class="text-[#09052D] w-[95%] flex ml-5 text-[16px] font-serif ">FIQUE À VONTADE!
+						ESTE LUGAR FOI RESERVADO <br />ESPECIALMENTE PARA VOCÊ!</p>
 				</div> 
 				
 				<Finaz />

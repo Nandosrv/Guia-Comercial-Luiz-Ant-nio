@@ -6,8 +6,8 @@
 	import Whatsapp from '../whatsapp.svelte';
 	import Avalie from '../../../routes/Avalie/+page.svelte'
 
-	import Callme from '$lib/images/callcomer.png';
-	import Whats from '$lib/images/whats.png';
+	import Cals from '$lib/images/call-me.png';
+	import Ws from '$lib/images/icon-ws.png';
 	import Face from '$lib/images/icons8-facebook-novo-48.png';
 	import Insta from '$lib/images/icons8-instagram-64.png';
 
@@ -66,7 +66,7 @@
 				<div class="flex h-[50px] w-[100%] justify-around z-[1000]  ">
 					<div>
 						<a href={`tel:${product?.telefone}`}>
-							<img class="h-10 w-10" src={Callme} alt="" />
+							<img class="h-10 w-10" src={Cals} alt="" />
 						</a>
 					</div>
 					<div>
@@ -75,7 +75,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							<img class="h-10 w-10" src={Whats} alt="" />
+							<img class="h-10 w-10" src={Ws} alt="" />
 						</a>
 					</div>
 					<div class="z-[999999] flex relative ">
