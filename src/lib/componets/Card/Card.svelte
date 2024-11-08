@@ -10,7 +10,7 @@
 	import Ws from '$lib/images/icon-ws.png';
 	import Face from '$lib/images/icons8-facebook-novo-48.png';
 	import Insta from '$lib/images/icons8-instagram-64.png';
-
+	// console.log(product?.image)
 	type Product = {
 		slug: string;
 		title: string;

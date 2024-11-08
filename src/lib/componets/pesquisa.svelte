@@ -43,14 +43,18 @@
     { nome: 'New Place Modas', id: 38, href: '/Comercios/New-Place-Modas' },
     { nome: 'Moda Viva', id: 39, href: '/Comercios/Moda-viva' },
     { nome: 'Lauanne Moda Feminina', id: 40, href: '/Comercios/Lauanne-Moda-Feminina' },
-    { nome: 'Por Do Sol Modas', id: 41, href: '/Comercios/Por-Do-Sol-Modas' },
-    { nome: 'Fenix Boutique', id: 42, href: '/Comercios/Fenix-Boutique' },
+    // { nome: 'Por Do Sol Modas', id: 41, href: '/Comercios/Por-Do-Sol-Modas' },
+    // { nome: 'Fenix Boutique', id: 42, href: '/Comercios/Fenix-Boutique' },
     { nome: 'Wagner Luiz Marques', id: 43, href: '/Comercios/Wagner-Luiz-Marques' },
     { nome: 'Modas E Acessorios Z', id: 44, href: '/Comercios/Modas-E-Acessorios-Z' },
     { nome: 'Chelly Modas', id: 45, href: '/Comercios/Chelly-modas' },
-    { nome: 'Borracheiro Movel 24h Duh Borracheiro', id: 46, href: '/Comercios/Borracheiro-movel-24h-Duh-Borracheiro' }
+    { nome: 'Borracheiro Movel 24h Duh Borracheiro', id: 46, href: '/Comercios/Borracheiro-movel-24h-Duh-Borracheiro' },
+    { nome: 'Merchan', id: 47, href: '/Comercios/Merchan' },
+    { nome: 'Porfirio Veiculos', id: 48, href: '/Comercios/Porfirio-Veiculos' },
+    { nome: 'Skina Veiculos Luiz Antonio', id: 48, href: '/Comercios/Skina-Veiculos-Luiz-Antonio' }
+    
     ];
-
+    
     let filteredComercios = comercios;
     let isDropdownOpen = false;
     let searchBox: HTMLDivElement | null = null;
