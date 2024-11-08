@@ -51,6 +51,7 @@
     import Wagner from '$lib/images/Wagner.png';
     import Mida from '$lib/images/Modas-E-Acessorios-Z.png';
     import Chery from '$lib/images/che.png';
+    import Karina from '$lib/images/xavier.png';
 
     // Restaurante
 
@@ -163,6 +164,8 @@ export function load() {
             {slug: 'NINA-NYKO', title: 'NINA NYKO', category: 'Loja De Moda Infantil',telefone:'0', whatsapp:'0',hours: "Quart-Sex: 09h às 18h", image: Nina, facebook:'https://www.facebook.com/mayara.adriano.92', instagram:'https://www.instagram.com/', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.689715902919!2d-47.70356060141278!3d-21.55292078980166!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375d41324713%3A0xd7997dc1743388ca!2sNINA%20NYKO!5e0!3m2!1spt-BR!2sbr!4v1731017416425!5m2!1spt-BR!2sbr'},
             
             // Loja De Roupas
+            {slug: 'Karina-Xavier', title: 'Karina Xavier', category: 'Loja De Roupas',telefone:'16992331004', whatsapp:'16992331004',hours: "Quart-Sex: 09h às 18h", image: Karina, facebook:'https://www.facebook.com/karina.navesxavier', instagram:'https://www.instagram.com/karinaxxavier?igsh=end3MDZ6NXI3ODZr', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.827402274354!2d-47.709838614247296!3d-21.553603139925226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b837afc90cdf8f%3A0xc0964b6bcd3b6ec2!2sKarina%20Xavier%20Ateli%C3%AA!5e0!3m2!1spt-BR!2sbr!4v1731024440705!5m2!1spt-BR!2sbr'},
+            
             {slug: 'New-Place-Modas', title: 'New Place Modas', category: 'Loja De Roupas',telefone:'(16) 3983-1329', whatsapp:'016982070897',hours: "Quart-Sex: 09h às 18h", image: Newroupa, facebook:'https://www.facebook.com/profile.php?id=100083104460217', instagram:'https://www.instagram.com/', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.673036060404!2d-47.70432564503778!3d-21.55324680357175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b83782b36e8af9%3A0xc9fda462c3c7b40a!2sNew%20Place%20Modas!5e0!3m2!1spt-BR!2sbr!4v1731015085728!5m2!1spt-BR!2sbr'},
             {slug: 'Moda-viva', title: 'Moda viva', category: 'Loja De Roupas',telefone:'(16) 3983-2007', whatsapp:'00000',hours: "Quart-Sex: 08h às 18h", image: Viva, facebook:'https://www.facebook.com/profile.php?id=100057246558421', instagram:'https://www.instagram.com/', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.642024382725!2d-47.70379627005271!3d-21.553852925946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375d71b1b591%3A0x96f1ce1aba9cbe56!2sModa%20xiva!5e0!3m2!1spt-BR!2sbr!4v1731015391185!5m2!1spt-BR!2sbr'},
             {slug: 'Lauanne-Moda-Feminina', title: 'Lauanne Moda Feminina', category: 'Loja De Roupas',telefone:'(16) 3983-2007', whatsapp:'00000',hours: "Quart-Sex: 08h às 18h", image: Lauanne, facebook:'https://www.facebook.com/', instagram:'https://www.instagram.com/', maps:'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.642024382725!2d-47.70379627005271!3d-21.553852925946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375d71b1b591%3A0x96f1ce1aba9cbe56!2sModa%20xiva!5e0!3m2!1spt-BR!2sbr!4v1731015391185!5m2!1spt-BR!2sbr'},

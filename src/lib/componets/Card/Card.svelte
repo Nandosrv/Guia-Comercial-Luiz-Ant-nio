@@ -18,6 +18,7 @@
 		image: string;
 		whatsapp: string;
 		facebook: string;
+		instagram: string;
 		maps: string;
 	};
 	type IProps = {
@@ -84,7 +85,10 @@
 						</a>
 					</div>
 					<div>
-						<img class="h-10 w-10" src={Insta} alt="" />
+						<a href={product?.instagram} target="_blank" rel="noopener noreferrer">
+							<img class="h-10 w-10" src={Insta} alt="" />
+
+						</a>
 					</div>
 				</div>
 			</div>
