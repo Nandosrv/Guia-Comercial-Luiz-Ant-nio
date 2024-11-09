@@ -1,34 +1,30 @@
-<script>
+<!-- <script>
 
     import Privac from '../../routes/Privac/+page.svelte'
-    // Verifica se estamos no ambiente do navegador
     let showModal = true;
 
     if (typeof window !== "undefined") {
-        // Remover escolha salva no localStorage para que o modal apareça a cada recarregamento (apenas para testes).
         localStorage.removeItem("cookiesAccepted");
 
-        // Controla a exibição do modal com base no localStorage
         showModal = !localStorage.getItem("cookiesAccepted");
     }
 
-    // Função para aceitar cookies e salvar a escolha no localStorage
     function acceptCookies() {
         showModal = false;
         if (typeof window !== "undefined") {
             localStorage.setItem("cookiesAccepted", "true");
         }
     }
-</script>
+</script> -->
 
-{#if showModal}
+<!-- {#if showModal}
     <div class="fixed bottom-0 left-0 right-0 w-4/5 max-w-[300px] bg-white rounded-2xl shadow-lg z-50 mx-auto mb-[200px]">
         <div class="flex flex-col items-center justify-between pt-9 px-6 pb-6 relative">
-            <span class="relative mx-auto -mt-16 mb-8">
+            <span class="relative mx-auto -mt-16 mb-8"> -->
                 <!-- Coloque o SVG aqui -->
-            </span>
+            <!-- </span> -->
 
-            <h5 class="text-sm font-semibold mb-2 text-left mr-auto text-zinc-700">
+            <!-- <h5 class="text-sm font-semibold mb-2 text-left mr-auto text-zinc-700">
                 Sua privacidade é importante para nós
             </h5>
 
@@ -55,4 +51,4 @@
             </button>
         </div>
     </div>
-{/if}
+{/if} -->

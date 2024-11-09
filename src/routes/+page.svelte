@@ -28,7 +28,7 @@
 		<img class="h-[300px] w-[315px] object-cover" src="{Cardcity} " alt="" />
 		<div class="absolute flex h-[290px] w-[320px] items-end justify-center"></div>
 	</div>
-	<CookieConsent />
+	<!-- <CookieConsent /> -->
 
 </main>
 <!-- Rua -->
