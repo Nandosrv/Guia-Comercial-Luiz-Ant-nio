@@ -56,7 +56,7 @@
 			</div>
 			<div class="absolute flex h-[50px] w-[100%] justify-start">
 				<div class="mt-3 w-[85%] z-50">
-					<Avaliacao />
+					<!-- <Avaliacao /> -->
 				</div>
 			</div>
 		</div>

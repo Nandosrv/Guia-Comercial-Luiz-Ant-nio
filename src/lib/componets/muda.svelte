@@ -12,38 +12,38 @@
     const comercios = [
         {
             nome: 'Grau',
-            telefone: '(16) 99734-7340',
+            telefone: '16997347340',
             descricao: 'Deposito de bebidas e mercado no grau.',
             fotos: [Grau],
-            texts: '16'
+            // texts: '16'
         },
         {
             nome: 'Frete',
-            telefone: '(11) 9876-5432',
+            telefone: '1198765432',
             descricao: 'Pizzaria com variedade de sabores.',
             fotos: [Frete],
-            texts: '60'
+            // texts: '8'
         },
         {
             nome: 'Fera',
-            telefone: '(16) 99630-5735',
+            telefone: '16996305735',
             descricao: 'FERA Supermercado.',
             fotos: [Fera],
-            texts: '72'
+            // texts: '74'
         },
         {
             nome: 'ORIENTAL',
-            telefone: '(16) 99754-1641',
+            telefone: '16997541641',
             descricao: 'UTILIDADES, VARIEDADES E PRESENTES.',
             fotos: [Oriental],
-            texts: '100'
+            // texts: '17'
         },
         {
             nome: 'Sacchi e Guedes',
-            telefone: '(16) 3983-1138',
+            telefone: '1639831138',
             descricao: 'Supermercado Sacchi e Guedes',
             fotos: [Sacchi],
-            texts: '50'
+            // texts: '260'
         }
     ];
 
@@ -81,10 +81,10 @@
                         <img src={Whatsapps} alt="Ícone do WhatsApp" />
                     </a>
                 </div>
-                <div class="flex w-[145px] justify-between">
+                <!-- <div class="flex w-[145px] justify-between">
                     <p>⭐⭐⭐⭐⭐</p>
                     <p>({comercios[currentIndex1].texts})</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -105,10 +105,10 @@
                         <img src={Whatsapps} alt="Ícone do WhatsApp" />
                     </a>
                 </div>
-                <div class="flex w-[145px] justify-between">
+                <!-- <div class="flex w-[145px] justify-between">
                     <p>⭐⭐⭐⭐⭐</p>
                     <p>({comercios[currentIndex2].texts})</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
