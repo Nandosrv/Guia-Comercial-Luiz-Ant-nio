@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Anuncio from './../lib/componets/anuncio.svelte';
 	import { comercios } from './../data.js';
 	import Lest from './../lib/componets/lest.svelte';
 	import Allura from '$lib/images/Allura.png';
@@ -21,6 +22,14 @@
 	import Cardcity from '$lib/images/51e8cf29-30c9-4bfe-bc52-2afbab085d5c.png';
 	import Muda from '$lib/componets/muda.svelte';
 	import CookieConsent from '$lib/componets/CookieConsent.svelte';
+	import { onMount } from 'svelte';
+	import supabaseApi from '$lib/api/client';
+	// onMount(async () => {
+	// 	let { data: businesses, error } = await supabaseApi
+	// 	.from('businesses')
+	// 	.select('*')
+    //     console.log(businesses);
+	// });
 </script>
 
 <main class="flex h-[300px] w-[100%] justify-center overflow-hidden bg-[#09052D]">
@@ -40,8 +49,23 @@
 		<div class=" h-2 w-16 rounded-2xl border border-yellow-400 bg-yellow-400"></div>
 	</div>
 	<!-- Tamnho do content -->
-	<div class="flex h-[340px] w-[100%] flex-col bg-[#09052D]">
-		<div class="mt-5 flex w-[350px] justify-end">
+	<div class="flex h-[440px] w-[100%] flex-col bg-[#09052D]">
+		<Anuncio />
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- Tamnho do content -->
+		<!-- <div class="mt-5 flex w-[350px] justify-end">
 			<div class="h-[12px] w-[121px] bg-white"></div>
 		</div>
 		<div class="mt-5 flex w-[340px] justify-end">
@@ -68,14 +92,12 @@
 		</div>
 		<div class="mt-5 flex w-[250px] justify-end">
 			<div class="h-[12px] w-[121px] bg-white"></div>
-		</div>
-
-		<div class="absolute mt-14 flex h-[75px] w-full justify-end">
+		</div> -->
+<!-- Bobecos -->
+		<!-- <div class="absolute mt-14 flex h-[75px] w-full justify-end">
 			<div class="z-10 flex h-[75px] w-full justify-center md:justify-end">
 				<div class="flex h-[70px] w-[340px] items-center justify-center md:w-[500px]">
-					<!-- icon -->
 					<div class="flex h-[50px] w-[250px] items-center justify-between md:w-[280px]">
-						<!-- icon -->
 						<div class="h-[40px] w-[40px] items-center justify-center rounded-2xl bg-yellow-400">
 							<a href="/">
 								<img class="h-[35px] w-[41px]" src={Homes} alt="" />
@@ -118,7 +140,7 @@
 		<div class="mt-5 flex w-[100%] justify-end">
 			<div class="h-[22px] w-[100%] bg-white"></div>
 		
-		</div>
+		</div> -->
 
 	</div>
 
