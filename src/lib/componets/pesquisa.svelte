@@ -98,6 +98,9 @@
   { nome: 'Lary\'s Bijus Fashion', id: 93, href: '/Comercios/LARYs-BIJUS-FASHION' },
   { nome: 'Menina de Luxo Moda e Acessórios', id: 94, href: '/Comercios/MENINA-DE-LUXO-MODA-E-ACESSORIOS' },
   { nome: 'Imperador Moda Masculina', id: 95, href: '/Comercios/MPERADOR-MODA-MASCULINA' },
+  
+  { nome: 'A.r Informática smartphone', id: 95, href: '/Comercios/A-R-Informatica-smartphone' },
+  { nome: 'Tecguillen Assistência Técnica Multimarcas', id: 95, href: '/Comercios/tecguillen' },
   { nome: 'Esquina Som', id: 96, href: '/Comercios/ESQUINA-SOM' }
     ];
     

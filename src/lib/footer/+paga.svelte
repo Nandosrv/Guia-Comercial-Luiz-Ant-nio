@@ -17,12 +17,24 @@
                     </a>
                     <p class="text-white  ">Guia Luiz Antônio</p>
 
-                        <div class="flex gap-4">
-                            <a href="/"><img class="w-[40px] " src="{Whatz}" alt=""></a>
-                        <a href="/"><img class="w-[40px] " src="{Instagram}" alt=""></a>
-    
-                        <a href="/"><img class="w-[40px] " src="{Facebook}" alt=""></a>
-                        </div>
+                    <div class="flex space-x-4">
+                        <!-- Link do Facebook -->
+                        <a href="https://www.facebook.com/profile.php?id=61568178650325" target="_blank" rel="noopener noreferrer">
+                            <img class="w-[40px]" src="{Facebook}" alt="Facebook" />
+                        </a>
+                    
+                        <!-- Link do Instagram -->
+                        <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer">
+                            <img class="w-[40px]" src="{Instagram}" alt="Instagram" />
+                        </a>
+                    
+                        <!-- Link do WhatsApp -->
+                        <a href="https://wa.me/16996151725" target="_blank" rel="noopener noreferrer">
+                            <img class="w-[40px]" src="{Whatz}" alt="WhatsApp" />
+                        </a>
+                    </div>
+                    
+                    
                 </div>
 
             </div>

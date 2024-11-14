@@ -135,6 +135,7 @@ import ABREU from '$lib/images/abreu.jpg';
 import BELEZA from '$lib/images/BELEZA.jpg';
 import lary from '$lib/images/lary.jpg';
 import Luxo from '$lib/images/Luxo.jpg';
+import info from '$lib/images/info.png';
 
 
 import Romavilia from '$lib/images/Romavilia.jpg';
@@ -150,7 +151,11 @@ import Bryan from '$lib/images/Bryan.png';
 import Cemei from '$lib/images/Cemei.png';
 import Matheus from '$lib/images/Matheus.jpg';
 import Gelindo from '$lib/images/gelindo.png';
+info
 import Bin from '$lib/images/Bim.png';
+import matica from '$lib/images/matica.png';
+import cell from '$lib/images/cell.png';
+
 
 export function load() {
     return {
@@ -168,7 +173,7 @@ export function load() {
             'Transporte e Automotivo',
             'Veículos e Serviços',
             'Pet e Suprimentos Animais',
-            'Loja de Informática'
+            'Tecnologia e Eletrônicos'
 
 
 
@@ -200,7 +205,7 @@ export function load() {
             // Restaurante
             { slug: 'jr-costela-ao-bafo', title: 'JR COSTELA AO BAFO', category: 'Alimentação e Bebidas', subcategory: 'Restaurantes', telefone: '16996384606', whatsapp: '16996384606', hours: "Seg-Sex: 08h às 20h", image: Reis, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d887.9530785897089!2d-47.6858200531696!3d-21.544957286800365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8374d3e0b4d15%3A0x3cc2f42f213760b!2sAv.%20Giuseppe%20Rosatti%2C%2025%2C%20Lu%C3%ADs%20Ant%C3%B4nio%20-%20SP%2C%2014210-000!5e0!3m2!1spt-BR!2sbr!4v1731174664833!5m2!1spt-BR!2sbr' },
             { slug: 'Marmitaria-Dona-do-Sabor', title: 'Marmitaria Dona do Sabor', category: 'Alimentação e Bebidas', subcategory: 'Restaurantes', telefone: '16993676602', whatsapp: '16993676602', hours: "Seg-Sex: 08h às 20h", image: Sabor, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.66998690237!2d-47.7131883!3d-21.5533064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b837ec92974587%3A0xb516cb3212112455!2sMarmitaria%20Dona%20do%20Sabor!5e0!3m2!1spt-BR!2sbr!4v1731018888833!5m2!1spt-BR!2sbr' },
-            { slug: 'Trem-Minero-Bar-e-Restaurante', title: 'Trem Minero Bar e Restaurante', category: 'Alimentação e Bebidas', subcategory: 'Restaurantes', telefone: '1639831493', whatsapp: '1639831493', hours: "Seg-Sex: 08h às 20h", image: Trem, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.718698649114!2d-47.7028769!3d-21.552354299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375d3bcee69d%3A0x5d2ee7691735ec23!2sTrem%20Minero%20Bar%20e%20Restaurante!5e0!3m2!1spt-BR!2sbr!4v1731019232903!5m2!1spt-BR!2sbr' },
+            { slug: 'Trem-Minero-Bar-e-Restaurante', title: 'Trem Minero Bar e Restaurante', category: 'Alimentação e Bebidas', subcategory: 'Restaurantes', telefone: '1639831493', whatsapp: '16991936825', hours: "Seg-Sex: 08h às 20h", image: Trem, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.718698649114!2d-47.7028769!3d-21.552354299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375d3bcee69d%3A0x5d2ee7691735ec23!2sTrem%20Minero%20Bar%20e%20Restaurante!5e0!3m2!1spt-BR!2sbr!4v1731019232903!5m2!1spt-BR!2sbr' },
             { slug: 'Restaurante-Uniao-gaucha', title: 'Restaurante União gaucha', category: 'Alimentação e Bebidas', subcategory: 'Restaurantes', telefone: '16994220997', whatsapp: '16994220997', hours: "Seg-Sex: 08h às 20h", image: Gaucha, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.913239401581!2d-47.6936914270836!3d-21.54855148602428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b837f0b82ac919%3A0x5e7f0e3a79349b2f!2sRestaurante%20Uni%C3%A3o%20gaucha!5e0!3m2!1spt-BR!2sbr!4v1731019512481!5m2!1spt-BR!2sbr' },
             { slug: 'Restaurante-La-Tavola', title: 'Restaurante La Tavola', category: 'Alimentação e Bebidas', subcategory: 'Restaurantes', telefone: '1639831505', whatsapp: '1639831505', hours: "Seg-Sex: 08h às 20h", image: Aa, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.639303742945!2d-47.702642499999996!3d-21.5539061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375d05ca7583%3A0xaba73c9586274c83!2sRestaurante%20La%20Tavola!5e0!3m2!1spt-BR!2sbr!4v1731019717163!5m2!1spt-BR!2sbr' },
             { slug: 'Adega-Santos-Restaurante-E-Lanchonete', title: 'Adega Santôs Restaurante E Lanchonete', category: 'Alimentação e Bebidas', subcategory: 'Restaurantes', telefone: '0', whatsapp: '0', hours: "Seg-Sex: 08h às 20h", image: Santos, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.796889732849!2d-47.69907798565023!3d-21.55082592510156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8375b4e216df%3A0x8a70df70c1e695b!2sAdega%20Sant%C3%B4s%20Restaurante%20E%20Lanchonete!5e0!3m2!1spt-BR!2sbr!4v1731019973368!5m2!1spt-BR!2sbr' },
@@ -263,8 +268,11 @@ export function load() {
 
 
             //    até aqui
-            { slug: '3D-Informatica', title: '3D Informática', category: 'Tecnologia e Eletrônicos', subcategory: 'Loja de Informática', telefone: '1639831593', whatsapp: '16992750191', hours: "Seg-Domingo: 24h", image: infomrat, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463.85529415929295!2d-47.7047756!3d-21.5530187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b83767f9ebca95%3A0x1fa8595f85ed7b48!2s3D%20Inform%C3%A1tica!5e0!3m2!1spt-BR!2sbr!4v1731199636205!5m2!1spt-BR!2sbr' },
+            { slug: '3D-Informatica', title: '3D Informática', category: 'Tecnologia e Eletrônicos', subcategory: 'Loja de Informática', telefone: '1639831593', whatsapp: '16992750191', hours: "Seg-Domingo: 24h", image: info, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463.85529415929295!2d-47.7047756!3d-21.5530187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b83767f9ebca95%3A0x1fa8595f85ed7b48!2s3D%20Inform%C3%A1tica!5e0!3m2!1spt-BR!2sbr!4v1731199636205!5m2!1spt-BR!2sbr' },
+            { slug: 'A-R-Informatica-smartphone', title: 'A.R Informática smartphone', category: 'Tecnologia e Eletrônicos', subcategory: 'Loja de Informática', telefone: '16991923369', whatsapp: '16997390221', hours: "Seg-Domingo: 24h", image: matica, instagram:'https://www.instagram.com/rodrigo_belarmino/profilecard/?igsh=dGNqZjg5NHF5cnpz', facebook:'https://www.facebook.com/rodrigo12informatica', maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d420.83042496008574!2d-47.70524079377037!3d-21.5533973682059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b83767f2702f65%3A0x467647831c1f7d68!2zUi4gQW3DqXJpY28gZGUgQXJhw7pqbyBQw61yZXMsIDQ2MiwgTHXDrXMgQW50w7RuaW8gLSBTUCwgMTQyMTAtMDAw!5e0!3m2!1spt-BR!2sbr!4v1731594888616!5m2!1spt-BR!2sbr' },
+            { slug: 'tecguillen', title: 'Tecguillen Assistência Técnica Multimarcas', category: 'Tecnologia e Eletrônicos', subcategory: 'Loja de Informática', telefone: '16992907838', whatsapp: '16992907838', hours: "Seg-Domingo: 24h",instagram:'https://www.instagram.com/pcdguillen/', image: cell, facebook:'https://www.facebook.com/paulo.guillen.545', maps: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7421.542296223664!2d-47.695382!3d-21.555802!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b837599239aed3%3A0xbcb83927504062cd!2sAv.%20Carlos%20V%2C%20Lu%C3%ADs%20Ant%C3%B4nio%20-%20SP%2C%2014210-000!5e0!3m2!1spt-BR!2sbr!4v1731595696285!5m2!1spt-BR!2sbr' },
 
+            
 
 
             // Clínicas

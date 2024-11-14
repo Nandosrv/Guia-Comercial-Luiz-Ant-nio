@@ -23,7 +23,6 @@
 	import Muda from '$lib/componets/muda.svelte';
 	import CookieConsent from '$lib/componets/CookieConsent.svelte';
 	import { onMount } from 'svelte';
-	import supabaseApi from '$lib/api/client';
 	// onMount(async () => {
 	// 	let { data: businesses, error } = await supabaseApi
 	// 	.from('businesses')

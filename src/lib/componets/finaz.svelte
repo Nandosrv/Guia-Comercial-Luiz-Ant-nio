@@ -1,7 +1,7 @@
 <script lang="ts">
     // Defina a função que será chamada no evento
     const openWhatsApp = () => {
-      const phoneNumber = '16991916526'; // Número de telefone no formato correto
+      const phoneNumber = '16996151725'; // Número de telefone no formato correto
       const message = encodeURIComponent('"Oi, estou interessado(a) em saber mais sobre [serviço/produto]."!');
       const url = `https://wa.me/${phoneNumber}?text=${message}`;
   

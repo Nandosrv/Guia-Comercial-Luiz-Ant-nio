@@ -3,7 +3,7 @@
 	import Finaz from '$lib/componets/finaz.svelte';
 
 	import mt from '$lib/images/mt.png';
-	export let phone: string = '+5516991916526';
+	export let phone: string = '+5516996151725';
 </script>
 
 <main class="flex h-[500px] w-[100%] flex-col bg-[#09052D] ">
