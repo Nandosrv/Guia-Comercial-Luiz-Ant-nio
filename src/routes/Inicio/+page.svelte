@@ -5,7 +5,6 @@
 	import Camera from '$lib/images/icons8-câmera-50.png';
 	import gif from '$lib/images/icons8-gif-48.png';
 	import userAvatar from '$lib/images/antonio.png';
-	import Cintia from '$lib/images/cintia.jpg';
 	import { getAuth, onAuthStateChanged } from "firebase/auth";
 	import supabase from '../../lib/supabaseClient';  // Importando o supabase client
     import avatar from '../../lib/images/antonio.png';  // Importando o supabase client
