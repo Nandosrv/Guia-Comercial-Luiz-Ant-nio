@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import { onMount } from 'svelte';
     import { supabase } from '../../supabaseConfig';
   
@@ -181,4 +181,4 @@
       margin: 0.5rem 0;
     }
   </style>
-  
+   -->

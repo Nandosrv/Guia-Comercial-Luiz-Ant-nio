@@ -33,8 +33,12 @@
 
 <main class="flex h-[300px] w-[100%] justify-center overflow-hidden bg-[#09052D]">
 	<div class="flex h-[300px] w-[340px] justify-center">
+		
+		<!-- <Pesquisa /> -->
 		<img class="h-[300px] w-[315px] object-cover" src="{Cardcity} " alt="" />
-		<div class="absolute flex h-[290px] w-[320px] items-end justify-center"></div>
+		<div class="absolute flex h-[290px] w-[320px] items-end justify-center">
+			
+		</div>
 	</div>
 	<!-- <CookieConsent /> -->
 
@@ -157,4 +161,4 @@
 		<Muda />
 	</div>
 </div>
-<Footer />
+<!-- <Footer /> -->
