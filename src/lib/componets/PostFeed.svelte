@@ -216,7 +216,7 @@
                 <div class="flex items-center space-x-3">
                     <img src={post.user_avatar} alt={post.user_name} class="h-10 w-10 rounded-full object-cover" />
                     <span class="font-semibold text-gray-800">{post.user_name}</span>
-                    <div></div>
+                    
                 </div>
                 <p class="mt-3 text-gray-700">{post.text}</p>
                 {#if post.image_url}
