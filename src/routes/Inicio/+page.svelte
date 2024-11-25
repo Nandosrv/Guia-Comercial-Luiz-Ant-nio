@@ -11,7 +11,22 @@
     import { uploadProfilePicture } from '../../uploadProfilePicture';
     import { userName, userPhotoURL } from '../../stores/user'; // Importando o store
 	import { on } from 'svelte/events';
-   
+	import { goto } from '$app/navigation'; // Para redirecionar o usuário
+	import PostFeed from '../../lib/componets/PostFeed.svelte';
+	let isAuthenticated = false;
+	
+	onMount(() => {
+		const auth = getAuth();
+		onAuthStateChanged(auth, (user) => {
+			if (!user) {
+				// Se não estiver autenticado, redirecione para a página de login
+				goto('/login');
+			} else {
+				isAuthenticated = true;
+			}
+		});
+	});
+
 	let photoURL: string = '';
 	
 	let currentUser = {
@@ -124,10 +139,11 @@
 		}
 	}
 </script>
+<PostFeed />
 
-<main class="mt-4 flex w-full flex-col items-center">
+<!-- <main class="mt-4 flex w-full flex-col items-center"> -->
 	<!-- Área de criação de postagem -->
-	<div class="w-[90%] max-w-[600px] rounded-lg bg-white p-4 shadow-md">
+	<!-- <div class="w-[90%] max-w-[600px] rounded-lg bg-white p-4 shadow-md">
 		<div class="flex items-center space-x-3">
 			<a href="/perfil">
 				<img
@@ -145,8 +161,8 @@
 				on:focus={() => (showModal = true)}
 				class="w-full rounded-full bg-gray-100 px-4 py-2 outline-none transition focus:bg-gray-200"
 			/>
-		</div>
-		<div class="mt-3 flex justify-between">
+		</div> -->
+		<!-- <div class="mt-3 flex justify-between">
 			<button
 				class="flex items-center space-x-2 rounded-md px-4 py-2 text-blue-600 hover:bg-blue-50"
 				on:click={openGallery}
@@ -169,10 +185,10 @@
 				<span>GIF</span>
 			</button>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Modal de criação de postagem -->
-	{#if showModal}
+	<!-- {#if showModal}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
 			<div class="w-[90%] max-w-[500px] rounded-lg bg-white p-6 shadow-lg">
 				<h2 class="mb-4 text-lg font-semibold text-gray-800">Criar Publicação</h2>
@@ -208,13 +224,13 @@
 				</div>
 			</div>
 		</div>
-	{/if}
-
+	{/if} -->
 	<!-- Feed de postagens -->
-	<section class="mt-6 w-[90%] max-w-[600px] space-y-4">
+	<!-- <section class="mt-6 w-[90%] max-w-[600px] space-y-4">
 		{#each posts as post, index (post.text + post.image)}
 			<div class="rounded-lg bg-white p-4 shadow-md">
 				<div class="flex items-center space-x-3">
+					
 					<img
 						src={post.user.avatar}
 						alt={post.user.name}
@@ -260,10 +276,10 @@
 				</div>
 			</div>
 		{/each}
-	</section>
+	</section> -->
 
 	<!-- Modal de comentários -->
-	{#if showCommentModal && postIndex !== null}
+	<!-- {#if showCommentModal && postIndex !== null}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
 			<div class="w-[90%] max-w-[500px] rounded-lg bg-white p-6 shadow-lg">
 				<h2 class="mb-4 text-lg font-semibold text-gray-800">Comentários</h2>
@@ -293,10 +309,10 @@
 				</div>
 			</div>
 		</div>
-	{/if}
+	{/if} -->
 
 	<!-- Modal de Imagem -->
-	{#if showImageModal}
+	<!-- {#if showImageModal}
 		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
 			<div class="w-[90%] max-w-[500px] rounded-lg bg-white p-6 shadow-lg">
 				<img
@@ -313,4 +329,4 @@
 			</div>
 		</div>
 	{/if}
-</main>
+</main> -->

@@ -196,9 +196,9 @@
                 </a>
             {/each}
             <!-- Link para Criar Conta (Mobile) -->
-            <a href="/login" class="block px-4 py-2 text-black text-lg font-medium transition-colors duration-300 hover:bg-gray-100">
+            <!-- <a href="/login" class="block px-4 py-2 text-black text-lg font-medium transition-colors duration-300 hover:bg-gray-100">
                 Criar Conta
-            </a>
+            </a> -->
         </div>
         <div class="mt-4 px-4">
             <Pesquisa />
@@ -214,7 +214,7 @@
             <a href="/" class="text-lg font-medium text-black hover:text-yellow-500">Home</a>
             <a href="/Comercios" class="ml-6 text-lg font-medium text-black hover:text-yellow-500">Comercios</a>
             <!-- Link para Criar Conta (Desktop) -->
-            <a href="/login" class="ml-6 text-lg font-medium text-black hover:text-yellow-500">Criar Conta</a>
+            <!-- <a href="/login" class="ml-6 text-lg font-medium text-black hover:text-yellow-500">Criar Conta</a> -->
         </div>
     </div>
 </nav>

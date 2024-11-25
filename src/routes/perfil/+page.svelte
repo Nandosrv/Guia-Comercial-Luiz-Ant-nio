@@ -22,7 +22,6 @@
         name = $userName || 'Usuário';
         photoURL = $userPhotoURL || 'avatar';  // Foto padrão
         iduser = $userId || '';
-        // console.log('teste', $userId);
     });
 
     // Função para lidar com a mudança da foto

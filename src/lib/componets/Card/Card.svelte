@@ -37,9 +37,9 @@
 <main class="mt-3 flex h-[400px] w-[100%] justify-center">
 	<!-- card -->
 	<div
-		class="flex h-[400px] w-[85%] justify-center rounded-[12px]  bg-[#D1D5D9]"
+		class="flex h-[500px] w-[85%] justify-center rounded-[12px]  bg-[#D1D5D9]"
 	>
-		<div class="flex h-[180px] w-[75%] rounded-[12px]">
+		<div class="flex h-[180px] w-[75%] rounded-[12px] md:h-[57%]">
 			<img class="w-[100%] rounded-[12px] object-cover" src="{product?.image} " alt="" />
 		</div>
 		<div class="absolute flex h-[290px] w-full items-end justify-end">

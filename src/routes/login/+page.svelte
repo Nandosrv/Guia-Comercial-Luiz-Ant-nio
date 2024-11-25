@@ -101,169 +101,23 @@
 	};
 </script>
 
-<main>
-	<div class="form-container">
-		<h1>{isRegistering ? 'Criar uma Conta' : 'Entrar'}</h1>
-		<form on:submit|preventDefault={isRegistering ? register : login} class="form">
-			<input type="email" bind:value={email} placeholder="E-mail" required class="input" />
-			<input type="password" bind:value={password} placeholder="Senha" required class="input" />
-			{#if isRegistering}
-				<input
-					type="password"
-					bind:value={confirmPassword}
-					placeholder="Confirme a senha"
-					required
-					class="input"
-				/>
-			{/if}
-			<button type="submit" class="btn">{isRegistering ? 'Registrar' : 'Entrar'}</button>
-		</form>
-
-		<button on:click={loginWithGoogle} class="google-btn">Entrar com Google</button>
+<main class="flex justify-center items-center min-h-screen bg-gray-100">
+	<div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md">
+		<h1 class="text-3xl font-semibold text-center mb-6 text-gray-800">
+			Entrar com Google
+		</h1>
+		<button
+			on:click={loginWithGoogle}
+			class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+		>
+			Entrar com Google
+		</button>
 
 		{#if errorMessage}
-			<p class="error-message">{errorMessage}</p>
+			<p class="mt-4 text-red-600 text-center">{errorMessage}</p>
 		{/if}
-
-		<button on:click={() => (isRegistering = !isRegistering)} class="toggle-link" type="button">
-			{isRegistering ? 'Já tem uma conta? Entre aqui.' : 'Ainda não tem uma conta? Crie uma aqui.'}
-		</button>
 	</div>
 </main>
 
-<style>
-	.form-container {
-		background: white;
-		padding: 30px;
-		border-radius: 8px;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-		width: 100%;
-		max-width: 400px;
-		text-align: center;
-		animation: fadeIn 0.5s ease-out;
-	}
-
-	h1 {
-		color: #333;
-		font-size: 24px;
-		margin-bottom: 20px;
-	}
-
-	.form-container {
-		background: white;
-		padding: 30px;
-		border-radius: 8px;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-		width: 100%;
-		max-width: 400px;
-		text-align: center;
-		animation: fadeIn 0.5s ease-out;
-	}
-
-	h1 {
-		color: #333;
-		font-size: 24px;
-		margin-bottom: 20px;
-	}
-
-	.form {
-		display: flex;
-		flex-direction: column;
-		gap: 15px;
-	}
-
-	.input {
-		padding: 10px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-		font-size: 14px;
-		width: 100%;
-		transition: border-color 0.3s;
-	}
-
-	.input:focus {
-		border-color: #3498db;
-		outline: none;
-	}
-
-	.btn {
-		padding: 12px;
-		background-color: #3498db;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 16px;
-		transition: background-color 0.3s;
-	}
-
-	.btn:hover {
-		background-color: #2980b9;
-	}
-
-	.google-btn {
-		padding: 12px;
-		background-color: #db4437;
-		color: white;
-		border: none;
-		border-radius: 4px;
-		width: 100%;
-		margin-top: 15px;
-		cursor: pointer;
-		transition: background-color 0.3s;
-	}
-
-	.google-btn:hover {
-		background-color: #c1351d;
-	}
-
-	.error-message {
-		color: #e74c3c;
-		font-size: 14px;
-		margin-top: 10px;
-		animation: shake 0.5s ease-in-out;
-	}
-
-	.toggle-link {
-		color: #3498db;
-		font-size: 14px;
-		cursor: pointer;
-		margin-top: 15px;
-		transition: color 0.3s;
-	}
-
-	.toggle-link:hover {
-		text-decoration: underline;
-		color: #2980b9;
-	}
-
-	/* Animações */
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-			transform: translateY(-10px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	@keyframes shake {
-		0% {
-			transform: translateX(-5px);
-		}
-		25% {
-			transform: translateX(5px);
-		}
-		50% {
-			transform: translateX(-5px);
-		}
-		75% {
-			transform: translateX(5px);
-		}
-		100% {
-			transform: translateX(0);
-		}
-	}
-</style>
+  
+  

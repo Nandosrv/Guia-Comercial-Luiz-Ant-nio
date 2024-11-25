@@ -6,7 +6,7 @@
   
 </script>
 
-<main class="w-[100%] h-[800px] flex justify-end items-end  ">
+<main class="w-[100%]  flex justify-end items-end  ">
     <div class="w-full h-[310px]  bg-[#09052D]">
         <div class="w-full h-[250px]  flex gap-5 justify-center items-center">
            <div class="w-[95%]   h-[240px] flex flex-col gap-2 justify-center items-center">
