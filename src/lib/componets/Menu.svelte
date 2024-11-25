@@ -4,11 +4,13 @@
     import Pesquisa from './pesquisa.svelte';
     import img from '$lib/images/new.png';
     import user from '$lib/images/usuário.png';
-
+    import { userPhotoURL } from '../../stores/user'; // Importando o store
     const items = [
         { href: '/', label: 'Home' },
+        { href: '/Inicio', label: 'Feed' },
         { href: '/Comercios', label: 'Comercios' },
     ];
+    
     let isOpen = false;
 
     function toggleMenu() {
@@ -41,7 +43,7 @@
         top: 20%;
         left: 50%;
         width: 300px;
-        height: 200px;
+        height: 250px;
         background-color: #EDF3EE;
         border-radius: 12px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -127,6 +129,25 @@
             color: #ffcc00;
         }
     }
+
+    /* Estilo para o botão do menu */
+    .btn-menu {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+    }
+
+    .menu-icon {
+        width: 32px;
+        height: 32px;
+        transition: transform 0.3s ease;
+    }
+
+    /* Cor de fundo ao passar o mouse */
+    .menu-icon:hover {
+        transform: scale(1.1);
+    }
 </style>
 
 <nav class="w-full h-[60px] flex items-center justify-between px-4 shadow-md relative">
@@ -134,9 +155,22 @@
     <a href="/" class="flex items-center justify-center">
         <img src={img} alt="Logo" class="w-[100px] flex mb-6" />
     </a>
+
     <div class="flex m-3">
-        <Pesquisa />
+        <!-- Barra de pesquisa -->
+        <!-- <Pesquisa /> -->
     </div>
+
+    <!-- Verifica se o usuário está logado e exibe a foto do perfil -->
+    {#if $userPhotoURL}
+       <a href="/perfil">
+        <div class="flex items-center">
+            <img src={$userPhotoURL} alt="Foto de perfil" class="w-8 h-8 rounded-full" />
+        </div>
+    </a>
+    {:else}
+        <a href="/login" class="text-yellow-500">Entrar</a> <!-- Link para login caso o usuário não esteja logado -->
+    {/if}
 
     <!-- Botão para abrir/fechar o menu (hamburguer) para mobile -->
     <button on:click={toggleMenu} class="lg:hidden text-yellow-500 focus:outline-none" aria-label="toggle menu">
@@ -161,6 +195,10 @@
                     {item.label}
                 </a>
             {/each}
+            <!-- Link para Criar Conta (Mobile) -->
+            <!-- <a href="/login" class="block px-4 py-2 text-black text-lg font-medium transition-colors duration-300 hover:bg-gray-100">
+                Criar Conta
+            </a> -->
         </div>
         <div class="mt-4 px-4">
             <Pesquisa />
@@ -175,6 +213,9 @@
         <div class="flex items-center">
             <a href="/" class="text-lg font-medium text-black hover:text-yellow-500">Home</a>
             <a href="/Comercios" class="ml-6 text-lg font-medium text-black hover:text-yellow-500">Comercios</a>
+            <!-- Link para Criar Conta (Desktop) -->
+            <!-- <a href="/login" class="ml-6 text-lg font-medium text-black hover:text-yellow-500">Criar Conta</a> -->
         </div>
     </div>
 </nav>
+

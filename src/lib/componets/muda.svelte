@@ -64,9 +64,9 @@
     onDestroy(() => clearInterval(intervalId));
 </script>
 
-<main class="m-1 flex h-full w-full justify-around">
+<main class="m-1 flex h-full w-full justify-around ">
     <div class="h-[512px] w-[157px]">
-        <div class="h-[50%] w-full rounded-[12px] border border-red-100 bg-[#5A4744]">
+        <div class="h-[50%] w-full rounded-[12px] border border-red-100 bg-[#5A4744] ">
             <div class="m-1 h-[70%] w-[95%] rounded-[12px]">
                 <img
                     class="h-full w-full object-cover rounded-[12px]"
@@ -90,7 +90,7 @@
     </div>
 
     <div class="h-[512px] w-[157px]">
-        <div class="h-[50%] w-full rounded-[12px] border border-red-100 bg-[#5A4744]">
+        <div class="h-[50%] w-full rounded-[12px] border border-red-100 bg-[#5A4744] ">
             <div class="m-1 h-[70%] w-[95%] rounded-[12px]">
                 <img
                     class="h-full w-full object-cover rounded-[12px]"
@@ -99,8 +99,8 @@
                 />
             </div>
             <div class="flex h-[50px] w-full flex-col justify-end">
-                <div class="flex w-[145px] items-center justify-between">
-                    <p class="text-yellow-400">DESTAQUES</p>
+                <div class="flex w-[145px] items-center justify-between ">
+                    <p class="text-yellow-400 ">DESTAQUES</p>
                     <a href={`https://wa.me/${comercios[currentIndex2].telefone}`} target="_blank" class="text-gray-300">
                         <img src={Whatsapps} alt="Ícone do WhatsApp" />
                     </a>

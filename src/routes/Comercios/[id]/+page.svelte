@@ -21,9 +21,9 @@
 	$: product = products.find((p: Product) => p.slug === productId);
   
 	if (product) {
-	  console.log('Produto encontrado:', product);
+	//   console.log('Produto encontrado:', product);
 	} else {
-	  console.log('Produto não encontrado');
+	//   console.log('Produto não encontrado');
 	}
   </script>
   

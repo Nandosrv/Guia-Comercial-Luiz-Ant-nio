@@ -11,7 +11,7 @@
         <a href="/Comercios">
             <p class="text-blue-600 font-serif">Manutenção Programada (05/12/2024)</p>
         </a>
-        <p class="text-white font-serif">13/11/2024</p>
+        <p class="text-white font-serif">05/12/2024</p>
         <span class="text-white font-serif">No dia 20/11/2024 às 13:00 horas, realizamos uma manutenção programada.</span>
        </div>
        <div class="w-[100%] h-[100px]  border-l-4 border-green-600">
