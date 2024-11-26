@@ -10,7 +10,7 @@
 	
 
 </script>
-<div class="w-full h-[70px] items-center relative flex justify-between bg-[#09052D]">
+<div class="w-full items-center relative flex justify-between ">
 	<Header />
 	
 </div>
