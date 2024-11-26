@@ -64,7 +64,7 @@
     onDestroy(() => clearInterval(intervalId));
 </script>
 
-<main class="m-1 flex h-full w-full justify-around ">
+<main class="p-2 flex h-[300px] w-full justify-around ">
     <div class="h-[512px] w-[157px]">
         <div class="h-[50%] w-full rounded-[12px] border border-red-100 bg-[#5A4744] ">
             <div class="m-1 h-[70%] w-[95%] rounded-[12px]">

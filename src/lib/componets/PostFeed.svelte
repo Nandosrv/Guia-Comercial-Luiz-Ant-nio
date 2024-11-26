@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { firebaseApp } from '../../firebase'; 
-    import supabase from '../../lib/supabaseClient'; 
+    import supabase from '../supabaseClient';
     import { userName, userPhotoURL } from '../../stores/user'; 
     import { writable } from 'svelte/store';
     import Galeria from '$lib/images/icons8-galeria-25.png';
