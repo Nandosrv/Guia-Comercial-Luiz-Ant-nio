@@ -27,7 +27,7 @@
 	import ImageSlider from '$lib/componets/ImageSlider.svelte';
 	import post1 from '$lib/images/post1.png';
 	import Comu from '$lib/images/comu.png';
-	import Pink from '$lib/images/anuncios.png';
+	import Pink from '$lib/images/anuncui2.png';
 	interface SliderItem {
 		title: string;
 		description: string;
