@@ -68,7 +68,7 @@
 		{ name: 'Eventos' },
 		{ name: 'LOJA' },
 		{ name: 'Ofertas da Semana' },
-		{ name: 'Quadro de Avisos',  },
+		{ name: 'Quadro de Avisos', href: '/QuadroAvisos' },
 		{ name: 'SUPORTE' }
 	];
 
