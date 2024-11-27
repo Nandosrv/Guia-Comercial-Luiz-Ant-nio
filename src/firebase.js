@@ -22,6 +22,7 @@ const firebaseConfig = {
   measurementId: "G-W5MRMQDDSL",
 };
 
+// Agora você pode usar o Firebase, por exemplo:
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
 
