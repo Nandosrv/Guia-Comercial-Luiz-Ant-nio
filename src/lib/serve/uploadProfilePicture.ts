@@ -1,4 +1,4 @@
-import supabase from './lib/supabaseClient'; // Certifique-se de que o supabase está configurado corretamente
+import supabase from '../supabaseClient'; // Certifique-se de que o supabase está configurado corretamente
 
 export async function uploadProfilePicture(file: File, userId: string) {
   // Sanitiza o nome do arquivo
