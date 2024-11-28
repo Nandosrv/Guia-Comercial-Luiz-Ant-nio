@@ -7,6 +7,7 @@
   import { userPhotoURL } from '../../stores/user';
   import { goto } from '$app/navigation';
   import * as firebase from '../../firebase';
+	import { uploadPicturesAnnounce } from '$lib/serve/uploadPicturesAnnounce';
 
 
 
@@ -49,7 +50,8 @@
       user_id: user?.uid || ''
   };
   let fotoPreview: string | null = null;
-
+  let fotoPreviewFile: File | null = null;
+  
   // Função para carregar os anúncios do banco de dados
   let carregando = true;
 
@@ -71,13 +73,17 @@ async function carregarAnuncios() {
           console.error('Usuário não autenticado');
           return;
       }
-
+      let pathFotoPreview: string | null = null;
+      if (fotoPreviewFile) {
+         pathFotoPreview = await uploadPicturesAnnounce(fotoPreviewFile, user.uid);
+        
+      }
       const { data, error } = await supabase
           .from('anuncios')
           .insert([
               {
                   ...novoAnuncio,
-                  foto: fotoPreview,
+                  foto: pathFotoPreview,
                   user_id: user.uid // Adicionando o user_id ao anúncio
               }
           ]);
@@ -134,7 +140,7 @@ async function carregarAnuncios() {
       if (file) {
           const reader = new FileReader();
           reader.onload = (e) => {
-              fotoPreview = e.target?.result as string;
+              fotoPreviewFile = file;
           };
           reader.readAsDataURL(file);
       }
@@ -178,8 +184,8 @@ async function carregarAnuncios() {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
       {#each filtrarAnuncios($anuncios, filtroSelecionado) as anuncio (anuncio.id)}
-        <div
-          in:fly={{ y: 50, duration: 300, delay: 300 * anuncio.id }}
+      <div
+          in:fly={{ y: 50, duration: 300}}
           out:fade={{ duration: 300 }}
           class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 relative flex flex-col"
         >
@@ -189,7 +195,8 @@ async function carregarAnuncios() {
             </div>
           {/if}
           {#if anuncio.foto}
-            <img src={anuncio.foto} alt="Imagem do anúncio" class="w-full h-48 object-cover" />
+          <img src={anuncio.foto} alt="Imagem do anúncio" class="w-full h-48 object-cover" loading="lazy" />
+          
           {/if}
           <div class="p-4 flex-grow">
             <h2 class="text-xl md:text-2xl font-semibold mb-2 text-blue-800">{anuncio.tipo}</h2>

@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { userPhotoURL, userName } from '../../stores/user'; 
     import Seta from '$lib/images/setas.png';
-    import { uploadProfilePicture } from '../../uploadProfilePicture';
+    import { uploadProfilePicture } from '../../lib/serve/uploadProfilePicture';
     import supabase from '../../lib/supabaseClient';  // Importando o supabase client
     import avatar from '../../lib/images/antonio.png';  // Importando o supabase client
     import { userId } from '../../stores/user'; // Importando o store

@@ -1,6 +1,6 @@
-import supabase from './lib/supabaseClient'; // Certifique-se de que o supabase está configurado corretamente
+import supabase from '../supabaseClient'; // Certifique-se de que o supabase está configurado corretamente
 
-export async function uploadProfilePicture(file: File, userId: string) {
+export async function uploadPicturesAnnounce(file: File, userId: string) {
   // Sanitiza o nome do arquivo
   const sanitizedFileName = `${userId}-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-_]/g, '')}`;
   // replace remove caracteres não-alfanuméricos
@@ -8,7 +8,7 @@ export async function uploadProfilePicture(file: File, userId: string) {
     // console.log('Iniando o upload da foto de perfil...');
     // Fazendo o upload do arquivo
     const { data, error: uploadError } = await supabase.storage
-      .from('profile-pictures')
+      .from('pictures_announce')
       .upload(sanitizedFileName, file);
       // console.log('Dados do upload:', data);
 
@@ -19,9 +19,9 @@ export async function uploadProfilePicture(file: File, userId: string) {
 
     // Obtendo a URL pública do arquivo
     const { data: urlData } = supabase.storage
-      .from('profile-pictures')
+      .from('pictures_announce')
       .getPublicUrl(sanitizedFileName);
-      console.log('URL pública do arquivo:', urlData);
+      // console.log('URL pública do arquivo:', urlData);
     // Verificando se a URL foi obtida corretamente
     if (!urlData || !urlData.publicUrl) {
       console.error('Erro ao obter a URL pública');
@@ -32,7 +32,7 @@ export async function uploadProfilePicture(file: File, userId: string) {
     return urlData.publicUrl;
 
   } catch (error: any) {  // Aqui tratamos o erro como "any" para acessar propriedades como 'message'
-    console.error('Erro ao atualizar foto de perfil:', error);
-    throw new Error(`Erro ao atualizar a foto de perfil: ${error.message}`);
+    console.error('Erro ao atualizar foto do anuncio:', error);
+    throw new Error(`Erro ao atualizar a foto do anuncio: ${error.message}`);
   }
 }
