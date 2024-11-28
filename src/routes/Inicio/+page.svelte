@@ -8,7 +8,7 @@
 	import { getAuth, onAuthStateChanged } from "firebase/auth";
 	import supabase from '../../lib/supabaseClient';  // Importando o supabase client
     import avatar from '../../lib/images/antonio.png';  // Importando o supabase client
-    import { uploadProfilePicture } from '../../uploadProfilePicture';
+    import { uploadProfilePicture } from '../../lib/serve/uploadProfilePicture';
     import { userName, userPhotoURL } from '../../stores/user'; // Importando o store
 	import { on } from 'svelte/events';
 	import { goto } from '$app/navigation'; // Para redirecionar o usuário
