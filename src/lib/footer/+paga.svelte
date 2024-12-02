@@ -6,8 +6,8 @@
   
 </script>
 
-<main class="w-[100%]  flex justify-end items-end  ">
-    <div class="w-full h-[310px]  bg-gradient-to-br from-purple-950 to-purple-900">
+<main class="w-[100%]  flex justify-end items-end ">
+    <div class="w-full h-[310px]  bg-gradient-to-br from-purple-950 to-purple-900  lg:rounded-[12px]">
         <div class="w-full h-[250px]  flex gap-5 justify-center items-center">
            <div class="w-[95%]   h-[240px] flex flex-col gap-2 justify-center items-center">
             <div class="w-[100%] h-[150px] flex justify-center items-center ">

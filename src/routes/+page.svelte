@@ -28,27 +28,35 @@
 	import post1 from '$lib/images/post1.png';
 	import Comu from '$lib/images/comu.png';
 	import Pink from '$lib/images/anuncui2.png';
+	import OfertaProfissional from '$lib/componets/OfertaProfissional.svelte';
+	import Black from '$lib/images/black.png';
+	import Postnew from '$lib/images/Posta.png';
+
 	interface SliderItem {
 		title: string;
 		description: string;
 		image: string;
+		link: string;
 	}
 
 	const sliderItems: SliderItem[] = [
 		{
 			title: 'Manutenção Programada (05/12/2024)',
 			description: 'Manutenção em andamento',
-			image: post1
+			image: Postnew,
+			link: '/noticias'
 		},
 		{
 			title: 'Manutenção Programada (05/12/2024)',
 			description: 'Manutenção Programada',
-			image: Comu
+			image: Comu,
+			link: '/noticias'
 		},
 		{
 			title: 'Avalie Nosso Site',
-			description: 'Estamos emplementando novas funcionalidades',
-			image: Pink
+			description: 'Estamos implementando novas funcionalidades',
+			image: Pink,
+			link: '/Avalie'
 		}
 	];
 
@@ -63,13 +71,13 @@
 	});
 
 	const navItems = [
-		{ name: 'Atualizações' },
+		{ name: 'Atualizações', href: '/noticias' },
 		{ name: 'Comércios', href: '/Comercios' },
-		{ name: 'Eventos' },
-		{ name: 'LOJA' },
-		{ name: 'Ofertas da Semana' },
-		{ name: 'Quadro de Avisos', href: '/QuadroAvisos' },
-		{ name: 'SUPORTE' }
+		// { name: 'Eventos' },
+		// { name: 'Loja' },
+		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
+		// { name: 'Quadro de Avisos', href: '/QuadroAvisos' },
+		{ name: 'Suporte', href: '/Suporte' }
 	];
 
 	function nextSlide() {
@@ -88,10 +96,10 @@
 			encontre luiz antonio
 		</h1>
 	</div>
-<!-- bg-purple-950/50 -->
+	<!-- bg-purple-950/50 -->
 	<!-- Main Navigation -->
-	<nav class="border-b border-purple-800 bg-black/60">
-		<div class="mx-auto max-w-7xl ">
+	<nav class="items-center justify-center border-b border-purple-800 bg-black/60 md:flex">
+		<div class="mx-auto flex max-w-7xl">
 			<div class="flex items-center justify-between">
 				<button
 					class="p-2 text-white md:hidden"
@@ -107,7 +115,7 @@
 					{#each navItems as item}
 						<a
 							href={item.href}
-							class="flex items-center px-3 py-4 text-sm text-gray-300 transition-colors hover:bg-purple-800/30 hover:text-white"
+							class="u flex items-center px-3 py-4 text-sm text-gray-300 transition-colors hover:bg-purple-800/30 hover:text-[17px] hover:text-blue-400"
 						>
 							<span>{item.name}</span>
 						</a>
@@ -118,25 +126,34 @@
 	</nav>
 
 	<!-- Main Content -->
-	<main class="mx-auto max-w-7xl px-4 py-8  justify-center items-center flex flex-col">
-		<div class="flex flex-wrap justify-center gap-8 "> 
+	<main class="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-8">
+		<div class="flex flex-wrap justify-center gap-8">
 			<!-- Main Content Area -->
-			<div class="lg:col-span-2 flex flex-col w-[100%] justify-center items-center ">
+
+			<div class="flex w-[100%] flex-col items-center justify-center lg:col-span-2">
 				<!-- Featured Banner Slider -->
-				<div class="slider relative mb-8 object-cover gap-7 w-full rounded-[12px] border-1-2 border-[#09052D] bg-black/60">
+				<!-- Featured Banner Slider -->
+				<div
+					class="slider border-1-2 relative mb-8 w-[100%] lg:w-[91%] lg:h-[500px]  gap-7 rounded-[12px] border-[#09052D] bg-black/60 object-cover"
+				>
 					<div class="slider-items flex" style="transform: translateX(-{$currentSlide * 100}%);">
 						{#each sliderItems as item, index}
 							<div class="slider-item relative">
-								<a href="/login">
-									<img 
-									src={item.image}
-									alt={item.title}
-									class="h-[400px] w-full object-cover brightness-75 cursor-pointer"
-								/>
-								</a>
-								<div class="absolute inset-0">
+								<a href={item.link}>
+									<!-- Adiciona o link correspondente -->
+									<img
+										src={item.image}
+										alt={item.title}
+										class="bg-conver lg:h-[500px] h-[320px] w-[100%] cursor-pointer bg-cover bg-center brightness-75"
+									/>
+									
+								</a><div>
+									
+								</div>
+								<div class="absolute inset-0 top-[200px] lg:top-[300px] ">
 									<div class="flex h-full flex-col justify-center p-4 md:p-8">
-										<a href="/Avalie">
+										<a href={item.link}>
+											<!-- Mesmo link utilizado aqui -->
 											<h2 class="mb-2 text-2xl font-bold text-white md:mb-4 md:text-4xl">
 												{item.title}
 											</h2>
@@ -164,13 +181,8 @@
 
 				<!-- News Section -->
 				<div class="space-y-4 rounded-[12px]">
-					{#each [
-						
-						{ type: 'Manutenção', title: 'Manutenção (25/11/24)', description: ' Estamos atualizando nosso sistema para melhorar a experiência do usuário e corrigir erros identificados.	', date: '25/12/2024' },
-						{ type: 'Notícias', title: 'Notas de Atualização (26/11/24)', description: ' A atualização do banco de dados foi concluída com sucesso. Isso nos permitirá oferecer um serviço mais rápido e preciso. Aproveite as melhorias no sistema! 05/11/2024!', date: '26/11/2024' },
-					    { type: 'Eventos', title: 'Avalie nosso site', description: 'Queremos saber sua opinião! Avalie a experiência em nosso site e nos ajude a melhorar a cada dia. Seu feedback é fundamental para oferecer o melhor conteúdo e usabilidade', date: '19/11/2024' }] as item
-					  }
-						<div class="border-purple-800/50 bg-black/40 p-4 rounded-[12px]">
+					{#each [{ type: 'Manutenção', title: 'Manutenção (25/11/24)', description: ' Estamos atualizando nosso sistema para melhorar a experiência do usuário e corrigir erros identificados.	', date: '25/12/2024' }, { type: 'Notícias', title: 'Notas de Atualização (26/11/24)', description: ' A atualização do banco de dados foi concluída com sucesso. Isso nos permitirá oferecer um serviço mais rápido e preciso. Aproveite as melhorias no sistema! 05/11/2024!', date: '26/11/2024' }, { type: 'Eventos', title: 'Avalie nosso site', description: 'Queremos saber sua opinião! Avalie a experiência em nosso site e nos ajude a melhorar a cada dia. Seu feedback é fundamental para oferecer o melhor conteúdo e usabilidade', date: '19/11/2024' }] as item}
+						<div class="rounded-[12px] border-purple-800/50 bg-black/40 p-4">
 							<div
 								class="mb-2 flex flex-col items-start justify-between md:flex-row md:items-center"
 							>
@@ -181,8 +193,10 @@
 								</span>
 								<span class="text-sm text-gray-400">{item.date}</span>
 							</div>
-							<a href="/Avalie">
-								<h3 class="mb-2 font-semibold text-white hover:text-blue-500 font-serif">{item.title}</h3>
+							<a href="/noticias">
+								<h3 class="mb-2 font-serif font-semibold text-white hover:text-blue-500">
+									{item.title}
+								</h3>
 							</a>
 							<p class="text-sm text-gray-300">{item.description}</p>
 						</div>
@@ -191,10 +205,25 @@
 			</div>
 
 			<!-- Sidebar -->
-			
 		</div>
 	</main>
 </div>
+<main
+	class="flex w-full flex-col items-center justify-center gap-7 bg-gradient-to-br from-purple-950 to-purple-900"
+>
+	<!-- <div
+		class="flex h-[100px] w-full items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 max-sm:w-[92%] md:w-[53%]"
+	> -->
+		<!-- <h1 class="u text-2xl font-bold tracking-wider text-white md:text-4xl">Ofertas Da Semana</h1> -->
+	<!-- </div> -->
+	<!-- <div
+		class="ml flex w-[53%] flex-col items-center justify-center rounded-[12px] bg-black/40 p-4 max-sm:w-[92%]"
+	>
+		<OfertaProfissional />
+	</div> -->
+	<!-- <Muda /> -->
+	<Footer />
+</main>
 
 <style>
 	.slider {
@@ -232,7 +261,3 @@
 		right: 10px;
 	}
 </style>
-<main class="w-full bg-gradient-to-br from-purple-950 to-purple-900">
-	<Muda />
-	<Footer />
-</main>

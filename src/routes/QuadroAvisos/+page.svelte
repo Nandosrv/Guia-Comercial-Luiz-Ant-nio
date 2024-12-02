@@ -203,7 +203,7 @@ async function carregarAnuncios() {
             <p class="text-gray-600 mb-4 text-sm md:text-base">{anuncio.conteudo}</p>
             <div class="flex justify-between items-center text-xs md:text-sm text-gray-500 mb-2">
               <span>{anuncio.nome}</span>
-              <span>{anuncio.telefone}</span>
+             <a href="tel:{anuncio.telefone}" class="text-blue-400">{anuncio.telefone}</a>
             </div>
           </div>
           {#if !anuncio.resolvido && anuncio.user_id === user?.uid}
