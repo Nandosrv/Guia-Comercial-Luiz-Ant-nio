@@ -3,7 +3,7 @@
     import anuncui2 from '$lib/images/anuncui2.png';
     import Newpost from '$lib/images/postpost.png';
     import Manu from '$lib/images/manu.gif';
-    import Post from '$lib/images/post.png';
+    import Post from '$lib/images/Post.png';
     import Ana from '$lib/images/ina.png';
 
     // Lista de anúncios com data
