@@ -76,7 +76,7 @@
 		// { name: 'Eventos' },
 		// { name: 'Loja' },
 		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
-		// { name: 'Quadro de Avisos', href: '/QuadroAvisos' },
+		{ name: 'Quadro de Avisos', href: '/QuadroAvisos' },
 		{ name: 'Suporte', href: '/Suporte' }
 	];
 
