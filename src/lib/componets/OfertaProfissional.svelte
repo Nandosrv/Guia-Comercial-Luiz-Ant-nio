@@ -1,5 +1,5 @@
 <script lang="ts">
-  import pizzaImg from '../images/Pizzas.png';
+  import pizzaImg from '../images/PIzzas.png';
   import { onMount } from 'svelte';
   import pizzaImg2 from '../images/zero.jpg';
   import whatsappImg from '../images/icon-ws.png';
