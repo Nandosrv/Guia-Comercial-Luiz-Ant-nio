@@ -1,4 +1,5 @@
 <main class="w-[100%] h-[500px] flex justify-center items-center ">
+
 	<div class="w-[95%] h-[300px] flex flex-col justify-center items-center">
 		<div class=" ml-1 w-[100%] h-[30px] flex justify-center items-center  gap-2">
 			<div class="w-[92%] h-[30px] flex justify-start items-center  gap-2">
@@ -31,3 +32,4 @@
 		 </div>
 	</div>
 </main>
+
