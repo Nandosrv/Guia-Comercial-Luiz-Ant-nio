@@ -73,8 +73,8 @@
 	const navItems = [
 		{ name: 'Atualizações', href: '/noticias' },
 		{ name: 'Comércios', href: '/Comercios' },
-		// { name: 'Eventos' },
-		// { name: 'Loja' },
+		// { name: 'Eventos', href: '/NewEventos' },
+		{ name: 'Mural', href: '/Mural' },
 		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
 		{ name: 'Quadro de Avisos', href: '/QuadroAvisos' },
 		{ name: 'Suporte', href: '/Suporte' }
@@ -208,22 +208,22 @@
 		</div>
 	</main>
 </div>
-<main
+<!-- <main
 	class="flex w-full flex-col items-center justify-center gap-7 bg-gradient-to-br from-purple-950 to-purple-900"
 >
-	<!-- <div
+	<div
 		class="flex h-[100px] w-full items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 max-sm:w-[92%] md:w-[53%]"
-	> -->
-		<!-- <h1 class="u text-2xl font-bold tracking-wider text-white md:text-4xl">Ofertas Da Semana</h1> -->
-	<!-- </div> -->
-	<!-- <div
+	>
+		<h1 class="u text-2xl font-bold tracking-wider text-white md:text-4xl">Ofertas Da Semana</h1>
+	</div>
+	<div
 		class="ml flex w-[53%] flex-col items-center justify-center rounded-[12px] bg-black/40 p-4 max-sm:w-[92%]"
 	>
 		<OfertaProfissional />
-	</div> -->
+	</div>
 	<!-- <Muda /> -->
 	<Footer />
-</main>
+<!-- </main> --> 
 
 <style>
 	.slider {
