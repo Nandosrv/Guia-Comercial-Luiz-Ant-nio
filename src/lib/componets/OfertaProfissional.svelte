@@ -1,5 +1,5 @@
 <script lang="ts">
-  import pizzaImg from '../images/PIzzas.png';
+  import Pirapizzas from '../images/pizzaptpt.png';
   import { onMount } from 'svelte';
   import pizzaImg2 from '../images/zero.jpg';
   import whatsappImg from '../images/icon-ws.png';
@@ -22,7 +22,7 @@
           descricao: 'SELF SERVICE, PRATO FEITO, MARMITEX - Atendimento Segunda a Sabado',
           dataInicio: new Date('2023-11-27T00:00:00'),
           dataFim: new Date('2023-12-02T23:59:59'),
-          imagemUrl: pizzaImg,
+          imagemUrl: Pirapizzas,
           desconto: 30,
           loja: 'Pizzaria Exemplo',
           whatsapp: '16996384606', // Número do WhatsApp
