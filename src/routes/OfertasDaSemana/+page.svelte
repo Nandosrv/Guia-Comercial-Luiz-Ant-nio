@@ -1,8 +1,6 @@
 <script lang="ts">
     import OfertaProfissional from '$lib/componets/OfertaProfissional.svelte';
     import Anuncio from '$lib/images/anuncio.png';
-    import Oferta from '$lib/images/black.png';
-    import Oferta1 from '$lib/images/PIzzas.png';
     import AnuncioOferts from '$lib/images/postblack.png';
 </script>
 
