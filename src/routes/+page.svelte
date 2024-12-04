@@ -75,7 +75,7 @@
 		{ name: 'Comércios', href: '/Comercios' },
 		// { name: 'Eventos', href: '/NewEventos' },
 		{ name: 'Mural', href: '/Mural' },
-		{ name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
+		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
 		{ name: 'Quadro de Avisos', href: '/QuadroAvisos' },
 		{ name: 'Suporte', href: '/Suporte' }
 	];
