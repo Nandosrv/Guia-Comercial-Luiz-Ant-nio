@@ -1,28 +1,26 @@
 <script>
-// @ts-nocheck
-
-	import Footer  from '$lib/footer/+paga.svelte';
 	// @ts-nocheck
-
+	import Footer from '$lib/footer/+paga.svelte';
 	import Breadcrumbs from '$lib/componets/Breadcrumbs.svelte';
-	import Carrossel from '$lib/componets/carrossel.svelte';
-	import Likecompone from '$lib/componets/likecompone.svelte';
 	import Citys from '../../lib/images/homepage.jpg';
 	import Sol from '$lib/images/icons8-sol-64.png';
 	import Maps from '$lib/images/icons8-mapa-64.png';
 	import Rota from '$lib/images/icons8-route-64.png';
 	import Postform from '$lib/componets/postform.svelte';
-</script>
+	import Mt from '$lib/images/mt.png';
+	import MenuMural from '$lib/componets/MenuMural.svelte';
+	import ScrollTo from '$lib/componets/scrollTo.svelte';
+	
 
+	</script>
+	
+	<ScrollTo />
 <main class="flex w-full flex-col items-center bg-gradient-to-br from-purple-950 to-purple-900">
 	<div class="flex w-full items-center justify-between border-b border-purple-800 bg-black/60 p-4">
-		<div class="flex items-center gap-4">
-			<img src={Citys} alt="Citys" class="h-10 w-10 rounded-full object-cover" />
-		</div>
 		<Breadcrumbs />
 	</div>
     <div class="w-full h-[50px] flex flex-col items-center justify-center border-b border-purple-800 bg-black/60 p-4">
-
+		<MenuMural />
 
     </div>
     
@@ -42,8 +40,16 @@
 			<img
 				class="flex rounded-[12px] object-cover max-sm:w-[400px] lg:w-[600px]"
 				src="{Citys} "
-				alt=""
+				alt="Cidade De Luís Antônio"
 			/>
+            <div class="w-full h-[50px] flex items-center gap-2 justify-start border-b border-purple-800 bg-black/60 p-4">
+                <img src="{Mt} " alt="Logo" class="h-[40px] w-[40px]">
+                <a href="/NandoOliveira" target="_blank" rel="noopener noreferrer">
+                    <p class="text-blue-400 hover:text-white no-underline">Nando Oliveira</p>
+                </a>
+                <p class="text-white">03/12/2024</p>
+
+            </div>
 			<div>
 				<p class="p-2 font-sans text-white lg:text-[20px]">
 					Você vai encontrar muitas opções de hotéis em Luís Antônio, informações e fotos da
@@ -61,7 +67,7 @@
 			</div>
 		</div>
 	</section>
-	<section
+	<section id="HISTORIA-DA-CIDADE"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -92,7 +98,7 @@
 			</div>
 		</div>
 	</section>
-	<section
+	<section id="Significado-do-Nome"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -110,7 +116,7 @@
 			</div>
 		</div>
 	</section>
-	<section
+	<section id="Aniversário-da-Cidade"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -127,7 +133,7 @@
 			</div>
 		</div>
 	</section>
-	<section
+	<section id="CARACTERÍSTICAS"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -155,7 +161,7 @@
 			</div>
 		</div>
 	</section>
-	<section
+	<section id="COMO-CHEGAR"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -214,7 +220,7 @@
 			</div>
 		</div>
 	</section>
-	<section
+	<section id="TURISMO"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -237,7 +243,7 @@
 		</div>
 	</section>
 	<section
-		id="informacoes"
+		id="INFORMAÇÕES-ÚTEIS"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -285,7 +291,12 @@
                 </a>
 			</div>
 		</div>
+	
+
 	</section>
+	<div id="Comentário">
+
+	</div>
 <Postform />
     <Footer />
 

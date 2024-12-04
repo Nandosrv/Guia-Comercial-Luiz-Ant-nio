@@ -75,7 +75,7 @@
 		{ name: 'Comércios', href: '/Comercios' },
 		// { name: 'Eventos', href: '/NewEventos' },
 		{ name: 'Mural', href: '/Mural' },
-		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
+		{ name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
 		{ name: 'Quadro de Avisos', href: '/QuadroAvisos' },
 		{ name: 'Suporte', href: '/Suporte' }
 	];
@@ -93,7 +93,7 @@
 	<!-- Header Logo -->
 	<div class="relative flex h-20 items-center justify-center bg-purple-950/50 md:h-32">
 		<h1 class="text-2xl font-bold uppercase tracking-wider text-white md:text-4xl">
-			encontre luiz antonio
+			encontre Luiz Antônio
 		</h1>
 	</div>
 	<!-- bg-purple-950/50 -->
@@ -208,22 +208,22 @@
 		</div>
 	</main>
 </div>
-<!-- <main
+<main
 	class="flex w-full flex-col items-center justify-center gap-7 bg-gradient-to-br from-purple-950 to-purple-900"
 >
 	<div
-		class="flex h-[100px] w-full items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 max-sm:w-[92%] md:w-[53%]"
+		class="flex h-[100px] flex-col w-full items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 max-sm:w-[92%] md:w-[53%]"
 	>
-		<h1 class="u text-2xl font-bold tracking-wider text-white md:text-4xl">Ofertas Da Semana</h1>
+		<h1 class="flex  text-2xl font-bold tracking-wider text-white md:text-4xl">Destaques Da Semana</h1>
+		<p>⭐⭐⭐⭐⭐</p>
 	</div>
 	<div
 		class="ml flex w-[53%] flex-col items-center justify-center rounded-[12px] bg-black/40 p-4 max-sm:w-[92%]"
 	>
-		<OfertaProfissional />
+	<OfertaProfissional />
 	</div>
-	<!-- <Muda /> -->
 	<Footer />
-<!-- </main> --> 
+ </main> 
 
 <style>
 	.slider {

@@ -12,7 +12,7 @@
     let name: string = '';
     let photoURL: string = '';
     let isSaving = false;
-    
+        
     // console.log('casa', $userId); 
     
     let iduser = '';
