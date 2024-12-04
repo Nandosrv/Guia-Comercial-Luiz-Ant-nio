@@ -17,7 +17,7 @@
 	let errorMessage = '';
 	let isRegistering = false; // Variável para alternar entre login e registro
 	let iduser = $userId;
-
+  
 	// Função para configurar o cookie
 	function setCookie(name: string, value: string, days: number) {
 		const date = new Date();

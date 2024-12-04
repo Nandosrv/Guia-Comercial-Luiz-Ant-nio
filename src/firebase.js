@@ -25,7 +25,7 @@ const firebaseConfig = {
 // Agora você pode usar o Firebase, por exemplo:
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
-
+ 
 // Inicializa o Analytics apenas se estiver no lado do cliente
 let analytics;
 if (typeof window !== "undefined") {

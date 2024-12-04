@@ -13,8 +13,9 @@
 	import { on } from 'svelte/events';
 	import { goto } from '$app/navigation'; // Para redirecionar o usuário
 	import PostFeed from '../../lib/componets/PostFeed.svelte';
+	import firebase from 'firebase/compat/app';
 	let isAuthenticated = false;
-	
+
 	onMount(() => {
 		const auth = getAuth();
 		onAuthStateChanged(auth, (user) => {

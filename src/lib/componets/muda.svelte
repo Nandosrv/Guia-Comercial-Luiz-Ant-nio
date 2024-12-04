@@ -1,4 +1,5 @@
 <script>
+	import Gelindo from '$lib/images/gelindo.png';
     import Frete from '$lib/images/frete-do-carlao.jpg';
     import Nunes from '$lib/images/nunes.jpg';
     import Grau from '$lib/images/grau.jpg'; // Certifique-se de que o caminho está correto
@@ -8,20 +9,21 @@
     import Oriental from '$lib/images/oriental.jpg';
     import Fera from '$lib/images/fera.jpg';
     import Sacchi from '$lib/images/sacchi.jpg';
+    import Jr from '$lib/images/reis.png';
 
     const comercios = [
         {
-            nome: 'Grau',
-            telefone: '16997347340',
+            nome: 'Gelindo',
+            telefone: '16991025776',
             descricao: 'Deposito de bebidas e mercado no grau.',
-            fotos: [Grau],
+            fotos: [Gelindo],
             // texts: '16'
         },
         {
-            nome: 'Frete',
-            telefone: '1198765432',
-            descricao: 'Pizzaria com variedade de sabores.',
-            fotos: [Frete],
+            nome: 'Jr Costela ao Bafo',
+            telefone: '16996384606',
+            descricao: 'Costela ao Bafo.',
+            fotos: [Jr],
             // texts: '8'
         },
         {
