@@ -220,7 +220,7 @@
 	<div
 		class="ml flex w-[53%] flex-col items-center justify-center rounded-[12px] bg-black/40 p-4 max-sm:w-[92%]"
 	>
-	<OfertaProfissional />
+	<!-- <OfertaProfissional /> -->
 	</div>
 	<Footer />
  </main> 
