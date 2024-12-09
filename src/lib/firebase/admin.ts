@@ -1,13 +1,14 @@
 import admin from 'firebase-admin';
 // import { readFileSync } from 'fs';
-import {
-	PUBLIC_FIREBASE_PROJECT_ID,
-	PUBLIC_FIREBASE_CLIENT_EMAIL,
-	PUBLIC_FIREBASE_PRIVATE_KEY
-} from '$env/static/public';
-// Caminho para o arquivo JSON com as configurações do Firebase Admin
-// const serviceAccount = JSON.parse(readFileSync('firebase-adminsdk.json', 'utf-8'));
-// console.log('admin firebase: ', serviceAccount);
+// import {
+// 	PUBLIC_FIREBASE_PROJECT_ID,
+// 	PUBLIC_FIREBASE_CLIENT_EMAIL,
+// 	PUBLIC_FIREBASE_PRIVATE_KEY
+// } from '$env/static/public';
+
+const PUBLIC_FIREBASE_PROJECT_ID = process.env.PUBLIC_FIREBASE_PROJECT_ID;
+const PUBLIC_FIREBASE_CLIENT_EMAIL = process.env.PUBLIC_FIREBASE_CLIENT_EMAIL;
+const PUBLIC_FIREBASE_PRIVATE_KEY = process.env.PUBLIC_FIREBASE_PRIVATE_KEY as string;
 
 if (!admin.apps.length) {
 	admin.initializeApp({
