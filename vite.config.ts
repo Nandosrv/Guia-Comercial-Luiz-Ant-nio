@@ -24,12 +24,12 @@ export default defineConfig({
 	  },
 	resolve: {
 		alias: {
-			net: 'false',
-            url: 'false',
-			fs: 'false',
-			tls: 'false',
-			os: 'false',
-
+			net: '',
+            url: '',
+			fs: '',
+			tls: '',
+			os: '',
+			querystring: '',
 		}
 	}
 
