@@ -5,11 +5,7 @@ dotenv.config();
 export default defineConfig({
 	plugins: [sveltekit()],
 	define: {
-		// Exponha apenas as variáveis públicas prefixadas com "PUBLIC"
-		'process.env': {
-		  ...Object.fromEntries(
-			Object.entries(process.env).filter(([key]) => key.startsWith('PUBLIC'))
-		  )
-		}
-	  },
+		'process.env.PUBLIC_SUPABASE_URL': JSON.stringify(process.env.PUBLIC_SUPABASE_URL),
+		'process.env.PUBLIC_SUPABASE_KEY': JSON.stringify(process.env.PUBLIC_SUPABASE_KEY)
+	  }
 });
