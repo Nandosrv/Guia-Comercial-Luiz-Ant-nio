@@ -1,6 +1,7 @@
 import { authAdmin } from '$lib/firebase/admin';
+import type { Handle } from '@sveltejs/kit';
 
-export async function handle({ event, resolve }) {
+export const handle: Handle = async ({ event, resolve }) => {
 	const token = event.cookies.get('authToken');
 
 	if (token) {
