@@ -1,4 +1,5 @@
 import { getAnalytics } from 'firebase/analytics';
+import { getDatabase } from 'firebase/database';
 import { initializeApp } from 'firebase/app';
 import {
 	// browserSessionPersistence,
@@ -46,6 +47,7 @@ const firebaseConfig = {
 // Agora você pode usar o Firebase, por exemplo:
 // Inicializa o Firebase
 const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 // Inicializa o Analytics apenas se estiver no lado do cliente
 let analytics;
