@@ -43,5 +43,8 @@
 		"firebase": "^11.0.2",
 		"firebase-admin": "^13.0.1",
 		"mysql2": "^3.11.3"
+	},
+	"optionalDependencies": {
+		"@rollup/rollup-linux-x64-gnu": "4.9.5"
 	}
 }
