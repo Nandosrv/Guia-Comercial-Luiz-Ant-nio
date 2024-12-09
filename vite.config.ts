@@ -21,5 +21,16 @@ export default defineConfig({
 		'process.env.PRIVATE_FIREBASE_PRIVATE_KEY': JSON.stringify(process.env.PRIVATE_FIREBASE_PRIVATE_KEY),
 		'process.env.PRIVATE_FIREBASE_PROJECT_ID': JSON.stringify(process.env.PRIVATE_FIREBASE_PROJECT_ID),
 
-	  }
+	  },
+	resolve: {
+		alias: {
+			net: 'false',
+            url: 'false',
+			fs: 'false',
+			tls: 'false',
+			os: 'false',
+
+		}
+	}
+
 });
