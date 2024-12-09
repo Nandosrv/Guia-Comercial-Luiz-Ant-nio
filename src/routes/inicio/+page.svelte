@@ -1,23 +1,16 @@
 <script lang="ts">
-	import { beforeUpdate, onMount } from 'svelte';
-	export let inputValue = '';
-	import Galeria from '$lib/images/icons8-galeria-25.png';
-	import Camera from '$lib/images/icons8-câmera-50.png';
-	import gif from '$lib/images/icons8-gif-48.png';
-	import userAvatar from '$lib/images/antonio.png';
-	import { getAuth, onAuthStateChanged } from "firebase/auth";
-	import supabase from '../../lib/supabaseClient';  // Importando o supabase client
-    import avatar from '../../lib/images/antonio.png';  // Importando o supabase client
-    import { uploadProfilePicture } from '../../lib/serve/uploadProfilePicture';
-    import { userName, userPhotoURL } from '../../stores/user'; // Importando o store
-	import { on } from 'svelte/events';
-	import { goto } from '$app/navigation'; // Para redirecionar o usuário
+	import { goto } from '$app/navigation';
+	import { getAuth, onAuthStateChanged } from 'firebase/auth';
+	import { onMount } from 'svelte';
+
+	import type { User } from '$lib/types/userStore';
 	import PostFeed from '../../lib/componets/PostFeed.svelte';
-	import firebase from 'firebase/compat/app';
+	import { userStore } from '../../stores/userStore.svelte';
 	let isAuthenticated = false;
 
 	onMount(() => {
 		const auth = getAuth();
+		// console.log('auth', auth);
 		onAuthStateChanged(auth, (user) => {
 			if (!user) {
 				// Se não estiver autenticado, redirecione para a página de login
@@ -29,31 +22,19 @@
 	});
 
 	let photoURL: string = '';
-	
-	let currentUser = {
-		name: $userName || 'Usuário',
-		avatar: avatar
-	};
-	onMount(() => {
-        // Carregar dados do usuário (exemplo simples)
-       
-		photoURL = $userPhotoURL || 'avatar';  // Foto padrão
-		currentUser.avatar = photoURL;  // Foto padrão
-		// console.log('aquiiiiii', $userPhotoURL);
-		userName.set($userName || 'Usuário');
-		// console.log('teste', $userName);
-    });
-	
+
+	let currentUser = $derived(userStore.value);
+
 	let showModal = false;
 	let selectedFile: string | null = null;
-	
+
 	// Informação do usuário logado
 
 	// Lista de postagens
 	let posts: {
 		text: string;
 		image: string | null;
-		user: { name: string; avatar: string };
+		user: User;
 		likes: number;
 		comments: { user: string; text: string }[];
 	}[] = [];
@@ -89,21 +70,21 @@
 	}
 
 	// Função para publicar o conteúdo
-	function postContent() {
-		posts = [
-			{
-				text: inputValue,
-				image: selectedFile,
-				user: currentUser,
-				likes: 0,
-				comments: []
-			},
-			...posts
-		];
-		showModal = false;
-		inputValue = '';
-		selectedFile = null;
-	}
+	// function postContent() {
+	// 	posts = [
+	// 		{
+	// 			text: inputValue,
+	// 			image: selectedFile,
+	// 			user: currentUser,
+	// 			likes: 0,
+	// 			comments: []
+	// 		},
+	// 		...posts
+	// 	];
+	// 	showModal = false;
+	// 	inputValue = '';
+	// 	selectedFile = null;
+	// }
 
 	// Função para abrir modal de imagem
 	function openImageModal(image: string) {
@@ -140,4 +121,5 @@
 		}
 	}
 </script>
+
 <PostFeed />

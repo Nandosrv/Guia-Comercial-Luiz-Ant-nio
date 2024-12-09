@@ -24,7 +24,6 @@
 		</div>
 	</div>
 	<div class="w-full rounded-[12px] bg-black/40 p-4 md:w-[50%]">
-	<Footer />
-
+		<Footer />
 	</div>
 </main>

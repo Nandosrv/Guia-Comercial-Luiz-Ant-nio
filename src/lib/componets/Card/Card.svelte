@@ -4,7 +4,7 @@
 	import Liga from '../Liga.svelte';
 	import Review from '../Review.svelte';
 	import Whatsapp from '../whatsapp.svelte';
-	import Avalie from '../../../routes/Avalie/+page.svelte'
+	import avalie from '../../../routes/avalie/+page.svelte';
 
 	import Cals from '$lib/images/call-me.png';
 	import Ws from '$lib/images/icon-ws.png';
@@ -36,9 +36,7 @@
 
 <main class="mt-3 flex h-[400px] w-[100%] justify-center">
 	<!-- card -->
-	<div
-		class="flex h-[500px] w-[85%] justify-center rounded-[12px]  bg-[#D1D5D9]"
-	>
+	<div class="flex h-[500px] w-[85%] justify-center rounded-[12px] bg-[#D1D5D9]">
 		<div class="flex h-[180px] w-[75%] rounded-[12px] md:h-[57%]">
 			<img class="w-[100%] rounded-[12px] object-cover" src="{product?.image} " alt="" />
 		</div>
@@ -55,7 +53,7 @@
 				</div>
 			</div>
 			<div class="absolute flex h-[50px] w-[100%] justify-start">
-				<div class="mt-3 w-[85%] z-50">
+				<div class="z-50 mt-3 w-[85%]">
 					<!-- <Avaliacao /> -->
 				</div>
 			</div>
@@ -64,7 +62,7 @@
 	<div class="absolute flex h-[400px] w-[100%] items-end justify-end">
 		<div class="flex h-[100px] w-[100%] items-center justify-center">
 			<div class="flex h-[100px] w-[82%] items-center justify-center">
-				<div class="flex h-[50px] w-[100%] justify-around z-[1000]  ">
+				<div class="z-[1000] flex h-[50px] w-[100%] justify-around">
 					<div>
 						<a href={`tel:${product?.telefone}`}>
 							<img class="h-10 w-10" src={Cals} alt="" />
@@ -79,15 +77,14 @@
 							<img class="h-10 w-10" src={Ws} alt="" />
 						</a>
 					</div>
-					<div class="z-[999999] flex relative ">
+					<div class="relative z-[999999] flex">
 						<a href={product?.facebook} target="_blank" rel="noopener noreferrer">
-							<img class="h-10 w-10 " src={Face} alt="" />
+							<img class="h-10 w-10" src={Face} alt="" />
 						</a>
 					</div>
 					<div>
 						<a href={product?.instagram} target="_blank" rel="noopener noreferrer">
 							<img class="h-10 w-10" src={Insta} alt="" />
-
 						</a>
 					</div>
 				</div>
@@ -95,8 +92,8 @@
 		</div>
 	</div>
 </main>
-<main class="absolute flex h-[1280px] w-[100%] items-center justify-center ">
-	<div class="flex h-[400px] w-full ">
+<main class="absolute flex h-[1280px] w-[100%] items-center justify-center">
+	<div class="flex h-[400px] w-full">
 		<!-- Div Do Meio -->
 		<div class="flex h-16 w-full flex-col items-center justify-center">
 			<!-- <div class="w-[80%] h-[50px] flex justify-center items-center bg-[#FCDF1D] rounded-[12px] ">
@@ -109,10 +106,8 @@
 			</div>
 		</div>
 	</div>
-	<div
-		class="absolute mt-5 flex h-[300px] w-full items-center justify-center "
-	>
-		<div class="flex h-[290px] w-full items-center justify-center ">
+	<div class="absolute mt-5 flex h-[300px] w-full items-center justify-center">
+		<div class="flex h-[290px] w-full items-center justify-center">
 			<section class="map-section my-5 h-[400px] w-full md:h-[450px] md:w-[600px]">
 				<iframe
 					src={product?.maps}
@@ -126,12 +121,13 @@
 				>
 				</iframe>
 			</section>
-			<div class="w-full h-[900px]  absolute flex justify-end items-end">
-				<div class="w-full h-14  justify-center items-center flex">
-					<div class="w-[80%] h-full bg-[#FCDF1D] rounded-[12px] flex justify-center items-center">
-						<a class="list-none no-underline" href="/Avalie">
-						<p class="flex font-serif text-[20px] font-bold text-black hover:text-yellow-100">AVALIE NOSSO SITE</p>
-
+			<div class="absolute flex h-[900px] w-full items-end justify-end">
+				<div class="flex h-14 w-full items-center justify-center">
+					<div class="flex h-full w-[80%] items-center justify-center rounded-[12px] bg-[#FCDF1D]">
+						<a class="list-none no-underline" href="/avalie">
+							<p class="flex font-serif text-[20px] font-bold text-black hover:text-yellow-100">
+								AVALIE NOSSO SITE
+							</p>
 						</a>
 					</div>
 				</div>

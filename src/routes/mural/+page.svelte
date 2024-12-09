@@ -10,28 +10,24 @@
 	import Mt from '$lib/images/mt.png';
 	import MenuMural from '$lib/componets/MenuMural.svelte';
 	import ScrollTo from '$lib/componets/scrollTo.svelte';
-	
+</script>
 
-	</script>
-	
-	<ScrollTo />
+<ScrollTo />
 <main class="flex w-full flex-col items-center bg-gradient-to-br from-purple-950 to-purple-900">
 	<div class="flex w-full items-center justify-between border-b border-purple-800 bg-black/60 p-4">
 		<Breadcrumbs />
 	</div>
-    <div class="w-full h-[50px] flex flex-col items-center justify-center border-b border-purple-800 bg-black/60 p-4">
+	<div
+		class="flex h-[50px] w-full flex-col items-center justify-center border-b border-purple-800 bg-black/60 p-4"
+	>
 		<MenuMural />
+	</div>
 
-    </div>
-    
-    
-    <div class="mt-10 flex w-full flex-col items-center justify-center">
+	<div class="mt-10 flex w-full flex-col items-center justify-center">
 		<h1 class="text-center text-3xl font-bold text-white">Bem-vindo a Luís Antônio!</h1>
 	</div>
-	
-    
-    
-    <section
+
+	<section
 		class="flex w-[95%] items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -42,14 +38,15 @@
 				src="{Citys} "
 				alt="Cidade De Luís Antônio"
 			/>
-            <div class="w-full h-[50px] flex items-center gap-2 justify-start border-b border-purple-800 bg-black/60 p-4">
-                <img src="{Mt} " alt="Logo" class="h-[40px] w-[40px]">
-                <a href="/NandoOliveira" target="_blank" rel="noopener noreferrer">
-                    <p class="text-blue-400 hover:text-white no-underline">Nando Oliveira</p>
-                </a>
-                <p class="text-white">03/12/2024</p>
-
-            </div>
+			<div
+				class="flex h-[50px] w-full items-center justify-start gap-2 border-b border-purple-800 bg-black/60 p-4"
+			>
+				<img src="{Mt} " alt="Logo" class="h-[40px] w-[40px]" />
+				<a href="/nandoOliveira" target="_blank" rel="noopener noreferrer">
+					<p class="text-blue-400 no-underline hover:text-white">Nando Oliveira</p>
+				</a>
+				<p class="text-white">03/12/2024</p>
+			</div>
 			<div>
 				<p class="p-2 font-sans text-white lg:text-[20px]">
 					Você vai encontrar muitas opções de hotéis em Luís Antônio, informações e fotos da
@@ -67,7 +64,8 @@
 			</div>
 		</div>
 	</section>
-	<section id="HISTORIA-DA-CIDADE"
+	<section
+		id="HISTORIA-DA-CIDADE"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -98,7 +96,8 @@
 			</div>
 		</div>
 	</section>
-	<section id="Significado-do-Nome"
+	<section
+		id="Significado-do-Nome"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -116,7 +115,8 @@
 			</div>
 		</div>
 	</section>
-	<section id="Aniversário-da-Cidade"
+	<section
+		id="Aniversário-da-Cidade"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -133,7 +133,8 @@
 			</div>
 		</div>
 	</section>
-	<section id="CARACTERÍSTICAS"
+	<section
+		id="CARACTERÍSTICAS"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -161,7 +162,8 @@
 			</div>
 		</div>
 	</section>
-	<section id="COMO-CHEGAR"
+	<section
+		id="COMO-CHEGAR"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -220,7 +222,8 @@
 			</div>
 		</div>
 	</section>
-	<section id="TURISMO"
+	<section
+		id="TURISMO"
 		class="mt-5 flex w-[95%] flex-col items-center justify-center rounded-[12px] border-b border-purple-900 bg-black/60 p-4 max-sm:flex-col"
 	>
 		<div
@@ -286,18 +289,17 @@
 				</a>
 				<a class="text-blue-700" href="tel:+551639831460">Telefone:1639831460</a>
 
-                <a href="https://www.google.com.br/maps/dir//Lu%C3%ADs+Ant%C3%B4nio,+SP,+14210-000/@-21.5537555,-47.7073056,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94b837433372e255:0x31f964ae06d686f4!2m2!1d-47.7027676!2d-21.5516028?entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
-				<p class="p-2 font-sans text-blue-700 lg:text-[20px]">Luís Antônio-SP - CEP: 14210-000</p>
-                </a>
+				<a
+					href="https://www.google.com.br/maps/dir//Lu%C3%ADs+Ant%C3%B4nio,+SP,+14210-000/@-21.5537555,-47.7073056,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94b837433372e255:0x31f964ae06d686f4!2m2!1d-47.7027676!2d-21.5516028?entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<p class="p-2 font-sans text-blue-700 lg:text-[20px]">Luís Antônio-SP - CEP: 14210-000</p>
+				</a>
 			</div>
 		</div>
-	
-
 	</section>
-	<div id="Comentário">
-
-	</div>
-<Postform />
-    <Footer />
-
+	<div id="Comentário"></div>
+	<Postform />
+	<Footer />
 </main>

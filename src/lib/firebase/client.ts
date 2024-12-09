@@ -1,25 +1,28 @@
+import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import {
-	getAuth,
-	signInWithEmailAndPassword,
+	// browserSessionPersistence,
+	browserLocalPersistence,
 	createUserWithEmailAndPassword,
+	getAuth,
 	GoogleAuthProvider,
-	signInWithPopup,
 	setPersistence,
-	browserSessionPersistence,
-	browserLocalPersistence
+	signInWithEmailAndPassword,
+	signInWithPopup,
+	signOut
 } from 'firebase/auth';
-import { getAnalytics } from 'firebase/analytics';
 
 import {
 	PUBLIC_FIREBASE_API_KEY,
-	PUBLIC_FIREBASE_AUTH_DOMAIN,
-	PUBLIC_FIREBASE_PROJECT_ID,
-	PUBLIC_FIREBASE_STORAGE_BUCKET,
-	PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
 	PUBLIC_FIREBASE_APP_ID,
-	PUBLIC_FIREBASE_MEASUREMENT_ID
+	PUBLIC_FIREBASE_AUTH_DOMAIN,
+	PUBLIC_FIREBASE_MEASUREMENT_ID,
+	PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	PUBLIC_FIREBASE_PROJECT_ID,
+	PUBLIC_FIREBASE_STORAGE_BUCKET
 } from '$env/static/public';
+import { deleteCookie } from '$lib/utils/cookies';
+import { userStore } from '../../stores/userStore.svelte';
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -54,14 +57,32 @@ setPersistence(auth, browserLocalPersistence) // Use browserSessionPersistence s
 		console.error('Erro ao configurar persistência de sessão:', error);
 	});
 
+/**
+ * The `logout` function in TypeScript asynchronously signs out the user, deletes the 'authToken'
+ * cookie, and logs the user out.
+ */
+async function logout() {
+	await signOut(auth);
+	deleteCookie('authToken');
+	userStore.value = {
+		name: '',
+		email: '',
+		photoURL: '',
+		userId: ''
+	};
+}
+
 // Google Auth Provider
 const googleProvider = new GoogleAuthProvider();
 
 export {
+	analytics,
 	auth,
-	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	app as firebaseApp,
 	googleProvider,
-	signInWithPopup
+	logout,
+	signInWithEmailAndPassword,
+	signInWithPopup,
+	signOut
 };
-export { app as firebaseApp, analytics };

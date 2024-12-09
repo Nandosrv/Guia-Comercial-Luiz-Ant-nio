@@ -56,7 +56,7 @@
 			title: 'Avalie Nosso Site',
 			description: 'Estamos implementando novas funcionalidades',
 			image: Pink,
-			link: '/Avalie'
+			link: '/avalie'
 		}
 	];
 
@@ -70,15 +70,15 @@
 		return () => clearInterval(timer);
 	});
 
-	const navItems = [
-		{ name: 'Atualizações', href: '/noticias' },
-		{ name: 'Comércios', href: '/Comercios' },
-		// { name: 'Eventos', href: '/NewEventos' },
-		{ name: 'Mural', href: '/Mural' },
-		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
-		{ name: 'Quadro de Avisos', href: '/QuadroAvisos' },
-		{ name: 'Suporte', href: '/Suporte' }
-	];
+	// const navItems = [
+	// 	{ name: 'Atualizações', href: '/noticias' },
+	// 	{ name: 'Comércios', href: '/comercios' },
+	// 	// { name: 'Eventos', href: '/NewEventos' },
+	// 	{ name: 'Mural', href: '/mural' },
+	// 	// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
+	// 	{ name: 'Quadro de Avisos', href: '/quadroAvisos' },
+	// 	{ name: 'Suporte', href: '/suporte' }
+	// ];
 
 	function nextSlide() {
 		currentSlide.update((prevSlide) => (prevSlide + 1) % sliderItems.length);
@@ -98,16 +98,16 @@
 	</div>
 	<!-- bg-purple-950/50 -->
 	<!-- Main Navigation -->
-	<nav class="items-center justify-center border-b border-purple-800 bg-black/60 md:flex">
+	<!-- <nav class="items-center justify-center border-b border-purple-800 bg-black/60 md:flex">
 		<div class="mx-auto flex max-w-7xl">
 			<div class="flex items-center justify-between">
 				<button
 					class="p-2 text-white md:hidden"
 					on:click={() => isMenuOpen.update((open) => !open)}
 					aria-label="Toggle menu"
-				>
-					<!-- Menu Icon placeholder -->
-					<span class="h-6 w-6">☰</span>
+				> -->
+	<!-- Menu Icon placeholder -->
+	<!-- <span class="h-6 w-6">☰</span>
 				</button>
 				<div
 					class={`md:flex ${$isMenuOpen ? 'flex' : 'hidden'} absolute left-0 top-[200px] z-50 w-full flex-col bg-black/90 md:relative md:top-auto md:w-auto md:flex-row md:space-x-8 md:bg-transparent`}
@@ -123,7 +123,7 @@
 				</div>
 			</div>
 		</div>
-	</nav>
+	</nav> -->
 
 	<!-- Main Content -->
 	<main class="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-8">
@@ -134,7 +134,7 @@
 				<!-- Featured Banner Slider -->
 				<!-- Featured Banner Slider -->
 				<div
-					class="slider border-1-2 relative mb-8 w-[100%] lg:w-[91%] lg:h-[500px]  gap-7 rounded-[12px] border-[#09052D] bg-black/60 object-cover"
+					class="slider border-1-2 relative mb-8 w-[100%] gap-7 rounded-[12px] border-[#09052D] bg-black/60 object-cover lg:h-[500px] lg:w-[91%]"
 				>
 					<div class="slider-items flex" style="transform: translateX(-{$currentSlide * 100}%);">
 						{#each sliderItems as item, index}
@@ -144,13 +144,11 @@
 									<img
 										src={item.image}
 										alt={item.title}
-										class="bg-conver lg:h-[500px] h-[320px] w-[100%] cursor-pointer bg-cover bg-center brightness-75"
+										class="bg-conver h-[320px] w-[100%] cursor-pointer bg-cover bg-center brightness-75 lg:h-[500px]"
 									/>
-									
-								</a><div>
-									
-								</div>
-								<div class="absolute inset-0 top-[200px] lg:top-[300px] ">
+								</a>
+								<div></div>
+								<div class="absolute inset-0 top-[200px] lg:top-[300px]">
 									<div class="flex h-full flex-col justify-center p-4 md:p-8">
 										<a href={item.link}>
 											<!-- Mesmo link utilizado aqui -->
@@ -212,18 +210,20 @@
 	class="flex w-full flex-col items-center justify-center gap-7 bg-gradient-to-br from-purple-950 to-purple-900"
 >
 	<div
-		class="flex h-[100px] flex-col w-full items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 max-sm:w-[92%] md:w-[53%]"
+		class="flex h-[100px] w-full flex-col items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 max-sm:w-[92%] md:w-[53%]"
 	>
-		<h1 class="flex  text-2xl font-bold tracking-wider text-white md:text-4xl">Destaques Da Semana</h1>
+		<h1 class="flex text-2xl font-bold tracking-wider text-white md:text-4xl">
+			Destaques Da Semana
+		</h1>
 		<p>⭐⭐⭐⭐⭐</p>
 	</div>
 	<div
 		class="ml flex w-[53%] flex-col items-center justify-center rounded-[12px] bg-black/40 p-4 max-sm:w-[92%]"
 	>
-	<!-- <OfertaProfissional /> -->
+		<!-- <OfertaProfissional /> -->
 	</div>
 	<Footer />
- </main> 
+</main>
 
 <style>
 	.slider {
