@@ -15,7 +15,7 @@ if (!admin.apps.length) {
 		credential: admin.credential.cert({
 			projectId: PUBLIC_FIREBASE_PROJECT_ID,
 			clientEmail: PUBLIC_FIREBASE_CLIENT_EMAIL,
-			privateKey: PUBLIC_FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
+			privateKey: PUBLIC_FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n')
 		})
 		// databaseURL: 'https://<SEU-PROJETO>.firebaseio.com'
 	});

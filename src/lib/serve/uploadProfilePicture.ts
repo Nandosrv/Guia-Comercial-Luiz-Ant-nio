@@ -2,7 +2,7 @@ import supabase from '../supabaseClient'; // Certifique-se de que o supabase est
 
 export async function uploadProfilePicture(file: File, userId: string) {
   // Sanitiza o nome do arquivo
-  const sanitizedFileName = `${userId}-${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-_]/g, '')}`;
+  const sanitizedFileName = `${userId}-${Date.now()}-${file.name?.replace(/[^a-zA-Z0-9.-_]/g, '')}`;
   // replace remove caracteres não-alfanuméricos
   try {
     // console.log('Iniando o upload da foto de perfil...');
