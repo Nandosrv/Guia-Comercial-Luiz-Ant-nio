@@ -6,8 +6,8 @@ import admin from 'firebase-admin';
 // 	PUBLIC_FIREBASE_PRIVATE_KEY
 // } from '$env/static/public';
 
-const PUBLIC_FIREBASE_PROJECT_ID = process.env.PUBLIC_FIREBASE_PROJECT_ID;
-const PUBLIC_FIREBASE_CLIENT_EMAIL = process.env.PUBLIC_FIREBASE_CLIENT_EMAIL;
+const PUBLIC_FIREBASE_PROJECT_ID = process.env.PUBLIC_FIREBASE_PROJECT_ID as string;
+const PUBLIC_FIREBASE_CLIENT_EMAIL = process.env.PUBLIC_FIREBASE_CLIENT_EMAIL as string;
 const PUBLIC_FIREBASE_PRIVATE_KEY = process.env.PUBLIC_FIREBASE_PRIVATE_KEY as string;
 
 if (!admin.apps.length) {
