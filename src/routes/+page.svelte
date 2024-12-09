@@ -94,6 +94,7 @@
 	<div class="relative flex h-20 items-center justify-center bg-purple-950/50 md:h-32">
 		<h1 class="text-2xl font-bold uppercase tracking-wider text-white md:text-4xl">
 			encontre Luiz Antônio
+			tes
 		</h1>
 	</div>
 	<!-- bg-purple-950/50 -->
