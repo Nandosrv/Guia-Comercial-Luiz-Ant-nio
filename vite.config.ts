@@ -16,5 +16,10 @@ export default defineConfig({
 		'process.env.PUBLIC_FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.PUBLIC_FIREBASE_STORAGE_BUCKET),
 		'process.env.PUBLIC_FIREBASE_CLIENT_EMAIL': JSON.stringify(process.env.PUBLIC_FIREBASE_CLIENT_EMAIL),
 		'process.env.PUBLIC_FIREBASE_PRIVATE_KEY': JSON.stringify(process.env.PUBLIC_FIREBASE_PRIVATE_KEY),
+		
+		'process.env.FIREBASE_CLIENT_EMAIL': JSON.stringify(process.env.FIREBASE_CLIENT_EMAIL),
+		'process.env.FIREBASE_PRIVATE_KEY': JSON.stringify(process.env.FIREBASE_PRIVATE_KEY),
+		'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
+
 	  }
 });
