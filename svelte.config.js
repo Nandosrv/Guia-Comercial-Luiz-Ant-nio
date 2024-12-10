@@ -29,6 +29,12 @@ const config = {
 			include: ['/*'],
 			exclude: ['<all>']
 		},
+		platformProxy: {
+			configPath: 'wrangler.toml',
+			environment: undefined,
+			experimentalJsonConfig: false,
+			persist: false
+		},
 		// paths: {
         //     base: '/.svelte-kit/cloudflare', // Defina se seu app não está na raiz
         // },
