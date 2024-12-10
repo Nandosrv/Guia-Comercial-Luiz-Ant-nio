@@ -26,7 +26,7 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: getAdapter(),
 		paths: {
-            base: '/.svelte-kit/cloudflare', // Defina se seu app não está na raiz
+            base: '', // Defina se seu app não está na raiz
         },
 		env: {
 			publicPrefix: 'PUBLIC_',
