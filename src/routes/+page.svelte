@@ -8,7 +8,7 @@
 	import Postnew from '$lib/images/Posta.png';
 
 	import { page } from '$app/stores';
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);

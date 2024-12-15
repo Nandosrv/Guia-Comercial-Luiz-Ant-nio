@@ -7,7 +7,7 @@
 	import supabase from '$lib/supabaseClient';
 	import { userStore } from '../../stores/userStore.svelte';
 	import { onMount } from 'svelte';
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);

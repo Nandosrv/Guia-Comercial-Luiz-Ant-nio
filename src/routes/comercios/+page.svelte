@@ -10,7 +10,7 @@
 	let selectedSubcategory = 'Todos';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);

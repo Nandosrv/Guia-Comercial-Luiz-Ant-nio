@@ -1,4 +1,4 @@
-import { deleteCookie } from '$lib/utils/cookies.svelte';
+import { deleteCookie } from '$lib/utils/cookies';
 import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
 import {

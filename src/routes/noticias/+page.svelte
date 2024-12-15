@@ -4,7 +4,7 @@
 	import Footer from '$lib/footer/+paga.svelte';
 	import Voltar from '$lib/images/volt.png';
 	import { page } from '$app/stores';
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 	import { onMount } from 'svelte';
 
 	onMount(() => {

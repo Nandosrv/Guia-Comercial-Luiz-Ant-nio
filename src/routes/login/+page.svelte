@@ -8,7 +8,7 @@
 		signInWithPopup
 	} from '$lib/firebase/client';
 	import supabase from '$lib/supabaseClient';
-	import { setCookie } from '$lib/utils/cookies.svelte';
+	import { setCookie } from '$lib/utils/cookies';
 	import { userStore } from '../../stores/userStore.svelte';
 	let email = $state(''); // E-mail
 	let password = $state(''); // Senha

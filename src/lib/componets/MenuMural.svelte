@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 

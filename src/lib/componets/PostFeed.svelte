@@ -5,7 +5,7 @@
 	import Camera from '$lib/images/icons8-câmera-50.png';
 	import gif from '$lib/images/icons8-gif-48.png';
 	import { userStore } from '../../stores/userStore.svelte';
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 
 	let inputValue = $state('');
 	let showModal = $state(false);

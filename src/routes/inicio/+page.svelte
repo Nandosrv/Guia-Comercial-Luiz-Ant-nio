@@ -6,7 +6,7 @@
 	$page.url.pathname;
 
 	import type { User } from '$lib/types/userStore';
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 	import PostFeed from '../../lib/componets/PostFeed.svelte';
 	import { userStore } from '../../stores/userStore.svelte';
 

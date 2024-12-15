@@ -4,7 +4,7 @@
 	// Função para redirecionamento
 	import { page } from '$app/stores';
 	import img from '$lib/images/new.png';
-	import { setLastPathUrl } from '$lib/utils/cookies.svelte';
+	import { setLastPathUrl } from '$lib/utils/cookies';
 	import { userStore } from '../../stores/userStore.svelte';
 	import Pesquisa from './pesquisa.svelte';
 	const items = [
