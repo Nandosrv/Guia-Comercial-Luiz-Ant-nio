@@ -6,12 +6,13 @@ console.log('node_ev', node_env);
 
 const apiUrl =
 	node_env != 'production' ? 'http://localhost:3000' : (process.env.PUBLIC_API_URL as string);
+// const apiUrl = process.env.PUBLIC_API_URL as string;
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const tokenStore = event.cookies.get('authToken02');
-	if (!!tokenStore) {
-		event.cookies.set('authToken', tokenStore, { path: '/' });
-	}
+	// const tokenStore = event.cookies.get('authToken02');
+	// if (!!tokenStore) {
+	// 	event.cookies.set('authToken', tokenStore, { path: '/' });
+	// }
 	const token = event.cookies.get('authToken');
 
 	if (!!token) {
@@ -63,11 +64,11 @@ async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser> {
 		authorization: 'Bearer ' + token
 	};
 
-	const responseData = await fetch(apiUrl + '/auth/me', {
+	const responseData = fetch(apiUrl + '/auth/me', {
 		method: 'POST',
 		headers
 	})
-		.then((response) => {
+		.then(async (response) => {
 			if (!response.ok) {
 				throw new Error('Erro ao verificar o token');
 			}

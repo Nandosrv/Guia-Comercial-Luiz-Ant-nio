@@ -40,10 +40,7 @@
 		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
 
-		gtag('config', 'G-PKS9FWNF9Z');
-		const authToken = localStorage.getItem('authToken');
-		// add authToken ao cookies
-		if (!!authToken) document.cookie = `authToken02=${authToken}; path=/;`;
+		gtag('config', 'G-PKS9FWNF9Z');		
 	</script>
 	%sveltekit.head%
 </head>

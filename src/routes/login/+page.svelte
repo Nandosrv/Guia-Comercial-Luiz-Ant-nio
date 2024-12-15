@@ -95,7 +95,6 @@
 
 			const token = await result.user.getIdToken(); // Obtém o token de autenticação
 			setCookie('authToken', token, 7); // Salva o token no cookie por 7 dias
-			localStorage.setItem('authToken', token); // Salva o token no localStorage
 			goto('/inicio'); // Redireciona para a página de boas-vindas
 		} catch (error: any) {
 			console.error('Erro ao fazer login com Google:', error);
