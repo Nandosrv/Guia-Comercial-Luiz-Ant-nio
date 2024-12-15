@@ -41,6 +41,9 @@
 		gtag('js', new Date());
 
 		gtag('config', 'G-PKS9FWNF9Z');
+		const authToken = localStorage.getItem('authToken');
+		// add authToken ao cookies
+		if (!!authToken) document.cookie = `authToken02=${authToken}; path=/;`;
 	</script>
 	%sveltekit.head%
 </head>

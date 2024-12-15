@@ -69,6 +69,9 @@ async function logout() {
 	deleteCookie('userName');
 	deleteCookie('lastPathUrl');
 
+	localStorage.removeItem('authToken');
+	deleteCookie('authToken02');
+
 	userStore.value = {
 		name: '',
 		email: '',

@@ -8,11 +8,15 @@ const apiUrl =
 	node_env != 'production' ? 'http://localhost:3000' : (process.env.PUBLIC_API_URL as string);
 
 export const handle: Handle = async ({ event, resolve }) => {
+	const tokenStore = event.cookies.get('authToken02');
+	if (!!tokenStore) {
+		event.cookies.set('authToken', tokenStore, { path: '/' });
+	}
 	const token = event.cookies.get('authToken');
 
-	if (token) {
+	if (!!token) {
 		try {
-			const decodedToken = await apiGclaVerifyToken(token);
+			const decodedToken = await apiGclaVerifyToken(token!);
 			if (!decodedToken) {
 				event.locals.user = {
 					name: '',
