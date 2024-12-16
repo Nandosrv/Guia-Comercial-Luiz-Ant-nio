@@ -9,15 +9,11 @@ const apiUrl =
 // const apiUrl = process.env.PUBLIC_API_URL as string;
 
 export const handle: Handle = async ({ event, resolve }) => {
-	// const tokenStore = event.cookies.get('authToken02');
-	// if (!!tokenStore) {
-	// 	event.cookies.set('authToken', tokenStore, { path: '/' });
-	// }
 	const token = event.cookies.get('authToken');
 
 	if (!!token) {
 		try {
-			const decodedToken = await apiGclaVerifyToken(token!);
+			const decodedToken = await apiGclaVerifyToken(token);
 			if (!decodedToken) {
 				event.locals.user = {
 					name: '',
@@ -27,13 +23,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 				};
 				event.cookies.delete('authToken', { path: '/' });
 			}
-			// console.log('autenticado');
-			event.locals.user = {
-				name: decodedToken.name,
-				email: decodedToken.email,
-				photoURL: decodedToken.picture,
-				userId: decodedToken.user_id
-			};
+			console.log('autenticado');
+			// event.locals.user = {
+			// 	name: decodedToken.name,
+			// 	email: decodedToken.email,
+			// 	photoURL: decodedToken.picture,
+			// 	userId: decodedToken.user_id
+			// };
 		} catch {
 			event.locals.user = {
 				name: '',

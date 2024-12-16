@@ -7,10 +7,12 @@ import {
 	createUserWithEmailAndPassword,
 	getAuth,
 	GoogleAuthProvider,
+	onAuthStateChanged,
 	setPersistence,
 	signInWithEmailAndPassword,
 	signInWithPopup,
-	signOut
+	signOut,
+	type Auth
 } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 import { userStore } from '../../stores/userStore.svelte';
@@ -80,6 +82,21 @@ async function logout() {
 // Google Auth Provider
 const googleProvider = new GoogleAuthProvider();
 
+const checkAuthState = (auth: Auth): void => {
+	onAuthStateChanged(auth, async (user) => {
+		if (user) {
+			// Usuário está autenticado
+			const token = await user.getIdToken();
+			// console.log('Token revalidado:', token);
+
+			// Atualizar o token no cookie, se necessário
+			document.cookie = `authToken=${token}; path=/; max-age=3600`;
+		} else {
+			console.log('Usuário não autenticado');
+		}
+	});
+};
+
 export {
 	analytics,
 	auth,
@@ -89,5 +106,6 @@ export {
 	logout,
 	signInWithEmailAndPassword,
 	signInWithPopup,
-	signOut
+	signOut,
+	checkAuthState
 };

@@ -17,4 +17,15 @@ function setLastPathUrl(pathName: string) {
 	setCookie('lastPathUrl', pathName, 3);
 }
 
-export { deleteCookie, setCookie, setLastPathUrl };
+// funcao para recuperar cookies por chave
+function getCookie(name: string) {
+	const cookies = document.cookie.split(';').reduce((acc: any, cookie) => {
+		const [key, value] = cookie.split('=');
+		acc[key.trim() as string] = value;
+		return acc;
+	}, {});
+
+	return cookies[name]?.trim() || null;
+}
+
+export { deleteCookie, setCookie, setLastPathUrl, getCookie };
