@@ -1,14 +1,6 @@
 import type { DecodedTokenUser } from '$lib/interfaces/decodedTokenUser';
 import type { Handle } from '@sveltejs/kit';
 
-const node_env = process.env.NODE_ENV;
-console.log('node_ev', node_env);
-
-const apiUrl =
-	node_env == 'development' ? 'http://localhost:3000' : (process.env.PUBLIC_API_URL as string);
-// const apiUrl = process.env.PUBLIC_API_URL as string;
-console.log('apiUrl', apiUrl);
-
 export const handle: Handle = async ({ event, resolve }) => {
 	const token = event.cookies.get('authToken');
 
@@ -61,7 +53,8 @@ async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser> {
 		authorization: 'Bearer ' + token
 	};
 
-	const responseData = await fetch(apiUrl + '/auth/me', {
+	const api_URL = `${process.env.PUBLIC_API_URL}/auth/me`;
+	const responseData = await fetch(api_URL, {
 		method: 'POST',
 		headers
 	})
