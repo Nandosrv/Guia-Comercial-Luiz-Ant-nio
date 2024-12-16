@@ -21,7 +21,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 					photoURL: '',
 					userId: ''
 				};
-				event.cookies.delete('authToken', { path: '/' });
+				// event.cookies.delete('authToken', { path: '/' });
 			}
 			console.log('autenticado');
 			// event.locals.user = {
@@ -37,7 +37,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				photoURL: '',
 				userId: ''
 			};
-			event.cookies.delete('authToken', { path: '/' });
+			// event.cookies.delete('authToken', { path: '/' });
 			console.log('Erro ao verificar o token');
 		} finally {
 			// console.log('event.locals.user: ', event.locals.user);
@@ -60,13 +60,17 @@ async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser> {
 		authorization: 'Bearer ' + token
 	};
 
-	const responseData = fetch(apiUrl + '/auth/me', {
-		method: 'POST',
-		headers
-	})
+	// const responseData = await fetch(apiUrl + '/auth/me', {
+	const responseData = await fetch(
+		'https://gcla-backend-nestjs-production.up.railway.app/auth/me',
+		{
+			method: 'POST',
+			headers
+		}
+	)
 		.then(async (response) => {
 			if (!response.ok) {
-				throw new Error('Erro ao verificar o token');
+				// throw new Error('Erro ao verificar o token');
 			}
 			return response.json();
 		})
