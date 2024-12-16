@@ -5,8 +5,9 @@ const node_env = process.env.NODE_ENV;
 console.log('node_ev', node_env);
 
 const apiUrl =
-	node_env != 'production' ? 'http://localhost:3000' : (process.env.PUBLIC_API_URL as string);
+	node_env == 'development' ? 'http://localhost:3000' : (process.env.PUBLIC_API_URL as string);
 // const apiUrl = process.env.PUBLIC_API_URL as string;
+console.log('apiUrl', apiUrl);
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const token = event.cookies.get('authToken');
@@ -24,12 +25,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 				// event.cookies.delete('authToken', { path: '/' });
 			}
 			console.log('autenticado');
-			// event.locals.user = {
-			// 	name: decodedToken.name,
-			// 	email: decodedToken.email,
-			// 	photoURL: decodedToken.picture,
-			// 	userId: decodedToken.user_id
-			// };
+			event.locals.user = {
+				name: decodedToken.name,
+				email: decodedToken.email,
+				photoURL: decodedToken.picture,
+				userId: decodedToken.user_id
+			};
 		} catch {
 			event.locals.user = {
 				name: '',
@@ -60,14 +61,10 @@ async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser> {
 		authorization: 'Bearer ' + token
 	};
 
-	// const responseData = await fetch(apiUrl + '/auth/me', {
-	const responseData = await fetch(
-		'https://gcla-backend-nestjs-production.up.railway.app/auth/me',
-		{
-			method: 'POST',
-			headers
-		}
-	)
+	const responseData = await fetch(apiUrl + '/auth/me', {
+		method: 'POST',
+		headers
+	})
 		.then(async (response) => {
 			if (!response.ok) {
 				// throw new Error('Erro ao verificar o token');

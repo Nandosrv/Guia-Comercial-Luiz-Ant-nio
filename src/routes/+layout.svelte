@@ -14,35 +14,38 @@
 	console.log('onMount', PUBLIC_API_URL);
 
 	onMount(async () => {
-		console.log('onMount', PUBLIC_API_URL);
+		// console.log('onMount', PUBLIC_API_URL);
 
-		const authToken = getCookie('authToken');
-		if (authToken) {
-			// relaizar a requisição para api em producao
-			// const response = await fetch(`${PUBLIC_API_URL}/auth/me`, {
-			const response = await fetch(
-				`https://gcla-backend-nestjs-production.up.railway.app/auth/me`,
-				{
-					method: 'POST',
-					headers: {
-						Authorization: `Bearer ${authToken}`
-					}
-				}
-			);
-			const data = await response.json();
-			console.log('data', data);
+		// const authToken = getCookie('authToken');
+		// if (authToken) {
+		// 	// relaizar a requisição para api em producao
+		// 	// const response = await fetch(`${PUBLIC_API_URL}/auth/me`, {
+		// 	const response = await fetch(
+		// 		`https://gcla-backend-nestjs-production.up.railway.app/auth/me`,
+		// 		{
+		// 			method: 'POST',
+		// 			headers: {
+		// 				Authorization: `Bearer ${authToken}`
+		// 			}
+		// 		}
+		// 	);
+		// 	const data = await response.json();
+		// 	console.log('data', data);
 
-			user = {
-				name: data.name,
-				email: data.email,
-				photoURL: data.picture,
-				userId: data.user_id
-			};
-		}
+		// 	user = {
+		// 		name: data.name,
+		// 		email: data.email,
+		// 		photoURL: data.picture,
+		// 		userId: data.user_id
+		// 	};
+		// }
 		if (!!user?.name) {
+			console.log('layout  user', user);
 			userStore.value = user;
+			goto(data.pathUrl!);
+		} else {
+			goto('/login');
 		}
-		goto(data.pathUrl!);
 	});
 
 	const navItems = [
