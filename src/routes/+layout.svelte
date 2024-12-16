@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { PUBLIC_API_URL } from '$env/static/public';
 	import Header from '$lib/componets/Header.svelte';
-	import { getCookie } from '$lib/utils/cookies';
 	import { onMount, type Snippet } from 'svelte';
 	import '../app.css';
 	import { userStore } from '../stores/userStore.svelte';
@@ -11,36 +9,8 @@
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 	let user = data?.user;
 
-	console.log('onMount', PUBLIC_API_URL);
-
 	onMount(async () => {
-		// console.log('onMount', PUBLIC_API_URL);
-
-		// const authToken = getCookie('authToken');
-		// if (authToken) {
-		// 	// relaizar a requisição para api em producao
-		// 	// const response = await fetch(`${PUBLIC_API_URL}/auth/me`, {
-		// 	const response = await fetch(
-		// 		`https://gcla-backend-nestjs-production.up.railway.app/auth/me`,
-		// 		{
-		// 			method: 'POST',
-		// 			headers: {
-		// 				Authorization: `Bearer ${authToken}`
-		// 			}
-		// 		}
-		// 	);
-		// 	const data = await response.json();
-		// 	console.log('data', data);
-
-		// 	user = {
-		// 		name: data.name,
-		// 		email: data.email,
-		// 		photoURL: data.picture,
-		// 		userId: data.user_id
-		// 	};
-		// }
 		if (!!user?.name) {
-			console.log('layout  user', user);
 			userStore.value = user;
 			goto(data.pathUrl!);
 		} else {

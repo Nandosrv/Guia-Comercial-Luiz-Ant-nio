@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 					photoURL: '',
 					userId: ''
 				};
-				// event.cookies.delete('authToken', { path: '/' });
+				event.cookies.delete('authToken', { path: '/' });
 			}
 			console.log('autenticado');
 			event.locals.user = {
@@ -30,7 +30,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 				photoURL: '',
 				userId: ''
 			};
-			// event.cookies.delete('authToken', { path: '/' });
+			event.cookies.delete('authToken', { path: '/' });
 			console.log('Erro ao verificar o token');
 		} finally {
 			// console.log('event.locals.user: ', event.locals.user);
