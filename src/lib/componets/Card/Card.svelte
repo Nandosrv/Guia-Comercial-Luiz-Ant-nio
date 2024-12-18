@@ -10,7 +10,11 @@
 	import Ws from '$lib/images/icon-ws.png';
 	import Face from '$lib/images/icons8-facebook-novo-48.png';
 	import Insta from '$lib/images/icons8-instagram-64.png';
+	import callcomer from '$lib/images/icons8.png';
+	import border from '$lib/images/border.png';
+	
 	// console.log(product?.image)
+	
 	type Product = {
 		slug: string;
 		title: string;
@@ -20,6 +24,7 @@
 		facebook: string;
 		instagram: string;
 		maps: string;
+		hours: string;
 	};
 	type IProps = {
 		product?: Product;
@@ -32,10 +37,82 @@
 			titlle: 'Product designer'
 		}
 	];
+	
 </script>
 
-<main class="mt-3 flex h-[400px] w-[100%] justify-center">
-	<!-- card -->
+<main
+	class="flex w-full h-[700px] flex-col items-center bg-gradient-to-br from-purple-900 to-purple-800 p-4 md:p-8"
+>
+	<div class="borber relative flex h-[200px] w-[95%] items-center justify-center">
+		<img
+			class="absolute h-[100%] w-[100%] lg:w-[400px] rounded-lg border border-purple-500 object-cover"
+			src="{product?.image} "
+			alt={product?.title}
+		/>
+
+		<div
+			class="z-10 mt-[200px] flex h-[100px] w-[100px] items-center justify-center rounded-full border border-purple-500 bg-white"
+		>
+			<img class="h-[100%] w-[100%] rounded-full object-cover" src="{product?.image} " alt="" />
+		</div>
+	</div>
+	<div class="flex h-[200px]  w-[95%] flex-col items-center justify-center rounded-lg bg-white">
+		<img src="{border} " alt="" class="h-[100%] w-[100%] object-cover" />
+		<!-- CAD -->
+		<div class="flex h-[95%] w-[95%] flex-col items-center justify-center">
+			<p class="flex font-['Inter'] text-[17px] font-bold text-black">
+				{product?.title}
+			</p>
+		</div>
+		<div class="mb-2 flex w-full items-center justify-around ">
+			<!-- Ligar Agora -->
+			<div class="flex h-[50px] w-[150px] items-center justify-center gap-1 rounded-lg border border-red-950 bg-blue-600"
+			>
+				<img class="flex h-5 w-5 bg-transparent" src={callcomer} alt="" />
+				<a class="flex items-center justify-center" href={`tel:${product?.telefone}`}>
+					<p class="font-['Inter'] font-bold text-white">Ligar agora</p>
+				</a>
+			</div>
+			<!-- Mensagem  whatsapp -->
+			<div
+				class="flex h-[50px] w-[150px] items-center justify-center gap-1 rounded-lg border border-red-950"
+			>
+			<a
+			class="flex justify-center items-center gap-1"
+			href={`https://wa.me/${product?.whatsapp}?text=${encodeURIComponent('Eu cheguei até aqui através do site encontreluizantonio.com.br')}`}
+			target="_blank"
+			rel="noopener noreferrer"
+		  >
+					<img class="h-7 w-7 flex" src={Ws} alt="" />
+					<p class="text-gray-700 font-['Inter'] font-bold">Mensagem</p>
+				</a>
+			</div>
+		</div>
+		
+	</div>
+	<div class="w-[95%] m-2 flex h-[30px] items-center justify-between rounded-lg ">
+		<a class="w-[150px] flex justify-center items-center bg-white border border-gray-600 rounded-lg" href={product?.instagram} target="_blank" rel="noopener noreferrer">
+			<img class="h-7 w-7 flex" src={Insta} alt="" />
+			<p>Instagram</p>
+		</a>
+		<a class="w-[150px] flex justify-center bg-white items-center border border-gray-600 rounded-lg" href={product?.facebook} target="_blank" rel="noopener noreferrer">
+			<img class="h-7 w-7" src={Face} alt="" />
+			<p>Facebook</p>
+		</a>
+	</div>
+	<div class="mt-1 flex w-[95%] h-[150px] items-center justify-center rounded-lg bg-white">
+		<div class="gap-4 flex-col flex h-[100%] w-[100%] items-center justify-center rounded-lg">
+			<p class="font-['Inter'] text-[17px] font-bold text-black">Horário de funcionamento</p>
+			<div class="w-[250px] h-[70px] flex items-center justify-center rounded-lg bg-red-500">
+				<p class="text-white font-['Inter'] font-bold text-center">
+					{product?.hours}
+				</p>
+			</div>
+		</div>
+	</div>
+</main>
+
+<!-- <main class="mt-3 flex h-[400px] w-[100%] justify-center">
 	<div class="flex h-[500px] w-[85%] justify-center rounded-[12px] bg-[#D1D5D9]">
 		<div class="flex h-[180px] w-[75%] rounded-[12px] md:h-[57%]">
 			<img class="w-[100%] rounded-[12px] object-cover" src="{product?.image} " alt="" />
@@ -54,7 +131,6 @@
 			</div>
 			<div class="absolute flex h-[50px] w-[100%] justify-start">
 				<div class="z-50 mt-3 w-[85%]">
-					<!-- <Avaliacao /> -->
 				</div>
 			</div>
 		</div>
@@ -94,11 +170,8 @@
 </main>
 <main class="absolute flex h-[1280px] w-[100%] items-center justify-center">
 	<div class="flex h-[400px] w-full">
-		<!-- Div Do Meio -->
 		<div class="flex h-16 w-full flex-col items-center justify-center">
-			<!-- <div class="w-[80%] h-[50px] flex justify-center items-center bg-[#FCDF1D] rounded-[12px] ">
-				<p class="text-[20px] font-serif font-bold ">COMENTÁRIOS</p>
-			</div> -->
+			
 			<div class="flex h-[400px] w-full items-center justify-center">
 				<div class="flex h-10 w-[80%] items-center justify-center rounded-[12px] bg-[#FCDF1D]">
 					<p class="flex font-serif text-[20px] font-bold text-black">LOCALIZE AQUI</p>
@@ -134,4 +207,4 @@
 			</div>
 		</div>
 	</div>
-</main>
+</main> -->

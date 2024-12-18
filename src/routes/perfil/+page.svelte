@@ -88,7 +88,7 @@
 	</button>
 </main>
 <main class="flex w-full flex-col items-center justify-center">
-	<h1>Estamos contruindo uma nova página para o perfil😊</h1>
+	<h1>Estamos construindo uma nova página para o perfil😊</h1>
 	<img src="{Manu} " alt="" />
 	<Footer />
 	<div class="absolute">

@@ -24,7 +24,7 @@
 	</div>
 
 	<div class="mt-10 flex w-full flex-col items-center justify-center">
-		<h1 class="text-center text-3xl font-bold text-white">Bem-vindo a Luís Antônio!</h1>
+		<h1 class="text-center text-3xl font-bold text-white">Bem-vindo a Luíz Antônio!</h1>
 	</div>
 
 	<section
