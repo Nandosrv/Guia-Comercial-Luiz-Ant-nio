@@ -7,14 +7,14 @@
 	import type { LayoutData } from './$types';
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
-
 	let user = data?.user;
 
 	onMount(async () => {
-		// console.log('data layout', data.pathUrl);
 		if (!!user?.name) {
 			userStore.value = user;
-			goto(`${data.pathUrl || '/inicio'}`);
+			goto(data.pathUrl!);
+		} else {
+			goto('/login');
 		}
 	});
 

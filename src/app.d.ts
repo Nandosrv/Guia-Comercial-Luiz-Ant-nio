@@ -23,6 +23,7 @@ declare global {
 			PUBLIC_FIREBASE_MEASUREMENT_ID: string;
 			PUBLIC_FIREBASE_CLIENT_EMAIL: string;
 			PUBLIC_FIREBASE_PRIVATE_KEY: string;
+			PUBLIC_API_URL: string;
 		}
 	}
 }
