@@ -31,11 +31,15 @@
 
 <div class="relative flex w-[full] flex-col items-center justify-between">
 	<Header />
-	<div class="flex w-full items-center justify-center bg-purple-950/100 p-4 text-purple-900">
+	<div
+		class="relative flex w-full items-center gap-4 overflow-y-auto bg-purple-950/100 p-4 text-purple-900 md:justify-center"
+	>
 		{#each navItems as item}
 			<a
 				href={item.href}
-				class="flex items-center bg-purple-900/100 px-3 py-4 font-['Inter'] text-[14px] text-sm font-semibold text-yellow-500 transition-colors hover:bg-purple-800/30 hover:text-[17px] hover:text-blue-400 max-sm:w-[96px] max-sm:text-[12px] sm:w-[120px] md:w-[120px] lg:w-[120px]"
+				class=" w-[120px] min-w-[100px] rounded-md border bg-purple-900/100 p-2 text-center font-['Inter']
+				text-sm font-semibold text-yellow-500 transition-colors hover:bg-purple-800/30
+				hover:text-[17px] hover:text-blue-400 max-sm:w-[96px]"
 			>
 				<span>{item.name}</span>
 			</a>
