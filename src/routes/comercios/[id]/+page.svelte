@@ -27,7 +27,10 @@
 	}
   </script>
   
-  <Alerty />
+  <div class="bg-gradient-to-br border-b border-purple-950 from-purple-900 to-purple-800 p-4 md:p-8">
+	<Alerty />
+
+  </div>
   
   <main class="flex w-full h-[600px] justify-center">
 	{#if product}
