@@ -27,8 +27,11 @@
 	}
   </script>
   
-  <div class="bg-gradient-to-br border-b border-purple-950 from-purple-900 to-purple-800 p-4 md:p-8">
-	<Alerty />
+  <div class="bg-gradient-to-br flex justify-center border-b border-purple-950 from-purple-900 to-purple-800 p-4 md:p-8">
+	<div class="w-full flex justify-center items-center lg:w-[49%]">
+		<Alerty />
+
+	</div>
 
   </div>
   
