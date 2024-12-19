@@ -3,11 +3,11 @@
 	import { fade, fly } from 'svelte/transition';
 	import { page } from '$app/stores';
 
-	import { uploadPicturesAnnounce } from '$lib/serve/uploadPicturesAnnounce';
 	import supabase from '$lib/supabaseClient';
 	import { userStore } from '../../stores/userStore.svelte';
 	import { onMount } from 'svelte';
 	import { setLastPathUrl } from '$lib/utils/cookies';
+	import { uploadPicturesAnnounce } from '$lib/services/uploadSupabase';
 
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);
