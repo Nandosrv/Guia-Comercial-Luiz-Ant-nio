@@ -5,11 +5,12 @@
 	import { onMount } from 'svelte';
 	$page.url.pathname;
 
-	import { checkAuthState } from '$lib/firebase/client';
+	// import { checkAuthState } from '$lib/firebase/client';
 	import type { User } from '$lib/types/userStore';
 	import { setLastPathUrl } from '$lib/utils/cookies';
 	import PostFeed from '../../lib/componets/PostFeed.svelte';
 	import { userStore } from '../../stores/userStore.svelte';
+	import { checkAuthState, subscribeToAuthState } from '$lib/services/authService.svelte';
 
 	let isAuthenticated = false;
 
@@ -17,7 +18,7 @@
 	onMount(async () => {
 		setLastPathUrl($page.url.pathname);
 		const auth = getAuth()!;
-		checkAuthState(auth);
+		checkAuthState();
 
 		if (!currentUser.name) {
 			// Se não estiver autenticado, redirecione para a página de login

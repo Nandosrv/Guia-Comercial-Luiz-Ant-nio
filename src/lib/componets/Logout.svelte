@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { logout } from '../firebase/client';
+	import { logout } from '$lib/services/authService.svelte';
 
 	async function handleLogout() {
 		try {
