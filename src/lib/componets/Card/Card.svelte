@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Footer from '$lib/footer/+paga.svelte';
+	import Footer from '$lib/footer/+page.svelte';
 	import Avaliacao from '../avaliacao.svelte';
 	import Call from '../call.svelte';
 	import Liga from '../Liga.svelte';
@@ -63,7 +63,7 @@
 
 <!-- Novo layout Card-->
 <main
-	class="flex h-[1800px] w-full flex-col items-center bg-gradient-to-br from-purple-900 to-purple-800 p-4 md:p-8 shadow-lg"
+	class="flex h-[1800px] w-full flex-col items-center bg-gradient-to-br from-purple-900 to-purple-950 p-4 shadow-lg md:p-8"
 >
 	<section class="flex w-[95%] flex-col items-center lg:w-[75%]">
 		<div class="relative flex h-[200px] w-[100%] items-center justify-center lg:w-[100%]">
@@ -141,7 +141,9 @@
 				class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
 				onclick={closeImageModalOnClickOutside}
 			>
-				<div class="relative w-11/12 lg:w-[30%] max-sm:w-[70%] max-md:w-[60%] max-lg:w-[40%] rounded-lg bg-white p-4 shadow-xl">
+				<div
+					class="relative w-11/12 rounded-lg bg-white p-4 shadow-xl max-lg:w-[40%] max-md:w-[60%] max-sm:w-[70%] lg:w-[30%]"
+				>
 					<img src={imageUrl} alt="Imagem do Comércio" class="h-auto w-full rounded-lg" />
 					<button
 						onclick={closeImageModal}
@@ -160,8 +162,9 @@
 				class="flex w-full flex-col items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 p-4 shadow-lg lg:w-[60%]"
 			>
 				<!-- Botão WhatsApp -->
+				<!-- opacity-90 -->
 				<a
-					class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-purple-700 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-purple-800"
+					class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-purple-700 p-4 shadow-md transition-all duration-300 ease-in-out hover:bg-purple-800 hover:scale-105"
 					href={`https://wa.me/${product?.whatsapp}?text=${encodeURIComponent('Eu cheguei até aqui através do site encontreluizantonio.com.br')}`}
 					target="_blank"
 					rel="noopener noreferrer"
@@ -175,7 +178,7 @@
 
 				<!-- Botão Facebook -->
 				<a
-					class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-blue-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-blue-700"
+					class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-blue-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:bg-blue-700 lg:hover:scale-105"
 					href={product?.facebook}
 					target="_blank"
 					rel="noopener noreferrer"
@@ -213,37 +216,39 @@
 				</a>
 			</div>
 		</div>
-		
-		<div class="flex flex-col items-center justify-center w-full bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 shadow-lg lg:w-[60%] py-8">
-			<!-- Aviso sobre o mapa -->
-			<div class="text-center mb-6 px-4 py-2 rounded-lg bg-purple-800 text-white shadow-md">
-			  <p class="text-xl font-semibold">Veja o mapa abaixo para traçar sua rota até nós!</p>
-			</div>
-			
-			<!-- Container do mapa -->
-			<div class="w-full h-[500px] rounded-xl overflow-hidden shadow-2xl">
-			  <iframe
-				src={product?.maps}
-				width="100%"
-				height="100%"
-				style="border:0;"
-				allowfullscreen
-				loading="lazy"
-				referrerpolicy="no-referrer-when-downgrade"
-				title="Mapa de localização para {product?.title}"
-				class="w-full h-full rounded-xl shadow-lg"
-			  >
-			  </iframe>
-			</div>
-		  </div>
-		  <div class="w-full flex justify-center items-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 shadow-lg lg:w-[60%]">
-			<div class="bg-purple-700 w-full   overflow-hidden shadow-2xl">
-				<Footer />
 
+		<div
+			class="flex w-full flex-col items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 py-8 shadow-lg lg:w-[60%]"
+		>
+			<!-- Aviso sobre o mapa -->
+			<div class="mb-6 rounded-lg bg-purple-800 px-4 py-2 text-center text-white shadow-md">
+				<p class="text-xl font-semibold">Veja o mapa abaixo para traçar sua rota até nós!</p>
 			</div>
-		  </div>
+
+			<!-- Container do mapa -->
+			<div class="h-[500px] w-full overflow-hidden rounded-xl shadow-2xl">
+				<iframe
+					src={product?.maps}
+					width="100%"
+					height="100%"
+					style="border:0;"
+					allowfullscreen
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					title="Mapa de localização para {product?.title}"
+					class="h-full w-full rounded-xl shadow-lg"
+				>
+				</iframe>
+			</div>
+		</div>
+		<div
+			class="flex w-full items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 shadow-lg lg:w-[60%]"
+		>
+			<div class="w-full overflow-hidden bg-purple-700 shadow-2xl">
+				<Footer />
+			</div>
+		</div>
 	</section>
-	
 </main>
 
 <!-- <main

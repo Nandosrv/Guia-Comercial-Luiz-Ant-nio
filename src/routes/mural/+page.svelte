@@ -1,6 +1,6 @@
 <script>
 	// @ts-nocheck
-	import Footer from '$lib/footer/+paga.svelte';
+	import Footer from '$lib/footer/+page.svelte';
 	import Breadcrumbs from '$lib/componets/Breadcrumbs.svelte';
 	import Citys from '../../lib/images/homepage.jpg';
 	import Sol from '$lib/images/icons8-sol-64.png';
