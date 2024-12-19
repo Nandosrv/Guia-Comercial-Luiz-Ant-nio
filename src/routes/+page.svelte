@@ -6,6 +6,7 @@
 	import Pink from '$lib/images/anuncui2.png';
 	import Comu from '$lib/images/comu.png';
 	import Postnew from '$lib/images/Posta.png';
+	import Story from '$lib/images/Posta.png';
 
 	import { page } from '$app/stores';
 	import { setLastPathUrl } from '$lib/utils/cookies';

@@ -5,9 +5,18 @@
 	import Manu from '$lib/images/manu.gif';
 	import Post from '$lib/images/Post.png';
 	import Ana from '$lib/images/ina.png';
+	import Novidades from '$lib/images/Novidades.png';
 
 	// Lista de anúncios com data
 	export let anuncios = [
+		{ 
+			titulo: 'Todas as partes do cards do comércio foram mudadas',
+			descricao:
+				'Agora, cada card está mais moderno, funcional e alinhado com a identidade do projeto. Continuamos trabalhando para garantir a melhor experiência visual e de usabilidade. 🚀Fique de olho para mais novidades! 😉',
+			imagem: Novidades,
+			link: '/comercios',
+
+		},
 		{
 			titulo: 'Avalie nosso site',
 			descricao:
