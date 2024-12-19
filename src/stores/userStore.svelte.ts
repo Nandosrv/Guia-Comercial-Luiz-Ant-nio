@@ -1,9 +1,9 @@
 import type { User } from '$lib/types/userStore';
 
-const user: User = {
+export const user: User = {
 	name: '',
 	email: '',
-	photoURL: '',
+	photoURL: null,
 	userId: ''
 };
 

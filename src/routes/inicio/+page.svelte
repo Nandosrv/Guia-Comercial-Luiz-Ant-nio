@@ -1,38 +1,30 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { getAuth, onAuthStateChanged } from 'firebase/auth';
+	import { onAuthStateChanged } from 'firebase/auth';
 	import { onMount } from 'svelte';
-	$page.url.pathname;
-
 	// import { checkAuthState } from '$lib/firebase/client';
+	import { auth } from '$lib/firebase/client';
+	import { checkAuthState, persistenciaUser } from '$lib/services/authService.svelte';
 	import type { User } from '$lib/types/userStore';
 	import { setLastPathUrl } from '$lib/utils/cookies';
 	import PostFeed from '../../lib/componets/PostFeed.svelte';
 	import { userStore } from '../../stores/userStore.svelte';
-	import { checkAuthState, subscribeToAuthState } from '$lib/services/authService.svelte';
 
 	let isAuthenticated = false;
 
 	let currentUser = $derived(userStore.value);
 	onMount(async () => {
 		setLastPathUrl($page.url.pathname);
-		const auth = getAuth()!;
-		checkAuthState();
-
-		if (!currentUser.name) {
-			// Se não estiver autenticado, redirecione para a página de login
-			goto('/login');
-		} else {
-			isAuthenticated = true;
-		}
-		// console.log('auth', auth);
-		onAuthStateChanged(auth, (user) => {
+		checkAuthState({});
+		onAuthStateChanged(auth, async (user) => {
 			if (!user) {
 				// Se não estiver autenticado, redirecione para a página de login
-				goto('/login');
+				// goto('/login');
 			} else {
 				isAuthenticated = true;
+				await persistenciaUser(user as never);
+
+				// goto('/inicio');
 			}
 		});
 	});

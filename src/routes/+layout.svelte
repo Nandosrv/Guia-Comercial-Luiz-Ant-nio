@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Header from '$lib/componets/Header.svelte';
+	import { persistenciaUser } from '$lib/services/authService.svelte';
 	import { onMount, type Snippet } from 'svelte';
 	import '../app.css';
-	import { userStore } from '../stores/userStore.svelte';
 	import type { LayoutData } from './$types';
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
@@ -11,10 +11,14 @@
 
 	onMount(async () => {
 		if (!!user?.name) {
-			userStore.value = user;
+			try {
+				await persistenciaUser(user, true);
+			} catch (error) {
+				// goto('/login');
+			}
 			goto(data.pathUrl!);
 		} else {
-			goto('/login');
+			// goto('/login');
 		}
 	});
 
