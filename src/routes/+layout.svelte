@@ -25,7 +25,7 @@
 		{ name: 'Mural', href: '/mural' },
 		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
 		{ name: 'Avisos', href: '/quadroAvisos' },
-		{ name: 'Suporte', href: '/suporte' }
+		{ name: 'Suporte', href: '/suporte' },
 	];
 </script>
 
