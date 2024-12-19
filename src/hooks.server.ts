@@ -1,5 +1,6 @@
 import type { DecodedTokenUser } from '$lib/interfaces/decodedTokenUser';
 import type { Handle } from '@sveltejs/kit';
+import { userStore } from './stores/userStore.svelte';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const token = event.cookies.get('authToken');
@@ -9,6 +10,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 			const decodedToken = await apiGclaVerifyToken(token);
 			if (!decodedToken) {
 				event.locals.user = {
+					name: '',
+					email: '',
+					photoURL: '',
+					userId: ''
+				};
+				userStore.value = {
 					name: '',
 					email: '',
 					photoURL: '',
@@ -25,6 +32,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 			};
 		} catch {
 			event.locals.user = {
+				name: '',
+				email: '',
+				photoURL: '',
+				userId: ''
+			};
+			userStore.value = {
 				name: '',
 				email: '',
 				photoURL: '',
