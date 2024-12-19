@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Footer from '$lib/footer/+paga.svelte';
+	import Footer from '$lib/footer/+page.svelte';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	// img
@@ -23,13 +23,13 @@
 
 	const sliderItems: SliderItem[] = [
 		{
-			title: 'Manutenção Programada (05/12/2024)',
+			title: 'Manutenção Programada (22/12/2024)',
 			description: 'Manutenção em andamento',
 			image: Postnew,
 			link: '/noticias'
 		},
 		{
-			title: 'Manutenção Programada (05/12/2024)',
+			title: 'Manutenção Programada (22/12/2024)',
 			description: 'Manutenção Programada',
 			image: Comu,
 			link: '/noticias'

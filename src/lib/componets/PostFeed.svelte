@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import supabase from '../supabaseClient';
-	import Galeria from '$lib/images/icons8-galeria-25.png';
 	import Camera from '$lib/images/icons8-câmera-50.png';
-	import gif from '$lib/images/icons8-gif-48.png';
+	import Galeria from '$lib/images/icons8-galeria-25.png';
+	import { onMount } from 'svelte';
 	import { userStore } from '../../stores/userStore.svelte';
-	import { setLastPathUrl } from '$lib/utils/cookies';
+	import supabase from '../supabaseClient';
 
 	let inputValue = $state('');
 	let showModal = $state(false);
@@ -68,7 +66,6 @@
 	};
 
 	onMount(() => {
-		setLastPathUrl();
 		loadPosts();
 	});
 

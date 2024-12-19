@@ -1,7 +1,7 @@
 <script>
 	import Breadcrumbs from '$lib/componets/Breadcrumbs.svelte';
 	import Cardnoticia from '$lib/componets/Cardnoticia.svelte';
-	import Footer from '$lib/footer/+paga.svelte';
+	import Footer from '$lib/footer/+page.svelte';
 	import Voltar from '$lib/images/volt.png';
 	import { page } from '$app/stores';
 	import { setLastPathUrl } from '$lib/utils/cookies';

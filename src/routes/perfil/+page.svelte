@@ -1,9 +1,10 @@
 <script lang="ts">
 	import Logout from '$lib/componets/Logout.svelte';
-	import Footer from '$lib/footer/+paga.svelte';
+	import Footer from '$lib/footer/+page.svelte';
 	import camera from '$lib/images/icons8-câmera-50.png';
 	import Manu from '$lib/images/manu.gif';
-	import { uploadProfilePicture } from '../../lib/serve/uploadProfilePicture';
+	import { uploadProfilePicture } from '$lib/services/uploadSupabase';
+
 	import supabase from '../../lib/supabaseClient';
 	import { userStore } from '../../stores/userStore.svelte.js';
 

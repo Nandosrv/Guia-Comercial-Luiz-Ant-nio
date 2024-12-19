@@ -24,7 +24,7 @@
                         </a>
                     
                         <!-- Link do Instagram -->
-                        <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
                             <img class="w-[40px]" src="{Instagram}" alt="Instagram" />
                         </a>
                     
