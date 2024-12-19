@@ -1,4 +1,4 @@
-<main class="mt-2 w-full flex justify-center ">
+<main class=" w-full flex justify-center ">
     <div class=" bg-indigo-600 w-11/12 flex justify-center rounded-xl">
         <div class="max-w-screen-xl mx-auto px-4 py-3 text-white sm:text-center md:px-8">
             <p class="font-medium">
