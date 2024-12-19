@@ -73,8 +73,9 @@
 			}
 			goto('/inicio'); // Redireciona para a página de boas-vindas
 		} catch (error: any) {
-			console.error('Erro ao fazer login com Google:', error);
 			errorMessage = error.message;
+			alert(`Erro ao fazer login com Google ${error}`);
+			goto('login'); // Redireciona para a página de login
 		}
 	};
 </script>
