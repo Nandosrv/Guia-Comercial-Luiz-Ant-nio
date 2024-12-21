@@ -5,8 +5,8 @@
 	import Whatz from '$lib/images/icon-ws.png';
 </script>
 
-<main class="flex w-full items-end justify-end">
-	<div class="h-[310px] w-full bg-gradient-to-br from-purple-950 to-purple-900 lg:rounded-[12px]">
+<main class="flex w-full bg-secondary-foreground">
+	<div class="h-[310px] w-full bg-gradient-to-br">
 		<div class="flex h-[250px] w-full items-center justify-center gap-5">
 			<div class="flex h-[240px] w-[95%] flex-col items-center justify-center gap-2">
 				<div class="flex h-[150px] w-[100%] items-center justify-center">
