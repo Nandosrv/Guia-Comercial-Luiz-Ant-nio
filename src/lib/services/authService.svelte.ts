@@ -69,7 +69,7 @@ export const checkAuthState = ({ reloadPage }: { reloadPage?: false }): void => 
 			// console.log('Token revalidado:', token);
 
 			// Atualizar o token no cookie, se necessário
-			// document.cookie = `authToken=${token}; path=/; max-age=3600`;
+			token && (document.cookie = `authToken=${token}; path=/; max-age=3600`);
 		} else {
 			console.log('Usuário não autenticado');
 		}
