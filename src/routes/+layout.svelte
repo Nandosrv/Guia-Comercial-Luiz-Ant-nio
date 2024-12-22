@@ -96,10 +96,18 @@
 	});
 </script>
 
-<div class="relative m-auto h-full min-h-screen w-full justify-between bg-secondary">
-	<div class="absolute left-0 top-0 h-20 w-full bg-secondary-foreground"></div>
-	<div class="mx-auto max-w-6xl">
-		<nav class="flex h-20 w-full items-center justify-between bg-primary px-2">
+<div class="relative z-0 m-auto h-full min-h-screen w-full justify-between">
+	<div class="absolute left-0 top-0 -z-10 h-80 w-full bg-foreground sm:h-72 md:h-96">
+		<img
+			class="h-full w-full object-cover"
+			src="https://www.abagrp.org.br/uploads/pagina/elemento/campo/2019/01/6Rm4mr2kkaylCGgT/anfiteatro-1030x579_1920x540.jpeg"
+			alt=""
+		/>
+	</div>
+	<div class="relative mx-auto max-w-6xl">
+		<nav
+			class="z-30 flex h-16 w-full items-center justify-between bg-secondary-foreground bg-opacity-5 px-2"
+		>
 			<!-- Logo -->
 			<div
 				class="absolute left-0 mx-auto flex h-20 w-full items-center justify-center border-gray-300 md:relative md:mx-0 md:w-auto"
@@ -111,17 +119,17 @@
 
 			<div class="flex w-full items-center justify-between gap-4 md:w-auto">
 				<div
-					class="duration-5 sm:top-[44px]flex-row absolute inset-x-0 top-[80px] z-10 mx-0 flex w-full bg-opacity-100 pt-12 transition-all ease-in-out md:relative
+					class="duration-5 sm:top-[44px]flex-row absolute inset-x-0 top-[70px] z-10 mx-0 flex w-full bg-opacity-100 pt-12 transition-all ease-in-out md:relative
 			md:top-0 md:w-full md:translate-x-0 md:items-center md:justify-end md:bg-transparent md:p-0 md:pt-0 md:opacity-100
 			{[
 						isOpen
-							? 'z-20 h-full translate-x-0 flex-col gap-4 bg-black bg-opacity-80 dark:bg-background dark:bg-opacity-70'
+							? 'z-50 h-full translate-x-0 flex-col gap-4 bg-black bg-opacity-80 dark:bg-background dark:bg-opacity-70'
 							: '-translate-x-full opacity-0 md:gap-2'
 					]}
 			 "
 				>
 					<div
-						class="absolute top-0 flex w-full justify-center bg-purple-800/100 py-2.5 uppercase text-yellow-400 md:hidden"
+						class="absolute top-0 flex w-full justify-center bg-secondary-foreground py-2.5 uppercase text-yellow-400 md:hidden"
 					>
 						<h2 class="text-xl font-bold">menu navegação</h2>
 					</div>
@@ -157,7 +165,9 @@
 							</div>
 						</a>
 					{:else}
-						<a href="/login" class="text-secondary">Entrar</a>
+						<div class="flex items-center rounded-md bg-secondary-foreground bg-opacity-60 p-1.5">
+							<a href="/login" class="text-secondary">Entrar</a>
+						</div>
 						<!-- Link para login caso o usuário não esteja logado -->
 					{/if}
 
@@ -165,7 +175,7 @@
 				</div>
 				<button
 					onclick={toggleMenu}
-					class="z-20 text-yellow-500 focus:outline-none md:hidden"
+					class="z-20 rounded-sm bg-secondary-foreground bg-opacity-60 p-1 text-secondary focus:outline-none md:hidden"
 					aria-label="toggle menu"
 				>
 					{#if !isOpen}
@@ -196,11 +206,11 @@
 				</button>
 			</div>
 		</nav>
-		<div class="z-30 flex h-10 w-full items-center justify-center bg-red-500">
+		<div class="flex h-12 w-full items-center justify-center">
 			<Pesquisa />
 		</div>
 
-		<main class="h-full w-full bg-purple-950/100 py-2">
+		<main class="z-0 h-full w-full">
 			{@render children()}
 		</main>
 	</div>

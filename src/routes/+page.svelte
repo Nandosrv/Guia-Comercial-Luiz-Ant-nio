@@ -72,141 +72,173 @@
 	}
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-purple-950 to-purple-900">
-	<!-- Header Logo -->
-	<div class="relative flex h-20 items-center justify-center bg-purple-950/50 md:h-32">
-		<h1 class="text-2xl font-bold uppercase tracking-wider text-white md:text-4xl">
-			encontre Luiz Antônio
-		</h1>
-	</div>
-	<!-- bg-purple-950/50 -->
-	<!-- Main Navigation -->
-	<!-- <nav class="items-center justify-center border-b border-purple-800 bg-black/60 md:flex">
-		<div class="mx-auto flex max-w-7xl">
-			<div class="flex items-center justify-between">
-				<button
-					class="p-2 text-white md:hidden"
-					on:click={() => isMenuOpen.update((open) => !open)}
-					aria-label="Toggle menu"
-				> -->
-	<!-- Menu Icon placeholder -->
-	<!-- <span class="h-6 w-6">☰</span>
-				</button>
-				<div
-					class={`md:flex ${$isMenuOpen ? 'flex' : 'hidden'} absolute left-0 top-[200px] z-50 w-full flex-col bg-black/90 md:relative md:top-auto md:w-auto md:flex-row md:space-x-8 md:bg-transparent`}
-				>
-					{#each navItems as item}
-						<a
-							href={item.href}
-							class="u flex items-center px-3 py-4 text-sm text-gray-300 transition-colors hover:bg-purple-800/30 hover:text-[17px] hover:text-blue-400"
-						>
-							<span>{item.name}</span>
-						</a>
-					{/each}
+<div class="hidden">
+	<div class="min-h-screen bg-gradient-to-br from-purple-950 to-purple-900">
+		<!-- Header Logo -->
+		<div class="relative flex h-20 items-center justify-center bg-purple-950/50 md:h-32">
+			<h1 class="text-2xl font-bold uppercase tracking-wider text-white md:text-4xl">
+				encontre Luiz Antônio
+			</h1>
+		</div>
+		<!-- bg-purple-950/50 -->
+		<!-- Main Navigation -->
+		<!-- <nav class="items-center justify-center border-b border-purple-800 bg-black/60 md:flex">
+			<div class="mx-auto flex max-w-7xl">
+				<div class="flex items-center justify-between">
+					<button
+						class="p-2 text-white md:hidden"
+						on:click={() => isMenuOpen.update((open) => !open)}
+						aria-label="Toggle menu"
+					> -->
+		<!-- Menu Icon placeholder -->
+		<!-- <span class="h-6 w-6">☰</span>
+					</button>
+					<div
+						class={`md:flex ${$isMenuOpen ? 'flex' : 'hidden'} absolute left-0 top-[200px] z-50 w-full flex-col bg-black/90 md:relative md:top-auto md:w-auto md:flex-row md:space-x-8 md:bg-transparent`}
+					>
+						{#each navItems as item}
+							<a
+								href={item.href}
+								class="u flex items-center px-3 py-4 text-sm text-gray-300 transition-colors hover:bg-purple-800/30 hover:text-[17px] hover:text-blue-400"
+							>
+								<span>{item.name}</span>
+							</a>
+						{/each}
+					</div>
 				</div>
 			</div>
-		</div>
-	</nav> -->
+		</nav> -->
 
-	<!-- Main Content -->
-	<main class="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-8">
-		<div class="flex flex-wrap justify-center gap-8">
-			<!-- Main Content Area -->
+		<!-- Main Content -->
+		<main class="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-8">
+			<div class="flex flex-wrap justify-center gap-8">
+				<!-- Main Content Area -->
 
-			<div class="flex w-[100%] flex-col items-center justify-center lg:col-span-2">
-				<!-- Featured Banner Slider -->
-				<!-- Featured Banner Slider -->
-				<div
-					class="slider border-1-2 relative mb-8 w-[100%] gap-7 rounded-[12px] border-[#09052D] bg-black/60 object-cover lg:h-[500px] lg:w-[91%]"
-				>
-					<div class="slider-items flex" style="transform: translateX(-{$currentSlide * 100}%);">
-						{#each sliderItems as item, index}
-							<div class="slider-item relative">
-								<a href={item.link}>
-									<!-- Adiciona o link correspondente -->
-									<img
-										src={item.image}
-										alt={item.title}
-										class="bg-conver h-[320px] w-[100%] cursor-pointer bg-cover bg-center brightness-75 lg:h-[500px]"
-									/>
-								</a>
-								<div></div>
-								<div class="absolute inset-0 top-[200px] lg:top-[300px]">
-									<div class="flex h-full flex-col justify-center p-4 md:p-8">
-										<a href={item.link}>
-											<!-- Mesmo link utilizado aqui -->
-											<h2 class="mb-2 text-2xl font-bold text-white md:mb-4 md:text-4xl">
-												{item.title}
-											</h2>
-										</a>
-										<p class="text-sm text-gray-200 md:text-base">
-											{item.description}
-										</p>
+				<div class="flex w-[100%] flex-col items-center justify-center lg:col-span-2">
+					<!-- Featured Banner Slider -->
+					<!-- Featured Banner Slider -->
+					<div
+						class="slider border-1-2 relative mb-8 w-[100%] gap-7 rounded-[12px] border-[#09052D] bg-black/60 object-cover lg:h-[500px] lg:w-[91%]"
+					>
+						<div class="slider-items flex" style="transform: translateX(-{$currentSlide * 100}%);">
+							{#each sliderItems as item, index}
+								<div class="slider-item relative">
+									<a href={item.link}>
+										<!-- Adiciona o link correspondente -->
+										<img
+											src={item.image}
+											alt={item.title}
+											class="bg-conver h-[320px] w-[100%] cursor-pointer bg-cover bg-center brightness-75 lg:h-[500px]"
+										/>
+									</a>
+									<div></div>
+									<div class="absolute inset-0 top-[200px] lg:top-[300px]">
+										<div class="flex h-full flex-col justify-center p-4 md:p-8">
+											<a href={item.link}>
+												<!-- Mesmo link utilizado aqui -->
+												<h2 class="mb-2 text-2xl font-bold text-white md:mb-4 md:text-4xl">
+													{item.title}
+												</h2>
+											</a>
+											<p class="text-sm text-gray-200 md:text-base">
+												{item.description}
+											</p>
+										</div>
 									</div>
 								</div>
+							{/each}
+						</div>
+
+						<button
+							on:click={prevSlide}
+							class="slider-button prev-button"
+							aria-label="Previous slide"
+						>
+							←
+						</button>
+						<button on:click={nextSlide} class="slider-button next-button" aria-label="Next slide">
+							→
+						</button>
+					</div>
+
+					<!-- News Section -->
+					<div class="space-y-4 rounded-[12px]">
+						{#each [{ type: 'Manutenção', title: 'Manutenção (25/11/24)', description: ' Estamos atualizando nosso sistema para melhorar a experiência do usuário e corrigir erros identificados.	', date: '25/12/2024' }, { type: 'Notícias', title: 'Notas de Atualização (26/11/24)', description: ' A atualização do banco de dados foi concluída com sucesso. Isso nos permitirá oferecer um serviço mais rápido e preciso. Aproveite as melhorias no sistema! 05/11/2024!', date: '26/11/2024' }, { type: 'Eventos', title: 'Avalie nosso site', description: 'Queremos saber sua opinião! Avalie a experiência em nosso site e nos ajude a melhorar a cada dia. Seu feedback é fundamental para oferecer o melhor conteúdo e usabilidade', date: '19/11/2024' }] as item}
+							<div class="rounded-[12px] border-purple-800/50 bg-black/40 p-4">
+								<div
+									class="mb-2 flex flex-col items-start justify-between md:flex-row md:items-center"
+								>
+									<span
+										class={`rounded px-2 py-1 text-xs ${item.type === 'Eventos' ? 'bg-green-600' : 'bg-red-600'} mb-2 text-white md:mb-0`}
+									>
+										{item.type}
+									</span>
+									<span class="text-sm text-gray-400">{item.date}</span>
+								</div>
+								<a href="/noticias">
+									<h3 class="mb-2 font-serif font-semibold text-white hover:text-blue-500">
+										{item.title}
+									</h3>
+								</a>
+								<p class="text-sm text-gray-300">{item.description}</p>
 							</div>
 						{/each}
 					</div>
-
-					<button
-						on:click={prevSlide}
-						class="slider-button prev-button"
-						aria-label="Previous slide"
-					>
-						←
-					</button>
-					<button on:click={nextSlide} class="slider-button next-button" aria-label="Next slide">
-						→
-					</button>
 				</div>
 
-				<!-- News Section -->
-				<div class="space-y-4 rounded-[12px]">
-					{#each [{ type: 'Manutenção', title: 'Manutenção (25/11/24)', description: ' Estamos atualizando nosso sistema para melhorar a experiência do usuário e corrigir erros identificados.	', date: '25/12/2024' }, { type: 'Notícias', title: 'Notas de Atualização (26/11/24)', description: ' A atualização do banco de dados foi concluída com sucesso. Isso nos permitirá oferecer um serviço mais rápido e preciso. Aproveite as melhorias no sistema! 05/11/2024!', date: '26/11/2024' }, { type: 'Eventos', title: 'Avalie nosso site', description: 'Queremos saber sua opinião! Avalie a experiência em nosso site e nos ajude a melhorar a cada dia. Seu feedback é fundamental para oferecer o melhor conteúdo e usabilidade', date: '19/11/2024' }] as item}
-						<div class="rounded-[12px] border-purple-800/50 bg-black/40 p-4">
-							<div
-								class="mb-2 flex flex-col items-start justify-between md:flex-row md:items-center"
-							>
-								<span
-									class={`rounded px-2 py-1 text-xs ${item.type === 'Eventos' ? 'bg-green-600' : 'bg-red-600'} mb-2 text-white md:mb-0`}
-								>
-									{item.type}
-								</span>
-								<span class="text-sm text-gray-400">{item.date}</span>
-							</div>
-							<a href="/noticias">
-								<h3 class="mb-2 font-serif font-semibold text-white hover:text-blue-500">
-									{item.title}
-								</h3>
-							</a>
-							<p class="text-sm text-gray-300">{item.description}</p>
-						</div>
-					{/each}
-				</div>
+				<!-- Sidebar -->
 			</div>
-
-			<!-- Sidebar -->
+		</main>
+	</div>
+	<main
+		class="flex w-full flex-col items-center justify-center gap-7 bg-gradient-to-br from-purple-950 to-purple-900"
+	>
+		<div
+			class="max-sm:w-[92%] flex h-[100px] w-full flex-col items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 md:w-[53%]"
+		>
+			<h1 class="flex text-2xl font-bold tracking-wider text-white md:text-4xl">
+				Destaques Da Semana
+			</h1>
+			<p>⭐⭐⭐⭐⭐</p>
 		</div>
+		<div
+			class="ml max-sm:w-[92%] flex w-[53%] flex-col items-center justify-center rounded-[12px] bg-black/40 p-4"
+		>
+			<!-- <OfertaProfissional /> -->
+		</div>
+		<Footer />
 	</main>
 </div>
-<main
-	class="flex w-full flex-col items-center justify-center gap-7 bg-gradient-to-br from-purple-950 to-purple-900"
->
+
+<section class="z-0 flex min-h-[calc(100vh-80px)] flex-col gap-7">
 	<div
-		class="flex h-[100px] w-full flex-col items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 max-sm:w-[92%] md:w-[53%]"
+		class="mx-h-[254px] relative flex h-[200px] w-full flex-col items-center bg-secondary-foreground bg-opacity-60 sm:h-[154px] sm:justify-between md:h-[254px] md:flex-row"
 	>
-		<h1 class="flex text-2xl font-bold tracking-wider text-white md:text-4xl">
-			Destaques Da Semana
-		</h1>
-		<p>⭐⭐⭐⭐⭐</p>
+		<div
+			class="flex h-40 w-full flex-col items-center justify-center gap-2 text-muted md:h-full md:w-[50%]"
+		>
+			<h1
+				class="w-[75%] text-justify text-xl font-semibold sm:text-lg md:w-[75%] md:text-2xl lg:w-[85%] lg:text-3xl"
+			>
+				Bem vindo ao classificados de comércios em Luiz Antonio SP
+			</h1>
+		</div>
+		<div
+			class="flex h-40 w-full items-center justify-center gap-2 p-4 text-muted sm:flex-col md:h-full md:w-[50%]"
+		>
+			<li class="w-[70%] p-4 font-light sm:p-0 md:text-xl lg:text-2xl">
+				Encontre todos os comercios em um único lugar
+			</li>
+
+			<li class="w-[70%] p-4 font-light sm:p-0 md:text-xl lg:text-2xl">
+				Leia as notícias mais recentes da cidade
+			</li>
+		</div>
+		<!-- <div class="ms:w-[50%] w-1/1 mx-auto flex h-full flex-col gap-7 sm:w-2/4">
+			<img src={img_pp} alt="" class="mx-auto h-full w-full" />
+		</div> -->
 	</div>
-	<div
-		class="ml flex w-[53%] flex-col items-center justify-center rounded-[12px] bg-black/40 p-4 max-sm:w-[92%]"
-	>
-		<!-- <OfertaProfissional /> -->
-	</div>
-	<Footer />
-</main>
+</section>
 
 <style>
 	.slider {
