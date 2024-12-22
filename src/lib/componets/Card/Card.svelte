@@ -63,194 +63,192 @@
 
 <!-- Novo layout Card-->
 <main
-	class="flex h-[1800px] w-full flex-col items-center bg-gradient-to-br from-purple-900 to-purple-950 p-4 shadow-lg md:p-8"
+	class="flex w-full flex-col items-center bg-gradient-to-br from-purple-900 to-purple-950 shadow-lg lg:h-full border border-yellow-400"
 >
-	<section class="flex w-[95%] flex-col items-center lg:w-[75%]">
-		<div class="relative flex h-[200px] w-[100%] items-center justify-center lg:w-[100%]">
-			<!-- svelte-ignore a11y_click_events_have_key_events -->
-			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-			<img
-				class="absolute h-[100%] w-[100%] rounded-t-lg object-cover lg:h-[250px] lg:w-[60%]"
-				src={product?.image}
-				alt={product?.title}
-				onclick={openImageModal}
-			/>
-			<div
-				class="z-10 mt-[200px] flex h-[100px] w-[100px] items-center justify-center rounded-full border border-purple-500 bg-white"
-			>
+	<section
+		class="flex w-[95%] flex-col items-center  lg:h-full lg:w-[100%] lg:flex-row"
+	>
+		<!-- Divisao de controle -->
+		<div class="flex w-full flex-col items-center justify-center lg:h-[700px] lg:flex-row">
+			<div class="relative flex h-[200px] w-[100%] items-center justify-center lg:w-[100%]">
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 				<img
-					class="h-[100%] w-[100%] rounded-full object-cover"
+					class="absolute h-[100%] w-[100%] rounded-t-lg object-cover lg:h-[450px] lg:w-[500px]"
 					src={product?.image}
 					alt={product?.title}
 					onclick={openImageModal}
 				/>
-			</div>
-		</div>
-
-		<div
-			class="flex h-[50px] w-full items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 shadow-lg lg:w-[60%]"
-		></div>
-
-		<div
-			class="flex h-[170px] w-full flex-col items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 shadow-lg lg:w-[60%]"
-		>
-			<p
-				class="text-center font-['Inter'] text-2xl font-extrabold uppercase tracking-wide text-white lg:text-3xl"
-			>
-				{product?.title}
-			</p>
-			<button
-				onclick={openModal}
-				class="mt-4 rounded-lg bg-purple-700 px-6 py-2 text-white shadow-md transition hover:scale-105 hover:bg-purple-800"
-			>
-				Saiba Mais
-			</button>
-		</div>
-
-		{#if isModalOpen}
-			<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
 				<div
-					class="w-10/12 max-w-lg scale-105 transform rounded-lg bg-white p-8 shadow-xl transition-all duration-300"
+					class="z-10 mt-[200px] flex h-[100px] w-[100px] items-center justify-center rounded-full border border-purple-500 bg-white"
 				>
-					<h2 class="mb-6 text-center font-['Inter'] text-3xl font-extrabold text-purple-900">
-						Horário de Funcionamento
-					</h2>
-					<div class="border-b border-purple-500 pb-4">
-						<p class="text-xl leading-relaxed text-gray-900">
-							{product?.hours}
-						</p>
-					</div>
-					<div class="mt-6 flex justify-center">
-						<button
-							onclick={closeModal}
-							class="transform rounded bg-purple-700 px-6 py-3 text-lg font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 hover:bg-purple-800"
-						>
-							Fechar
-						</button>
-					</div>
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+					<img
+						class="h-[100%] w-[100%] rounded-full object-cover"
+						src={product?.image}
+						alt={product?.title}
+						onclick={openImageModal}
+					/>
 				</div>
 			</div>
-		{/if}
 
-		{#if isImageModalOpen}
-			<!-- svelte-ignore a11y_click_events_have_key_events -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div
-				class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
-				onclick={closeImageModalOnClickOutside}
-			>
+			<!-- Divisao da Imagem -->
+			<div class="flex w-full flex-col items-center bg-secondary-foreground rounded-lg">
 				<div
-					class="relative w-11/12 rounded-lg bg-white p-4 shadow-xl max-lg:w-[40%] max-md:w-[60%] max-sm:w-[70%] lg:w-[30%]"
+					class="flex h-[170px] w-full flex-col items-center justify-center shadow-lg lg:w-[60%]"
 				>
-					<img src={imageUrl} alt="Imagem do Comércio" class="h-auto w-full rounded-lg" />
-					<button
-						onclick={closeImageModal}
-						class="absolute right-4 top-4 rounded-full bg-red-500 p-2 text-white transition-all duration-200 ease-in-out hover:bg-red-600"
+					<p
+						class="text-center font-['Inter'] text-2xl font-extrabold uppercase tracking-wide text-white lg:text-3xl"
 					>
-						X
+						{product?.title}
+					</p>
+					<button
+						onclick={openModal}
+						class="mt-4 rounded-lg bg-purple-700 px-6 py-2 text-white shadow-md transition hover:scale-105 hover:bg-purple-800"
+					>
+						Saiba Mais
 					</button>
 				</div>
-			</div>
-		{/if}
 
-		<div
-			class="flex w-full items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 shadow-lg lg:w-[60%]"
-		>
-			<div
-				class="flex w-full flex-col items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 p-4 shadow-lg lg:w-[60%]"
-			>
-				<!-- Botão WhatsApp -->
-				<!-- opacity-90 -->
-				<a
-					class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-purple-700 p-4 shadow-md transition-all duration-300 ease-in-out hover:bg-purple-800 hover:scale-105"
-					href={`https://wa.me/${product?.whatsapp}?text=${encodeURIComponent('Eu cheguei até aqui através do site encontreluizantonio.com.br')}`}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img class="h-8 w-8" src={Ws} alt="WhatsApp" />
-					<p class="font-['Inter'] font-semibold text-white">Mensagem</p>
-				</a>
+				{#if isModalOpen}
+					<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+						<div
+							class="w-10/12 max-w-lg scale-105 transform rounded-lg bg-white p-8 shadow-xl transition-all duration-300"
+						>
+							<h2 class="mb-6 text-center font-['Inter'] text-3xl font-extrabold text-purple-900">
+								Horário de Funcionamento
+							</h2>
+							<div class="border-b border-purple-500 pb-4">
+								<p class="text-xl leading-relaxed text-gray-900">
+									{product?.hours}
+								</p>
+							</div>
+							<div class="mt-6 flex justify-center">
+								<button
+									onclick={closeModal}
+									class="transform rounded bg-purple-700 px-6 py-3 text-lg font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 hover:bg-purple-800"
+								>
+									Fechar
+								</button>
+							</div>
+						</div>
+					</div>
+				{/if}
 
-				<!-- Divider -->
-				<div class="mb-4 h-[1px] w-full bg-purple-500"></div>
+				{#if isImageModalOpen}
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
+					<div
+						class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+						onclick={closeImageModalOnClickOutside}
+					>
+						<div
+							class="max-lg:w-[40%] max-md:w-[60%] max-sm:w-[70%] relative w-11/12 rounded-lg bg-white p-4 shadow-xl lg:w-[30%]"
+						>
+							<img src={imageUrl} alt="Imagem do Comércio" class="h-auto w-full rounded-lg" />
+							<button
+								onclick={closeImageModal}
+								class="absolute right-4 top-4 rounded-full bg-red-500 p-2 text-white transition-all duration-200 ease-in-out hover:bg-red-600"
+							>
+								X
+							</button>
+						</div>
+					</div>
+				{/if}
 
-				<!-- Botão Facebook -->
-				<a
-					class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-blue-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:bg-blue-700 lg:hover:scale-105"
-					href={product?.facebook}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img class="h-8 w-8" src={Face} alt="Facebook" />
-					<p class="font-['Inter'] font-semibold text-white">Facebook</p>
-				</a>
+				<!-- Div dos botoes -->
+					<div
+						class="flex lg:gap-4 w-full lg:flex-row lg:flex-wrap flex-col items-center justify-center  p-4 shadow-lg lg:w-[90%] "
+					>
+						<!-- Botão WhatsApp -->
+						<!-- opacity-90 -->
+						<a
+							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-purple-700 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-purple-800"
+							href={`https://wa.me/${product?.whatsapp}?text=${encodeURIComponent('Eu cheguei até aqui através do site encontreluizantonio.com.br')}`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img class="h-8 w-8" src={Ws} alt="WhatsApp" />
+							<p class="font-['Inter'] font-semibold text-white">Mensagem</p>
+						</a>
 
-				<!-- Divider -->
-				<div class="mb-4 h-[1px] w-full bg-purple-500"></div>
+						<!-- Divider -->
+						<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
 
-				<!-- Botão Instagram -->
-				<a
-					class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-pink-500 to-orange-500 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r"
-					href={product?.instagram}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img class="h-8 w-8" src={Insta} alt="Instagram" />
-					<p class="font-['Inter'] font-semibold text-white">Instagram</p>
-				</a>
+						<!-- Botão Facebook -->
+						<a
+							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-blue-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:bg-blue-700 lg:hover:scale-105"
+							href={product?.facebook}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img class="h-8 w-8" src={Face} alt="Facebook" />
+							<p class="font-['Inter'] font-semibold text-white">Facebook</p>
+						</a>
 
-				<!-- Divider -->
-				<div class="mb-4 h-[1px] w-full bg-purple-500"></div>
+						<!-- Divider -->
+						<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
 
-				<!-- Botão Call -->
-				<a
-					class="flex w-full transform items-center justify-center gap-3 rounded-lg bg-green-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-green-700"
-					href={`tel:${product?.telefone}`}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img class="h-8 w-8" src={callcomer} alt="Call" />
-					<p class="font-['Inter'] font-semibold text-white">Ligue Agora</p>
-				</a>
-			</div>
-		</div>
+						<!-- Botão Instagram -->
+						<a
+							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-pink-500 to-orange-500 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r"
+							href={product?.instagram}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img class="h-8 w-8" src={Insta} alt="Instagram" />
+							<p class="font-['Inter'] font-semibold text-white">Instagram</p>
+						</a>
 
-		<div
-			class="flex w-full flex-col items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 py-8 shadow-lg lg:w-[60%]"
-		>
-			<!-- Aviso sobre o mapa -->
-			<div class="mb-6 rounded-lg bg-purple-800 px-4 py-2 text-center text-white shadow-md">
-				<p class="text-xl font-semibold">Veja o mapa abaixo para traçar sua rota até nós!</p>
-			</div>
+						<!-- Divider -->
+						<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
 
-			<!-- Container do mapa -->
-			<div class="h-[500px] w-full overflow-hidden rounded-xl shadow-2xl">
-				<iframe
-					src={product?.maps}
-					width="100%"
-					height="100%"
-					style="border:0;"
-					allowfullscreen
-					loading="lazy"
-					referrerpolicy="no-referrer-when-downgrade"
-					title="Mapa de localização para {product?.title}"
-					class="h-full w-full rounded-xl shadow-lg"
-				>
-				</iframe>
-			</div>
-		</div>
-		<div
-			class="flex w-full items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 shadow-lg lg:w-[60%]"
-		>
-			<div class="w-full overflow-hidden bg-purple-700 shadow-2xl">
-				<Footer />
+						<!-- Botão Call -->
+						<a
+							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-green-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-green-700"
+							href={`tel:${product?.telefone}`}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<img class="h-8 w-8" src={callcomer} alt="Call" />
+							<p class="font-['Inter'] font-semibold text-white">Ligue Agora</p>
+						</a>
+					</div>
+				
 			</div>
 		</div>
 	</section>
+	<!-- Aviso sobre o mapa -->
+	<div class="w-full h-full" >
+		<div class=" mb-6 rounded-lg bg-purple-800 px-4 py-2 text-center text-white shadow-md">
+			<p class="text-xl font-semibold">Veja o mapa abaixo para traçar sua rota até nós!</p>
+		</div>
+	
+		<!-- Container do mapa -->
+		<div class="h-[500px] w-full overflow-hidden rounded-xl shadow-2xl border border-purple-500">
+			<iframe
+				src={product?.maps}
+				width="100%"
+				height="100%"
+				style="border:0;"
+				allowfullscreen
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+				title="Mapa de localização para {product?.title}"
+				class="h-full w-full rounded-xl shadow-lg"
+			>
+			</iframe>
+		
+		</div>
+	</div>
 </main>
 
+<!-- <div
+		class="flex w-full flex-col items-center justify-center bg-opacity-90 bg-gradient-to-r from-purple-800 to-purple-950 py-8 shadow-lg lg:w-[60%]"
+	>
+		
+	</div> -->
 <!-- <main
 	class="flex w-full h-[700px] flex-col items-center bg-gradient-to-br from-purple-900 to-purple-800 p-4 md:p-8"
 >
