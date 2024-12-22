@@ -27,7 +27,7 @@
 	}
   </script>
   
-  <div class="bg-gradient-to-br flex justify-center border-b border-purple-950 from-purple-900 to-purple-800 p-4 md:p-8">
+  <div class="bg-gradient-to-br flex justify-center bg-secondary-foreground p-4 md:p-8">
 	<div class="w-full flex justify-center items-center lg:w-[49%]">
 		<Alerty />
 
@@ -35,7 +35,7 @@
 
   </div>
   
-  <main class="flex w-full h-[600px] justify-center">
+  <main class="flex w-full h-full justify-center">
 	{#if product}
 	  <Card {product} />
 	{:else}
