@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { auth } from '$lib/firebase/client';
 	import Footer from '$lib/footer/+page.svelte';
 	import Avaliacao from '../avaliacao.svelte';
 	import Call from '../call.svelte';
@@ -63,24 +64,24 @@
 
 <!-- Novo layout Card-->
 <main
-	class="flex w-full flex-col items-center bg-gradient-to-br from-purple-900 to-purple-950 shadow-lg lg:h-full border border-yellow-400"
+	class="flex w-full flex-col items-center bg-gradient-to-br from-purple-900 to-purple-950 shadow-lg lg:h-full"
 >
-	<section
-		class="flex w-[95%] flex-col items-center  lg:h-full lg:w-[100%] lg:flex-row"
-	>
+	<section class="flex w-[95%] flex-col items-center py-8 lg:h-full lg:w-[100%] lg:flex-row">
 		<!-- Divisao de controle -->
-		<div class="flex w-full flex-col items-center justify-center lg:h-[700px] lg:flex-row">
-			<div class="relative flex h-[200px] w-[100%] items-center justify-center lg:w-[100%]">
+		<div class="flex flex-col items-center justify-center lg:flex-row lg:px-4">
+			<div
+				class="relative flex h-[240px] w-full flex-col items-center justify-center sm:flex-row lg:w-[100%]"
+			>
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 				<img
-					class="absolute h-[100%] w-[100%] rounded-t-lg object-cover lg:h-[450px] lg:w-[500px]"
+					class=" h-[100%] w-[100%] rounded-t-lg object-cover lg:h-[450px] lg:max-w-[500px]"
 					src={product?.image}
 					alt={product?.title}
 					onclick={openImageModal}
 				/>
 				<div
-					class="z-10 mt-[200px] flex h-[100px] w-[100px] items-center justify-center rounded-full border border-purple-500 bg-white"
+					class="absolute top-40 z-10 flex h-[100px] w-[100px] items-center justify-center rounded-full border border-purple-500 bg-white"
 				>
 					<!-- svelte-ignore a11y_click_events_have_key_events -->
 					<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
@@ -94,9 +95,9 @@
 			</div>
 
 			<!-- Divisao da Imagem -->
-			<div class="flex w-full flex-col items-center bg-secondary-foreground rounded-lg">
+			<div class="flex w-full flex-col items-center rounded-lg bg-secondary-foreground lg:w-[100%]">
 				<div
-					class="flex h-[170px] w-full flex-col items-center justify-center shadow-lg lg:w-[60%]"
+					class="flex h-[250px] w-full flex-col items-center justify-center shadow-lg lg:w-[60%]"
 				>
 					<p
 						class="text-center font-['Inter'] text-2xl font-extrabold uppercase tracking-wide text-white lg:text-3xl"
@@ -158,75 +159,74 @@
 				{/if}
 
 				<!-- Div dos botoes -->
-					<div
-						class="flex lg:gap-4 w-full lg:flex-row lg:flex-wrap flex-col items-center justify-center  p-4 shadow-lg lg:w-[90%] "
+				<div
+					class="flex w-full flex-col items-center justify-center p-4 shadow-lg lg:w-[90%] lg:flex-row lg:flex-wrap lg:gap-4"
+				>
+					<!-- Botão WhatsApp -->
+					<!-- opacity-90 -->
+					<a
+						class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-purple-700 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-purple-800 lg:w-auto"
+						href={`https://wa.me/${product?.whatsapp}?text=${encodeURIComponent('Eu cheguei até aqui através do site encontreluizantonio.com.br')}`}
+						target="_blank"
+						rel="noopener noreferrer"
 					>
-						<!-- Botão WhatsApp -->
-						<!-- opacity-90 -->
-						<a
-							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-purple-700 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-purple-800"
-							href={`https://wa.me/${product?.whatsapp}?text=${encodeURIComponent('Eu cheguei até aqui através do site encontreluizantonio.com.br')}`}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<img class="h-8 w-8" src={Ws} alt="WhatsApp" />
-							<p class="font-['Inter'] font-semibold text-white">Mensagem</p>
-						</a>
+						<img class="h-8 w-8" src={Ws} alt="WhatsApp" />
+						<p class="font-['Inter'] font-semibold text-white">Mensagem</p>
+					</a>
 
-						<!-- Divider -->
-						<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
+					<!-- Divider -->
+					<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
 
-						<!-- Botão Facebook -->
-						<a
-							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-blue-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:bg-blue-700 lg:hover:scale-105"
-							href={product?.facebook}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<img class="h-8 w-8" src={Face} alt="Facebook" />
-							<p class="font-['Inter'] font-semibold text-white">Facebook</p>
-						</a>
+					<!-- Botão Facebook -->
+					<a
+						class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-blue-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:bg-blue-700 lg:w-auto lg:hover:scale-105"
+						href={product?.facebook}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img class="h-8 w-8" src={Face} alt="Facebook" />
+						<p class="font-['Inter'] font-semibold text-white">Facebook</p>
+					</a>
 
-						<!-- Divider -->
-						<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
+					<!-- Divider -->
+					<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
 
-						<!-- Botão Instagram -->
-						<a
-							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-pink-500 to-orange-500 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r"
-							href={product?.instagram}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<img class="h-8 w-8" src={Insta} alt="Instagram" />
-							<p class="font-['Inter'] font-semibold text-white">Instagram</p>
-						</a>
+					<!-- Botão Instagram -->
+					<a
+						class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-pink-500 to-orange-500 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-gradient-to-r lg:w-auto"
+						href={product?.instagram}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img class="h-8 w-8" src={Insta} alt="Instagram" />
+						<p class="font-['Inter'] font-semibold text-white">Instagram</p>
+					</a>
 
-						<!-- Divider -->
-						<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
+					<!-- Divider -->
+					<!-- <div class="mb-4 h-[1px] w-full bg-purple-500"></div> -->
 
-						<!-- Botão Call -->
-						<a
-							class="mb-4 flex w-full lg:w-auto transform items-center justify-center gap-3 rounded-lg bg-green-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-green-700"
-							href={`tel:${product?.telefone}`}
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<img class="h-8 w-8" src={callcomer} alt="Call" />
-							<p class="font-['Inter'] font-semibold text-white">Ligue Agora</p>
-						</a>
-					</div>
-				
+					<!-- Botão Call -->
+					<a
+						class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-green-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-green-700 lg:w-auto"
+						href={`tel:${product?.telefone}`}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img class="h-8 w-8" src={callcomer} alt="Call" />
+						<p class="font-['Inter'] font-semibold text-white">Ligue Agora</p>
+					</a>
+				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Aviso sobre o mapa -->
-	<div class="w-full h-full" >
+	<div class="h-full w-full">
 		<div class=" mb-6 rounded-lg bg-purple-800 px-4 py-2 text-center text-white shadow-md">
 			<p class="text-xl font-semibold">Veja o mapa abaixo para traçar sua rota até nós!</p>
 		</div>
-	
+
 		<!-- Container do mapa -->
-		<div class="h-[500px] w-full overflow-hidden rounded-xl shadow-2xl border border-purple-500">
+		<div class="h-[500px] w-full overflow-hidden rounded-xl border border-purple-500 shadow-2xl">
 			<iframe
 				src={product?.maps}
 				width="100%"
@@ -239,7 +239,6 @@
 				class="h-full w-full rounded-xl shadow-lg"
 			>
 			</iframe>
-		
 		</div>
 	</div>
 </main>
