@@ -1,4 +1,4 @@
-import type { DecodedTokenUser } from '$lib/interfaces/decodedTokenUser';
+import type { DecodedTokenUser, TypeErrorValidToken } from '$lib/interfaces/decodedTokenUser';
 import type { Handle } from '@sveltejs/kit';
 import { userStore } from './stores/userStore.svelte';
 
@@ -8,7 +8,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (!!token) {
 		try {
 			const decodedToken = await apiGclaVerifyToken(token);
-			if (!decodedToken) {
+
+			console.log('error' in decodedToken, decodedToken);
+
+			if ('error' in decodedToken) {
+				console.log(decodedToken.error, decodedToken.message);
 				event.locals.user = {
 					name: '',
 					email: '',
@@ -22,14 +26,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 					userId: ''
 				};
 				event.cookies.delete('authToken', { path: '/' });
+			} else {
+				console.log('autenticado ', new Date().toLocaleTimeString());
+				event.locals.user = {
+					name: decodedToken.name,
+					email: decodedToken.email,
+					photoURL: decodedToken.picture,
+					userId: decodedToken.user_id
+				};
 			}
-			console.log('autenticado');
-			event.locals.user = {
-				name: decodedToken.name,
-				email: decodedToken.email,
-				photoURL: decodedToken.picture,
-				userId: decodedToken.user_id
-			};
 		} catch {
 			event.locals.user = {
 				name: '',
@@ -60,7 +65,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	return resolve(event);
 };
 
-async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser> {
+async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser | TypeErrorValidToken> {
 	const headers = {
 		'Content-Type': 'application/json',
 		authorization: 'Bearer ' + token

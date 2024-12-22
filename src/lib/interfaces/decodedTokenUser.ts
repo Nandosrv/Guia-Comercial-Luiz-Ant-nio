@@ -36,3 +36,9 @@ export interface DecodedTokenUser {
 	};
 	uid: string;
 }
+
+export interface TypeErrorValidToken {
+	message: string;
+	error: string;
+	statusCode: number;
+}
