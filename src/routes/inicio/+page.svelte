@@ -9,6 +9,7 @@
 	import { setLastPathUrl } from '$lib/utils/cookies';
 	import PostFeed from '../../lib/componets/PostFeed.svelte';
 	import { userStore } from '../../stores/userStore.svelte';
+	import { goto } from '$app/navigation';
 
 	let isAuthenticated = false;
 
@@ -18,13 +19,12 @@
 		checkAuthState({});
 		onAuthStateChanged(auth, async (user) => {
 			if (!user) {
-				// Se não estiver autenticado, redirecione para a página de login
-				// goto('/login');
+				// 		// Se não estiver autenticado, redirecione para a página de login
+				goto('/login');
 			} else {
 				isAuthenticated = true;
 				await persistenciaUser(user as never);
-
-				// goto('/inicio');
+				goto('/inicio');
 			}
 		});
 	});
@@ -127,7 +127,4 @@
 	}
 </script>
 
-<!-- <main class="w-full h-[50px] bg-black ">
-
-</main> -->
 <PostFeed />

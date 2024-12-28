@@ -1,87 +1,101 @@
 <script>
- import Avatari from '$lib/images/icons8-avatar-50.png';
-</script>
-<main class="w-[95%] border border-purple-800 bg-black/60 p-4 max-sm:flex-col">
-	<div
-		class="w-full flex flex-col justify-start border-b border-purple-800 bg-black/60 p-4 max-sm:flex max-sm:items-center"
-	>
-		<div class="flex items-center gap-4">
-			<p class="text-2xl font-bold tracking-wider text-white">Comentários de Luís Antônio</p>
-		</div>
-    
-    <!-- card2 -->
-    
-	</div>
-  <!-- card1 -->
-  <div class="flex items-center gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] "> zulmira maria de mattos chaves</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4">
-    <p class="text-white">Luis Antônio, tem o melhor carnaval de rua do Brasil!!!! Confiram...</p>
-  </div>
-  <!-- card2 -->
-  <div class="flex items-center gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] "> Odair Pereira da Silva</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">FAS 2 ANOS QUE EU MUDEI DE POR MOTIVO DE TRABALHO MAS TENHO ORGULHO DE TER CONHECIDO ESTÁ CIDADE MARAVILHOSA GOSTÁRI DE PARABENIZAR O PREFEITO ELEITO QUE, QUE NESSEA 04 ANOS FASSA O MELHOR PARA CIDADE CRESCER MAIS AINDA.</p>
-  </div>
-  <!-- card3 -->
-  <div class="flex items-center mt-2 gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] ">margarete a sbrana de souza</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">Voce gostaia de viver em um local exuberante, vá a Luiz Antonio, ate o carnaval é muito bom, asaude é levada a serio, a educação tambem, enfim Luiz Antonio é um pedaço de São Paulo onde vc pode encontrar muita paz.</p>
-  </div>
-  <!-- card4 -->
-  <div class="flex items-center mt-2 gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] ">Bruno</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">Quando eu morava lahg era uma maravilha... agora to bem longe! mais ainda sinto saudades dos meus amigos! - Recomendo! =D</p>
-  </div>
-  <!-- Card5 -->
-  <div class="flex items-center mt-2 gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] ">Isa</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">Olha gente...não me vejo morando em outro lugar , e olha q já tentei...sou dak e dak não saiu mais...qm não conhece tenho certeza q se conhecerem tbm ficarão por ak.....assim como eu!!</p>
-  </div>
-  <!-- Card6 -->
-  <div class="flex items-center mt-2 gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] ">antonio ernesto ripamonti</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">ACHO PARTICULARMENTE, A BELA CIDADE DE LUÍZ ANTONIO A MAIS RECOMENDAVEL PARA SE DESCANÇAR E DESFRUTAR DE UM AR PURO E DE UM POVO HOSPITALEIRO E SUPER GENTIL E MUITO AMIGÁVEL. EU SOU O MAIOR INSENTIVADOR DE QUE TODOS CONHEÇAM E DESFRUTAM DA JÓIA DO INTERIOR DE SÃO PAULO. EU AMO LUÍZ ANTONIO E PARABENIZO TODOS OS QUE AÍ ME ACOLHEM. ATÉ BREVE. ABRAÇOS... TCHAU</p>
-  </div>
-  <!-- Card7 -->
-  <div class="flex items-center mt-2 gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] "> ANTONIO ERNE4STO RIPAMONTI</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">FIQUEI FELIZ EM VER AS MINHAS CONCIDERAÇÕES QUE FIZ A BELA CIDADE DE LUIZ ANTONIO QUE TANTO AMO. AI PASSEI OS MEUS MELHORES DIAS DA MINHA VIDA. MINHA FAMÍLIA MUITO CONTRIBUIU PARA SER A CIDADE + LINDA DO INTERIOR DE SÃO PAULO. MINHA VIDA COMEÇOU AÍ EM 1950 EM UMA MESA DE BILHAR NO COMÉRCIO DO MEU TIO FELÍCIO RIPAMONTI, IRMÃO DE MEU PAI. MEU VÔ ERA ITALIANO E FOI PARAR AI PARA TRABALHAR NA LAVOURA. DAÍ ONDE TUDO COMEÇOU PELOS IDOS ANOS DE 1900. TENHO UM CARINHO MUITO GRANDE POR LUIZ ANTONIO, POIS VIVI MOMENTOS MEMORÁVEIS QUE NUNCA ESQUECI, UM DELES EM PARTICULAR FOI O ÚLTIMO ADEUS A MARIA FUMAÇA DA MOGIANA EM 1961. O POVO CHOROU E EU TAMBEM. MUITAS HISTÓRIAS ACOMPANHEI AI DURANTE ANOS, MINHA FAMÍLIA SÃO: BRAYN, RIPAMONTI, RAMPAZZO E TURAZZI. JÁ NÃO VOU A LUIZ ANTONIO JÁ ALGUM TEMPO, MAS JÁ QUE AÍ NASCI, AÍ QUE MORRER. DEUS ME ESCUTE E REALIZE O MEU SONHO.</p>
-  </div>
-  <!-- Card8 -->
-  <div class="flex items-center mt-2 gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] ">antonio ernesto ripamonti</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">FIQUEI FELIZ EM VER AS MINHAS CONCIDERAÇÕES QUE FIZ A BELA CIDADE DE LUIZ ANTONIO QUE TANTO AMO. AI PASSEI OS MEUS MELHORES DIAS DA MINHA VIDA. MINHA FAMÍLIA MUITO CONTRIBUIU PARA SER A CIDADE + LINDA DO INTERIOR DE SÃO PAULO. MINHA VIDA COMEÇOU AÍ EM 1950 EM UMA MESA DE BILHAR NO COMÉRCIO DO MEU TIO FELÍCIO RIPAMONTI, IRMÃO DE MEU PAI. MEU VÔ ERA ITALIANO E FOI PARAR AI PARA TRABALHAR NA LAVOURA. DAÍ ONDE TUDO COMEÇOU PELOS IDOS ANOS DE 1900. TENHO UM CARINHO MUITO GRANDE POR LUIZ ANTONIO, POIS VIVI MOMENTOS MEMORÁVEIS QUE NUNCA ESQUECI, UM DELES EM PARTICULAR FOI O ÚLTIMO ADEUS A MARIA FUMAÇA DA MOGIANA EM 1961. O POVO CHOROU E EU TAMBEM. MUITAS HISTÓRIAS ACOMPANHEI AI DURANTE ANOS, MINHA FAMÍLIA SÃO: BRAYN, RIPAMONTI, RAMPAZZO E TURAZZI. JÁ NÃO VOU A LUIZ ANTONIO JÁ ALGUM TEMPO, MAS JÁ QUE AÍ NASCI, AÍ QUE MORRER. DEUS ME ESCUTE E REALIZE O MEU SONHO.</p>
-  </div>
-  <!-- Card9 -->
-  <div class="flex items-center mt-2 gap-4">
-    <img src="{Avatari}" alt="Avatari" class="h-10 w-10 rounded-full object-cover bg-white/50" />
-    <p class="text-white font-serif text-[17px] ">antonio ernesto ripamonti</p>
-  </div>
-  <div class="flex mt-4 gap-4 flex-col border border-purple-800 bg-black/60 p-4 rounded-lg">
-    <p class="text-white">ACHO PARTICULARMENTE, A BELA CIDADE DE LUÍZ ANTONIO A MAIS RECOMENDAVEL PARA SE DESCANÇAR E DESFRUTAR DE UM AR PURO E DE UM POVO HOSPITALEIRO E SUPER GENTIL E MUITO AMIGÁVEL. EU SOU O MAIOR INSENTIVADOR DE QUE TODOS CONHEÇAM E DESFRUTAM DA JÓIA DO INTERIOR DE SÃO PAULO. EU AMO LUÍZ ANTONIO E PARABENIZO TODOS OS QUE AÍ ME ACOLHEM. ATÉ BREVE. ABRAÇOS... TCHAU</p>
-  </div>
-</main>
+  import Avatari from '$lib/images/icons8-avatar-50.png';
+ 
+  // Sample comments data - could be moved to a separate store or prop
+  const comments = [
+     {
+         author: "Zulmira Maria de Mattos Chaves",
+         content: "Luis Antônio, tem o melhor carnaval de rua do Brasil!!!! Confiram..."
+     },
+     {
+         author: "Odair Pereira da Silva",
+         content: "Faz 2 anos que eu mudei por motivo de trabalho mas tenho orgulho de ter conhecido esta cidade maravilhosa. Gostaria de parabenizar o prefeito eleito que nesses 04 anos faça o melhor para cidade crescer mais ainda."
+     },
+     {
+         author: "Margarete A. Sbrana de Souza",
+         content: "Você gostaria de viver em um local exuberante? Vá a Luiz Antonio! Até o carnaval é muito bom, a saúde é levada a sério, a educação também. Enfim, Luiz Antonio é um pedaço de São Paulo onde você pode encontrar muita paz."
+     },
+     {
+         author: "Bruno",
+         content: "Quando eu morava lá era uma maravilha... agora estou bem longe! Mas ainda sinto saudades dos meus amigos! - Recomendo! =D"
+     },
+     {
+         author: "Isa",
+         content: "Olha gente... não me vejo morando em outro lugar, e olha que já tentei... sou daqui e daqui não saio mais... quem não conhece tenho certeza que se conhecerem também ficarão por aqui... assim como eu!!"
+     },
+     {
+         author: "Antonio Ernesto Ripamonti",
+         content: "Acho particularmente a bela cidade de Luíz Antonio a mais recomendável para se descansar e desfrutar de um ar puro e de um povo hospitaleiro e super gentil e muito amigável. Eu sou o maior incentivador de que todos conheçam e desfrutem da jóia do interior de São Paulo. Eu amo Luíz Antonio e parabenizo todos os que aí me acolhem."
+     }
+  ];
+ </script>
+ 
+ <section class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6">
+     <header class="border-b border-gray-200 pb-6 mb-6">
+         <h2 class="text-2xl font-bold text-gray-800">
+             Comentários sobre Luís Antônio
+         </h2>
+         <p class="text-gray-600 mt-2">
+             Descubra o que as pessoas dizem sobre nossa cidade
+         </p>
+     </header>
+ 
+     <div class="space-y-6">
+         {#each comments as comment}
+             <article class="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition">
+                 <div class="flex items-start gap-4">
+                     <img 
+                         src={Avatari} 
+                         alt="Avatar" 
+                         class="w-12 h-12 rounded-full bg-white p-1 shadow-sm"
+                     />
+                     <div class="flex-1">
+                         <h3 class="font-semibold text-gray-800">
+                             {comment.author}
+                         </h3>
+                         <p class="mt-2 text-gray-600 leading-relaxed">
+                             {comment.content}
+                         </p>
+                     </div>
+                 </div>
+             </article>
+         {/each}
+     </div>
+ 
+     <!-- Add Comment Form -->
+     <!-- <div class="mt-8 pt-6 border-t border-gray-200">
+         <h3 class="text-lg font-semibold text-gray-800 mb-4">
+             Deixe seu comentário
+         </h3>
+         <form class="space-y-4">
+             <div>
+                 <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                     Nome
+                 </label>
+                 <input 
+                     type="text" 
+                     id="name"
+                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                     placeholder="Seu nome"
+                 />
+             </div>
+             <div>
+                 <label for="comment" class="block text-sm font-medium text-gray-700 mb-1">
+                     Comentário
+                 </label>
+                 <textarea 
+                     id="comment"
+                     rows="4"
+                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                     placeholder="Compartilhe sua experiência..."
+                 ></textarea>
+             </div>
+             <button 
+                 type="submit"
+                 class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition"
+             >
+                 Enviar comentário
+             </button>
+         </form>
+     </div> -->
+ </section>
