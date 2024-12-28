@@ -3,7 +3,7 @@
 	import { fade } from 'svelte/transition'; // Animação de fade
 	import supabase from '../../lib/supabaseClient'; // Supabase client para interações com o banco de dados
 	import iconws from '$lib/images/icon-ws.png'; // Ícone para WhatsApp
-    import whats from '$lib/images/whatsappa.png'; // Ícone padrão
+	import whats from '$lib/images/whatsappa.png'; // Ícone padrão
 	import icon from '$lib/images/icons8.png'; // Ícone padrão
 	import { userStore } from '../../stores/userStore.svelte'; // Store para usuário
 	import AdCard from '$lib/componets/AdCard.svelte'; // Componente de card de anúncio
@@ -168,30 +168,29 @@
 	};
 
 	// Função para compartilhar o anúncio
-    const shareAd = (ad: { title: string; description: string }) => {
-    // Verifica se o navegador suporta a API de compartilhamento
-    if (navigator.share) {
-        // Tenta compartilhar
-        navigator
-            .share({
-                title: ad.title,
-                text: ad.description,
-                url: window.location.href // Pode ser substituído por um URL específico se necessário
-            })
-            .then(() => {
-                console.log('Compartilhado com sucesso');
-                alert('O anúncio foi compartilhado com sucesso!');
-            })
-            .catch((error) => {
-                console.log('Erro ao compartilhar', error);
-                alert('Ocorreu um erro ao tentar compartilhar o anúncio.');
-            });
-    } else {
-        // Caso a API de compartilhamento não esteja disponível, exibe uma mensagem alternativa
-        alert(`Compartilhe este anúncio: ${ad.title} - ${ad.description}`);
-    }
-};
-
+	const shareAd = (ad: { title: string; description: string }) => {
+		// Verifica se o navegador suporta a API de compartilhamento
+		if (navigator.share) {
+			// Tenta compartilhar
+			navigator
+				.share({
+					title: ad.title,
+					text: ad.description,
+					url: window.location.href // Pode ser substituído por um URL específico se necessário
+				})
+				.then(() => {
+					console.log('Compartilhado com sucesso');
+					alert('O anúncio foi compartilhado com sucesso!');
+				})
+				.catch((error) => {
+					console.log('Erro ao compartilhar', error);
+					alert('Ocorreu um erro ao tentar compartilhar o anúncio.');
+				});
+		} else {
+			// Caso a API de compartilhamento não esteja disponível, exibe uma mensagem alternativa
+			alert(`Compartilhe este anúncio: ${ad.title} - ${ad.description}`);
+		}
+	};
 
 	// Função para alternar o modo escuro
 	// const toggleDarkMode = () => {
@@ -234,7 +233,8 @@
 	// Função chamada quando o componente é montado
 	onMount(() => {
 		fetchFeaturedAds(); // Busca os anúncios destacados ao montar o componente
-	});console.log('Adicionando anúncio:', formData);
+	});
+	// console.log('Adicionando anúncio:', formData);
 </script>
 
 <main
@@ -261,7 +261,7 @@
 	</div>
 
 	<!-- Destaques da Semana -->
-     <!-- Anuncio Pago Premio -->
+	<!-- Anuncio Pago Premio -->
 	<div class="mb-8">
 		<h2 class="mb-4 font-['Inter'] text-2xl font-bold text-black dark:text-white">
 			Destaques da Semana
@@ -269,7 +269,8 @@
 		<div>
 			<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 				{#each filteredAds.filter((ad) => ad.selectedPlan === 'premium') as ad (ad.id)}
-					<div class="overflow-hidden rounded-lg border border-secondary-foreground bg-white shadow-lg dark:border-secondary-foreground dark:bg-gray-800"
+					<div
+						class="overflow-hidden rounded-lg border border-secondary-foreground bg-white shadow-lg dark:border-secondary-foreground dark:bg-gray-800"
 						transition:fade
 					>
 						<img
@@ -285,45 +286,48 @@
 								<span class="mr-1 text-yellow-400">⭐⭐⭐⭐</span>
 								<span>{ad.rating && !isNaN(ad.rating) ? ad.rating.toFixed(1) : '4.7'}</span>
 							</div>
-							<div class="mt-4 flex flex-col p-4 gap-4 w-full bg-secondary-foreground dark:bg-secondary rounded-lg shadow-md">
-                            <!-- Flex-col  -->
-                                
-                                <button
-                                    on:click={() => shareAd(ad)}
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-md"
-                                >
-                                    Compartilhar
-                                </button>
-                                <button class="bg-secondary dark:bg-secondary-foreground text-gray-700 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-md">
-                                    <a class="text-gray-700 hover:text-gray-900" href={`tel:${ad.phoneNumber}`}>
-                                        Ligar
-                                    </a>
-                                </button>
-                            
-                                <button class="bg-green-500 hover:bg-green-600 justify-center items-center text-white font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-md">
-                                    <a
-                                        class="text-white hover:text-white"
-                                        href={`https://wa.me/${ad.whatsapp}?text=${'Olá, estou interessado no anúncio!'}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        WhatsApp
-                                    </a>
-                                </button>
-                                <!-- Saiba Mais -->
-                                <button>
-                                    <a href={`/anuncio/${ad.id}`} target="_blank" rel="noopener noreferrer">
-                                      <p class="bg-secondary dark:bg-secondary-foreground text-gray-700 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-md">
-                                        Visitar Anuncio
-                                      </p>
-                                    </a>
-                                  </button>
-                                  
-                                  
-                                  
-                                  
-                            </div>
-                            
+							<div
+								class="mt-4 flex w-full flex-col gap-4 rounded-lg bg-secondary-foreground p-4 shadow-md dark:bg-secondary"
+							>
+								<!-- Flex-col  -->
+
+								<button
+									on:click={() => shareAd(ad)}
+									class="transform rounded-lg bg-blue-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-blue-600"
+								>
+									Compartilhar
+								</button>
+								<button
+									class="transform rounded-lg bg-secondary px-6 py-2 font-semibold text-gray-700 shadow-md transition duration-300 hover:scale-105 dark:bg-secondary-foreground"
+								>
+									<a class="text-gray-700 hover:text-gray-900" href={`tel:${ad.phoneNumber}`}>
+										Ligar
+									</a>
+								</button>
+
+								<button
+									class="transform items-center justify-center rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600"
+								>
+									<a
+										class="text-white hover:text-white"
+										href={`https://wa.me/${ad.whatsapp}?text=${'Olá, estou interessado no anúncio!'}`}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										WhatsApp
+									</a>
+								</button>
+								<!-- Saiba Mais -->
+								<button>
+									<a href={`/anuncio/${ad.id}`} target="_blank" rel="noopener noreferrer">
+										<p
+											class="transform rounded-lg bg-secondary px-6 py-2 font-semibold text-gray-700 shadow-md transition duration-300 hover:scale-105 dark:bg-secondary-foreground"
+										>
+											Visitar Anuncio
+										</p>
+									</a>
+								</button>
+							</div>
 						</div>
 					</div>
 				{/each}
@@ -332,26 +336,32 @@
 	</div>
 
 	<!-- Filtro por Categoria -->
-    <div class="flex justify-between items-center mb-8">
-        <h2 class="text-2xl sm:text-3xl font-bold bg-gradient-to-r text-black dark:text-white bg-clip-text">Todos os Anúncios</h2>
-        <div class="relative">
-          <select
-            bind:value={filterCategory}
-            class="appearance-none bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md py-2 pl-3 pr-10 text-gray-700 dark:text-gray-300 leading-tight focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent"
-          >
-            <option value="all">Todas Categorias</option>
-            {#each categories as category}
-              <option value={category}>{category}</option>
-            {/each}
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-      
+	<div class="mb-8 flex items-center justify-between">
+		<h2
+			class="bg-gradient-to-r bg-clip-text text-2xl font-bold text-black dark:text-white sm:text-3xl"
+		>
+			Todos os Anúncios
+		</h2>
+		<div class="relative">
+			<select
+				bind:value={filterCategory}
+				class="appearance-none rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 leading-tight text-gray-700 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+			>
+				<option value="all">Todas Categorias</option>
+				{#each categories as category}
+					<option value={category}>{category}</option>
+				{/each}
+			</select>
+			<div
+				class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300"
+			>
+				<svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+					<path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+				</svg>
+			</div>
+		</div>
+	</div>
+
 	<!-- Anuncios normais Free -->
 	<p
 		class="font-['Inter'] text-2xl font-bold text-secondary-foreground dark:text-secondary-foreground"
@@ -362,11 +372,11 @@
 	<section class="grid grid-cols-1 gap-6 md:grid-cols-3">
 		{#each filteredAds as ad (ad.id)}
 			<div
-				class="bg-white  rounded-2xl shadow-lg overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl dark:border-secondary-foreground dark:bg-gray-800"
+				class="transform overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-secondary-foreground dark:bg-gray-800"
 				transition:fade
 			>
 				<img class="h-[200px] w-full object-cover" src={`${ad.image}`} alt="Descrição da imagem" />
-                <!-- <div class="absolute top-0 left-0 bg-red-600 text-white px-4 py-2 rounded-br-lg font-bold text-xl">
+				<!-- <div class="absolute top-0 left-0 bg-red-600 text-white px-4 py-2 rounded-br-lg font-bold text-xl">
                     -{ad.desconto}%
                 </div> -->
 				<div class="p-6">
@@ -377,18 +387,18 @@
 						<span class="mr-1 text-yellow-400">⭐⭐⭐⭐</span>
 						<span>{ad.rating && !isNaN(ad.rating) ? ad.rating.toFixed(1) : '4.7'}</span>
 					</div>
-                    <!-- Compartilhar -->
+					<!-- Compartilhar -->
 					<div class="mt-4 flex items-center justify-between">
 						<button on:click={() => shareAd(ad)} class="text-primary-500 hover:text-primary-700"
 							>Compartilhar</button
 						>
-                        <!-- Telefone -->
+						<!-- Telefone -->
 						<button>
-							<a class="text-primary-500 hover:text-primary-700 " href={`tel:${ad.phoneNumber}`}>
+							<a class="text-primary-500 hover:text-primary-700" href={`tel:${ad.phoneNumber}`}>
 								Ligar
 							</a>
 						</button>
-                        <!-- WhatsApp -->
+						<!-- WhatsApp -->
 						<button>
 							<a
 								class="text-primary-500 hover:text-primary-700"
@@ -456,7 +466,7 @@
 						id="whatsapp"
 						type="text"
 						bind:value={formData.whatsapp}
-						class="mb-4 w-full rounded-md border  border-gray-300 p-2 text-sm dark:text-secondary"
+						class="mb-4 w-full rounded-md border border-gray-300 p-2 text-sm dark:text-secondary"
 						placeholder="Número do WhatsApp"
 					/>
 
