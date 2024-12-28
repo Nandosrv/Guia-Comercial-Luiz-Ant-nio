@@ -37,8 +37,6 @@
 	import Cardfolheto from '$lib/componets/Cardfolheto.svelte';
 	// Mercados Fernandes
 
-
-
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);
 	});
@@ -224,7 +222,7 @@
 		<div
 			class="max-sm:w-[92%] flex h-[100px] w-full flex-col items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 md:w-[53%]"
 		>
-			<h1  id="art-destaques" class="flex text-2xl font-bold tracking-wider text-white md:text-4xl">
+			<h1 id="art-destaques" class="flex text-2xl font-bold tracking-wider text-white md:text-4xl">
 				Destaques Da Semana
 			</h1>
 			<p>⭐⭐⭐⭐⭐</p>
@@ -280,38 +278,45 @@
 <main class="w-full items-center justify-center">
 	<ScrollTo />
 
-	
 	<!-- Nav artigo -->
-	<div class="w-full h-[60px] flex items-center justify-center  backdrop-blur-sm">
-		<nav class="flex gap-8">
-		  <a href="#art-comercios" 
-			 class="text-white text-sm font-medium tracking-wide
-					hover:text-blue-400 transition-colors duration-300
-					relative
-					">
-			Comercios
-		  </a>
-		  <a href="#art-folhetos"
-			 class="text-white text-sm font-medium tracking-wide
-					hover:text-blue-400 transition-colors duration-300
-					relative 
-					">
-			Folhetos
-		  </a>
-		  <a href="#art-destaque"
-			 class="text-white text-sm font-medium tracking-wide
-					hover:text-blue-400 transition-colors duration-300
-					relative">
-			Destaques
-		  </a>
-		  <a href="#art-somos"
-			 class="text-white text-sm font-medium tracking-wide
-					hover:text-blue-400 transition-colors duration-300
-					relative">
-			Quem Somos
-		  </a>
+	<div class="flex w-full items-center justify-center bg-secondary-foreground bg-opacity-40">
+		<nav class="flex w-full flex-wrap items-center justify-evenly md:gap-4">
+			<a
+				href="#art-comercios"
+				class="relative p-2 text-sm font-medium tracking-wide
+					text-white transition-colors duration-300
+					hover:text-blue-400
+					"
+			>
+				Comércios
+			</a>
+			<a
+				href="#art-folhetos"
+				class="relative p-2 text-sm font-medium tracking-wide
+					text-white transition-colors duration-300
+					hover:text-blue-400
+					"
+			>
+				Folhetos
+			</a>
+			<a
+				href="#art-destaque"
+				class="relative p-2 text-sm font-medium tracking-wide
+					text-white transition-colors duration-300
+					hover:text-blue-400"
+			>
+				Destaques
+			</a>
+			<a
+				href="#art-somos"
+				class="relative p-2 text-sm font-medium tracking-wide
+					text-white transition-colors duration-300
+					hover:text-blue-400"
+			>
+				Sobre
+			</a>
 		</nav>
-	  </div>
+	</div>
 	<!-- Div slides do Anuncio   -->
 	<div
 		class="flex h-[50px] items-center overflow-hidden bg-white text-black dark:bg-secondary dark:text-white"
@@ -356,7 +361,7 @@
 				</p>
 
 				<button
-					class="inline-block transform rounded-full p-4 bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
+					class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 p-4 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
 				>
 					<a href="/Anuncios-Promocao" target="_blank" rel="noopener noreferrer">
 						<p class=" font-semibold hover:text-secondary dark:hover:text-secondary">
@@ -387,7 +392,10 @@
 			</div>
 		</div>
 		<!-- Cards -->
-		<div id="art-comercios" class="flex w-full flex-wrap justify-center gap-4 lg:flex-wrap lg:gap-8">
+		<div
+			id="art-comercios"
+			class="flex w-full flex-wrap justify-center gap-4 lg:flex-wrap lg:gap-8"
+		>
 			<!-- Card 1 -->
 			<div class=" flex h-[400px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
 				<div class="flex h-[170px] w-full flex-col items-center justify-center">
@@ -473,10 +481,10 @@
 			</div>
 			<!-- Card todos cards-->
 			<div
-				class=" flex h-[100px] w-full items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800 "
+				class=" flex h-[100px] w-full items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800"
 			>
 				<button
-					class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400 "
+					class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
 				>
 					<a href="/comercios" target="_blank" rel="noopener noreferrer">
 						<p class=" font-semibold hover:text-secondary dark:hover:text-secondary">
@@ -526,7 +534,7 @@
 			</div>
 		</div>
 	</div>
-<!-- Cards de anúncios Premio -->
+	<!-- Cards de anúncios Premio -->
 	<div id="art-destaque" class="rounded-md bg-secondary p-2 text-center dark:bg-secondary">
 		<p class="font-semibold text-yellow-700">⭐ Anúncio em Destaque</p>
 		<div>
@@ -534,22 +542,23 @@
 		</div>
 	</div>
 	<!-- Folhetos -->
-	<div id="art-folhetos" class="flex items-center border justify-center w-full p-4 bg-secondary-foreground dark:bg-secondary-foreground shadow-md">
-		<h2 class="text-xl font-semibold text-white dark:text-secondary ">Folhetos dos Mercados</h2>
+	<div
+		id="art-folhetos"
+		class="flex w-full items-center justify-center border bg-secondary-foreground p-4 shadow-md dark:bg-secondary-foreground"
+	>
+		<h2 class="text-xl font-semibold text-white dark:text-secondary">Folhetos dos Mercados</h2>
 		<!-- <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
 			Ver Mais
 		</button> -->
-		
 	</div>
-	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 bg-secondary w-full ">
-  
+	<div class="grid w-full grid-cols-1 gap-6 bg-secondary p-4 sm:grid-cols-2 lg:grid-cols-4">
 		<Cardfolheto />
-
-
-
-    </div>
+	</div>
 	<!-- Quem Somos -->
-	<div id="art-somos" class="flex h-[500px] w-full flex-col items-center justify-center bg-secondary-foreground dark:bg-secondary-foreground">
+	<div
+		id="art-somos"
+		class="flex w-full flex-col items-center justify-center bg-secondary-foreground dark:bg-secondary-foreground"
+	>
 		<div
 			class="flex w-full flex-col items-center justify-center bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 dark:from-secondary dark:to-secondary-foreground lg:flex-row"
 		>
@@ -561,7 +570,9 @@
 					<h2 class="mb-4 text-2xl font-extrabold tracking-wide text-white md:mb-6 md:text-4xl">
 						Quem Somos
 					</h2>
-					<p class="mb-6 text-sm leading-relaxed text-white dark:text-white md:text-base lg:text-lg">
+					<p
+						class="mb-6 text-sm leading-relaxed text-white dark:text-white md:text-base lg:text-lg"
+					>
 						Somos uma empresa dedicada a conectar pessoas e negócios, oferecendo soluções práticas e
 						inovadoras. Nosso compromisso é criar uma experiência única, que valoriza cada cliente e
 						parceiro. Acreditamos no poder da colaboração e da tecnologia para transformar ideias em
@@ -589,9 +600,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="w-full border">
-
-	</div>
+	<div class="w-full border"></div>
 </main>
 
 <style>
