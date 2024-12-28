@@ -82,7 +82,7 @@
 			};
 
 			const { data, error } = await supabase.from('postss').insert([newPost]);
-			console.log('Postagem criada:', data);
+			// console.log('Postagem criada:', data);
 			if (error) {
 				console.error('Erro ao criar a postagem:', error);
 			} else {
