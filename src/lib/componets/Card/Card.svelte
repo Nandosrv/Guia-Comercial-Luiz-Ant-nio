@@ -64,7 +64,7 @@
 
 <!-- Novo layout Card-->
 <main
-	class="flex w-full flex-col items-center bg-gradient-to-br from-purple-900 to-purple-950 shadow-lg lg:h-full"
+	class="flex w-full flex-col items-center bg-secondary shadow-lg lg:h-full"
 >
 	<section class="flex w-[95%] flex-col items-center py-8 lg:h-full lg:w-[100%] lg:flex-row">
 		<!-- Divisao de controle -->
@@ -81,7 +81,7 @@
 					onclick={openImageModal}
 				/>
 				<div
-					class="absolute top-40 z-10 flex h-[100px] w-[100px] items-center justify-center rounded-full border border-purple-500 bg-white"
+					class="absolute top-40 z-10 flex h-[100px] w-[100px] items-center justify-center rounded-full border border-secondary bg-white"
 				>
 					<!-- svelte-ignore a11y_click_events_have_key_events -->
 					<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
@@ -106,7 +106,7 @@
 					</p>
 					<button
 						onclick={openModal}
-						class="mt-4 rounded-lg bg-purple-700 px-6 py-2 text-white shadow-md transition hover:scale-105 hover:bg-purple-800"
+						class="mt-4 rounded-lg bg-secondary px-6 py-2 text-black shadow-md transition hover:scale-105 hover:bg-purple-800"
 					>
 						Saiba Mais
 					</button>
@@ -165,7 +165,7 @@
 					<!-- Botão WhatsApp -->
 					<!-- opacity-90 -->
 					<a
-						class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-purple-700 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-purple-800 lg:w-auto"
+						class="mb-4 flex w-full transform items-center justify-center gap-3 rounded-lg bg-green-500 hover:bg-green-600 p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105  lg:w-auto"
 						href={`https://wa.me/${product?.whatsapp}?text=${encodeURIComponent('Eu cheguei até aqui através do site encontreluizantonio.com.br')}`}
 						target="_blank"
 						rel="noopener noreferrer"

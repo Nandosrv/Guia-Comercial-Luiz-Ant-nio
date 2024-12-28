@@ -232,7 +232,7 @@
 			bind:value={searchQuery}
 			on:input={filterComercios}
 			on:focus={() => (isDropdownOpen = true)}
-			class="h-[30px] rounded-[12px] border border-gray-300 bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 sm:w-[350px] dark:border-blue-600 dark:bg-yellow-400 dark:text-blue-500 dark:focus:border-blue-500"
+			class="h-[30px] rounded-[12px] border border-gray-300 bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 sm:w-[350px] dark:border-blue-600 dark:bg-secondary dark:text-white dark:focus:border-blue-500"
 			placeholder="Busca Rápida"
 		/>
 	</div>

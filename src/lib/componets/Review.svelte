@@ -1,6 +1,6 @@
-<!-- <script lang="ts">
+<script lang="ts">
     import { onMount } from 'svelte';
-    import { supabase } from '../../supabaseConfig';
+    import  supabase  from '../../lib/supabaseClient';
   
     type Review = {
       id: number;
@@ -181,4 +181,4 @@
       margin: 0.5rem 0;
     }
   </style>
-   -->
+  
