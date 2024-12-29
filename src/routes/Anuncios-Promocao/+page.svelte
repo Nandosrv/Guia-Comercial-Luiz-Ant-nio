@@ -19,7 +19,8 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                 "Descrição Simples"
 
             ],
-            buttonText: "Começar Agora"
+            buttonText: "Começar Agora",
+            link: "/Anuncios-Promocao/planos/plano/basico"
         },
         {
             name: "Plano Premium",
@@ -34,7 +35,9 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                 "Anuncio personalizado",
                 "Contato direto com o programador"
             ],
-            buttonText: "Assinar Premium"
+            buttonText: "Assinar Premium",
+            link: "/Anuncios-Promocao/planos/plano/premium"
+
         },
         {
             name: "Plano Empresarial",
@@ -52,7 +55,9 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                 "Contato direto com o programador"
 
             ],
-            buttonText: "Contratar Agora"
+            buttonText: "Contratar Agora",
+            link: "/Anuncios-Promocao/planos/plano/empresarial"
+
         }
     ];
 
@@ -219,7 +224,11 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
     //     };
     // }
 </script>
-
+<!-- <button class="bg-red-800 w-full h-full">
+	<a href="/Anuncios-Promocao/premium">
+		test
+	</a> -->
+<!-- </button> -->
 <div class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
     <ScrollTo />
     <!-- Hero Section -->
@@ -272,11 +281,20 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                             </ul>
                         </div>
 
-                        <button 
+                        <!-- <button 
                             on:click={() => handleContact(plan.name)}
                             class="mt-8 block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3 px-4 text-center transition-colors">
                             {plan.buttonText}
-                        </button>
+                        </button> -->
+                        
+                        <button 
+                        
+                        class="mt-8 block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3 px-4 text-center transition-colors">
+                        <a href="{plan.link}">
+                            {plan.buttonText}
+                        </a>
+                    </button>
+                        
                     </div>
                 {/each}
             </div>

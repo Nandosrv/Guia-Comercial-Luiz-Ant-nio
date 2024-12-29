@@ -376,7 +376,8 @@
 	<section
 		class="flex w-full flex-col border-t-2 bg-white dark:border-secondary-foreground dark:bg-secondary"
 	>
-		<div class="ga flex h-[110px] w-full flex-col items-center justify-center lg:h-[70px]">
+	<!-- Darkmod  Div Apresentação -->
+		<div class="flex h-[110px] w-full flex-col items-center justify-center lg:h-[70px]">
 			<div
 				class=" flex h-[50px] w-full items-center justify-around bg-secondary dark:bg-secondary lg:h-[70px]"
 			>
@@ -392,9 +393,7 @@
 			</div>
 		</div>
 		<!-- Cards -->
-		<div
-			id="art-comercios"
-			class="flex w-full flex-wrap justify-center gap-4 lg:flex-wrap lg:gap-8"
+		<div id="art-comercios" class="flex bg-secondary dark:bg-secondary w-full flex-wrap justify-center gap-4 lg:flex-wrap lg:gap-8"
 		>
 			<!-- Card 1 -->
 			<div class=" flex h-[400px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
@@ -408,7 +407,7 @@
 				<div
 					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
-					<p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
+					<p class="mb-4 text-center text-2xl xl:text-xl font-bold text-gray-700 dark:text-white">
 						OdontoCompany Luiz Antônio-SP
 					</p>
 					<button
@@ -438,7 +437,7 @@
 				<div
 					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
-					<p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
+					<p class="mb-4 text-center text-2xl xl:text-md font-bold text-gray-700 dark:text-white">
 						Gelindo Uber
 					</p>
 					<button
@@ -467,7 +466,7 @@
 				<div
 					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
-					<p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
+					<p class="mb-4 text-center text-2xl xl:text-md font-bold text-gray-700 dark:text-white">
 						Hotel Vero Verde
 					</p>
 					<button
@@ -487,7 +486,7 @@
 					class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
 				>
 					<a href="/comercios" target="_blank" rel="noopener noreferrer">
-						<p class=" font-semibold hover:text-secondary dark:hover:text-secondary">
+						<p class=" font-semibold xl:text-md hover:text-secondary dark:hover:text-secondary">
 							Ver todos os comércios
 						</p>
 					</a>
@@ -496,7 +495,7 @@
 		</div>
 	</section>
 	<!-- Card do video -->
-	<div class="flex h-[310px] w-full flex-col justify-center overflow-hidden shadow-lg lg:flex-row">
+	<div class="flex w-full flex-col justify-center overflow-hidden shadow-lg lg:flex-row">
 		<div
 			class="flex h-[200px] w-full items-center justify-center bg-secondary shadow-lg dark:bg-secondary sm:h-[400px] lg:h-[300px] lg:w-[50%]"
 		>
@@ -512,7 +511,7 @@
 						autoplay
 						loop
 						muted
-						class="h-full w-full object-cover sm:w-full md:w-full lg:w-full xl:w-full"
+						class="h-full w-full auto autoplay muted controls object-cover sm:w-full md:w-full lg:w-full xl:w-full"
 					>
 					</video>
 				</a>
