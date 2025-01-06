@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Quemsomos from './../lib/componets/quemsomos.svelte';
+	import Carrossel from './../lib/componets/carrossel.svelte';
 	import Darkmod from './../lib/componets/Darkmod.svelte';
 	import Anuncio from './../lib/componets/anuncio.svelte';
 	import Call from './../lib/componets/call.svelte';
@@ -23,10 +25,12 @@
 	import Hotel from '$lib/images/Hotel-Vero-Verde.png';
 	import paginasite from '$lib/images/paginasite1.png';
 	import Dell from '$lib/images/dall.webp';
+	import banerinfo from '$lib/images/banerinfo.png';
+	
 
 	import fotohometre from '$lib/images/fotohometre.png';
 	// video
-	import Reds from '$lib/images/reds.mp4';
+	import Reds from '$lib/images/redsgit.gif';
 	import CardsPremio from '$lib/componets/CardsPremio.svelte';
 	import dall from '$lib/images/dall.webp';
 	import ScrollTo from '$lib/componets/scrollTo.svelte';
@@ -36,6 +40,12 @@
 	import fernandes from '$lib/images/z.jpeg';
 	import Cardfolheto from '$lib/componets/Cardfolheto.svelte';
 	// Mercados Fernandes
+
+	// Banner
+	import bannerseguro from '$lib/images/Bannerseguro.png';
+
+	// iconnav
+	import icons10 from '$lib/images/icons8-shop-50.png';
 
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);
@@ -282,36 +292,27 @@
 	<div class="flex w-full items-center justify-center bg-secondary-foreground bg-opacity-40">
 		<nav class="flex w-full flex-wrap items-center justify-evenly md:gap-4">
 			<a
-				href="#art-comercios"
-				class="relative p-2 text-sm font-medium tracking-wide
-					text-white transition-colors duration-300
-					hover:text-blue-400
-					"
-			>
-				Comércios
-			</a>
-			<a
 				href="#art-folhetos"
-				class="relative p-2 text-sm font-medium tracking-wide
+				class="relative p-2 font-['Inter'] text-sm font-medium tracking-wide
 					text-white transition-colors duration-300
-					hover:text-blue-400
+					hover:text-blue-400 dark:text-secondary
 					"
 			>
 				Folhetos
 			</a>
 			<a
 				href="#art-destaque"
-				class="relative p-2 text-sm font-medium tracking-wide
+				class=" relative p-2 font-['Inter'] text-sm font-medium tracking-wide
 					text-white transition-colors duration-300
-					hover:text-blue-400"
+					hover:text-blue-400 dark:text-secondary"
 			>
 				Destaques
 			</a>
 			<a
 				href="#art-somos"
-				class="relative p-2 text-sm font-medium tracking-wide
+				class=" relative p-2 font-['Inter'] text-sm font-medium tracking-wide
 					text-white transition-colors duration-300
-					hover:text-blue-400"
+					hover:text-blue-400 dark:text-secondary"
 			>
 				Sobre
 			</a>
@@ -376,38 +377,46 @@
 	<section
 		class="flex w-full flex-col border-t-2 bg-white dark:border-secondary-foreground dark:bg-secondary"
 	>
-	<!-- Darkmod  Div Apresentação -->
-		<div class="flex h-[110px] w-full flex-col items-center justify-center lg:h-[70px]">
+		<!-- Darkmod  Div Apresentação -->
+		<div class="flex w-full flex-col items-center justify-center lg:h-[70px]">
 			<div
-				class=" flex h-[50px] w-full items-center justify-around bg-secondary dark:bg-secondary lg:h-[70px]"
+				class=" flex w-full flex-col items-center justify-between bg-secondary px-4 dark:bg-secondary sm:flex-row lg:h-[70px]"
 			>
-				<p class="text-center font-bold text-black dark:text-secondary-foreground lg:text-3xl">
+				<p
+					class="text-center text-lg font-bold text-black dark:text-secondary-foreground lg:text-3xl"
+				>
 					Aqui você encontra o número de qualquer comércio que procura.
 				</p>
 				<Darkmod />
 			</div>
-			<div class="">
-				<!-- <h1 class="text-center text-3xl font-bold text-gray-800 dark:text-white">
-					Aqui você encontra o número de qualquer comércio que procura.
-				</h1> -->
-			</div>
 		</div>
 		<!-- Cards -->
-		<div id="art-comercios" class="flex bg-secondary dark:bg-secondary w-full flex-wrap justify-center gap-4 lg:flex-wrap lg:gap-8"
+		<div
+			id="art-comercios"
+			class="flex w-full flex-wrap justify-center gap-4 bg-secondary dark:bg-secondary lg:flex-wrap lg:gap-8"
 		>
 			<!-- Card 1 -->
-			<div class=" flex h-[400px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
+			<div class=" flex w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
 				<div class="flex h-[170px] w-full flex-col items-center justify-center">
+					<a
+						href="https://encontreluizantonio.com.br/comercios/OdontoCompany"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="block h-full w-full"
+					>
+
 					<img
 						src={ondontolo}
 						alt="OdontoCompany Luiz Antônio-SP"
 						class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
 					/>
+					</a>
+					
 				</div>
 				<div
 					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
-					<p class="mb-4 text-center text-2xl xl:text-xl font-bold text-gray-700 dark:text-white">
+					<p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white xl:text-xl">
 						OdontoCompany Luiz Antônio-SP
 					</p>
 					<button
@@ -428,16 +437,23 @@
 			<!-- Card 2 -->
 			<div class=" flex h-[400px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
 				<div class="flex h-[170px] w-full flex-col items-center justify-center">
-					<img
-						src={gelindo}
-						alt="OdontoCompany Luiz Antônio-SP"
-						class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
-					/>
+					<a
+						href="https://encontreluizantonio.com.br/comercios/Gelindo-Uber"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="block h-full w-full"
+					>
+						<img
+							src={gelindo}
+							alt="OdontoCompany Luiz Antônio-SP"
+							class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
+						/>
+					</a>
 				</div>
 				<div
 					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
-					<p class="mb-4 text-center text-2xl xl:text-md font-bold text-gray-700 dark:text-white">
+					<p class="xl:text-md mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
 						Gelindo Uber
 					</p>
 					<button
@@ -456,17 +472,25 @@
 			</div>
 			<!-- Card 3 -->
 			<div class=" flex h-[400px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
-				<div class="flex h-[170px] w-full flex-col items-center justify-center">
-					<img
-						src={Hotel}
-						alt="OdontoCompany Luiz Antônio-SP"
-						class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
-					/>
+				<div class="relative h-[170px] w-full overflow-hidden rounded-t-xl">
+					<a
+						href="https://encontreluizantonio.com.br/comercios/Hotel-Vero-Verde"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="block h-full w-full"
+					>
+						<img
+							src={Hotel}
+							alt="OdontoCompany Luiz Antônio-SP"
+							class="h-full w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+						/>
+					</a>
 				</div>
+
 				<div
 					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
-					<p class="mb-4 text-center text-2xl xl:text-md font-bold text-gray-700 dark:text-white">
+					<p class="xl:text-md mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
 						Hotel Vero Verde
 					</p>
 					<button
@@ -486,7 +510,7 @@
 					class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
 				>
 					<a href="/comercios" target="_blank" rel="noopener noreferrer">
-						<p class=" font-semibold xl:text-md hover:text-secondary dark:hover:text-secondary">
+						<p class=" xl:text-md font-semibold hover:text-secondary dark:hover:text-secondary">
 							Ver todos os comércios
 						</p>
 					</a>
@@ -500,21 +524,7 @@
 			class="flex h-[200px] w-full items-center justify-center bg-secondary shadow-lg dark:bg-secondary sm:h-[400px] lg:h-[300px] lg:w-[50%]"
 		>
 			<div class="flex w-full">
-				<a
-					href="https://encontreluizantonio.com.br/"
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label="Página inicial"
-				>
-					<video
-						src={Reds}
-						autoplay
-						loop
-						muted
-						class="h-full w-full auto autoplay muted controls object-cover sm:w-full md:w-full lg:w-full xl:w-full"
-					>
-					</video>
-				</a>
+				<img src="{Reds}" alt="Reds" class="h-full w-full object-cover" />
 			</div>
 			<!-- <p class="text-center text-3xl font-semibold text-secondary-foreground px-6 py-3 border-b-2  shadow-xl mb-4 hover:border-b-blue-400">
 			  Tá querendo aparecer? Anuncia aqui e destaque-se em Luiz Antônio-SP
@@ -553,58 +563,24 @@
 	<div class="grid w-full grid-cols-1 gap-6 bg-secondary p-4 sm:grid-cols-2 lg:grid-cols-4">
 		<Cardfolheto />
 	</div>
-	<!-- Quem Somos -->
+
 	<div
-		id="art-somos"
 		class="flex w-full flex-col items-center justify-center bg-secondary-foreground dark:bg-secondary-foreground"
 	>
-		<div
-			class="flex w-full flex-col items-center justify-center bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 dark:from-secondary dark:to-secondary-foreground lg:flex-row"
-		>
-			<!-- Seção de texto -->
-			<div
-				class="flex h-auto w-full items-center justify-center p-6 lg:h-[500px] lg:w-[50%] lg:p-8"
-			>
-				<div class="max-w-lg text-center lg:text-left">
-					<h2 class="mb-4 text-2xl font-extrabold tracking-wide text-white md:mb-6 md:text-4xl">
-						Quem Somos
-					</h2>
-					<p
-						class="mb-6 text-sm leading-relaxed text-white dark:text-white md:text-base lg:text-lg"
-					>
-						Somos uma empresa dedicada a conectar pessoas e negócios, oferecendo soluções práticas e
-						inovadoras. Nosso compromisso é criar uma experiência única, que valoriza cada cliente e
-						parceiro. Acreditamos no poder da colaboração e da tecnologia para transformar ideias em
-						resultados. Junte-se a nós nesta jornada de crescimento e sucesso compartilhado!
-					</p>
-					<!-- Botão -->
-					<a
-						href="/quem-somos"
-						class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
-					>
-						Saiba Mais
-					</a>
-				</div>
-			</div>
-
-			<!-- Seção de imagem -->
-			<div
-				class="h-[300px] w-full overflow-hidden rounded-lg shadow-lg md:h-[400px] lg:h-[500px] lg:w-[50%]"
-			>
-				<img
-					src={dall}
-					alt="Imagem representando a empresa"
-					class="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
-				/>
-			</div>
-		</div>
+		<Carrossel />
 	</div>
-	<div class="w-full border"></div>
+	<!-- Quem Somos -->
+	<div id="art-somos">
+
+	</div>
+	
+	<!-- <Quemsomos /> -->
+	<Quemsomos />
 </main>
 
 <style>
 	p::selection {
-		color: yellow;
+		color: blue;
 		background-color: transparent; /* Cor de fundo ao selecionar */
 	}
 	.slider {

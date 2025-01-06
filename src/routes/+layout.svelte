@@ -28,6 +28,8 @@
 	});
 
 	let navItemsLogado = [
+		{ name: 'Inicio', href: '/' },
+
 		{ name: 'Atualizações', href: '/noticias' },
 		{ name: 'Comércios', href: '/comercios' },
 		// { name: 'Eventos', href: '/NewEventos' },
@@ -40,17 +42,19 @@
 	];
 
 	let navItems = [
+		{ name: 'Inicio', href: '/' },
+
 		{ name: 'Atualizações', href: '/noticias' },
 		{ name: 'Comércios', href: '/comercios' },
 		// { name: 'Eventos', href: '/NewEventos' },
 		{ name: 'Mural', href: '/mural' },
 		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
 		{ name: 'Avisos', href: '/quadroAvisos' },
-		{ name: 'Anúncios', href: '/anuncios-luiz-antonio' }	
+		{ name: 'Anúncios', href: '/anuncios-luiz-antonio' }
 	];
 
 	const items = [
-		{ href: '/', label: 'Home' },
+		{ name: 'Inicio', href: '/' },
 		{ href: '/inicio', label: 'Feed' },
 		{ href: '/comercios', label: 'Comercios' }
 	];
