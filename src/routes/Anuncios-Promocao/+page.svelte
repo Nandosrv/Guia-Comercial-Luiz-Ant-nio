@@ -19,7 +19,10 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                 "Descrição Simples"
 
             ],
-            buttonText: "Começar Agora"
+            buttonText: "Começar Agora",
+            link: "https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Grátis%20no%20Guia%20Comercial"
+
+            // link: "/Anuncios-Promocao/planos/plano/basico"
         },
         {
             name: "Plano Premium",
@@ -34,7 +37,9 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                 "Anuncio personalizado",
                 "Contato direto com o programador"
             ],
-            buttonText: "Assinar Premium"
+            buttonText: "Assinar Premium",
+            // link: "/Anuncios-Promocao/planos/plano/premium"
+            link: "https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%20Premium%20no%20Guia%20Comercial"
         },
         {
             name: "Plano Empresarial",
@@ -52,7 +57,11 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                 "Contato direto com o programador"
 
             ],
-            buttonText: "Contratar Agora"
+            buttonText: "Contratar Agora",
+            link: "https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Empresarial%20no%20Guia%20Comercial"
+
+            // link: "/Anuncios-Promocao/planos/plano/empresarial"
+
         }
     ];
 
@@ -173,7 +182,8 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
     ];
 
     // Estados
-    let showContactForm = true; // Alterar conforme o controle do seu modal
+//   let showContactForm = true; // This is causing the modal to show on load
+    let showContactForm = false; // Alterar conforme o controle do seu modal
     let selectedPlan = 'Plano Empresarial'; // Altere isso conforme o plano selecionado
     let formData = {
         name: '',
@@ -218,8 +228,13 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
     //         message: ''
     //     };
     // }
+    let showConstructionModal = false;
 </script>
-
+<!-- <button class="bg-red-800 w-full h-full">
+	<a href="/Anuncios-Promocao/premium">
+		test
+	</a> -->
+<!-- </button> -->
 <div class="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
     <ScrollTo />
     <!-- Hero Section -->
@@ -272,11 +287,20 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                             </ul>
                         </div>
 
-                        <button 
+                        <!-- <button 
                             on:click={() => handleContact(plan.name)}
                             class="mt-8 block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3 px-4 text-center transition-colors">
                             {plan.buttonText}
-                        </button>
+                        </button> -->
+                        
+                        <button 
+                        
+                        class="mt-8 block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3 px-4 text-center transition-colors">
+                        <a href="{plan.link}">
+                            {plan.buttonText}
+                        </a>
+                    </button>
+                        
                     </div>
                 {/each}
             </div>
@@ -448,7 +472,32 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
             </div>
         </div>
     </div>
-    
+    <!-- aqui vai o modal -->
+    {#if showConstructionModal}
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4">Página em Construção</h2>
+            <p class="text-gray-600 mb-6">
+                Esta funcionalidade está sendo desenvolvida. Por enquanto, entre em contato via WhatsApp para anunciar seu negócio.
+            </p>
+            <div class="flex justify-end space-x-3">
+                <button 
+                    on:click={() => showConstructionModal = false}
+                    class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                >
+                    Fechar
+                </button>
+                <a 
+                    href="https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20anunciar%20meu%20negócio%20no%20Guia%20Comercial"
+                    target="_blank"
+                    class="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md"
+                >
+                    Contatar via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+{/if}
     <!-- Destaque Numérico -->
     <div class="bg-blue-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

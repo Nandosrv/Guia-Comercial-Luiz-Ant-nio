@@ -14,6 +14,7 @@
 	import Insta from '$lib/images/icons8-instagram-64.png';
 	import callcomer from '$lib/images/icons8.png';
 	import border from '$lib/images/border.png';
+	import Darkmod from '../Darkmod.svelte';
 
 	// Declarar props corretamente
 	export let product: Product;
@@ -100,13 +101,13 @@
 					class="flex h-[250px] w-full flex-col items-center justify-center shadow-lg lg:w-[60%]"
 				>
 					<p
-						class="text-center font-['Inter'] text-2xl font-extrabold uppercase tracking-wide text-white lg:text-3xl"
+						class="text-center font-['Inter'] text-2xl font-extrabold uppercase tracking-wide text-secondary dark:text-secondary lg:text-3xl"
 					>
 						{product?.title}
 					</p>
 					<button
 						onclick={openModal}
-						class="mt-4 rounded-lg bg-secondary px-6 py-2 text-black shadow-md transition hover:scale-105 hover:bg-purple-800"
+						class="mt-4 rounded-lg bg-secondary px-6 py-2 dark:text-secondary-foreground text-black shadow-md transition hover:scale-105 hover:bg-blue-800"
 					>
 						Saiba Mais
 					</button>
@@ -128,7 +129,7 @@
 							<div class="mt-6 flex justify-center">
 								<button
 									onclick={closeModal}
-									class="transform rounded bg-purple-700 px-6 py-3 text-lg font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 hover:bg-purple-800"
+									class="transform rounded bg-secondary-foreground dark:bg-secondary px-6 py-3 text-lg font-semibold text-white transition-all duration-200 ease-in-out hover:scale-105 hover:bg-purple-800"
 								>
 									Fechar
 								</button>
@@ -219,14 +220,49 @@
 			</div>
 		</div>
 	</section>
+	<!-- Novo content -->
+	 <!-- <div class="flex w-full flex-col items-center justify-center bg-secondary-foreground dark:bg-secondary-foreground">
+		<section class="w-full py-16 bg-secondary">
+			<div class="container mx-auto px-4 text-center">
+			  <h2 class="text-3xl font-bold mb-4 text-white">Fique por dentro das novidades</h2>
+			  <p class="text-white/80 mb-8">Receba nossas promoções e atualizações exclusivas</p>
+			  <form class="max-w-md mx-auto flex gap-4">
+				<input
+				  type="email"
+				  placeholder="Seu melhor e-mail"
+				  class="flex-1 px-4 py-2 rounded-lg"
+				/>
+				<button class="bg-white text-secondary px-6 py-2 rounded-lg hover:bg-gray-100">
+				  Inscrever
+				</button>
+			  </form>
+			</div>
+		  </section>
+	 </div> -->
 	<!-- Aviso sobre o mapa -->
 	<div class="h-full w-full">
-		<div class=" mb-6 rounded-lg bg-purple-800 px-4 py-2 text-center text-white shadow-md">
-			<p class="text-xl font-semibold">Veja o mapa abaixo para traçar sua rota até nós!</p>
-		</div>
+		<div class="transform transition-transform duration-300 mb-6 bg-secondary dark:bg-secondary-foreground px-6 py-4 text-center text-white shadow-lg ">
+			<div class="space-y-3">
+			  <p class="text-2xl font-semibold text-secondary-foreground dark:text-secondary">
+				Veja o mapa abaixo para traçar sua rota até nós!
+			  </p>
+			  <p class="text-sm text-secondary-foreground/80 dark:text-secondary/80">
+				Facilitamos sua chegada com localização precisa e rotas otimizadas
+			  </p>
+			</div>
+			<div class="mt-4 flex justify-center">
+			  <span class="animate-bounce text-2xl">⬇️</span>
+			</div>
+		  </div>
 
+
+
+
+
+
+		  
 		<!-- Container do mapa -->
-		<div class="h-[500px] w-full overflow-hidden rounded-xl border border-purple-500 shadow-2xl">
+		<div class="h-[500px] w-full overflow-hidden  border border-purple-500 shadow-2xl">
 			<iframe
 				src={product?.maps}
 				width="100%"
@@ -236,11 +272,12 @@
 				loading="lazy"
 				referrerpolicy="no-referrer-when-downgrade"
 				title="Mapa de localização para {product?.title}"
-				class="h-full w-full rounded-xl shadow-lg"
+				class="h-full w-full shadow-lg"
 			>
 			</iframe>
 		</div>
 	</div>
+	
 </main>
 
 <!-- <div

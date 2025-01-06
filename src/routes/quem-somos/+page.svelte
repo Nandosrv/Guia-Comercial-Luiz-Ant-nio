@@ -131,8 +131,20 @@
       <h2 class="text-3xl font-bold">Faça Parte Dessa História</h2>
       <p class="mt-4">Cadastre sua empresa ou entre em contato para saber mais!</p>
       <div class="buttons flex justify-center gap-4 mt-8">
-        <button class="btn primary bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold">Cadastre sua Empresa</button>
-        <button class="btn secondary border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800">Entre em Contato</button>
+        <button
+        class="btn primary bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold"
+        on:click={() => window.open('https://wa.me/16996151725?text=Olá! Gostaria de cadastrar minha empresa.', '_blank')}
+      >
+        Cadastre sua Empresa
+      </button>
+      
+      <button
+        class="btn secondary border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-800"
+        on:click={() => window.open('https://wa.me/16996151725?text=Olá! Gostaria de mais informações sobre o site.', '_blank')}
+      >
+        Entre em Contato
+      </button>
+      
       </div>
     </section>
   </main>
