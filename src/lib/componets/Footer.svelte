@@ -6,7 +6,7 @@
 	let currentYear = new Date().getFullYear();
 </script>
 
-<main class="flex w-full bg-secondary-foreground dark:bg-secondary">
+<main class="flex w-full border border-t-white/15 bg-secondary-foreground dark:bg-secondary">
 	<div class="h-auto w-full bg-gradient-to-br py-12 text-white">
 		<div class="container mx-auto flex flex-wrap justify-between px-6">
 			<!-- Logo e Redes Sociais -->
@@ -49,7 +49,7 @@
 						📞 <a href="tel:+5516996151725" class="hover:underline">+55 16 99615-1725</a>
 					</li>
 					<li>
-						📧 <a href="mailto:contato@guiacomercial.com" class="hover:underline">contato@guiacomercial.com</a>
+						📧 <a href="mailto:contato@guiacomercial.com" class="hover:underline">solucoestecnologiasrv@gmail.com</a>
 					</li>
 					<li>📍 Luiz Antônio, SP - Brasil</li>
 				</ul>

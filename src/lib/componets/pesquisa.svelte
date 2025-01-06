@@ -58,7 +58,7 @@
 		},
 		{ nome: 'Rubão Cheiro Verde', id: 28, href: '/comercios/Rubao-Cheiro-Verde' },
 		{ nome: 'Mercado Bebidas Em Geral', id: 29, href: '/comercios/Mercado-Bebidas-Em-Geral' },
-		{ nome: 'Panificadora Romavil', id: 30, href: '/comercios/Panificadora-Romavil' },
+		// { nome: 'Panificadora Romavil', id: 30, href: '/comercios/Panificadora-Romavil' },
 		{ nome: 'Olavo Mamede Silva', id: 31, href: '/comercios/Olavo-Mamede-Silva' },
 		{
 			nome: 'Panificadora Delícias e Pães',

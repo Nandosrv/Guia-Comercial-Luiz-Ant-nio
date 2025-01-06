@@ -237,8 +237,10 @@ if (formData.image && formData.image.size === 0) {
 		<h1 class="font-['Inter'] text-4xl lg:text-5xl font-bold text-black dark:text-white">
 			Anúncios Locais em Destaque
 		</h1>
+
 		<button>
 			<Darkmod />
+			
 		</button>
 	</div>
 
