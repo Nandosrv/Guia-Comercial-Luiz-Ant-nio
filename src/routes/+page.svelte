@@ -496,7 +496,7 @@
 					<button
 						class="transform rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600"
 					>
-						<a href="tel:+1639832055" class="flex h-full w-full items-center justify-center">
+						<a href="tel:1639832055" class="flex h-full w-full items-center justify-center">
 							Ligar
 						</a>
 					</button>
