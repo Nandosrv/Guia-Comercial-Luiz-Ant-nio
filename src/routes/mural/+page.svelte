@@ -10,6 +10,52 @@
     import Rota from '$lib/images/icons8-route-64.png';
     import Mt from '$lib/images/mt.png';
     import Darkmod from '$lib/componets/Darkmod.svelte';
+
+
+
+    let isReading = false;
+    let speechUtterance;
+    let speechSynthesis;
+    let readingSpeed = 1.0;
+
+    function stopReading() {
+        if (speechSynthesis) {
+            speechSynthesis.cancel();
+            isReading = false;
+        }
+    }
+
+    function startReading() {
+        if (typeof window !== 'undefined') {
+            speechSynthesis = window.speechSynthesis;
+            
+            if (isReading) {
+                stopReading();
+                return;
+            }
+
+            const text = document.getElementById('historia-texto').textContent;
+            speechUtterance = new SpeechSynthesisUtterance(text);
+            speechUtterance.lang = 'pt-BR';
+            speechUtterance.rate = readingSpeed;
+            speechUtterance.pitch = 1;
+
+            speechUtterance.onend = () => {
+                isReading = false;
+            };
+
+            speechSynthesis.speak(speechUtterance);
+            isReading = true;
+        }
+    }
+
+    function adjustSpeed(change) {
+        readingSpeed = Math.max(0.5, Math.min(2, readingSpeed + change));
+        if (isReading) {
+            stopReading();
+            startReading();
+        }
+    }
 </script>
 
 <ScrollTo />
@@ -22,8 +68,8 @@
         <nav class="border-t border-gray-200 dark:border-gray-700 bg-white/60 dark:bg-gray-900/60">
             <div class="container mx-auto p-4">
                 <div class="flex items-center justify-end gap-4">
+                    <!-- <Darkmod /> -->
                     <MenuMural />
-                    <Darkmod />
                 </div>
             </div>
         </nav>
@@ -44,14 +90,16 @@
                     <div class="flex flex-wrap gap-4">
                         <a
                             href="#COMO-CHEGAR"
-                            class="rounded-full bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
+                            class="rounded-full bg-red-500 px-8 py-3 text-white font-medium transition-all duration-300 hover:bg-blue-700 hover:shadow-lg dark:bg-blue-500 dark:hover:bg-blue-400"
                         >
+                            <i class="fas fa-map-marker-alt mr-2"></i>
                             Como Chegar
                         </a>
                         <a
                             href="#TURISMO"
-                            class="rounded-full border border-blue-600 px-6 py-3 text-blue-600 transition hover:bg-blue-50 dark:text-blue-400 dark:border-blue-400 dark:hover:bg-gray-700"
+                            class="rounded-full border-2 border-blue-800 px-8 py-3 text-blue-800 font-medium transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-lg dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-500 dark:hover:text-white"
                         >
+                            <i class="fas fa-landmark mr-2"></i>
                             Pontos Turísticos
                         </a>
                     </div>
@@ -70,20 +118,59 @@
     <!-- História Section -->
     <section id="HISTORIA-DA-CIDADE" class="container mx-auto px-4 py-16">
         <div class="rounded-3xl bg-white dark:bg-gray-800 p-8 shadow-lg">
-            <h2 class="mb-8 text-3xl font-bold text-slate-800 dark:text-white">História da Cidade</h2>
-            <div class="space-y-6 text-slate-600 dark:text-gray-300">
-                <p class="p-2 font-sans lg:text-[20px]">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+                <h2 class="text-3xl font-bold text-slate-800 dark:text-white">História da Cidade</h2>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button
+                            on:click={() => adjustSpeed(-0.1)}
+                            class="rounded-full bg-gray-200 dark:bg-gray-700 p-2 hover:bg-gray-300 dark:hover:bg-gray-600"
+                            title="Diminuir velocidade"
+                        >
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="text-sm font-medium text-slate-800 dark:text-white">
+                            {readingSpeed.toFixed(1)}x
+                        </span>
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button
+                            on:click={() => adjustSpeed(0.1)}
+                            class="rounded-full bg-gray-200 dark:bg-gray-700 p-2 hover:bg-gray-300 dark:hover:bg-gray-600"
+                            title="Aumentar velocidade"
+                        >
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <button
+                    on:click={startReading}
+                    class="relative flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-500 
+                    px-4 sm:px-6 py-2.5 sm:py-3 text-white font-medium text-sm sm:text-base transition-all duration-300 
+                    hover:shadow-lg hover:shadow-blue-200/50 dark:hover:shadow-blue-900/30 
+                    hover:scale-[1.02] active:scale-95 group"
+                >
+                    <span class="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <i class={`${isReading ? "fas fa-pause" : "fas fa-play"} text-base transition-transform duration-300 group-hover:scale-110`}></i>
+                    <span class="relative">
+                        {isReading ? 'Pausar' : 'Ouvir'}
+                    </span>
+                    <div class="absolute inset-0 rounded-full border border-white/20 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"></div>
+                </button>
+                </div>
+            </div>
+            <div id="historia-texto" class="space-y-6 text-slate-600 dark:text-gray-300">
+                <p id="p0" class="p-2 font-sans lg:text-[20px]">
                     De acordo com o livro "Elementos para a História de Luiz Antônio", a data aceita como de fundação do município é 13 de dezembro de 1893. Neste dia, à margem do "Estradão de São Simão" que ligava a cidade de São Simão ao Porto do Jatahy, o farmacêutico Carlos Loyola, transitando com seu carroção pelo local onde hoje fica a Praça Mário Junqueira, foi repentinamente acometido de cegueira total. Em sua aflição, fez uma promessa à Santa Luzia (protetora dos olhos) de que, se recuperasse a visão, abriria no local uma Botica para dar suporte aos viajantes que transitavam por aquela região inóspita. Alcançada a graça, Loyola cumpriu sua promessa, e ao redor de sua Botica começaram a surgir outras casas, iniciando o povoamento.
                 </p>
-                <p class="p-2 font-sans lg:text-[20px]">
+                <p id="p1" class="p-2 font-sans lg:text-[20px]">
                     No entanto, existem evidências históricas que sugerem que o povoamento da região começou pelo menos 17 anos antes. Em 1887, quando da Criação da Comarca de São Simão, documentos oficiais já mencionavam a Vila Jatahy (primeiro nome de Luiz Antônio) como parte de sua jurisdição, junto com São Simão e Santa Rosa de Viterbo. O povoado inicial se estabeleceu próximo à atual fazenda Jatahy, nas proximidades do antigo porto fluvial do Jatahy.
                 </p>
-                <p class="p-2 font-sans lg:text-[20px]">
+                <p id="p2" class="p-2 font-sans lg:text-[20px]">
                     A transformação definitiva em município ocorreu através da lei nº 5.121, de 31 de dezembro de 1958, que entrou em vigor em 1º de janeiro de 1960, estabelecendo oficialmente o município de Luiz Antônio.
                 </p>
             </div>
         </div>
-    </section>
 
     <!-- Características Section -->
     <section id="CARACTERÍSTICAS" class="container mx-auto px-4 py-16">
@@ -243,5 +330,12 @@
 <style>
     :global(.dark) {
         color-scheme: dark;
+    }
+    button {
+        transition: all 0.3s ease;
+    }
+    
+    button:active {
+        transform: scale(0.95);
     }
 </style>

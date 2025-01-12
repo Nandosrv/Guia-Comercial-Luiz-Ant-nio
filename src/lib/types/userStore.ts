@@ -1,4 +1,7 @@
 export interface User {
+	[x: string]: any;
+	plan?: string;
+	bio?: string;
 	name: string;
 	email: string;
 	photoURL: string | null;

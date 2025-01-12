@@ -93,9 +93,13 @@
                         <p class="text-xl md:text-2xl opacity-90 max-w-lg mb-8">
                             {slide.description}
                         </p>
-                        <button class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-300">
-                            Saiba mais
-                        </button>
+                        <!-- <button class="bg-white mt-10 absolute text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-300">
+                            <a 
+                             class="p-5"
+                             href="#art-sobre">
+                                Saiba mais
+                            </a>
+                        </button> -->
                     </div>
                 </div>
             </div>
@@ -172,7 +176,8 @@
                 <p class="text-gray-600 text-lg">Planejamento das próximas melhorias</p>
             </div>
 
-            <div class="max-w-4xl mx-auto">
+            <div id="art-sobre"
+             class="max-w-4xl mx-auto">
                 <div class="space-y-8">
                     {#each features as feature, index}
                         <div class="relative pl-8 border-l-4 border-blue-500">

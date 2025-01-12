@@ -1,5 +1,4 @@
 <script context="module">
-	// import { comercios } from '../../data.js';
 	import { load } from './+layout';
 	const data = load();
 </script>
@@ -11,12 +10,9 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { setLastPathUrl } from '$lib/utils/cookies';
+	import { fly } from 'svelte/transition';
+	import Generate from '$lib/componets/Generate.svelte';
 
-	onMount(() => {
-		setLastPathUrl($page.url.pathname);
-	});
-
-	// Obtém subcategorias dinâmicas para a categoria selecionada
 	$: availableSubcategories =
 		selectedCategory === 'Todos'
 			? []
@@ -28,7 +24,6 @@
 					)
 				].filter(Boolean);
 
-	// Filtra itens com base na categoria e subcategoria selecionadas
 	function filter() {
 		filteredItems = data.items.filter((item) => {
 			const categoryMatch = selectedCategory === 'Todos' || item.category === selectedCategory;
@@ -39,78 +34,142 @@
 	}
 </script>
 
-<section class="bg-white dark:bg-gray-900">
-	<div class="container mx-auto px-6 py-10">
-		<h1 class="text-2xl font-semibold capitalize text-gray-800 lg:text-3xl dark:text-white">
-			Lista de Comércios
-		</h1>
+<section
+	class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
+>
+	<div class="flex w-full justify-center">
+		<Generate />
+	</div>
 
-		<!-- Filtro por Categoria -->
-		<div class="mt-4">
-			<label for="category" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
-				>Filtrar por Categoria</label
-			>
-			<select
-				id="category"
-				bind:value={selectedCategory}
-				on:change={() => {
-					selectedSubcategory = 'Todos';
-					filter();
-				}}
-				class="mt-1 block w-full rounded-lg border bg-gray-100 px-4 py-2 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-			>
-				<option value="Todos">Todos</option>
-				{#each data.categories as category}
-					<option value={category}>{category}</option>
-				{/each}
-			</select>
+	<div class="container mx-auto px-6 py-12">
+		<!-- Cabeçalho mais estilizado -->
+		<div class="mb-12 text-center">
+			<h1 class="animate-fade-in text-3xl font-bold text-gray-800 dark:text-white md:text-4xl">
+				Descubra Comércios Locais
+			</h1>
+			<p class="mt-4 text-gray-600 dark:text-gray-300">
+				Encontre os melhores estabelecimentos comerciais da região
+			</p>
 		</div>
 
-		<!-- Filtro por Subcategoria -->
-		{#if availableSubcategories.length > 0}
-			<div class="mt-4">
-				<label
-					for="subcategory"
-					class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
-					>Filtrar por Subcategoria</label
-				>
-				<select
-					id="subcategory"
-					bind:value={selectedSubcategory}
-					on:change={filter}
-					class="mt-1 block w-full rounded-lg border bg-gray-100 px-4 py-2 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-				>
-					<option value="Todos">Todos</option>
-					{#each availableSubcategories as subcategory}
-						<option value={subcategory}>{subcategory}</option>
-					{/each}
-				</select>
+		<!-- Filtros em um card -->
+		<div
+			class="mx-auto mb-12 max-w-3xl transform rounded-xl bg-white p-6 shadow-lg transition-all hover:shadow-xl dark:bg-gray-800"
+		>
+			<div class="grid gap-6 md:grid-cols-2">
+				<!-- Filtro por Categoria -->
+				<div>
+					<label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+						Categoria
+					</label>
+					<select
+						id="category"
+						bind:value={selectedCategory}
+						on:change={() => {
+							selectedSubcategory = 'Todos';
+							filter();
+						}}
+						class="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 transition-colors
+                               focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-600
+                               dark:bg-gray-700 dark:text-white"
+					>
+						<option value="Todos">Todas as categorias</option>
+						{#each data.categories as category}
+							<option value={category}>{category}</option>
+						{/each}
+					</select>
+				</div>
+
+				<!-- Filtro por Subcategoria -->
+				{#if availableSubcategories.length > 0}
+					<div>
+						<label
+							for="subcategory"
+							class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+						>
+							Subcategoria
+						</label>
+						<select
+							id="subcategory"
+							bind:value={selectedSubcategory}
+							on:change={filter}
+							class="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 transition-colors
+                                   focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-600
+                                   dark:bg-gray-700 dark:text-white"
+						>
+							<option value="Todos">Todas as subcategorias</option>
+							{#each availableSubcategories as subcategory}
+								<option value={subcategory}>{subcategory}</option>
+							{/each}
+						</select>
+					</div>
+				{/if}
 			</div>
-		{/if}
+		</div>
 
-		<!-- Exibição dos Itens Filtrados -->
-		<div class="mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 lg:grid-cols-3">
+		<!-- Grid de comércios com cards mais elaborados -->
+		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			{#each filteredItems as item}
-				<div class="overflow-hidden rounded-lg bg-white shadow-md lg:flex dark:bg-gray-800">
-					<img
-						class="h-56 w-full object-cover lg:h-auto lg:w-32"
-						src={item.image}
-						alt={item.title}
-					/>
-
-					<div class="flex flex-col justify-between p-4 leading-normal">
+				<div
+					class="group transform overflow-hidden rounded-xl bg-white shadow-lg transition-all
+                            duration-300 hover:-translate-y-2 hover:shadow-2xl dark:bg-gray-800"
+				>
+					<div class="relative h-48 overflow-hidden">
+						
+						<img
+							class="h-full w-full transform object-cover transition-transform duration-300
+                                   group-hover:scale-110"
+							src={item.image}
+							alt={item.title}
+						/>
+						<div
+							class="absolute inset-0 bg-black opacity-0 transition-opacity group-hover:opacity-20"
+						></div>
+					</div>
+					<div class="p-6">
 						<a
 							href={`/comercios/${item.slug}`}
-							class="text-xl font-semibold text-gray-800 hover:underline dark:text-white"
+							class="mb-2 block text-xl font-bold text-gray-800
+                                   hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
 						>
 							{item.title}
 						</a>
-						<span class="text-sm text-gray-500 dark:text-gray-400">
-							{item.category}{item.subcategory ? ` - ${item.subcategory}` : ''}
-						</span>
+						<div class="flex items-center space-x-2">
+							<span
+								class="inline-block rounded-full bg-blue-100 px-3 py-1 text-sm
+                                        font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+							>
+								{item.category}
+							</span>
+							{#if item.subcategory}
+								<span
+									class="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm
+                                            font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+								>
+									{item.subcategory}
+								</span>
+							{/if}
+						</div>
 					</div>
 				</div>
 			{/each}
 		</div>
 	</div>
 </section>
+
+<style>
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(-20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animate-fade-in {
+		animation: fade-in 0.5s ease-out;
+	}
+</style>

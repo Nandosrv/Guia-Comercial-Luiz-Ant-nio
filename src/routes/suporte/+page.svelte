@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { setLastPathUrl } from '$lib/utils/cookies';
 	import { fade, slide, scale } from 'svelte/transition';
+	import SendEmail from '$lib/componets/sendEmail.svelte';
 
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);
@@ -144,7 +145,9 @@
 							class="mt-6 inline-flex items-center space-x-2 rounded-xl bg-blue-500 px-6 py-3 text-white shadow-md transition-all duration-300 hover:bg-blue-600 hover:shadow-lg"
 						>
 							<span>Enviar Email</span>
+						<!-- <p>Envie um email para contatar-nos</p> -->
 						</button>
+
 					</div>
 				</div>
 
@@ -346,64 +349,10 @@
 					</svg>
 				</button>
 			</div>
-
-			<form on:submit|preventDefault={handleContactSubmit} class="space-y-4">
-				<div>
-					<label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
-					<input
-						type="text"
-						id="name"
-						bind:value={contactForm.name}
-						class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-						required
-					/>
-				</div>
-
-				<div>
-					<label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-					<input
-						type="email"
-						id="email"
-						bind:value={contactForm.email}
-						class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-						required
-					/>
-				</div>
-
-				<div>
-					<label for="subject" class="block text-sm font-medium text-gray-700">Assunto</label>
-					<input
-						type="text"
-						id="subject"
-						bind:value={contactForm.subject}
-						class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-						required
-					/>
-				</div>
-
-				<div>
-					<label for="message" class="block text-sm font-medium text-gray-700">Mensagem</label>
-					<!-- svelte-ignore element_invalid_self_closing_tag -->
-					<textarea
-						id="message"
-						bind:value={contactForm.message}
-						rows="4"
-						class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-						required
-					/>
-				</div>
-
-				<button
-					type="submit"
-					class="w-full rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
-				>
-					Enviar Mensagem
-				</button>
-			</form>
+			<SendEmail />
 		</div>
 	</div>
 {/if}
-
 <style>
 	:global(html) {
 		scroll-behavior: smooth;

@@ -2,10 +2,10 @@
 	import { setLastPathUrl } from '$lib/utils/cookies';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { slide } from 'svelte/transition';
 
-	let isMenuOpen = false; // Estado para controlar o menu
+	let isMenuOpen = false;
 
-	// Função para fechar o menu ao clicar fora
 	function handleOutsideClick(event: MouseEvent) {
 		const menu = document.getElementById('menu');
 		const button = document.getElementById('menu-button');
@@ -20,6 +20,17 @@
 		}
 	}
 
+	const menuItems = [
+		{ href: '#HISTORIA-DA-CIDADE', text: 'História' },
+		// { href: '#Significado-do-Nome', text: 'Nome' },
+		// { href: '#Aniversário-da-Cidade', text: 'Aniversário' },
+		{ href: '#CARACTERÍSTICAS', text: 'Características' },
+		{ href: '#COMO-CHEGAR', text: 'Como Chegar' },
+		{ href: '#TURISMO', text: 'Turismo' },
+		{ href: '#INFORMAÇÕES-ÚTEIS', text: 'Info' },
+		{ href: '#Comentário', text: 'Comentários' }
+	];
+
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);
 		document.addEventListener('click', handleOutsideClick);
@@ -27,76 +38,75 @@
 	});
 </script>
 
-<!-- Header com menu -->
-<div
-	class="flex h-[50px] w-full items-center justify-between border-b border-purple-800 bg-black/60 p-4"
->
-	<!-- Botão do menu -->
-	<button
-		id="menu-button"
-		class="text-white focus:outline-none"
-		on:click={() => (isMenuOpen = !isMenuOpen)}
-		aria-label="Toggle menu"
-	>
-		<!-- Ícone hambúrguer -->
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke-width="1.5"
-			stroke="currentColor"
-			class="h-6 w-6"
-		>
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				d="M3.75 7.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
-			/>
-		</svg>
-	</button>
+<header class="fixed top-0 z-50 w-[95%] ">
+	<div class="flex h-12 items-center justify-between border-b bg-white px-4 shadow-sm">
+		<div class="flex items-center gap-3">
+			<!-- <span class="text-lg font-bold text-gray-700">LA</span> -->
+		</div>
 
-	<!-- Menu -->
-	<nav
-		id="menu"
-		class={`absolute left-0 top-[50px] mt-[200px] w-full transform rounded-b-lg bg-black/90 p-4 text-white shadow-lg transition-all duration-500 ease-in-out ${
-			isMenuOpen
-				? 'pointer-events-auto translate-y-0 opacity-100'
-				: 'pointer-events-none -translate-y-10 opacity-0'
-		}`}
-	>
-		<ul class="flex flex-col gap-4">
-			<li>
-				<a href="#HISTORIA-DA-CIDADE" class="font-serif text-white hover:underline"
-					>História Da Cidade</a
-				>
-			</li>
-			<li>
-				<a href="#Significado-do-Nome" class="font-serif text-white hover:underline"
-					>Significado Do Nome</a
-				>
-			</li>
-			<li>
-				<a href="#Aniversário-da-Cidade" class="font-serif text-white hover:underline"
-					>Aniversário da Cidade</a
-				>
-			</li>
-			<li>
-				<a href="#CARACTERÍSTICAS" class="font-serif text-white hover:underline">Características</a>
-			</li>
-			<li>
-				<a href="#COMO-CHEGAR" class="font-serif text-white hover:underline">Como Chegar</a>
-			</li>
-			<li>
-				<a href="#TURISMO" class="font-serif text-white hover:underline">Turismo</a>
-			</li>
-			<li>
-				<a href="#INFORMAÇÕES-ÚTEIS" class="font-serif text-white hover:underline"
-					>Informações ÚTeis</a
-				>
-			</li>
-			<li>
-				<a href="#Comentário" class="font-serif text-white hover:underline">Comentário</a>
-			</li>
-		</ul>
-	</nav>
-</div>
+		<!-- Menu Mobile -->
+		<button
+			id="menu-button"
+			class="rounded p-1 hover:bg-gray-100 lg:hidden"
+			on:click={() => (isMenuOpen = !isMenuOpen)}
+			aria-label="Menu"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+				class="h-6 w-6 text-gray-700"
+			>
+				<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+			</svg>
+		</button>
+
+		<!-- Menu Desktop -->
+		<nav class="hidden lg:block">
+			<ul class="flex gap-6">
+				{#each menuItems as item}
+					<li>
+						<a
+							href={item.href}
+							class="text-sm font-medium text-gray-600 transition-all hover:text-gray-900"
+						>
+							{item.text}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	</div>
+
+	<!-- Menu Mobile Dropdown -->
+	{#if isMenuOpen}
+		<nav
+			id="menu"
+			class="w-full bg-white shadow-md"
+			transition:slide={{ duration: 200 }}
+		>
+			<ul class="grid grid-cols-2 gap-2 p-4">
+				{#each menuItems as item}
+					<li>
+						<a
+							href={item.href}
+							class="block rounded px-3 py-2 text-sm font-medium text-gray-600 transition-all hover:bg-gray-50 hover:text-gray-900"
+							on:click={() => (isMenuOpen = false)}
+						>
+							{item.text}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	{/if}
+</header>
+
+
+<style>
+	header {
+		background-color: rgba(255, 255, 255, 0.98);
+		backdrop-filter: blur(8px);
+	}
+</style>
