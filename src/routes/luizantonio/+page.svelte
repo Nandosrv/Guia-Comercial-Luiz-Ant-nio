@@ -1,8 +1,17 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { auth } from '$lib/firebase/client';
   import Icongogole from '$lib/images/googlelogo.png';
 	import { loginWithGoogle } from '$lib/services/authService.svelte';
+	import { createUserWithEmailAndPassword } from 'firebase/auth';
+ 
   let active = false;
+  let loginEmail = '';
+	let loginPassword = '';
+	let registerEmail = '';
+	let registerPassword = '';
+	let registerUsername = '';
+	let errorMessage = '';
 
   const toggleForm = () => {
     active = !active;
@@ -21,8 +30,21 @@
 		}
 	};
 
-  // Login
+  // registro
 
+  const handleRegister = async (e: SubmitEvent) => {
+		e.preventDefault();
+		try {
+			const userCredential = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
+			if (userCredential.user) {
+				goto('/inicio');
+			}
+		} catch (error: any) {
+			errorMessage = 'Erro ao criar conta: ' + error.message;
+			alert(errorMessage);
+		}
+	};
+// login email
 </script>
 
   <!-- svelte-ignore css_unused_selector -->

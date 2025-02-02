@@ -276,6 +276,11 @@ async function editProfile() {
 </script>
 
 <div class="min-h-screen bg-gray-50">
+    <!-- <button>
+        <a href="/adminz">
+            admin
+        </a>
+    </button> -->
     <!-- Header com navegação -->
     <nav class="bg-white shadow-sm">
         <div class="container mx-auto px-4">
@@ -546,26 +551,26 @@ async function editProfile() {
                     </div>
                 </div>
                 <!-- Current Plan -->
-                <div class="mt-8 bg-white rounded-xl shadow-sm p-6">
+                <!-- <div class="mt-8 bg-white rounded-xl shadow-sm p-6">
                     <div class="flex justify-between items-center">
                         <div>
                             <h2 class="text-xl font-bold text-secondary-foreground dark:text-secondary font-['Inter']">Seu Plano Atual</h2>
                             <p class="text-blue-500 font-medium mt-1 font-['Inter']">Plano {currentUser.plan || 'Básico'}</p>
                             <!-- <p>{new Date().toLocaleDateString()}</p> -->
                             
-                            <p class="text-sm text-gray-600 mt-1">
+                            <!-- <p class="text-sm text-gray-600 mt-1">
                                 Próxima renovação em: {new Date(new Date().setMonth(new Date().getMonth() + 1)).toLocaleDateString('pt-BR')}
                             </p>   
                         </div>
+                        svelte-ignore event_directive_deprecated -->
                         <!-- svelte-ignore event_directive_deprecated -->
-                        <!-- svelte-ignore event_directive_deprecated -->
-                        <button
+                        <!-- <button
                             class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-purple-700"
                             on:click={() => showPlanModal = true}>
                             Mudar Plano
                         </button>
                     </div>
-                </div>
+                </div> --> 
             </div>
         {:else if activeTab === 'statistics'}
             <div class="bg-white rounded-xl shadow-sm p-6" in:fade>

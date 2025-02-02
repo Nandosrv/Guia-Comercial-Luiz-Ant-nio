@@ -472,7 +472,7 @@
 			</div>
 			<!-- Card 3 -->
 			<div class=" flex h-[320px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
-				<div class="relative h-[170px] w-full overflow-hidden rounded-t-xl">
+				<div class="relative h-[250px] w-full overflow-hidden rounded-t-xl">
 					<a
 						href="https://encontreluizantonio.com.br/comercios/Hotel-Vero-Verde"
 						target="_blank"

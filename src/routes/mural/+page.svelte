@@ -318,12 +318,22 @@
         </div>
     </section>
 
-    <!-- Comment Section -->
-    <section id="Comentário" class="container mx-auto px-4 py-16">
-        <div class="rounded-3xl bg-white dark:bg-gray-800 p-8 shadow-lg">
+     <!-- Comment Section -->
+  <section id="Comentário" class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div class="max-w-5xl mx-auto">
+        <div class="relative">
+          <!-- Decorative Elements -->
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 opacity-50"></div>
+          <!-- Content -->
+          <div class="relative">
             <Postform />
+          </div>
         </div>
-    </section>
+      </div>
+  </section>
+
+
+
 
 </main>
 

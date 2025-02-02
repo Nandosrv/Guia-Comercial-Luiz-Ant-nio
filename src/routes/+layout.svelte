@@ -40,7 +40,8 @@
 		{ name: 'Avisos', href: '/quadroAvisos' },
 		{ name: 'Suporte', href: '/suporte' },
 		{ name: 'Feeds', href: '/inicio' },
-		{ name: 'Anúncios', href: '/anuncios-luiz-antonio' }
+		// { name: 'Anúncios', href: '/anuncios-luiz-antonio' }
+		{ name: 'Anúncios', href: '/Anuncios-Promocao' }
 	];
 
 	let navItems = [
@@ -52,7 +53,9 @@
 		{ name: 'Mural', href: '/mural' },
 		// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
 		{ name: 'Avisos', href: '/quadroAvisos' },
-		{ name: 'Anúncios', href: '/anuncios-luiz-antonio' }
+		// { name: 'Anúncios', href: '/anuncios-luiz-antonio' }
+		{ name: 'Anúncios', href: '/Anuncios-Promocao' }
+
 	];
 
 	const items = [
@@ -178,7 +181,7 @@
 						</a>
 						{:else}
 						<div class="flex items-center rounded-md bg-secondary-foreground bg-opacity-60 p-1.5">
-							<a href="/luizantonio" class="text-secondary">Entrar</a>
+							<a href="/login" class="text-secondary">Entrar</a>
 						</div>
 						<!-- Link para login caso o usuário não esteja logado -->
 					{/if}

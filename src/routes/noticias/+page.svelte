@@ -48,6 +48,14 @@
         description: "Atualizações para otimizar a performance do site e garantir mais segurança na navegação e interação com o banco de dados dos comércios.",
         icon: "🔧",
         image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        title: "Anúncio de manutenção",
+        date: "fevereiro 2025",
+        category: "Manutenção",
+        description: "Estamos realizando melhorias no site e, em breve, algumas funcionalidades, como os botões, estarão totalmente otimizadas. Agradecemos pela paciência enquanto trabalhamos para oferecer uma experiência ainda melhor",
+        icon: "🔧",
+        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
     }
 ];
 
