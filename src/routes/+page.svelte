@@ -396,8 +396,8 @@
 			class="flex w-full flex-wrap justify-center gap-4 bg-secondary dark:bg-secondary lg:flex-wrap lg:gap-8"
 		>
 			<!-- Card 1 -->
-			<div class=" flex w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
-				<div class="flex h-[170px] w-full flex-col items-center justify-center">
+			<div class=" flex w-[300px] h-[320px] bg-red-600  flex-col overflow-hidden rounded-xl shadow-lg">
+				<div class="flex h-[180px] w-full flex-col items-center justify-center">
 					<a
 						href="https://encontreluizantonio.com.br/comercios/OdontoCompany"
 						target="_blank"
@@ -414,7 +414,7 @@
 					
 				</div>
 				<div
-					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
+					class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
 					<p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white xl:text-xl">
 						OdontoCompany Luiz Antônio-SP
@@ -435,8 +435,8 @@
 			</div>
 
 			<!-- Card 2 -->
-			<div class=" flex h-[400px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
-				<div class="flex h-[170px] w-full flex-col items-center justify-center">
+			<div class=" flex h-[320px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
+				<div class="flex h-[180px] w-full flex-col items-center justify-center">
 					<a
 						href="https://encontreluizantonio.com.br/comercios/Gelindo-Uber"
 						target="_blank"
@@ -451,7 +451,7 @@
 					</a>
 				</div>
 				<div
-					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
+					class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
 					<p class="xl:text-md mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
 						Gelindo Uber
@@ -471,8 +471,8 @@
 				</div>
 			</div>
 			<!-- Card 3 -->
-			<div class=" flex h-[400px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
-				<div class="relative h-[170px] w-full overflow-hidden rounded-t-xl">
+			<div class=" flex h-[320px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
+				<div class="relative h-[250px] w-full overflow-hidden rounded-t-xl">
 					<a
 						href="https://encontreluizantonio.com.br/comercios/Hotel-Vero-Verde"
 						target="_blank"
@@ -488,7 +488,7 @@
 				</div>
 
 				<div
-					class="flex h-[230px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
+					class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
 				>
 					<p class="xl:text-md mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
 						Hotel Vero Verde

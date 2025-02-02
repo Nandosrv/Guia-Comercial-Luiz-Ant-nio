@@ -27,7 +27,7 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
         {
             name: "Plano Premium",
             description: "Para negócios em crescimento",
-            price: "R$ 49,90/mês",
+            price: "R$ 29,99/mês",
             features: [
                 "Anúncio por 30 dias",
                 "Destaque na página principal",
@@ -44,7 +44,7 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
         {
             name: "Plano Empresarial",
             description: "Máxima visibilidade para empresas que desejam se destacar.",
-            price: "R$ 149,90/mês",
+            price: "R$ 39,99/mês",
             features: [
                 "Anúncio por 60 dias",
                 "Posição de destaque na página principal",

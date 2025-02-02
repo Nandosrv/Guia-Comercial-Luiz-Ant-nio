@@ -48,6 +48,14 @@
         description: "Atualizações para otimizar a performance do site e garantir mais segurança na navegação e interação com o banco de dados dos comércios.",
         icon: "🔧",
         image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+    },
+    {
+        title: "Anúncio de manutenção",
+        date: "fevereiro 2025",
+        category: "Manutenção",
+        description: "Estamos realizando melhorias no site e, em breve, algumas funcionalidades, como os botões, estarão totalmente otimizadas. Agradecemos pela paciência enquanto trabalhamos para oferecer uma experiência ainda melhor",
+        icon: "🔧",
+        image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
     }
 ];
 
@@ -93,9 +101,13 @@
                         <p class="text-xl md:text-2xl opacity-90 max-w-lg mb-8">
                             {slide.description}
                         </p>
-                        <button class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-300">
-                            Saiba mais
-                        </button>
+                        <!-- <button class="bg-white mt-10 absolute text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-300">
+                            <a 
+                             class="p-5"
+                             href="#art-sobre">
+                                Saiba mais
+                            </a>
+                        </button> -->
                     </div>
                 </div>
             </div>
@@ -172,7 +184,8 @@
                 <p class="text-gray-600 text-lg">Planejamento das próximas melhorias</p>
             </div>
 
-            <div class="max-w-4xl mx-auto">
+            <div id="art-sobre"
+             class="max-w-4xl mx-auto">
                 <div class="space-y-8">
                     {#each features as feature, index}
                         <div class="relative pl-8 border-l-4 border-blue-500">
