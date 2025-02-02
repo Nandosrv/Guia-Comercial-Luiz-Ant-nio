@@ -43,7 +43,8 @@ export const logout = async (): Promise<void> => {
 			name: '',
 			email: '',
 			photoURL: '',
-			userId: ''
+			userId: '',
+			plan: ''
 		};
 	} catch (error) {
 		console.error('Erro ao deslogar:', error);

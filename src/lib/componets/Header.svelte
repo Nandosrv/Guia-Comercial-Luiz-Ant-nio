@@ -1,5 +1,6 @@
 <script>
 	import Logo from './Logo.svelte';
+	import negocio from '$lib/images/negocio.png';
 	import Menu from './Menu.svelte';
 	import border from '$lib/images/border.png';
 </script>
