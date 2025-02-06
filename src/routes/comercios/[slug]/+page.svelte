@@ -2,7 +2,10 @@
 	import { page } from '$app/stores';
 	import Alerty from '$lib/componets/alerty.svelte';
 	import Card from '$lib/componets/Card/Card.svelte';
-  
+
+	export let data: any;
+
+	
 	// Define o tipo Product para representar os itens de comércio
 	type Product = {
 	  slug: string;
@@ -12,18 +15,22 @@
 	};
   
 	// Obtém o ID do produto a partir dos parâmetros da página
-	$: productId = $page.params.id;
-  
+	// $: productId = $page.params.slug;
+	const productId = data.slug;
+	// $: productId = data.slug;
+	// console.log('ID do produto:', productId);
 	// Verifica se a página tem dados e se items é um array válido
-	$: products = $page.data.items ? $page.data.items : [];
+	const products = data.items ? data.items : [];
+	// $: products = data.items ? data.items : [];
   
 	// Encontra o produto com base no slug
-	$: product = products.find((p: Product) => p.slug === productId);
+	const product = products.find((p: Product) => p.slug === productId);
+	// $: product = products.find((p: Product) => p.slug === productId);
   
 	if (product) {
-	//   console.log('Produto encontrado:', product);
+	  console.log('Produto encontrado:', product);
 	} else {
-	//   console.log('Produto não encontrado');
+	  console.log('Produto não encontrado');
 	}
   </script>
   
