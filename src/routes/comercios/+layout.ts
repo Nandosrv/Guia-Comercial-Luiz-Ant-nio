@@ -106,6 +106,7 @@ import Rosas from '$lib/images/Rosa.png';
 
 // odonto
 import ondontolo from '$lib/images/ondontolo.png';
+import ondontoloclip from '$lib/images/odontologia.jpg';
 
 import ORTHO from '$lib/images/ORTHO.png';
 import Reabilitar from '$lib/images/Reabilitar.png';
@@ -174,9 +175,6 @@ export function load() {
             'Veículos e Serviços',
             'Pet e Suprimentos Animais',
             'Tecnologia e Eletrônicos'
-
-
-
 
         ],
         items: [
@@ -283,6 +281,12 @@ export function load() {
             // Clínica odontológica
             { slug: 'ORTHOclinicas-Clinica', title: 'ORTHOclínicas Clínica Odontológica', category: 'Serviços de Saúde', subcategory: 'Odontológica', telefone: '16997979503', whatsapp: '16997979503', hours: "Seg-Domingo: 24h", image: ORTHO, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.676222603484!2d-47.717440538684066!3d-21.553184521756485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8372051a1b58b%3A0x5f16ec5450d40a41!2sORTHOcl%C3%ADnicas%20Cl%C3%ADnica%20Odontol%C3%B3gica%20-%20Dentista%20em%20Lu%C3%ADs%20Ant%C3%B4nio-SP%20%7C%20Aparelhos%20ortod%C3%B4nticos%2C%20Facetas%20em%20Resina%2CPr%C3%B3tese!5e0!3m2!1spt-BR!2sbr!4v1731184208342!5m2!1spt-BR!2sbr' },
             { slug: 'OdontoCompany', title: 'OdontoCompany Luiz Antônio-SP', category: 'Serviços de Saúde', subcategory: 'Odontológica', telefone: '16992452772', whatsapp: '16992452772', hours: "Seg-Domingo: 24h", facebook: 'https://www.facebook.com/odontocompany?locale=pt_BR', image: ondontolo, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14843.044649468226!2d-47.7007358!3d-21.5561923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b837447ac32f4f%3A0xaed99e52756aaed7!2sOdontoCompany%20Luiz%20Ant%C3%B4nio-SP!5e0!3m2!1spt-BR!2sbr!4v1731185766227!5m2!1spt-BR!2sbr' },
+        //    aqui 2
+            { slug: 'Odontologia-Estetica', title: 'Odontologia', category: 'Serviços de Saúde', subcategory: 'Odontológica', telefone: '16997600070', whatsapp: '16997600070', hours: "Seg-Sabado: 09h às 18h", facebook: 'https://www.facebook.com/share/1BYRRDrxcP/?mibextid=wwXIfr',instagram: 'https://www.instagram.com/drasimone_rosati?igsh=MXNtejd6bm96NnRxaw==', image: ondontoloclip, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.8659688170123!2d-47.71025391125749!3d-21.552095529259777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b837680ee28dbb%3A0xaf45637944e70350!2sR.%20Jos%C3%A9%20Carneiro%20Mesquita%2C%20172%2C%20Lu%C3%ADs%20Ant%C3%B4nio%20-%20SP%2C%2014210-000!5e0!3m2!1spt-BR!2sbr!4v1738815429032!5m2!1spt-BR!2sbr' },
+            
+           
+           
+           
             // Fisioterapia
             { slug: 'Reabilitar-Clinica-de-Fisioterapia', title: 'Reabilitar Clinica de Fisioterapia', category: 'Serviços de Saúde', subcategory: 'Fisioterapia', telefone: '16992368499', whatsapp: '16992368499', hours: "Seg-Domingo: 24h", image: Reabilitar, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7421.687157246744!2d-47.7110509!3d-21.5529708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b8376f11032fc9%3A0x7239ccad4fe1682d!2sEspa%C3%A7o%20Reabilitar%20Clinica%20de%20Fisioterapia!5e0!3m2!1spt-BR!2sbr!4v1731184673560!5m2!1spt-BR!2sbr' },
             { slug: 'Fisioterapia-Pelvica', title: 'Fisioterapia Pélvica - Dra. Izabela Alves', category: 'Serviços de Saúde', subcategory: 'Fisioterapia', telefone: '16992368499', whatsapp: '16992368499', hours: "Seg-Domingo: 24h", image: Pelvica, maps: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14843.434522225438!2d-47.71115582475272!3d-21.55238239807561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b837d7158f88f5%3A0xcd19c2e5c6b49a8d!2sFisioterapia%20P%C3%A9lvica%20-%20Dra.%20Izabela%20Alves!5e0!3m2!1spt-BR!2sbr!4v1731186429222!5m2!1spt-BR!2sbr' },

@@ -1,6 +1,9 @@
 <script context="module">
 	import { load } from './+layout';
 	const data = load();
+	export {
+		data
+	}
 </script>
 
 <script>

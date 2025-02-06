@@ -167,7 +167,8 @@
 
 		{ nome: 'A.r Informática smartphone', id: 95, href: '/comercios/A-R-Informatica-smartphone' },
 		{ nome: 'Tecguillen Assistência Técnica Multimarcas', id: 95, href: '/comercios/tecguillen' },
-		{ nome: 'Esquina Som', id: 96, href: '/comercios/ESQUINA-SOM' }
+		{ nome: 'Esquina Som', id: 96, href: '/comercios/ESQUINA-SOM' },
+		{ nome: 'Odontologia', id: 97, href: '/comercios/Odontologia-Estetica' }
 	];
 
 	let filteredComercios = comercios;
