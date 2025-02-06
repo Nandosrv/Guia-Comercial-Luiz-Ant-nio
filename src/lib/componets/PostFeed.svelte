@@ -171,7 +171,8 @@
 			<!-- <span class="font-semibold text-gray-800">{currentUser.name}</span> -->
 			<input
 				type="text"
-				placeholder="O que você está pensando?"
+				placeholder="O que você está pensando, {currentUser.name.split(' ')[0]}?"
+
 				bind:value={inputValue}
 				onfocus={() => (showModal = true)}
 				class="w-full rounded-full bg-gray-100 px-4 py-2 outline-none transition focus:bg-gray-200"
@@ -185,6 +186,7 @@
 				<img src={Galeria} alt="Galeria" class="h-6 w-6" />
 				<span>Galeria</span>
 			</button>
+			
 			<button
 				class="flex items-center space-x-2 rounded-md px-4 py-2 text-green-600 hover:bg-green-50"
 				onclick={() => alert('Acessando a câmera do dispositivo...')}
@@ -312,14 +314,28 @@
 
 	<!-- Modal de imagem -->
 	{#if showImageModal}
-		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-			<div class="relative w-[90%] max-w-[500px]">
-				<button
-					class="absolute right-0 top-0 rounded-full bg-gray-700 p-2 text-white"
-					onclick={closeImageModal}>X</button
-				>
-				<img src={modalImage} alt="Imagem do post" class="w-full rounded-md object-cover" />
-			</div>
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" onclick={closeImageModal}>
+		<!-- Container da imagem com bordas arredondadas e padding -->
+		<div class="relative w-[80%] max-w-[500px] sm:h-[80%] rounded-lg overflow-hidden" onclick={e => e.stopPropagation()}>
+			<!-- Botão de fechar com animação e interações visuais -->
+			<button
+				aria-label="Fechar modal de imagem"
+				class="absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-red-600 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white transition-transform transform hover:scale-105 active:scale-95"
+				onclick={closeImageModal}
+			>
+				<span class="text-2xl">&times;</span>
+			</button>
+			<!-- Imagem do post -->
+			<img 
+				src={modalImage} 
+				alt="Imagem do post" 
+				class="w-full rounded-md object-cover" 
+				loading="lazy" 
+			/>
 		</div>
-	{/if}
+	</div>
+{/if}
+
 </main>

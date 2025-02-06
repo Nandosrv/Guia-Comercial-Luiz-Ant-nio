@@ -396,49 +396,45 @@
 			class="flex w-full flex-wrap justify-center gap-4 bg-secondary dark:bg-secondary lg:flex-wrap lg:gap-8"
 		>
 			<!-- Card 1 -->
-			<div class=" flex w-[300px] h-[320px] bg-red-600  flex-col overflow-hidden rounded-xl shadow-lg">
+			<div class="flex w-[300px] h-[320px] bg-red-600 flex-col overflow-hidden rounded-xl shadow-lg">
 				<div class="flex h-[180px] w-full flex-col items-center justify-center">
-					<a
-						href="https://encontreluizantonio.com.br/comercios/OdontoCompany"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="block h-full w-full"
-					>
-
+				  <a
+					href="/comercios/OdontoCompany"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="block h-full w-full"
+				  >
 					<img
-						src={ondontolo}
-						alt="OdontoCompany Luiz Antônio-SP"
-						class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
+					  src={ondontolo}
+					  alt="OdontoCompany Luiz Antônio-SP"
+					  class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
 					/>
-					</a>
-					
+				  </a>
 				</div>
-				<div
-					class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
-				>
-					<p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white xl:text-xl">
-						OdontoCompany Luiz Antônio-SP
-					</p>
-					<button
-						class="transform rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600"
+				<div class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800">
+				  <p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white xl:text-xl">
+					OdontoCompany Luiz Antônio-SP
+				  </p>
+				  <button
+					class="transform rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600"
+				  >
+					<a
+					  href="https://wa.me/16992452772?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}"
+					  target="_blank"
+					  rel="noopener noreferrer"
+					  class="flex h-full w-full items-center justify-center"
 					>
-						<a
-							href="https://wa.me/16992452772?text={'Olá, Vim pelo site!'}"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="flex h-full w-full items-center justify-center"
-						>
-							WhatsApp
-						</a>
-					</button>
+					  WhatsApp
+					</a>
+				  </button>
 				</div>
-			</div>
-
+			  </div>
+			  
 			<!-- Card 2 -->
 			<div class=" flex h-[320px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
 				<div class="flex h-[180px] w-full flex-col items-center justify-center">
 					<a
-						href="https://encontreluizantonio.com.br/comercios/Gelindo-Uber"
+						href="/comercios/Prefeitura-Municipal-de-Luiz-Antonio"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="block h-full w-full"
@@ -460,7 +456,7 @@
 						class="transform rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600"
 					>
 						<a
-							href="https://wa.me/16991025776?text={'Olá, Vim pelo site!'}"
+							href="https://wa.me/16991025776?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}"
 							target="_blank"
 							rel="noopener noreferrer"
 							class="flex h-full w-full items-center justify-center"
@@ -474,7 +470,7 @@
 			<div class=" flex h-[320px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
 				<div class="relative h-[250px] w-full overflow-hidden rounded-t-xl">
 					<a
-						href="https://encontreluizantonio.com.br/comercios/Hotel-Vero-Verde"
+						href="/comercios/Hotel-Vero-Verde"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="block h-full w-full"

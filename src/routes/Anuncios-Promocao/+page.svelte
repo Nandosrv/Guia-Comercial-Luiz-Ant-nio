@@ -20,7 +20,7 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
 
             ],
             buttonText: "Começar Agora",
-            link: "https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Grátis%20no%20Guia%20Comercial"
+            link: "https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Grátis%20no%20Guia%20Comercial"
 
             // link: "/Anuncios-Promocao/planos/plano/basico"
         },
@@ -39,14 +39,14 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
             ],
             buttonText: "Assinar Premium",
             // link: "/Anuncios-Promocao/planos/plano/premium"
-            link: "https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%20Premium%20no%20Guia%20Comercial"
+            link: "https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%20Premium%20no%20Guia%20Comercial"
         },
         {
             name: "Plano Empresarial",
             description: "Máxima visibilidade para empresas que desejam se destacar.",
             price: "R$ 39,99/mês",
             features: [
-                "Anúncio por 60 dias",
+                "Anúncio por 30 dias",
                 "Posição de destaque na página principal",
                 "Contato completo e personalizado",
                 "Links para redes sociais e site oficial",
@@ -58,7 +58,7 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
 
             ],
             buttonText: "Contratar Agora",
-            link: "https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Empresarial%20no%20Guia%20Comercial"
+            link: "https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Empresarial%20no%20Guia%20Comercial"
 
             // link: "/Anuncios-Promocao/planos/plano/empresarial"
 
@@ -202,7 +202,7 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
             Plano Selecionado: ${selectedPlan}
         `;
         const encodedMessage = encodeURIComponent(whatsappMessage);
-        const whatsappLink = `https://wa.me/5516991916526?text=${encodedMessage}`;
+        const whatsappLink = `https://wa.me/5516996151725?text=${encodedMessage}`;
 
         // Redireciona para o WhatsApp com a mensagem
         window.open(whatsappLink, '_blank');
@@ -461,7 +461,7 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                     Junte-se a centenas de empresas que já estão crescendo com o Guia Comercial
                 </p>
                 <a 
-                href="https://wa.me/5516991916526?text=Quero%20meu%20Comércio%20no%20site" 
+                href="https://wa.me/5516996151725?text=Quero%20meu%20Comércio%20no%20site" 
                 target="_blank" 
                 class="inline-block bg-blue-600 text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-colors"
             >
@@ -488,7 +488,7 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                     Fechar
                 </button>
                 <a 
-                    href="https://wa.me/5516991916526?text=Olá,%20gostaria%20de%20anunciar%20meu%20negócio%20no%20Guia%20Comercial"
+                    href="https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20anunciar%20meu%20negócio%20no%20Guia%20Comercial"
                     target="_blank"
                     class="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md"
                 >
