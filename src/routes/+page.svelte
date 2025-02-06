@@ -393,133 +393,57 @@
 			</div>
 		</div>
 		<!-- Cards -->
-		<div
-			id="art-comercios"
-			class="flex w-full flex-wrap justify-center gap-4 bg-secondary dark:bg-secondary lg:flex-wrap lg:gap-8"
-		>
+		<div id="art-comercios" class="flex w-full gap-10 flex-wrap justify-center bg-secondary dark:bg-secondary lg:gap-8">
 			<!-- Card 1 -->
-			<div class="flex w-[300px] h-[320px] bg-red-600 flex-col overflow-hidden rounded-xl shadow-lg">
-				<div class="flex h-[180px] w-full flex-col items-center justify-center">
-				  <a
-					href="/comercios/OdontoCompany"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="block h-full w-full"
-				  >
-					<img
-					  src={ondontolo}
-					  alt="OdontoCompany Luiz Antônio-SP"
-					  class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
-					/>
-				  </a>
-				</div>
-				<div class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800">
-				  <p class="mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white xl:text-xl">
-					OdontoCompany Luiz Antônio-SP
-				  </p>
-				  <button
-					class="transform rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600"
-				  >
-					<a
-					  href="https://wa.me/16992452772?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}"
-					  target="_blank"
-					  rel="noopener noreferrer"
-					  class="flex h-full w-full items-center justify-center"
-					>
-					  WhatsApp
+			<div class="flex w-[300px] h-[350px] flex-col overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800">
+				<a href="/comercios/OdontoCompany" target="_blank" rel="noopener noreferrer" class="block h-[180px] w-full">
+					<img src={ondontolo} alt="OdontoCompany Luiz Antônio-SP" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
+				</a>
+				<div class="flex flex-col justify-between h-[170px] p-4 border-t-2">
+					<p class="text-center text-2xl font-bold text-gray-700 dark:text-white">OdontoCompany Luiz Antônio-SP</p>
+					<a href="https://wa.me/16992452772?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}" target="_blank" rel="noopener noreferrer" class="mt-2 block">
+						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600">WhatsApp</button>
 					</a>
-				  </button>
 				</div>
-			  </div>
-			  
+			</div>
+			
 			<!-- Card 2 -->
-			<div class=" flex h-[320px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg">
-				<div class="flex h-[180px] w-full flex-col items-center justify-center">
-					<a
-						href="/comercios/Prefeitura-Municipal-de-Luiz-Antonio"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="block h-full w-full"
-					>
-						<img
-							src={gelindo}
-							alt="OdontoCompany Luiz Antônio-SP"
-							class="h-full w-full transform rounded-t-xl object-cover transition-transform hover:scale-105"
-						/>
+			<div class="flex w-[300px] h-[350px] flex-col overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800">
+				<a href="/comercios/Gelindo-Uber" target="_blank" rel="noopener noreferrer" class="block h-[180px] w-full">
+					<img src={gelindo} alt="Gelindo Uber" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
+				</a>
+				<div class="flex flex-col justify-between h-[170px] p-4 border-t-2">
+					<p class="text-center text-2xl font-bold text-gray-700 dark:text-white">Gelindo Uber</p>
+					<a href="https://wa.me/16991025776?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}" target="_blank" rel="noopener noreferrer" class="mt-2 block">
+						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600">WhatsApp</button>
 					</a>
 				</div>
-				<div
-					class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800"
-				>
-					<p class="xl:text-md mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
-						Gelindo Uber
-					</p>
-					<button
-						class="transform rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600"
-					>
-						<a
-							href="https://wa.me/16991025776?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="flex h-full w-full items-center justify-center"
-						>
-							WhatsApp
-						</a>
-					</button>
-				</div>
 			</div>
+			
 			<!-- Card 3 -->
-			<div class="flex h-[320px] w-[300px] flex-col overflow-hidden rounded-xl shadow-lg relative">
-				<!-- Rótulo "Novo" no canto superior direito -->
-				<div class="z-10 absolute top-0 right-0 bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-bl-lg">
-					Novo
-				</div>
-			
-				<!-- Imagem -->
-				<div class="relative h-[250px] w-full overflow-hidden rounded-t-xl z-0">
-					<a href="/comercios/Odontologia-Estetica" target="_blank" rel="noopener noreferrer" class="block h-full w-full">
-						<img
-							src="{odon} " 
-							alt="Hotel Vero Verde"
-							class="h-full w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-						/>
+			<div class="flex w-[300px] h-[350px] flex-col overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800 relative">
+				<div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-bl-lg">Novo</div>
+				<a href="/comercios/Odontologia-Estetica" target="_blank" rel="noopener noreferrer" class="block h-[180px] w-full">
+					<img src={odon} alt="Odontologia" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
+				</a>
+				<div class="flex flex-col justify-between h-[170px] p-4 border-t-2">
+					<p class="text-center text-2xl font-bold text-gray-700 dark:text-white">Odontologia</p>
+					<a href="https://wa.me/16997600070?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}" target="_blank" rel="noopener noreferrer" class="mt-2 block">
+						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600">WhatsApp</button>
 					</a>
-				</div>
-			
-				<!-- Descrição e Botão -->
-				<div class="flex h-[180px] flex-col justify-between rounded-b-xl border-t-2 bg-white p-4 dark:bg-gray-800">
-					<p class="xl:text-md mb-4 text-center text-2xl font-bold text-gray-700 dark:text-white">
-						Odontologia
-					</p>
-					<button class="transform rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600">
-						<a
-							href="https://wa.me/16997600070?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="flex h-full w-full items-center justify-center"
-						>
-							WhatsApp
-						</a>
-					</button>
 				</div>
 			</div>
 			
-			
-			<!-- Card todos cards-->
-			<div
-				class=" flex h-[100px] w-full items-center justify-center overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800"
-			>
-				<button
-					class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
-				>
-					<a href="/comercios" target="_blank" rel="noopener noreferrer">
-						<p class=" xl:text-md font-semibold hover:text-secondary dark:hover:text-secondary">
-							Ver todos os comércios
-						</p>
-					</a>
-				</button>
+			<!-- Botão Ver Todos -->
+			<div class="w-full flex items-center justify-center mt-4">
+				<a href="/comercios" target="_blank" rel="noopener noreferrer">
+					<button class="rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400">Ver todos os comércios</button>
+				</a>
 			</div>
 		</div>
+		
+
+
 	</section>
 	<!-- Card do video -->
 	<div class="flex w-full flex-col justify-center overflow-hidden shadow-lg lg:flex-row">
