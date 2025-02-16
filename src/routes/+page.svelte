@@ -329,7 +329,7 @@
 	<!-- Div 50% de imagens -->
 	<div class="w-full flex-wrap sm:flex lg:flex">
 		<div
-			class="flex h-[200px] w-full items-center justify-center bg-black sm:h-[400px] lg:h-[400px] lg:w-[50%]"
+			class="flex h-[400px] w-full items-center justify-center bg-black sm:h-[400px] lg:h-[400px] lg:w-[50%]"
 		>
 			<!-- <video 
 		src="{Reds}" 
