@@ -26,4 +26,5 @@ class UserStore {
 }
 
 export const userStore = new UserStore();
+
 // Atualizar automaticamente o estado do usuário

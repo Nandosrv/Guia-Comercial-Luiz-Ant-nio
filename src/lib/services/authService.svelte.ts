@@ -6,10 +6,12 @@ import {
 	GoogleAuthProvider,
 	onAuthStateChanged,
 	signInWithPopup,
+	signInWithEmailAndPassword,
 	signOut,
 	type User as UserAuth
 } from 'firebase/auth';
 import { userStore } from '../../stores/userStore.svelte';
+import { goto } from '$app/navigation';
 
 // Login com Google
 export const loginWithGoogle = async (): Promise<UserAuth | null> => {
@@ -21,15 +23,13 @@ export const loginWithGoogle = async (): Promise<UserAuth | null> => {
 	}
 	await persistenciaUser(user as never, false);
 
+	// Redirect to the profile page after login
+	goto('/perfil');
+
 	return user;
-	// return null;
 };
 
 // Logout
-/**
- * The `logout` function in TypeScript asynchronously signs out the user, deletes the 'authToken'
- * cookie, and logs the user out.
- */
 export const logout = async (): Promise<void> => {
 	try {
 		await signOut(auth);
@@ -52,30 +52,30 @@ export const logout = async (): Promise<void> => {
 	}
 };
 
-// Escutar mudanças no estado do usuário
-export const subscribeToAuthState = async (callback: (user: UserAuth | null) => void) => {
+// Subscribe to user auth state changes
+export const subscribeToAuthState = (callback: (user: UserAuth | null) => void): void => {
 	onAuthStateChanged(auth, callback);
 };
 
-// Obter o usuário autenticado
+// Retrieve the currently authenticated user
 export const getCurrentUser = (): UserAuth | null => {
 	return auth.currentUser;
 };
 
+// Check the authentication state
 export const checkAuthState = ({ reloadPage }: { reloadPage?: false }): void => {
 	onAuthStateChanged(auth, async (user) => {
-		if (user && !reloadPage) {
-			// Usuário está autenticado
-			const token = await user.getIdToken();
-			// console.log('Token revalidado:', token);
-
-			// Atualizar o token no cookie, se necessário
-			token && (document.cookie = `authToken=${token}; path=/; max-age=3600`);
-		} else {
-			console.log('Usuário não autenticado');
+	  if (user) {
+		const token = await user.getIdToken();
+		if (token) {
+		  document.cookie = `authToken=${token}; path=/; max-age=3600`;
 		}
+	  } else {
+		console.log('Usuário não autenticado 01');
+	  }
 	});
-};
+  };
+  
 
 export async function persistenciaUser(user: UserAuth & UserStore, reloadPage = false) {
 	if (user.emailVerified) {
@@ -92,9 +92,8 @@ export async function persistenciaUser(user: UserAuth & UserStore, reloadPage = 
 			method: 'POST',
 			headers
 		});
-
 		if (responseData.status === 401) {
-			console.log('Usuário não autenticado');
+			console.log('Usuário não autenticado ');
 			logout();
 			throw Error(responseData.statusText);
 		}
@@ -107,9 +106,8 @@ export async function persistenciaUser(user: UserAuth & UserStore, reloadPage = 
 			.from('users')
 			.select('*')
 			.eq('id', user?.uid || user?.userId);
-
 		if (data && data.length > 0) {
-			userStore.value.photoURL = data[0]?.photo_url || user.photoURL; // Atualiza a foto do usuário no store
+			userStore.value.photoURL = data[0]?.photo_url || user.photoURL;
 		} else {
 			const { data, error } = await supabase.from('users').insert([
 				{
@@ -122,8 +120,8 @@ export async function persistenciaUser(user: UserAuth & UserStore, reloadPage = 
 			]);
 		}
 	}
-	user.emailVerified &&
+	user.email &&
 		(await user?.getIdToken().then((token) => {
-			setCookie('authToken', token, 7); // Salva o token no cookie por 7 dias
-		})); // Obtém o token de autenticação
+			setCookie('authToken', token, 7);
+		}));
 }

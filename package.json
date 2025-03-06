@@ -45,6 +45,7 @@
 		"@jridgewell/sourcemap-codec": "^1.5.0",
 		"@supabase/supabase-js": "^2.46.1",
 		"firebase": "^11.0.2",
+		"lucide-svelte": "^0.477.0",
 		"mysql2": "^3.11.3"
 	},
 	"optionalDependencies": {
