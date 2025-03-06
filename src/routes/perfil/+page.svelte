@@ -17,6 +17,7 @@
 	let userBio = $state(currentUser.bio || '');
 	// svelte-ignore state_referenced_locally
 	let username = $state(currentUser.username || '');
+	console.log(username);
 	// svelte-ignore state_referenced_locally
 	let userPlan = $state(currentUser.plan || '');
 	let isEditingBio = $state(false);
@@ -169,10 +170,12 @@
 	async function loadUserData() {
 		try {
 			const auth = getAuth();
+			console.log("auth",auth);
 			const firebaseUser = auth.currentUser;
+			console.log("firebaseUser",firebaseUser);
 
 			if (!firebaseUser?.uid) {
-				console.log('Usuário não autenticado');
+				console.log('Usuário não autenticado 03');
 				return;
 			}
 
@@ -236,7 +239,7 @@
 			const firebaseUser = auth.currentUser;
 
 			if (!firebaseUser?.uid) {
-				throw new Error('Usuário não autenticado');
+				throw new Error('Usuário não autenticado 04');
 			}
 
 			// Atualiza no Supabase

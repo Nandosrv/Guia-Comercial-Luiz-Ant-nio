@@ -15,17 +15,17 @@
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 	let user = data?.user;
-
+	
 	onMount(async () => {
-		if (!!user?.name) {
+		if (!!user?.email) {
 			try {
 				await persistenciaUser(user, true);
 			} catch (error) {
-				// goto('/login');
+				goto('/');
 			}
 			goto(data.pathUrl!);
 		} else {
-			// goto('/login');
+			goto('/');
 		}
 	});
 

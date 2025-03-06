@@ -58,9 +58,9 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
 
             ],
             buttonText: "Contratar Agora",
-            link: "https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Empresarial%20no%20Guia%20Comercial"
+            // link: "https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Empresarial%20no%20Guia%20Comercial"
 
-            // link: "/Anuncios-Promocao/planos/plano/empresarial"
+            link: "/Anuncios-Promocao/planos/plano/empresarial"
 
         }
     ];

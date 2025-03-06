@@ -15,7 +15,7 @@
 
 	let user = $state(userStore.value);
 	if (!user) {
-			console.error('Usuário não autenticado');
+			console.error('Usuário não autenticado 04');
 	}
 
 	type Anuncio = {
@@ -84,7 +84,7 @@
 
 	async function poostarAnuncio() {
 			if (!user) {
-					showFeedback('Usuário não autenticado', 'error');
+					showFeedback('Usuário não autenticado 05', 'error');
 					return;
 			}
 
@@ -243,7 +243,7 @@ function editarAnuncio(anuncio: Anuncio) {
 // Modifique a função postarAnuncio para lidar com edição
 async function postarAnuncio() {
 		if (!user) {
-				showFeedback('Usuário não autenticado', 'error');
+				showFeedback('Usuário não autenticado 06', 'error');
 				return;
 		}
 
