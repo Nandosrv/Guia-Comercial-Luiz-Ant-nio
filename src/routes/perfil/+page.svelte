@@ -17,7 +17,7 @@
 	let userBio = $state(currentUser.bio || '');
 	// svelte-ignore state_referenced_locally
 	let username = $state(currentUser.username || '');
-	console.log(username);
+	// console.log(username);
 	// svelte-ignore state_referenced_locally
 	let userPlan = $state(currentUser.plan || '');
 	let isEditingBio = $state(false);
@@ -83,7 +83,6 @@
 	async function handleFileChange(event: Event) {
 		const input = event.target as HTMLInputElement;
 		const file = input.files ? input.files[0] : null;
-
 		if (file) {
 			try {
 				isSaving = true;
@@ -94,9 +93,8 @@
 						.from('users')
 						.update({ photo_url: newPhotoURL, updated_at: new Date().toISOString() })
 						.eq('id', currentUser.userId);
-
+					// console.log(newPhotoURL);
 					if (error) throw error;
-
 					currentUser.photoURL = newPhotoURL;
 					showPhotoModal = false;
 				}
@@ -170,9 +168,9 @@
 	async function loadUserData() {
 		try {
 			const auth = getAuth();
-			console.log("auth",auth);
+			// console.log("auth",auth);
 			const firebaseUser = auth.currentUser;
-			console.log("firebaseUser",firebaseUser);
+			// console.log("firebaseUser",firebaseUser);
 
 			if (!firebaseUser?.uid) {
 				console.log('Usuário não autenticado 03');

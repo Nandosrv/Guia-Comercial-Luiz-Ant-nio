@@ -17,17 +17,22 @@
 	let user = data?.user;
 	
 	onMount(async () => {
-		if (!!user?.email) {
-			try {
-				await persistenciaUser(user, true);
-			} catch (error) {
-				goto('/');
-			}
-			goto(data.pathUrl!);
-		} else {
-			goto('/');
-		}
-	});
+    // Verifica se a rota atual exige login
+    const paginasProtegidas = ['/perfil', '/inicio', '/perfil']; // Defina as rotas protegidas
+    const rotaAtual = window.location.pathname;
+
+    if (paginasProtegidas.includes(rotaAtual)) {
+        if (!!user?.email) {
+            try {
+                await persistenciaUser(user, true);
+            } catch (error) {
+                goto('/login'); // Redireciona para login se der erro ao persistir
+            }
+        } else {
+            goto('/login'); // Redireciona se não estiver logado
+        }
+    }
+});
 
 	let navItemsLogado = [
 		{ name: 'Inicio', href: '/' },

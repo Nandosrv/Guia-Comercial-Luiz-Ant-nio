@@ -2,9 +2,10 @@
 	import Avatari from '$lib/images/icons8-avatar-50.png';
 	import { onMount } from 'svelte';
 	import supabase from '$lib/supabaseClient';
+  console.log(supabase);
 	import { getAuth } from 'firebase/auth';
   import { userStore } from '../../stores/userStore.svelte.js';
-	// Função auxiliar para gerar ID único
+  // Função auxiliar para gerar ID único
 	function generateId(): string {
 		return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 	}
@@ -23,7 +24,7 @@
 		author?: {
 			id?: string;
 			email?: string;
-			avatar_url?: string;
+			photo_url?: string;
 		};
 		replies?: Reply[];
 	}
@@ -40,7 +41,7 @@
 		author?: {
 			id?: string;
 			email?: string;
-			avatar_url?: string;
+			photo_url?: string;
 		};
 	}
 
@@ -63,8 +64,8 @@
         .select(
           `
           *,
-          author:users(id, email, avatar_url),
-          replies:comment_replies(*, author:users(id, email, avatar_url))
+          author:users(id, email, photo_url),
+          replies:comment_replies(*, author:users(id, email, photo_url))
         `
         )
         .order('created_at', { ascending: false });
@@ -111,55 +112,74 @@
 
 
 
-	async function handleSubmit(event: { preventDefault: () => void }) {
-		event.preventDefault();
-		loading = true;
+  async function handleSubmit(event: { preventDefault: () => void }) {
+    event.preventDefault();
+    loading = true;
 
-		try {
-			const auth = getAuth();
-			const user = auth.currentUser;
+    try {
+        const auth = getAuth();
+        const user = auth.currentUser;
 
-			if (!user) {
-				alert('Por favor, faça login para comentar');
-				return;
-			}
+        if (!user) {
+            alert('Por favor, faça login para comentar');
+            return;
+        }
 
-			const commentId = generateId();
+        let username = user.displayName || 'Anônimo';
 
-			const { data, error } = await supabase
-				.from('commentis')
-				.insert([
-					{
-						id: commentId,
-						author_id: user.uid,
-						content: newComment,
-						username: user.displayName || 'Anônimo',
-						photo_url: user.photoURL || ''
-					}
-				])
-				.select(
-					`
-					*,
-					author:users(id, email, avatar_url)
-				`
-				)
-				.single();
+        // Se não houver displayName no Firebase, buscar nome do Supabase
+        if (!user.displayName) {
+            const { data: userData, error: userError } = await supabase
+                .from('users')
+                .select('username')
+                .eq('id', user.uid)
+                .single();
 
-			if (error) {
-				console.error('Erro ao enviar comentário:', error);
-				alert('Erro ao enviar comentário.');
-				return;
-			}
+            if (userError) {
+                console.error('Erro ao buscar nome do usuário:', userError);
+                alert('Erro ao buscar informações do usuário.');
+                return;
+            }
 
-			comments = [data, ...comments];
-			newComment = '';
-		} catch (error) {
-			console.error('Erro ao enviar comentário:', error);
-			alert('Erro ao enviar comentário.');
-		} finally {
-			loading = false;
-		}
-	}
+            username = userData?.username || 'Anônimo';
+        }
+
+        const commentId = generateId();
+
+        const { data, error } = await supabase
+            .from('commentis')
+            .insert([
+                {
+                    id: commentId,
+                    author_id: user.uid,
+                    content: newComment,
+                    username,
+                    photo_url: user.photoURL || ''
+                }
+            ])
+            .select(
+                `
+                *,
+                author:users(id, email, photo_url)
+            `
+            )
+            .single();
+
+        if (error) {
+            console.error('Erro ao enviar comentário:', error);
+            alert('Erro ao enviar comentário.');
+            return;
+        }
+
+        comments = [data, ...comments];
+        newComment = '';
+    } catch (error) {
+        console.error('Erro ao enviar comentário:', error);
+        alert('Erro ao enviar comentário.');
+    } finally {
+        loading = false;
+    }
+}
 
 	async function deleteComment(commentId: string) {
 		const auth = getAuth();
@@ -358,7 +378,7 @@
         // Verificar foto na tabela users
         const { data: userData } = await supabase
             .from('users')
-            .select('avatar_url')
+            .select('photo_url')
             .eq('id', user.uid)
             .single();
 
@@ -373,12 +393,12 @@
                     author_id: user.uid,
                     content: replyContent,
                     username: user.displayName || 'Anônimo',
-                    photo_url: userData?.avatar_url || user.photoURL || ''
+                    photo_url: userData?.photo_url || user.photoURL || ''
                 }
             ])
             .select(`
                 *,
-                author:users(id, email, avatar_url)
+                author:users(id, email, photo_url)
             `)
             .single();
 
@@ -485,11 +505,11 @@
         <div class="flex gap-2 sm:gap-4">
           <div class="relative shrink-0">
             <img
-              src={comment.photo_url || comment.author?.avatar_url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + comment.author_id}
+              src={comment.photo_url || comment.author?.photo_url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + comment.author_id}
               alt="Avatar do usuário"
               class="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 rounded-full bg-white p-0.5 ring-2 ring-gray-100 group-hover:ring-blue-200 transition-all duration-200"
             />
-            <div class="absolute -bottom-1 -right-1 h-3 w-3 sm:h-4 sm:w-4 bg-green-400 rounded-full border-2 border-white"></div>
+            <div class="absolute top-0 md:mt-[30px] lg:mt-[30px] mt-[20px] bottom-1  -right-1 h-3 w-3 sm:h-4 sm:w-4 bg-green-400 rounded-full border-2 border-white"></div>
           </div>
           
           <div class="flex-1 min-w-0">
@@ -658,7 +678,7 @@
                 {#each comment.replies as reply}
                   <div class="flex gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg hover:bg-gray-50/80 transition-colors">
                     <img
-                      src={reply.author?.avatar_url || reply.photo_url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + reply.author_id}
+                      src={reply.author?.photo_url || reply.photo_url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + reply.author_id}
                       alt="Avatar do usuário"
                       class="h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white p-0.5 ring-1 ring-gray-200"
                     />
