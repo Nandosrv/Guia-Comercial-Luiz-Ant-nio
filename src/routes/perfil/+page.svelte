@@ -7,6 +7,7 @@
 	import { user, userStore } from '../../stores/userStore.svelte.js';
 	import { fade, slide } from 'svelte/transition';
 	import { getAuth, updateProfile } from 'firebase/auth';
+	import { goto } from '$app/navigation';
 
 	// Estados
 	let isSaving = $state(false);
@@ -264,6 +265,48 @@
 	// function dispatch(arg0: string, arg1: { name: string; whatsapp: any; bio: string; }) {
 	// 	throw new Error('Function not implemented.');
 	// }
+	let isComerciante = false;
+  const apiUrl = 'http://localhost:3000';
+
+  let isLoading = false
+  // Função chamada ao clicar no botão "Sou Comerciante"
+  const handleComerciante = async () => {
+  if (!currentUser || !currentUser.userId) {
+    console.error('Usuário não está autenticado corretamente.');
+    alert('Erro: usuário não autenticado.');
+    return;
+  }
+
+  try {
+    const response = await fetch(`${apiUrl}/painel/meu-comercio/${currentUser.userId}`, { // <--- Verifique se userId está definido
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro HTTP: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data.isComerciante) {
+      goto('/formulario-comercio');
+    } else {
+      alert('Você ainda não tem um comércio cadastrado. Vamos cadastrar agora!');
+      goto('/formulario-comercio');
+    }
+  } catch (error) {
+    console.error('Erro ao verificar comerciante:', error);
+    alert('Erro ao verificar comerciante. Tente novamente.');
+  }
+};
+
+// console.log('Usuário atual:', currentUser);
+// console.log('Verificando comerciante para userId:', currentUser.userId);
+
+
 </script>
 
 <div class="min-h-screen bg-gray-50">
@@ -429,6 +472,7 @@
 											<label for="edit-bio" class="mb-1 block text-sm font-medium text-gray-700">
 												Biografia
 											</label>
+											
 											<textarea
 												id="edit-bio"
 												bind:value={userBio}
@@ -577,12 +621,17 @@
 					</div>
 				</div>
 
-				<!-- Aqui fica o conteúdo para a seção Redes Sociais -->
-				<h3
+				<!-- comerciante -->
+					<!-- svelte-ignore event_directive_deprecated -->
+					<button on:click="{handleComerciante}" class="mt-8 w-full px-4 py-2 bg-blue-500 text-white rounded-lg transition-colors">
+						Voce tem um comercios?
+					</button>
+				
+				<!-- <h3
 					class="mb-4 font-['Inter'] text-lg font-semibold text-secondary-foreground dark:text-secondary"
 				>
 					Redes Sociais
-				</h3>
+				</h3> -->
 				<div class="mt-6 rounded-xl bg-white p-6 shadow-sm">
 					<div class="flex space-x-4">
 						<!-- svelte-ignore a11y_invalid_attribute -->
@@ -600,13 +649,13 @@
 						<!-- outros ícones de redes sociais -->
 					</div>
 				</div>
-				<!-- Current Plan -->
+				<!-- Current Plan --> 
 				<!-- <div class="mt-8 bg-white rounded-xl shadow-sm p-6">
                     <div class="flex justify-between items-center">
                         <div>
                             <h2 class="text-xl font-bold text-secondary-foreground dark:text-secondary font-['Inter']">Seu Plano Atual</h2>
                             <p class="text-blue-500 font-medium mt-1 font-['Inter']">Plano {currentUser.plan || 'Básico'}</p>
-                            <!-- <p>{new Date().toLocaleDateString()}</p> -->
+                            <p>{new Date().toLocaleDateString()}</p> -->
 
 				<!-- <p class="text-sm text-gray-600 mt-1">
                                 Próxima renovação em: {new Date(new Date().setMonth(new Date().getMonth() + 1)).toLocaleDateString('pt-BR')}
@@ -620,7 +669,7 @@
                             Mudar Plano
                         </button>
                     </div>
-                </div> -->
+                </div>
 			</div>
 		{:else if activeTab === 'statistics'}
 			<div class="rounded-xl bg-white p-6 shadow-sm" in:fade>

@@ -9,8 +9,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 		try {
 			const decodedToken = await apiGclaVerifyToken(token);
 
-			console.log('error' in decodedToken, decodedToken);
-
 			if ('error' in decodedToken) {
 				console.log(decodedToken.error, decodedToken.message);
 				event.locals.user = {
@@ -50,8 +48,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 			};
 			event.cookies.delete('authToken', { path: '/' });
 			console.log('Erro ao verificar o token');
-		} finally {
-			// console.log('event.locals.user: ', event.locals.user);
 		}
 	} else {
 		event.locals.user = {
@@ -62,8 +58,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 		};
 	}
 
-	return resolve(event);
+	// 🟢 Configuração de CORS
+	const response = await resolve(event);
+	response.headers.set('Access-Control-Allow-Origin', '*'); // Permitir qualquer domínio (troque por um domínio específico em produção)
+	response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+	response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+	return response;
 };
+
 
 async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser | TypeErrorValidToken> {
 	const headers = {
@@ -90,3 +93,4 @@ async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser | Typ
 
 	return responseData;
 }
+

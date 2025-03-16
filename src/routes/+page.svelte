@@ -7,6 +7,29 @@
 	import Footer from '$lib/footer/+page.svelte';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	
+	// Import Lucide icons
+	import { 
+		ChevronLeft, 
+		ChevronRight, 
+		FileText, 
+		Star, 
+		Info, 
+		ShoppingBag, 
+		Phone, 
+		MessageSquare, 
+		ArrowUp,
+		Calendar,
+		Bell,
+		Tag,
+		AlertTriangle,
+		Newspaper,
+		Store,
+		MapPin,
+		Clock,
+		Award
+	} from 'lucide-svelte';
+	
 	// img
 	import Pink from '$lib/images/anuncui2.png';
 	import Comu from '$lib/images/comu.png';
@@ -91,16 +114,7 @@
 		return () => clearInterval(timer);
 	});
 
-	// const navItems = [
-	// 	{ name: 'Atualizações', href: '/noticias' },
-	// 	{ name: 'Comércios', href: '/comercios' },
-	// 	// { name: 'Eventos', href: '/NewEventos' },
-	// 	{ name: 'Mural', href: '/mural' },
-	// 	// { name: 'Ofertas da Semana', href: '/OfertasDaSemana'},
-	// 	{ name: 'Quadro de Avisos', href: '/quadroAvisos' },
-	// 	{ name: 'Suporte', href: '/suporte' }
-	// ];
-
+	
 	function nextSlide() {
 		currentSlide.update((prevSlide) => (prevSlide + 1) % sliderItems.length);
 	}
@@ -118,34 +132,7 @@
 				encontre Luiz Antônio
 			</h1>
 		</div>
-		<!-- bg-purple-950/50 -->
-		<!-- Main Navigation -->
-		<!-- <nav class="items-center justify-center border-b border-purple-800 bg-black/60 md:flex">
-			<div class="mx-auto flex max-w-7xl">
-				<div class="flex items-center justify-between">
-					<button
-						class="p-2 text-white md:hidden"
-						on:click={() => isMenuOpen.update((open) => !open)}
-						aria-label="Toggle menu"
-					> -->
-		<!-- Menu Icon placeholder -->
-		<!-- <span class="h-6 w-6">☰</span>
-					</button>
-					<div
-						class={`md:flex ${$isMenuOpen ? 'flex' : 'hidden'} absolute left-0 top-[200px] z-50 w-full flex-col bg-black/90 md:relative md:top-auto md:w-auto md:flex-row md:space-x-8 md:bg-transparent`}
-					>
-						{#each navItems as item}
-							<a
-								href={item.href}
-								class="u flex items-center px-3 py-4 text-sm text-gray-300 transition-colors hover:bg-purple-800/30 hover:text-[17px] hover:text-blue-400"
-							>
-								<span>{item.name}</span>
-							</a>
-						{/each}
-					</div>
-				</div>
-			</div>
-		</nav> -->
+
 
 		<!-- Main Content -->
 		<main class="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-8">
@@ -164,7 +151,7 @@
 									<a href={item.link}>
 										<!-- Adiciona o link correspondente -->
 										<img
-											src={item.image}
+											src={item.image || "/placeholder.svg"}
 											alt={item.title}
 											class="bg-conver h-[320px] w-[100%] cursor-pointer bg-cover bg-center brightness-75 lg:h-[500px]"
 										/>
@@ -192,26 +179,30 @@
 							class="slider-button prev-button"
 							aria-label="Previous slide"
 						>
-							←
+							<ChevronLeft class="h-6 w-6" />
 						</button>
 						<button on:click={nextSlide} class="slider-button next-button" aria-label="Next slide">
-							→
+							<ChevronRight class="h-6 w-6" />
 						</button>
 					</div>
 
 					<!-- News Section -->
 					<div class="space-y-4 rounded-[12px]">
-						{#each [{ type: 'Manutenção', title: 'Manutenção (25/11/24)', description: ' Estamos atualizando nosso sistema para melhorar a experiência do usuário e corrigir erros identificados.	', date: '25/12/2024' }, { type: 'Notícias', title: 'Notas de Atualização (26/11/24)', description: ' A atualização do banco de dados foi concluída com sucesso. Isso nos permitirá oferecer um serviço mais rápido e preciso. Aproveite as melhorias no sistema! 05/11/2024!', date: '26/11/2024' }, { type: 'Eventos', title: 'Avalie nosso site', description: 'Queremos saber sua opinião! Avalie a experiência em nosso site e nos ajude a melhorar a cada dia. Seu feedback é fundamental para oferecer o melhor conteúdo e usabilidade', date: '19/11/2024' }] as item}
+						{#each [{ type: 'Manutenção', title: 'Manutenção (25/11/24)', description: ' Estamos atualizando nosso sistema para melhorar a experiência do usuário e corrigir erros identificados.	', date: '25/12/2024', icon: AlertTriangle }, { type: 'Notícias', title: 'Notas de Atualização (26/11/24)', description: ' A atualização do banco de dados foi concluída com sucesso. Isso nos permitirá oferecer um serviço mais rápido e preciso. Aproveite as melhorias no sistema! 05/11/2024!', date: '26/11/2024', icon: Bell }, { type: 'Eventos', title: 'Avalie nosso site', description: 'Queremos saber sua opinião! Avalie a experiência em nosso site e nos ajude a melhorar a cada dia. Seu feedback é fundamental para oferecer o melhor conteúdo e usabilidade', date: '19/11/2024', icon: Calendar }] as item}
 							<div class="rounded-[12px] border-purple-800/50 bg-black/40 p-4">
 								<div
 									class="mb-2 flex flex-col items-start justify-between md:flex-row md:items-center"
 								>
 									<span
-										class={`rounded px-2 py-1 text-xs ${item.type === 'Eventos' ? 'bg-green-600' : 'bg-red-600'} mb-2 text-white md:mb-0`}
+										class={`rounded px-2 py-1 text-xs ${item.type === 'Eventos' ? 'bg-green-600' : 'bg-red-600'} mb-2 text-white md:mb-0 flex items-center gap-1`}
 									>
+										<svelte:component this={item.icon} class="h-3 w-3" />
 										{item.type}
 									</span>
-									<span class="text-sm text-gray-400">{item.date}</span>
+									<span class="text-sm text-gray-400 flex items-center gap-1">
+										<Clock class="h-3 w-3" />
+										{item.date}
+									</span>
 								</div>
 								<a href="/noticias">
 									<h3 class="mb-2 font-serif font-semibold text-white hover:text-blue-500">
@@ -235,7 +226,7 @@
 			class="max-sm:w-[92%] flex h-[100px] w-full flex-col items-center justify-center rounded-[12px] border border-black bg-black/40 p-4 md:w-[53%]"
 		>
 			<h1 id="art-destaques" class="flex text-2xl font-bold tracking-wider text-white md:text-4xl">
-				Destaques Da Semana
+				<Star class="h-6 w-6 mr-2" /> Destaques Da Semana
 			</h1>
 			<p>⭐⭐⭐⭐⭐</p>
 		</div>
@@ -266,10 +257,12 @@
 				class="flex h-40 w-full items-center justify-center gap-2 p-4 text-muted sm:flex-col md:h-full md:w-[50%]"
 			>
 				<li class="w-[70%] p-4 font-light text-secondary-foreground sm:p-0 md:text-xl lg:text-2xl">
+					<Store class="h-5 w-5 inline mr-2" />
 					Encontre todos os comercios em um único lugar
 				</li>
 
 				<li class="w-[70%] p-4 font-light text-secondary-foreground sm:p-0 md:text-xl lg:text-2xl">
+					<Newspaper class="h-5 w-5 inline mr-2" />
 					Leia as notícias mais recentes da cidade
 				</li>
 			</div>
@@ -297,25 +290,28 @@
 				href="#art-folhetos"
 				class="relative p-2 font-['Inter'] text-sm font-medium tracking-wide
 					text-white transition-colors duration-300
-					hover:text-blue-400 dark:text-secondary
+					hover:text-blue-400 dark:text-secondary flex items-center gap-1
 					"
 			>
+				<FileText class="h-4 w-4" />
 				Folhetos
 			</a>
 			<a
 				href="#art-destaque"
-				class=" relative p-2 font-['Inter'] text-sm font-medium tracking-wide
+				class="relative p-2 font-['Inter'] text-sm font-medium tracking-wide
 					text-white transition-colors duration-300
-					hover:text-blue-400 dark:text-secondary"
+					hover:text-blue-400 dark:text-secondary flex items-center gap-1"
 			>
+				<Star class="h-4 w-4" />
 				Destaques
 			</a>
 			<a
 				href="#art-somos"
-				class=" relative p-2 font-['Inter'] text-sm font-medium tracking-wide
+				class="relative p-2 font-['Inter'] text-sm font-medium tracking-wide
 					text-white transition-colors duration-300
-					hover:text-blue-400 dark:text-secondary"
+					hover:text-blue-400 dark:text-secondary flex items-center gap-1"
 			>
+				<Info class="h-4 w-4" />
 				Sobre
 			</a>
 		</nav>
@@ -331,16 +327,10 @@
 		<div
 			class="flex h-[400px] w-full items-center justify-center bg-black sm:h-[400px] lg:h-[400px] lg:w-[50%]"
 		>
-			<!-- <video 
-		src="{Reds}" 
-		autoplay 
-		loop 
-		muted 
-		class="h-full w-full object-cover">
-	  </video> -->
+	
 
-			<img src={Dell} alt="Iconhome" class="h-full w-full object-cover dark:hidden" />
-			<img src={iconhome} alt="Iconhome" class="hidden h-full w-full object-cover dark:flex" />
+			<img src={Dell || "/placeholder.svg"} alt="Iconhome" class="h-full w-full object-cover dark:hidden" />
+			<img src={iconhome || "/placeholder.svg"} alt="Iconhome" class="hidden h-full w-full object-cover dark:flex" />
 		</div>
 		<div
 			class="flex h-[400px] w-full flex-col items-center justify-center bg-secondary px-6 py-8 dark:bg-secondary lg:w-[50%]"
@@ -350,6 +340,7 @@
 				<p
 					class="text-center font-['Inter'] text-3xl font-semibold leading-tight text-black dark:text-white md:text-4xl"
 				>
+					<MessageSquare class="h-8 w-8 inline mr-2" />
 					Quando você anuncia aqui, todo mundo vê!
 				</p>
 			</div>
@@ -367,7 +358,8 @@
 					class="inline-block transform rounded-full bg-gradient-to-r from-red-600 to-red-500 p-4 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400"
 				>
 					<a href="/Anuncios-Promocao" target="_blank" rel="noopener noreferrer">
-						<p class=" font-semibold hover:text-secondary dark:hover:text-secondary">
+						<p class="font-semibold hover:text-secondary dark:hover:text-secondary flex items-center gap-2">
+							<Tag class="h-5 w-5" />
 							Anuncie agora
 						</p>
 					</a>
@@ -387,6 +379,7 @@
 				<p
 					class="text-center text-lg font-bold text-black dark:text-secondary-foreground lg:text-3xl"
 				>
+					<MapPin class="h-6 w-6 inline mr-2" />
 					Aqui você encontra o número de qualquer comércio que procura.
 				</p>
 				<Darkmod />
@@ -397,12 +390,15 @@
 			<!-- Card 1 -->
 			<div class="flex w-[300px] h-[350px] flex-col overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800">
 				<a href="/comercios/OdontoCompany" target="_blank" rel="noopener noreferrer" class="block h-[180px] w-full">
-					<img src={ondontolo} alt="OdontoCompany Luiz Antônio-SP" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
+					<img src={ondontolo || "/placeholder.svg"} alt="OdontoCompany Luiz Antônio-SP" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
 				</a>
 				<div class="flex flex-col justify-between h-[170px] p-4 border-t-2">
 					<p class="text-center text-2xl font-bold text-gray-700 dark:text-white">OdontoCompany Luiz Antônio-SP</p>
 					<a href="https://wa.me/16992452772?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}" target="_blank" rel="noopener noreferrer" class="mt-2 block">
-						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600">WhatsApp</button>
+						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600 flex items-center justify-center gap-2">
+							<Phone class="h-4 w-4" />
+							WhatsApp
+						</button>
 					</a>
 				</div>
 			</div>
@@ -410,26 +406,35 @@
 			<!-- Card 2 -->
 			<div class="flex w-[300px] h-[350px] flex-col overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800">
 				<a href="/comercios/Gelindo-Uber" target="_blank" rel="noopener noreferrer" class="block h-[180px] w-full">
-					<img src={gelindo} alt="Gelindo Uber" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
+					<img src={gelindo || "/placeholder.svg"} alt="Gelindo Uber" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
 				</a>
 				<div class="flex flex-col justify-between h-[170px] p-4 border-t-2">
 					<p class="text-center text-2xl font-bold text-gray-700 dark:text-white">Gelindo Uber</p>
 					<a href="https://wa.me/16991025776?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}" target="_blank" rel="noopener noreferrer" class="mt-2 block">
-						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600">WhatsApp</button>
+						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600 flex items-center justify-center gap-2">
+							<Phone class="h-4 w-4" />
+							WhatsApp
+						</button>
 					</a>
 				</div>
 			</div>
 			
 			<!-- Card 3 -->
 			<div class="flex w-[300px] h-[350px] flex-col overflow-hidden rounded-xl shadow-lg bg-white dark:bg-gray-800 relative">
-				<div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-bl-lg">Novo</div>
+				<div class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold py-1 px-3 rounded-bl-lg flex items-center gap-1">
+					<Bell class="h-3 w-3" />
+					Novo
+				</div>
 				<a href="/comercios/Odontologia-Estetica" target="_blank" rel="noopener noreferrer" class="block h-[180px] w-full">
-					<img src={odon} alt="Odontologia" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
+					<img src={odon || "/placeholder.svg"} alt="Odontologia" class="h-full w-full object-cover rounded-t-xl transition-transform hover:scale-105" />
 				</a>
 				<div class="flex flex-col justify-between h-[170px] p-4 border-t-2">
 					<p class="text-center text-2xl font-bold text-gray-700 dark:text-white">Odontologia</p>
 					<a href="https://wa.me/16997600070?text={'Olá, Vim pelo site! encontreluizantonio.com.br'}" target="_blank" rel="noopener noreferrer" class="mt-2 block">
-						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600">WhatsApp</button>
+						<button class="w-full rounded-lg bg-green-500 px-6 py-2 font-semibold text-white shadow-md transition duration-300 hover:scale-105 hover:bg-green-600 flex items-center justify-center gap-2">
+							<Phone class="h-4 w-4" />
+							WhatsApp
+						</button>
 					</a>
 				</div>
 			</div>
@@ -437,7 +442,10 @@
 			<!-- Botão Ver Todos -->
 			<div class="w-full flex items-center justify-center mt-4">
 				<a href="/comercios" target="_blank" rel="noopener noreferrer">
-					<button class="rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400">Ver todos os comércios</button>
+					<button class="rounded-full bg-gradient-to-r from-red-600 to-red-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-red-500 hover:to-red-400 flex items-center gap-2">
+						<Store class="h-5 w-5" />
+						Ver todos os comércios
+					</button>
 				</a>
 			</div>
 		</div>
@@ -453,17 +461,14 @@
 			<div class="flex w-full">
 				<img src="{Reds}" alt="Reds" class="h-full w-full object-cover" />
 			</div>
-			<!-- <p class="text-center text-3xl font-semibold text-secondary-foreground px-6 py-3 border-b-2  shadow-xl mb-4 hover:border-b-blue-400">
-			  Tá querendo aparecer? Anuncia aqui e destaque-se em Luiz Antônio-SP
-			</p> -->
-		</div>
+			</div>
 		<!-- Card da foto -->
 		<div
 			class="flex h-[400px] w-[100%] items-center justify-end bg-secondary-foreground sm:h-[400px] lg:h-[300px] lg:w-[50%]"
 		>
 			<div class="flex w-full">
 				<img
-					src={paginasite}
+					src={paginasite || "/placeholder.svg"}
 					alt="Pagina de Anúncios"
 					class="h-full w-full object-cover sm:w-full md:w-full lg:w-full xl:w-full"
 				/>
@@ -472,7 +477,10 @@
 	</div>
 	<!-- Cards de anúncios Premio -->
 	<div id="art-destaque" class="rounded-md bg-secondary p-2 text-center dark:bg-secondary">
-		<p class="font-semibold text-yellow-700">⭐ Anúncio em Destaque</p>
+		<p class="font-semibold text-yellow-700 flex items-center justify-center gap-1">
+			<Award class="h-5 w-5 text-yellow-500" />
+			Anúncio em Destaque
+		</p>
 		<div>
 			<CardsPremio />
 		</div>
@@ -482,10 +490,10 @@
 		id="art-folhetos"
 		class="flex w-full items-center justify-center border bg-secondary-foreground p-4 shadow-md dark:bg-secondary-foreground"
 	>
-		<h2 class="text-xl font-semibold text-white dark:text-secondary">Folhetos dos Mercados</h2>
-		<!-- <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-			Ver Mais
-		</button> -->
+		<h2 class="text-xl font-semibold text-white dark:text-secondary flex items-center gap-2">
+			<FileText class="h-5 w-5" />
+			Folhetos dos Mercados
+		</h2>
 	</div>
 	<div class="grid w-full grid-cols-1 gap-6 bg-secondary p-4 sm:grid-cols-2 lg:grid-cols-4">
 		<Cardfolheto />
@@ -535,6 +543,9 @@
 		border: none;
 		cursor: pointer;
 		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.prev-button {
