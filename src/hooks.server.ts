@@ -93,4 +93,3 @@ async function apiGclaVerifyToken(token: string): Promise<DecodedTokenUser | Typ
 
 	return responseData;
 }
-

@@ -3,7 +3,49 @@
     // Importe as imagens (você precisará adicionar estas imagens ao seu projeto)
     import ScrollTo from '$lib/componets/scrollTo.svelte';
 import avatardep1 from '$lib/images/avatardep1.jpg';
+import { onMount } from 'svelte';
+import { userStore } from '../../stores/userStore.svelte';
+import { getCookie } from '$lib/utils/cookies';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { persistenciaUser } from '$lib/services/authService.svelte';
+	import Assinatura from '$lib/componets/Assinatura.svelte';
 
+    // Sincronizar dados do usuário ao carregar a página
+    onMount(() => {
+        // Verificar se há dados de usuário nos cookies
+        const userId = getCookie('userId');
+        if (userId && !userStore.value.userId) {
+            // Carregar dados do cookie para o userStore
+            userStore.value = {
+                ...userStore.value,
+                name: getCookie('userName') || '',
+                email: getCookie('userEmail') || '',
+                photoURL: getCookie('userPhotoURL') || '',
+                userId: userId
+            };
+            console.log('Dados do usuário restaurados dos cookies', userStore.value);
+        }
+
+        // Verificar autenticação do Firebase
+        const auth = getAuth();
+        const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+            if (firebaseUser && !userStore.value.photoURL) {
+                console.log('Firebase Auth: usuário logado na página de Anúncios');
+                try {
+                    await persistenciaUser({
+                        ...firebaseUser,
+                        name: firebaseUser.displayName || '',
+                        userId: firebaseUser.uid
+                    } as any, false);
+                } catch (error) {
+                    console.error('Erro ao persistir usuário do Firebase:', error);
+                }
+            }
+        });
+        
+        // Limpar listener ao desmontar
+        return () => unsubscribe();
+    });
 
     // Constantes e estados
     const plans = [
@@ -293,13 +335,11 @@ import avatardep1 from '$lib/images/avatardep1.jpg';
                             {plan.buttonText}
                         </button> -->
                         
-                        <button 
+                        <div 
                         
                         class="mt-8 block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3 px-4 text-center transition-colors">
-                        <a href="{plan.link}">
-                            {plan.buttonText}
-                        </a>
-                    </button>
+                        <Assinatura />
+                    </div>
                         
                     </div>
                 {/each}

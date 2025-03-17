@@ -2,8 +2,9 @@
 	import  supabase  from '$lib/supabaseClient';
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
-    import { getAuth, type User } from 'firebase/auth';
+    import { getAuth, type User, onAuthStateChanged } from 'firebase/auth';
     import { userStore } from '../../stores/userStore.svelte';
+    import { subscribeToAuthState, checkAuthState, logout } from '$lib/services/authService.svelte';
     
     console.log(userStore);
     import { 
@@ -41,6 +42,7 @@
     import test from '$lib/images/bitar.png'
 	import Promocoes from '$lib/componets/Promocoes.svelte';
 	import Mensagens from '$lib/componets/Mensagens.svelte';
+	import Produtc from '$lib/componets/Produtc.svelte';
     // Estado do usuário e comércio
      
     let usuario = { nome: '', email: '', foto: '' , telefone: ''};
@@ -97,32 +99,24 @@
     let isAddingPromocao = false;
   
     const auth = getAuth();
-    // console.log('aaaaa:', auth);
-    // console.log('auth:', auth);
-    const userId = auth.currentUser?.uid;
-    onMount(async () => {
-      if (!userId) {
-        goto('/login');
-        return;
-      }
-      
+    let authUser: User | null = null;
+    
+    async function carregarDadosComercio(userId: string) {
       try {
         // Carregar dados do usuário
         const userResponse = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
         const userData = await userResponse.json();
-        // console.log("userData",userResponse);
-        console.log("es",userData);
+        console.log("es", userData);
+        
         // informacoes do usuario
         if (userData) {
           usuario = {
             nome: userData.comerciante.nome || 'Comerciante',
             email: userData.comerciante.email || 'email@exemplo.com',
             foto: userData.comerciante.foto || '/placeholder.svg?height=40&width=40',
-            // telefone: userData.comerciante.telefone || 'Telefone não cadastrado'
             telefone: userData.comerciante.telefone || 'Telefone não cadastrados'
           };
           console.log("usuario", userData.comerciante.telefone);
-          // console.log("1", userData.comerciante.foto);
         }
         
         // Carregar dados do comércio
@@ -141,7 +135,6 @@
             email: comercioData.comerciante.email || 'email@exemplo.com',
             dataCadastro: formatarData(comercioData.comerciante.criado_em) || formatarData(new Date()),
             visualizacoes: comercioData.comerciante.visualizacoes || Math.floor(Math.random() * 100),
-         
           };
           console.log("comercio", comercioData.comerciante.telefone);
         }
@@ -235,6 +228,31 @@
       } finally {
         isLoading = false;
       }
+    }
+    
+    onMount(() => {
+      // Verifica o estado de autenticação e configura o listener
+      checkAuthState({});
+      
+      // Listener para mudanças no estado de autenticação
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          authUser = user;
+          
+          // Inicializar campos do usuário
+          nome = user.displayName || '';
+          email = user.email || '';
+          
+          // Carregar dados do comércio
+          carregarDadosComercio(user.uid);
+        } else {
+          console.log('Usuário não autenticado, redirecionando para login');
+          goto('/login');
+        }
+      });
+      
+      // Cleanup listener quando o componente for desmontado
+      return () => unsubscribe();
     });
     
     function formatarData(data: string | number | Date) {
@@ -262,8 +280,14 @@
     }
     
     function handleLogout() {
-      // Implementar logout
-      goto('/login');
+      // Usar a função de logout do serviço de autenticação
+      logout().catch(error => {
+        console.error('Erro ao realizar logout:', error);
+        errorMessage = 'Erro ao sair da conta. Tente novamente.';
+        setTimeout(() => {
+          errorMessage = '';
+        }, 3000);
+      });
     }
     
     function salvarPerfil() {
@@ -341,92 +365,99 @@
     }
     // function pra atualizar dados do comerciante
     let nome = '';
-  let endereco = '';
-  let telefone = '';
-  let email = '';
-  let categoria = '';
-  let authUser: User | null = null;
+    let endereco = '';
+    let telefone = '';
+    let email = '';
+    let categoria = '';
 
-  onMount(async () => {
-    authUser = auth.currentUser;
-    if (authUser) {
-      nome = authUser.displayName || '';
-      email = authUser.email || '';
-    }
-  });
-
-async function pegarTokenUsuario() {
-    const user = auth.currentUser;
-    if (user) {
-        await user.getIdToken(true); // Força a atualização do token
-        return await user.getIdToken();
-    }
-    throw new Error("Usuário não autenticado");
-}
-
-
-async function atualizarComerciante(
-  idComerciante: string,
-  nome: string,
-  email: string,
-  endereco: string,
-  telefone: string,
-  categoria: string
-) {
-  // Pegando o token do usuário
-  const token = await pegarTokenUsuario();
-  
-  // Verificando os dados antes de enviar
-  console.log("Dados a serem enviados para o backend:", {
-    idComerciante, nome, email, endereco, telefone, categoria
-  });
-
-  try {
-    // Enviando a requisição PUT
-    const response = await fetch('http://localhost:3000/painel/meu-comercio/atualizar-comercio', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        idComerciante, // Corrigido para incluir o ID no body da requisição
-        nome,
-        endereco,
-        telefone,
-        email,
-        categoria
-      })
-    });
-
-    // Logando o token e a resposta do servidor
-    console.log("Token enviado:", token);
-    console.log("Resposta do servidor:", response);
-
-    // Verificando se a resposta do servidor está ok
-    if (!response.ok) {
-      const errorText = await response.text(); // Obtém o texto da resposta de erro
-      console.error("Erro na resposta do servidor:", errorText);
-      throw new Error(`Erro: ${response.status} - ${errorText}`);
+    async function pegarTokenUsuario() {
+      if (authUser) {
+        await authUser.getIdToken(true); // Força a atualização do token
+        return await authUser.getIdToken();
+      }
+      throw new Error("Usuário não autenticado");
     }
 
-    // Convertendo a resposta em JSON
-    const data = await response.json();
-    console.log("Comerciante atualizado com sucesso:", data);
+    async function atualizarComerciante(
+      idComerciante: string,
+      nome: string,
+      email: string,
+      endereco: string,
+      telefone: string,
+      categoria: string
+    ) {
+      try {
+        // Pegando o token do usuário
+        const token = await pegarTokenUsuario();
+        
+        // Verificando os dados antes de enviar
+        console.log("Dados a serem enviados para o backend:", {
+          idComerciante, nome, email, endereco, telefone, categoria
+        });
 
-    // Se necessário, aqui você pode atualizar a interface do usuário com os dados recebidos
-    // Exemplo: setComerciante(data);
+        // Enviando a requisição PUT
+        const response = await fetch('http://localhost:3000/painel/meu-comercio/atualizar-comercio', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            idComerciante, // Corrigido para incluir o ID no body da requisição
+            nome,
+            endereco,
+            telefone,
+            email,
+            categoria
+          })
+        });
 
-  } catch (error) {
-    // Tratando qualquer erro que ocorrer
-    console.error("Erro ao atualizar comerciante:", (error as Error).message);
-  }
-}
+        // Logando o token e a resposta do servidor
+        console.log("Token enviado:", token);
+        console.log("Resposta do servidor:", response);
 
+        // Verificando se a resposta do servidor está ok
+        if (!response.ok) {
+          const errorText = await response.text(); // Obtém o texto da resposta de erro
+          console.error("Erro na resposta do servidor:", errorText);
+          throw new Error(`Erro: ${response.status} - ${errorText}`);
+        }
 
+        // Convertendo a resposta em JSON
+        const data = await response.json();
+        console.log("Comerciante atualizado com sucesso:", data);
+        
+        // Atualizando informações locais com os novos dados
+        if (data && data.comerciante) {
+          usuario.nome = nome;
+          usuario.email = email;
+          usuario.telefone = telefone;
+          
+          comercio.nome = nome;
+          comercio.email = email;
+          comercio.endereco = endereco;
+          comercio.telefone = telefone;
+          comercio.categoria = categoria;
+        }
+        
+        // Exibindo mensagem de sucesso
+        successMessage = "Dados do comércio atualizados com sucesso!";
+        setTimeout(() => {
+          successMessage = '';
+        }, 3000);
+        
+        // Fechando o modo de edição
+        isEditingPerfil = false;
 
-
-
+      } catch (error) {
+        // Tratando qualquer erro que ocorrer
+        console.error("Erro ao atualizar comerciante:", (error as Error).message);
+        errorMessage = `Erro ao atualizar dados: ${(error as Error).message}`;
+        setTimeout(() => {
+          errorMessage = '';
+        }, 5000);
+      }
+    }
   </script>
   
   <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -540,6 +571,7 @@ async function atualizarComerciante(
             </div>
           </div>
           <div class="mt-3 space-y-1">
+            <!-- svelte-ignore a11y_invalid_attribute -->
             <a 
               href="#" 
               on:click|preventDefault={handleLogout}
@@ -1076,182 +1108,7 @@ async function atualizarComerciante(
               
               <!-- Produtos/Serviços -->
               {#if activeTab === 'produtos'}
-                <div>
-                  <div class="flex justify-between items-center">
-                    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Produtos e Serviços</h1>
-                    <button 
-                      on:click={() => isAddingProduto = !isAddingProduto}
-                      class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                    >
-                      <Plus class="h-5 w-5 mr-1" />
-                      Adicionar Produto
-                    </button>
-                  </div>
-                  
-                  {#if isAddingProduto}
-                    <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
-                      <div class="px-4 py-5 sm:p-6">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
-                          Novo Produto/Serviço
-                        </h3>
-                        <div class="mt-5 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                          <div class="sm:col-span-3">
-                            <label for="nome-produto" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                              Nome do Produto/Serviço
-                            </label>
-                            <div class="mt-1">
-                              <input 
-                                type="text" 
-                                id="nome-produto" 
-                                bind:value={novoProduto.nome}
-                                class="shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
-                              />
-                            </div>
-                          </div>
-                          
-                          <div class="sm:col-span-3">
-                            <label for="preco" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                              Preço
-                            </label>
-                            <div class="mt-1">
-                              <input 
-                                type="text" 
-                                id="preco" 
-                                bind:value={novoProduto.preco}
-                                placeholder="R$ 0,00"
-                                class="shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
-                              />
-                            </div>
-                          </div>
-                          
-                          <div class="sm:col-span-6">
-                            <label for="descricao-produto" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                              Descrição
-                            </label>
-                            <div class="mt-1">
-                              <textarea 
-                                id="descricao-produto" 
-                                rows="3" 
-                                bind:value={novoProduto.descricao}
-                                class="shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
-                              ></textarea>
-                            </div>
-                          </div>
-                          
-                          <div class="sm:col-span-6">
-                            <label for="imagem" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                              URL da Imagem
-                            </label>
-                            <div class="mt-1">
-                              <input 
-                                type="text" 
-                                id="imagem" 
-                                bind:value={novoProduto.imagem}
-                                class="shadow-sm focus:ring-purple-500 focus:border-purple-500 block w-full sm:text-sm border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md"
-                              />
-                            </div>
-                          </div>
-                          
-                          <div class="sm:col-span-6">
-                            <div class="flex items-start">
-                              <div class="flex items-center h-5">
-                                <input 
-                                  id="destaque" 
-                                  type="checkbox" 
-                                  bind:checked={novoProduto.destaque}
-                                  class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded"
-                                />
-                              </div>
-                              <div class="ml-3 text-sm">
-                                <label for="destaque" class="font-medium text-gray-700 dark:text-gray-300">Produto em destaque</label>
-                                <p class="text-gray-500 dark:text-gray-400">Marque esta opção para exibir este produto em destaque na sua página.</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div class="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse">
-                          <button 
-                            type="button" 
-                            on:click={adicionarProduto}
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm"
-                          >
-                            Adicionar
-                          </button>
-                          <button 
-                            type="button" 
-                            on:click={() => isAddingProduto = false}
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-700 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:mt-0 sm:w-auto sm:text-sm"
-                          >
-                            Cancelar
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  {/if}
-                  
-                  <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
-                    <div class="px-4 py-5 sm:px-6">
-                      <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
-                        Seus Produtos e Serviços
-                      </h3>
-                      <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
-                        Gerencie os produtos e serviços oferecidos pelo seu comércio.
-                      </p>
-                    </div>
-                    <div class="border-t border-gray-200 dark:border-gray-700">
-                      {#if produtos.length === 0}
-                        <div class="px-4 py-5 sm:px-6 text-center">
-                          <p class="text-sm text-gray-500 dark:text-gray-400">
-                            Você ainda não cadastrou nenhum produto ou serviço.
-                          </p>
-                        </div>
-                      {:else}
-                        <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-                          {#each produtos as produto}
-                            <li class="px-4 py-4 sm:px-6">
-                              <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                  <div class="flex-shrink-0 h-12 w-12">
-                                    <img class="h-12 w-12 rounded-md object-cover" src={produto.imagem || "/placeholder.svg"} alt={produto.nome} />
-                                  </div>
-                                  <div class="ml-4">
-                                    <div class="flex items-center">
-                                      <h4 class="text-sm font-medium text-gray-900 dark:text-white">{produto.nome}</h4>
-                                      {#if produto.destaque}
-                                        <span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
-                                          Destaque
-                                        </span>
-                                      {/if}
-                                    </div>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">{produto.preco}</p>
-                                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400 line-clamp-1">{produto.descricao}</p>
-                                  </div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                  <span class="text-xs text-gray-500 dark:text-gray-400 flex items-center">
-                                    <Eye class="h-3 w-3 mr-1" /> {produto.visualizacoes}
-                                  </span>
-                                  <button 
-                                    class="p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                                  >
-                                    <Edit class="h-5 w-5" />
-                                  </button>
-                                  <button 
-                                    on:click={() => removerProduto(produto.id)}
-                                    class="p-1 rounded-full text-red-400 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                                  >
-                                    <Trash2 class="h-5 w-5" />
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                          {/each}
-                        </ul>
-                      {/if}
-                    </div>
-                  </div>
-                </div>
+                <Produtc />
               {/if}
               
               <!-- Mensagens -->
@@ -1405,7 +1262,6 @@ async function atualizarComerciante(
     /* Adicione estilos personalizados aqui, se necessário */
     .line-clamp-1 {
       display: -webkit-box;
-      -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
