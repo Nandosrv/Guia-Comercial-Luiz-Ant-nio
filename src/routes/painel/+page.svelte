@@ -6,7 +6,7 @@
     import { userStore } from '../../stores/userStore.svelte';
     import { subscribeToAuthState, checkAuthState, logout } from '$lib/services/authService.svelte';
     
-    console.log(userStore);
+    // console.log("userStore",userStore);
     import { 
       Store, 
       Home, 
@@ -58,7 +58,8 @@
       status: 'Aberto',
       dataCadastro: '',
       visualizacoes: 0,
-      contatos: 0
+      contatos: 0,
+      fotos: []
     };
     
     // Estado da UI
@@ -81,6 +82,11 @@
     let produtos: any[] = [];
     let novoProduto = { nome: '', preco: '', descricao: '', imagem: '',telefone: '', destaque: false };
     let isAddingProduto = false;
+    
+    // Fotos do comércio
+    let novaFoto: File | null = null;
+    let previewFotos: string[] = [];
+    let selectedFile: File | null = null;
     
     // Lista de mensagens
     let mensagens: any[] = [];
@@ -109,21 +115,21 @@
         console.log("es", userData);
         
         // informacoes do usuario
-        if (userData) {
-          usuario = {
-            nome: userData.comerciante.nome || 'Comerciante',
-            email: userData.comerciante.email || 'email@exemplo.com',
-            foto: userData.comerciante.foto || '/placeholder.svg?height=40&width=40',
-            telefone: userData.comerciante.telefone || 'Telefone não cadastrados'
-          };
-          console.log("usuario", userData.comerciante.telefone);
-        }
+        // if (userData) {
+        //   usuario = {
+        //     nome: userData.comerciante.nome || 'Comerciante',
+        //     email: userData.comerciante.email || 'email@exemplo.com',
+        //     foto: userData.comerciante.foto || '/placeholder.svg?height=40&width=40',
+        //     telefone: userData.comerciante.telefone || 'Telefone não cadastrados'
+        //   };
+        //   console.log("usuario", userData.comerciante.telefone);
+        // }
         
         // Carregar dados do comércio
         const comercioResponse = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
         const comercioData = await comercioResponse.json();
         
-        if (comercioData) {
+        if (comercioData && comercioData.comerciante) {
           comercio = {
             ...comercio,
             id: comercioData.comerciante.id || '',
@@ -137,6 +143,15 @@
             visualizacoes: comercioData.comerciante.visualizacoes || Math.floor(Math.random() * 100),
           };
           console.log("comercio", comercioData.comerciante.telefone);
+          
+          // Verificar se o comércio tem foto e carregar no preview
+          if (comercioData.comerciante['photo-comercio']) {
+            console.log("Foto do comércio encontrada:", comercioData.comerciante['photo-comercio'].substring(0, 50) + "...");
+            previewFotos = [comercioData.comerciante['photo-comercio']];
+          } else {
+            console.log("Comércio não possui foto");
+            previewFotos = [];
+          }
         }
         
         // Carregar estatísticas
@@ -232,7 +247,7 @@
     
     onMount(() => {
       // Verifica o estado de autenticação e configura o listener
-      checkAuthState({});
+      // checkAuthState({});
       
       // Listener para mudanças no estado de autenticação
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -298,6 +313,33 @@
       setTimeout(() => {
         successMessage = '';
       }, 3000);
+    }
+    
+    // Função para lidar com upload de fotos
+    function handleFileUpload(event: Event): void {
+      const target = event.target as HTMLInputElement;
+      const file = target.files?.[0];
+      if (file) {
+        // Armazenar referência ao arquivo selecionado
+        selectedFile = file;
+        console.log('Arquivo selecionado:', file.name, 'tamanho:', Math.round(file.size / 1024), 'KB');
+        
+        // Não criar preview automaticamente - isso será feito ao clicar no botão "Aplicar Foto"
+      }
+    }
+    
+    // Função para remover foto
+    function removerFoto(index: number): void {
+      previewFotos = [];
+      selectedFile = null;
+      
+      // Limpar o input file para permitir selecionar o mesmo arquivo novamente
+      const fileInput = document.getElementById('foto-upload') as HTMLInputElement;
+      if (fileInput) {
+        fileInput.value = '';
+      }
+      
+      console.log('Foto removida e seleção limpa');
     }
     
     function adicionarProduto() {
@@ -390,26 +432,35 @@
         // Pegando o token do usuário
         const token = await pegarTokenUsuario();
         
+        // Criando um objeto FormData para enviar os dados incluindo a foto
+        const formData = new FormData();
+        formData.append('nome', nome);
+        formData.append('email', email);
+        formData.append('endereco', endereco);
+        formData.append('telefone', telefone);
+        formData.append('categoria', categoria);
+        
+        // Se tiver um arquivo selecionado, adiciona ao FormData
+        if (selectedFile) {
+          formData.append('foto', selectedFile);
+          console.log('Foto adicionada ao FormData:', selectedFile.name);
+        }
+        
         // Verificando os dados antes de enviar
         console.log("Dados a serem enviados para o backend:", {
-          idComerciante, nome, email, endereco, telefone, categoria
+          idComerciante, nome, email, endereco, telefone, categoria, 
+          temFoto: !!selectedFile,
+          fotoNome: selectedFile?.name
         });
 
-        // Enviando a requisição PUT
+        // Enviando a requisição PUT com FormData (não precisa definir Content-Type)
         const response = await fetch('http://localhost:3000/painel/meu-comercio/atualizar-comercio', {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
+            // Não inclua Content-Type aqui, o navegador vai definir automaticamente com boundary para o FormData
           },
-          body: JSON.stringify({
-            idComerciante, // Corrigido para incluir o ID no body da requisição
-            nome,
-            endereco,
-            telefone,
-            email,
-            categoria
-          })
+          body: formData
         });
 
         // Logando o token e a resposta do servidor
@@ -438,7 +489,16 @@
           comercio.endereco = endereco;
           comercio.telefone = telefone;
           comercio.categoria = categoria;
+          
+          // Atualizando a foto do comércio, se disponível
+          if (data.comerciante['photo-comercio']) {
+            // Já temos o preview criado no momento do upload, não precisamos fazer nada aqui
+            console.log('URL da foto salva:', data.comerciante['photo-comercio']);
+          }
         }
+        
+        // Limpar o arquivo selecionado após o upload bem-sucedido
+        selectedFile = null;
         
         // Exibindo mensagem de sucesso
         successMessage = "Dados do comércio atualizados com sucesso!";
@@ -560,6 +620,13 @@
         >
           Configurações
         </a>
+        <!-- <a 
+        href="#Planos" 
+        on:click|preventDefault={() => { activeTab = 'Planos'; isMobileMenuOpen = false; }}
+        class={`${activeTab === 'Planos' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+      >
+        Planos
+      </a> -->
         <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
           <div class="flex items-center px-4">
             <div class="flex-shrink-0">
@@ -654,7 +721,15 @@
                   <Settings class={`${activeTab === 'configuracoes' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Configurações</span>
                 </a>
-                
+                <!-- <a 
+                href="#Planos" 
+                on:click={() => {
+                  goto('/painel/planos')
+              }} 
+                class={`${activeTab === 'Planos' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+              >
+                Planos
+              </a> -->
                 <div class="pt-8">
                   <button 
                     on:click={handleLogout}
@@ -1006,17 +1081,93 @@
                               Breve descrição do seu comércio. Máximo 500 caracteres.
                             </p>
                           </div>
+                          
+                          <div class="sm:col-span-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                              Fotos do Comércio
+                            </label>
+                            <div class="mt-2">
+                              <div class="flex items-center flex-wrap gap-2">
+                                <label for="foto-upload" class="cursor-pointer bg-white dark:bg-gray-700 py-2 px-3 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none">
+                                  <span>Selecionar Foto</span>
+                                  <input id="foto-upload" name="foto-upload" type="file" accept="image/*" class="sr-only" on:change={handleFileUpload} />
+                                </label>
+                                
+                                {#if selectedFile}
+                                  <span class="text-sm text-green-600 dark:text-green-400">
+                                    Arquivo selecionado: {selectedFile.name} ({Math.round(selectedFile.size / 1024)} KB)
+                                  </span>
+                                  
+                                  <button 
+                                    type="button"
+                                    on:click={() => {
+                                      // Atualiza a prévia antes de salvar ou atualizar
+                                      if (selectedFile) {
+                                        const reader = new FileReader();
+                                        reader.onload = (e) => {
+                                          if (e.target && e.target.result) {
+                                            previewFotos = [e.target.result as string];
+                                          }
+                                        };
+                                        reader.readAsDataURL(selectedFile);
+                                      }
+                                    }}
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                  >
+                                    Aplicar Foto
+                                  </button>
+
+                                  <p class="w-full mt-1 text-sm text-amber-600 dark:text-amber-400">
+                                    Importante: Clique em "Aplicar Foto" para visualizar a imagem antes de salvar.
+                                  </p>
+                                {/if}
+                                
+                                <p class="ml-3 text-xs text-gray-500 dark:text-gray-400">
+                                  JPG, PNG, ou GIF de até 10MB
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <!-- Pré-visualização das fotos -->
+                            {#if previewFotos.length > 0}
+                              <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                                {#each previewFotos as foto, index}
+                                  <div class="relative">
+                                    <img src={foto} alt="Foto do comércio" class="h-24 w-full object-cover rounded-md" />
+                                    <button 
+                                      type="button" 
+                                      on:click={() => removerFoto(index)}
+                                      class="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 rounded-full p-1 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                    >
+                                      <X class="h-4 w-4" />
+                                    </button>
+                                  </div>
+                                {/each}
+                              </div>
+                            {:else}
+                              <div class="mt-4 p-4 border border-dashed border-gray-300 dark:border-gray-600 rounded-md text-center">
+                                <Image class="h-8 w-8 mx-auto text-gray-400" />
+                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                  Nenhuma foto adicionada. Selecione um arquivo e clique em "Aplicar Foto" para visualizar.
+                                </p>
+                              </div>
+                            {/if}
+                          </div>
                         </div>
                         
                         <div class="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse">
-                          <button class="shadow-sm focus:ring-purple-500 focus:border-purple-500
-                          block w-full sm:text-sm border-gray-300
-                            dark:border-gray-600 dark:bg-gray-700
-                              dark:text-white rounded-md"
-                              on:click={() => atualizarComerciante(comercio.id, comercio.nome, comercio.email, comercio.endereco, comercio.telefone, comercio.categoria)}
-                            >
-                            Atualizar Comerciante
-                        </button>
+                          <button 
+                            type="button"
+                            on:click={() => atualizarComerciante(comercio.id, comercio.nome, comercio.email, comercio.endereco, comercio.telefone, comercio.categoria)}
+                            class="w-full inline-flex justify-center items-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-purple-600 text-base font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:ml-3 sm:w-auto sm:text-sm"
+                          >
+                            {#if selectedFile && previewFotos.length > 0}
+                              <Image class="h-4 w-4 mr-2" />
+                              Salvar com foto
+                            {:else}
+                              Salvar alterações
+                            {/if}
+                          </button>
                           
                           <button 
                             type="button"
@@ -1076,8 +1227,7 @@
                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
                               Horário de Funcionamento
                             </dt>
-                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2 flex items-center">
-                              <Clock class="h-4 w-4 text-gray-400 mr-1" />
+                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
                               {comercio.horario}
                             </dd>
                           </div>
@@ -1087,6 +1237,34 @@
                             </dt>
                             <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
                               {comercio.descricao || 'Nenhuma descrição fornecida.'}
+                            </dd>
+                          </div>
+                          <div class="bg-gray-50 dark:bg-gray-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                              Fotos
+                            </dt>
+                            <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
+                              {#if previewFotos.length > 0}
+                                <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                                  {#each previewFotos as foto}
+                                    <div class="relative">
+                                      <img src={foto} alt="Foto do comércio" class="h-24 w-full object-cover rounded-md shadow-sm" />
+                                      {#if isEditingPerfil}
+                                        <!-- Botão de remoção só aparece no modo de edição -->
+                                        <button 
+                                          type="button" 
+                                          on:click={() => removerFoto(0)} 
+                                          class="absolute top-0 right-0 -mt-2 -mr-2 bg-red-600 rounded-full p-1 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                        >
+                                          <X class="h-4 w-4" />
+                                        </button>
+                                      {/if}
+                                    </div>
+                                  {/each}
+                                </div>
+                              {:else}
+                                <p class="text-gray-500 dark:text-gray-400">Nenhuma foto adicionada.</p>
+                              {/if}
                             </dd>
                           </div>
                           <div class="bg-gray-50 dark:bg-gray-700 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -1251,6 +1429,10 @@
                   </div>
                 </div>
               {/if}
+              <!-- Planos -->
+              <!-- {#if activeTab === 'Planos'}
+                <button class="bg-purple-500 text-white px-4 py-2 rounded-md" on:click={() => goto('/painel/planos')}>Planos</button>
+              {/if} -->
             </div>
           </div>
         {/if}

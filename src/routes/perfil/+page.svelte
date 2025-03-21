@@ -7,6 +7,7 @@
 	import { user, userStore } from '../../stores/userStore.svelte.js';
 	import { fade, slide } from 'svelte/transition';
 	import { getAuth, updateProfile } from 'firebase/auth';
+
 	import { goto } from '$app/navigation';
 
 	// Estados
@@ -169,10 +170,10 @@
 	async function loadUserData() {
 		try {
 			const auth = getAuth();
+
 			// console.log("auth",auth);
 			const firebaseUser = auth.currentUser;
 			// console.log("firebaseUser",firebaseUser);
-
 			if (!firebaseUser?.uid) {
 				console.log('Usuário não autenticado 03');
 				return;

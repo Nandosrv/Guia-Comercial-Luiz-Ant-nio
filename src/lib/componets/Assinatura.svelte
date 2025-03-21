@@ -21,6 +21,76 @@
 	let tokenInfo = '';
 	let mostrarDetalhesErro = false;
 	let ultimoPaymentId = '';
+	let verificandoPagamento = false;
+	let tempoRestante = 120; // 2 minutos em segundos
+	let intervalId: ReturnType<typeof setInterval> | null = null;
+	let timeoutId: ReturnType<typeof setTimeout> | null = null;
+	let statusPagamento = 'pendente';
+
+	// Verificar parâmetros de URL ao montar o componente
+	onMount(() => {
+		// Processar parâmetros da URL para verificar o status do pagamento
+		const urlParams = new URLSearchParams(window.location.search);
+		const status = urlParams.get('status');
+		const paymentId = urlParams.get('payment_id');
+		
+		if (status && paymentId) {
+			console.log(`Detectado redirecionamento de pagamento: status=${status}, payment_id=${paymentId}`);
+			
+			if (status === 'success' || status === 'approved') {
+				// Salvar o ID do pagamento e redirecionar para o formulário de comércio
+				ultimoPaymentId = paymentId;
+				setTimeout(() => {
+					alert('Pagamento aprovado! Redirecionando para formulário de comércio.');
+					goto('/formulario-comercio');
+				}, 500);
+			} else if (status === 'pending') {
+				// Pagamento pendente, iniciar verificação
+				ultimoPaymentId = paymentId;
+				iniciarVerificacaoPagamento();
+			} else {
+				// Falha no pagamento
+				setTimeout(() => {
+					alert('Houve um problema com o pagamento. Tente novamente ou escolha outra forma de pagamento.');
+				}, 500);
+			}
+		}
+		
+		// Recuperar pagamento salvo no localStorage
+		const pagamentoSalvo = localStorage.getItem('ultimoPagamento');
+		if (pagamentoSalvo) {
+			try {
+				const { id, timestamp } = JSON.parse(pagamentoSalvo);
+				const tempoDecorrido = Date.now() - timestamp;
+				
+				// Se o pagamento foi iniciado há menos de 10 minutos
+				if (tempoDecorrido < 10 * 60 * 1000) {
+					ultimoPaymentId = id;
+					verificarPagamento().then(aprovado => {
+						if (aprovado) {
+							localStorage.removeItem('ultimoPagamento');
+							alert('Pagamento aprovado! Redirecionando para formulário de comércio.');
+							goto('/formulario-comercio');
+						} else if (tempoDecorrido < 2 * 60 * 1000) {
+							// Se ainda estiver dentro do período de 2 minutos, retomar verificação
+							iniciarVerificacaoPagamento();
+						}
+					});
+				} else {
+					// Limpar pagamentos expirados
+					localStorage.removeItem('ultimoPagamento');
+				}
+			} catch (e) {
+				console.error('Erro ao processar pagamento salvo:', e);
+				localStorage.removeItem('ultimoPagamento');
+			}
+		}
+		
+		// Limpar quando o componente for desmontado
+		return () => {
+			limparVerificacaoPagamento();
+		};
+	});
 
 	// Função para testar a conexão com o Mercado Pago
 	async function testarConexao() {
@@ -67,26 +137,119 @@
 	}
 
 	// Função para verificar status de um pagamento específico
-	async function verificarPagamento() {
+	async function verificarPagamento(paymentId = ultimoPaymentId): Promise<boolean> {
 		try {
-			if (!ultimoPaymentId) {
-				alert('Nenhum ID de pagamento disponível para verificar');
-				return;
+			if (!paymentId) {
+				console.log('Nenhum ID de pagamento disponível para verificar');
+				return false;
 			}
 			
-			loading = true;
-			const response = await axios.get(`http://localhost:3000/mercadopago/payment/${ultimoPaymentId}`);
+			statusPagamento = 'verificando';
+			console.log(`Verificando status do pagamento ID ${paymentId}...`);
+			
+			const response = await axios.get(`http://localhost:3000/mercadopago/payment/${paymentId}`);
 			
 			if (response.data.success) {
-				alert(`Status do pagamento ${ultimoPaymentId}: ${response.data.payment.status}`);
+				const status = response.data.payment.status;
+				statusPagamento = status;
+				console.log(`Status do pagamento ${paymentId}: ${status}`);
+				
+				// Se o pagamento foi aprovado, retorna true
+				if (status === 'approved') {
+					console.log('Pagamento APROVADO! 🎉');
+					return true;
+				}
 			} else {
-				alert('Falha ao verificar pagamento: ' + response.data.error);
+				statusPagamento = 'erro';
+				console.error('Falha ao verificar pagamento: ' + response.data.error);
+			}
+			return false;
+		} catch (error) {
+			statusPagamento = 'erro';
+			console.error('Erro ao verificar pagamento:', error);
+			return false;
+		}
+	}
+
+	// Função wrapper para usar no evento on:click
+	async function handleVerificarPagamento() {
+		try {
+			loading = true;
+			const aprovado = await verificarPagamento();
+			if (aprovado) {
+				localStorage.removeItem('ultimoPagamento');
+				alert(`Pagamento ${ultimoPaymentId} aprovado! Redirecionando...`);
+				goto('/formulario-comercio');
+			} else {
+				alert(`Pagamento ${ultimoPaymentId} - Status: ${statusPagamento}`);
 			}
 		} catch (error) {
 			console.error('Erro ao verificar pagamento:', error);
 			alert('Erro ao verificar status do pagamento');
 		} finally {
 			loading = false;
+		}
+	}
+
+	// Função para iniciar a verificação temporizada do pagamento
+	function iniciarVerificacaoPagamento() {
+		if (verificandoPagamento || !ultimoPaymentId) return;
+		
+		verificandoPagamento = true;
+		tempoRestante = 120; // Resetar para 2 minutos
+		
+		// Salvar o ID do pagamento no localStorage com timestamp
+		localStorage.setItem('ultimoPagamento', JSON.stringify({
+			id: ultimoPaymentId,
+			timestamp: Date.now()
+		}));
+		
+		// Verificar o pagamento a cada 5 segundos (mais frequente)
+		intervalId = setInterval(async () => {
+			tempoRestante -= 5;
+			
+			// Tentar verificar o pagamento
+			const aprovado = await verificarPagamento();
+			
+			if (aprovado) {
+				// Se aprovado, limpar os intervalos e redirecionar
+				limparVerificacaoPagamento();
+				// Limpar do localStorage, já que o pagamento foi aprovado
+				localStorage.removeItem('ultimoPagamento');
+				alert('Pagamento aprovado! Redirecionando para formulário de comércio.');
+				// mandar pro banco de dados o id do pagamento
+				goto('/formulario-comercio');
+			} else if (tempoRestante <= 0) {
+				// Se o tempo acabou, limpar os intervalos e redirecionar
+				limparVerificacaoPagamento();
+				// Não limpar do localStorage, o usuário ainda pode concluir o pagamento depois
+				alert('Tempo de espera esgotado. Redirecionando para anúncios.');
+				goto('/Anuncios-Promocao');
+			}
+		}, 5000); // Verificar a cada 5 segundos
+		
+		// Definir um timeout para encerrar após 2 minutos (120000ms)
+		timeoutId = setTimeout(() => {
+			if (verificandoPagamento) {
+				limparVerificacaoPagamento();
+				alert('Tempo de espera esgotado. Redirecionando para anúncios.');
+				goto('/Anuncios-Promocao');
+			}
+		}, 120000);
+	}
+
+	// Função para limpar a verificação de pagamento
+	function limparVerificacaoPagamento() {
+		verificandoPagamento = false;
+		
+		if (intervalId) {
+			clearInterval(intervalId);
+			intervalId = null;
+		}
+		
+		if (timeoutId) {
+			clearTimeout(timeoutId);
+			timeoutId = null;
 		}
 	}
 
@@ -115,6 +278,10 @@
 			
 			console.log('Token de autenticação obtido');
 			
+			// Obter URL de redirecionamento
+			const currentUrl = window.location.origin;
+			const redirectUrl = `${currentUrl}/redirecionamento-pagamento`;
+			
 			// Dados básicos para o pagamento
 			const paymentData = {
 				transaction_amount: 1, // 1 real para teste
@@ -129,6 +296,7 @@
 				},
 				description: 'Assinatura Guia Comercial',
 				userId: userStore.value.userId
+				// Não incluir back_urls e auto_return pois causam erro no Mercado Pago com PIX
 			};
 			
 			// Usando o endpoint que utiliza o SDK do Mercado Pago
@@ -160,6 +328,17 @@
 				
 				// Armazenar o ID do pagamento para verificação posterior
 				ultimoPaymentId = response.data.payment_id;
+				
+				
+				// Salvar no localStorage com timestamp
+				localStorage.setItem('ultimoPagamento', JSON.stringify({
+					id: ultimoPaymentId,
+					timestamp: Date.now()
+				}));
+				
+				// Iniciar verificação temporizada do pagamento
+				iniciarVerificacaoPagamento();
+
 				
 				// Opcional: abrir a URL de pagamento em uma nova aba
 				window.open(response.data.payment_url, '_blank');
@@ -226,7 +405,7 @@
 			
 			{#if ultimoPaymentId}
 				<button 
-					on:click={verificarPagamento} 
+					on:click={handleVerificarPagamento} 
 					class="text-sm text-blue-600 hover:underline"
 					disabled={loading}
 				>
@@ -275,6 +454,27 @@
 			<a href={qrCodeData.payment_url} target="_blank" class="text-blue-600 hover:underline text-sm">
 				Abrir página de pagamento
 			</a>
+			
+			<div class="mt-3 px-4 py-3 bg-yellow-50 border border-yellow-200 rounded-md text-yellow-700 text-sm">
+				<p class="font-medium">⚠️ Importante:</p>
+				<ol class="list-decimal mt-2 ml-5 text-left">
+					<li>Após efetuar o pagamento pelo QR Code, você será redirecionado automaticamente.</li>
+					<li>Se não for redirecionado, volte a esta página para concluir o processo.</li>
+					<li>O sistema verificará automaticamente o status do seu pagamento.</li>
+				</ol>
+			</div>
+			
+			{#if verificandoPagamento}
+				<div class="mt-3 p-2 bg-blue-50 rounded-md">
+					<p class="text-sm text-blue-700">
+						Aguardando confirmação do pagamento... ({Math.floor(tempoRestante / 60)}:{(tempoRestante % 60).toString().padStart(2, '0')})
+					</p>
+					<p class="text-xs text-blue-600 mt-1">Status atual: {statusPagamento}</p>
+					<div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+						<div class="bg-blue-600 h-2.5 rounded-full" style="width: {(tempoRestante / 120) * 100}%"></div>
+					</div>
+				</div>
+			{/if}
 		</div>
 	{/if}
 </div>
