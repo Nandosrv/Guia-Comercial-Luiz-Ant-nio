@@ -3,7 +3,7 @@
     import { onMount, type Snippet } from 'svelte';
     import { goto } from '$app/navigation';
     import { getAuth, type User, onAuthStateChanged } from 'firebase/auth';
-    import { userStore } from '../../../stores/userStore.svelte';
+    // import { userStore } from '../../../stores/userStore.svelte';
     import { subscribeToAuthState, checkAuthState, logout } from '$lib/services/authService.svelte';
     
     // console.log("userStore",userStore);
@@ -44,7 +44,7 @@
 	import Promocoes from '$lib/componets/Promocoes.svelte';
 	import Mensagens from '$lib/componets/Mensagens.svelte';
 	import Produtc from '$lib/componets/Produtc.svelte';
-	import type { LayoutData } from './$types';
+	// import type { LayoutData } from './$types';
     // Estado do usuário e comércio
     let { children } = $props();
     let usuario = { nome: '', email: '', foto: '' , telefone: ''};
@@ -64,15 +64,21 @@
     };
     
     // Estado da UI
-    let isLoading = false;
-    let activeTab = 'Planos';
-    let isMobileMenuOpen = false;
+    // svelte-ignore non_reactive_update
+        let isLoading = false;
+    // svelte-ignore non_reactive_update
+        let activeTab = 'Planos';
+    // svelte-ignore non_reactive_update
+        let isMobileMenuOpen = false;
     let isEditingPerfil = false;
-    let errorMessage = '';
-    let successMessage = '';
+    // svelte-ignore non_reactive_update
+        let errorMessage = '';
+    // svelte-ignore non_reactive_update
+        let successMessage = '';
     
     // Dados para o dashboard
-    let estatisticas = {
+    // svelte-ignore non_reactive_update
+        let estatisticas = {
       visualizacoes: { total: 0, percentual: 0 },
       contatos: { total: 0, percentual: 0 },
       produtos: { total: 0, percentual: 0 },
@@ -496,6 +502,7 @@
           
           <div class="-mr-2 flex items-center sm:hidden">
             <!-- Mobile menu button -->
+            <!-- svelte-ignore event_directive_deprecated -->
             <button 
               on:click={() => isMobileMenuOpen = !isMobileMenuOpen}
               class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500"
@@ -515,6 +522,7 @@
     <!-- Mobile menu, show/hide based on menu state -->
     {#if isMobileMenuOpen}
       <div class="sm:hidden bg-white dark:bg-gray-800 pt-2 pb-3 space-y-1">
+        <!-- svelte-ignore event_directive_deprecated -->
         <a 
           href="#dashboard" 
           on:click|preventDefault={() => { activeTab = 'dashboard'; isMobileMenuOpen = false; }}
@@ -522,6 +530,7 @@
         >
           Dashboard
         </a>
+        <!-- svelte-ignore event_directive_deprecated -->
         <a 
           href="#perfil" 
           on:click={() => {
@@ -532,6 +541,7 @@
        
         Meu Comércio
         </a>
+        <!-- svelte-ignore event_directive_deprecated -->
         <a 
           href="#produtos" 
           on:click|preventDefault={() => { activeTab = 'produtos'; isMobileMenuOpen = false; }}
@@ -539,6 +549,8 @@
         >
           Produtos/Serviços
         </a>
+        <!-- svelte-ignore event_directive_deprecated -->
+        <!-- svelte-ignore event_directive_deprecated -->
         <a 
           href="#mensagens" 
           on:click|preventDefault={() => { activeTab = 'mensagens'; isMobileMenuOpen = false; }}
@@ -550,7 +562,9 @@
               {estatisticas.mensagens.novas}
             </span>
           {/if}
+        <!-- svelte-ignore event_directive_deprecated -->
         </a>
+        <!-- svelte-ignore event_directive_deprecated -->
         <a 
           href="#promocoes" 
           on:click|preventDefault={() => { activeTab = 'promocoes'; isMobileMenuOpen = false; }}
@@ -558,6 +572,8 @@
         >
           Promoções
         </a>
+        <!-- svelte-ignore event_directive_deprecated -->
+        <!-- svelte-ignore event_directive_deprecated -->
         <a 
           href="#configuracoes" 
           on:click|preventDefault={() => { activeTab = 'configuracoes'; isMobileMenuOpen = false; }}
@@ -577,6 +593,8 @@
           </div>
           <div class="mt-3 space-y-1">
             <!-- svelte-ignore a11y_invalid_attribute -->
+            <!-- svelte-ignore event_directive_deprecated -->
+            <!-- svelte-ignore event_directive_deprecated -->
             <a 
               href="#" 
               on:click|preventDefault={handleLogout}
@@ -600,10 +618,14 @@
           <div class="flex flex-row  border border-gray-200 dark:border-gray-700">
             <!-- Sidebar (desktop) -->
             <div class="hidden lg:block lg:w-64 lg:mr-8 border-r border-gray-200 dark:border-gray-700">
+                <!-- svelte-ignore event_directive_deprecated -->
+                <!-- svelte-ignore event_directive_deprecated -->
               <nav class="space-y-1 border-r border-gray-200 dark:border-gray-700">
                 <a 
-                  href="#dashboard" 
-                  on:click|preventDefault={() => activeTab = 'dashboard'}
+                  href="#dashboard"                   
+                  on:click={() => {
+                    goto('/painel')
+                }} 
                   class={`${activeTab === 'dashboard' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Home class={`${activeTab === 'dashboard' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
@@ -613,7 +635,7 @@
                 <a 
                   href="#perfil" 
                   on:click={() => {
-                    goto('/painel')
+                    goto('/painel/meu-comercio')
                 }} 
                   class={`${activeTab === 'perfil' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
@@ -622,8 +644,10 @@
                 </a>
                 
                 <a 
-                  href="#produtos" 
-                  on:click|preventDefault={() => activeTab = 'produtos'}
+                  href="#produtos"                   
+                  on:click={() => {
+                    goto('/painel/produtos')
+                }}
                   class={`${activeTab === 'produtos' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Package class={`${activeTab === 'produtos' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
@@ -631,8 +655,10 @@
                 </a>
                 
                 <a 
-                  href="#mensagens" 
-                  on:click|preventDefault={() => activeTab = 'mensagens'}
+                  href="#mensagens"                   
+                  on:click={() => {
+                    goto('/painel/mensagens')
+                }}
                   class={`${activeTab === 'mensagens' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <MessageSquare class={`${activeTab === 'mensagens' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
@@ -645,8 +671,10 @@
                 </a>
                 
                 <a 
-                  href="#promocoes" 
-                  on:click|preventDefault={() => activeTab = 'promocoes'}
+                  href="#promocoes"                   
+                  on:click={() => {
+                    goto('/painel/promocoes')
+                }}
                   class={`${activeTab === 'promocoes' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Tag class={`${activeTab === 'promocoes' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
@@ -654,20 +682,24 @@
                 </a>
                 
                 <a 
-                  href="#configuracoes" 
-                  on:click|preventDefault={() => activeTab = 'configuracoes'}
+                  href="#configuracoes"                   
+                  on:click={() => {
+                    goto('/painel/configuracoes')
+                }}
                   class={`${activeTab === 'configuracoes' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Settings class={`${activeTab === 'configuracoes' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Configurações</span>
                 </a>
-                <!-- <a 
+              <a 
                 href="#Planos" 
-                on:click|preventDefault={() => { activeTab = 'Planos'; isMobileMenuOpen = false; }}
+                on:click={() => {
+                  goto('/painel/planos')
+              }} 
                 class={`${activeTab === 'Planos' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
               >
                 Planos
-              </a> -->
+              </a>
                 
                 <div class="pt-8">
                   <button 

@@ -3,7 +3,6 @@
     import { onMount } from 'svelte';
     import { goto } from '$app/navigation';
     import { getAuth, type User, onAuthStateChanged } from 'firebase/auth';
-    import { userStore } from '../../stores/userStore.svelte';
     import { subscribeToAuthState, checkAuthState, logout } from '$lib/services/authService.svelte';
     
     // console.log("userStore",userStore);
@@ -519,214 +518,130 @@
       }
     }
   </script>
-
 <div>
-  <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Dashboard</h1>
+  <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Configurações</h1>
   <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-    Visão geral do seu comércio
+    Gerencie as configurações da sua conta e do seu comércio.
   </p>
   
-  <!-- Stats -->
-  <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-    <!-- Visualizações -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <Eye class="h-6 w-6 text-gray-400" />
-          </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                Visualizações
-              </dt>
-              <dd>
-                <div class="text-lg font-medium text-gray-900 dark:text-white">
-                  {estatisticas.visualizacoes.total}
-                </div>
-              </dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <span class={`font-medium ${estatisticas.visualizacoes.percentual > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-            {estatisticas.visualizacoes.percentual > 0 ? '+' : ''}{estatisticas.visualizacoes.percentual}%
-          </span>
-          <span class="text-gray-500 dark:text-gray-400"> em relação ao mês anterior</span>
-        </div>
-      </div>
+  <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
+        Notificações
+      </h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
+        Configure como deseja receber notificações.
+      </p>
     </div>
-    
-    <!-- Contatos -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <Phone class="h-6 w-6 text-gray-400" />
+    <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:p-6">
+      <div class="space-y-6">
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input 
+              id="notificacao-email" 
+              type="checkbox" 
+              bind:checked={notificacoes.email}
+              class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded"
+            />
           </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                Contatos
-              </dt>
-              <dd>
-                <div class="text-lg font-medium text-gray-900 dark:text-white">
-                  {estatisticas.contatos.total}
-                </div>
-              </dd>
-            </dl>
+          <div class="ml-3 text-sm">
+            <label for="notificacao-email" class="font-medium text-gray-700 dark:text-gray-300">Notificações por e-mail</label>
+            <p class="text-gray-500 dark:text-gray-400">Receba notificações por e-mail sobre atividades importantes.</p>
           </div>
         </div>
-      </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <span class={`font-medium ${estatisticas.contatos.percentual > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-            {estatisticas.contatos.percentual > 0 ? '+' : ''}{estatisticas.contatos.percentual}%
-          </span>
-          <span class="text-gray-500 dark:text-gray-400"> em relação ao mês anterior</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Produtos -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <Package class="h-6 w-6 text-gray-400" />
+        
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input 
+              id="notificacao-app" 
+              type="checkbox" 
+              bind:checked={notificacoes.app}
+              class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded"
+            />
           </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                Produtos/Serviços
-              </dt>
-              <dd>
-                <div class="text-lg font-medium text-gray-900 dark:text-white">
-                  {estatisticas.produtos.total}
-                </div>
-              </dd>
-            </dl>
+          <div class="ml-3 text-sm">
+            <label for="notificacao-app" class="font-medium text-gray-700 dark:text-gray-300">Notificações no aplicativo</label>
+            <p class="text-gray-500 dark:text-gray-400">Receba notificações dentro do aplicativo.</p>
           </div>
         </div>
-      </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <span class={`font-medium ${estatisticas.produtos.percentual > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
-            {estatisticas.produtos.percentual > 0 ? '+' : ''}{estatisticas.produtos.percentual}%
-          </span>
-          <span class="text-gray-500 dark:text-gray-400"> novos produtos este mês</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Mensagens -->
-    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
-      <div class="p-5">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <MessageSquare class="h-6 w-6 text-gray-400" />
+        
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input 
+              id="notificacao-mensagem" 
+              type="checkbox" 
+              bind:checked={notificacoes.novaMensagem}
+              class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded"
+            />
           </div>
-          <div class="ml-5 w-0 flex-1">
-            <dl>
-              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                Mensagens
-              </dt>
-              <dd>
-                <div class="text-lg font-medium text-gray-900 dark:text-white">
-                  {estatisticas.mensagens.total}
-                </div>
-              </dd>
-            </dl>
+          <div class="ml-3 text-sm">
+            <label for="notificacao-mensagem" class="font-medium text-gray-700 dark:text-gray-300">Novas mensagens</label>
+            <p class="text-gray-500 dark:text-gray-400">Seja notificado quando receber uma nova mensagem.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start">
+          <div class="flex items-center h-5">
+            <input 
+              id="notificacao-visualizacao" 
+              type="checkbox" 
+              bind:checked={notificacoes.novaVisualizacao}
+              class="focus:ring-purple-500 h-4 w-4 text-purple-600 border-gray-300 dark:border-gray-600 rounded"
+            />
+          </div>
+          <div class="ml-3 text-sm">
+            <label for="notificacao-visualizacao" class="font-medium text-gray-700 dark:text-gray-300">Novas visualizações</label>
+            <p class="text-gray-500 dark:text-gray-400">Seja notificado sobre novas visualizações do seu comércio.</p>
           </div>
         </div>
       </div>
-      <div class="bg-gray-50 dark:bg-gray-700 px-5 py-3">
-        <div class="text-sm">
-          <span class="font-medium text-yellow-600 dark:text-yellow-400">
-            {estatisticas.mensagens.novas} novas
-          </span>
-          <span class="text-gray-500 dark:text-gray-400"> mensagens não lidas</span>
-        </div>
+      
+      <div class="mt-6">
+        <button 
+          type="button" 
+          on:click={salvarConfiguracoes}
+          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+        >
+          Salvar Configurações
+        </button>
       </div>
     </div>
   </div>
   
-  <!-- Informações do Comércio -->
-  <div class="mt-8 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
+  <div class="mt-6 bg-white dark:bg-gray-800 shadow overflow-hidden sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
-        Informações do Comércio
+        Conta
       </h3>
       <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
-        Detalhes e status do seu negócio.
+        Gerencie as configurações da sua conta.
       </p>
     </div>
-    <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:p-0">
-      <dl class="sm:divide-y sm:divide-gray-200 dark:sm:divide-gray-700">
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Nome do comércio
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-            {comercio.nome}
-          </dd>
+    <div class="border-t border-gray-200 dark:border-gray-700 px-4 py-5 sm:p-6">
+      <div class="space-y-6">
+        <div>
+          <h4 class="text-sm font-medium text-gray-900 dark:text-white">Alterar senha</h4>
+          <button 
+            type="button" 
+            class="mt-2 inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+          >
+            Alterar senha
+          </button>
         </div>
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Categoria
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-            {comercio.categoria}
-          </dd>
+        
+        <div>
+          <h4 class="text-sm font-medium text-gray-900 dark:text-white">Excluir conta</h4>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            Ao excluir sua conta, todos os seus dados serão permanentemente removidos. Esta ação não pode ser desfeita.
+          </p>
+          <button 
+            type="button" 
+            class="mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          >
+            Excluir conta
+          </button>
         </div>
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Endereço
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-            {comercio.endereco}
-          </dd>
-        </div>
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Telefone
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-            {comercio.telefone}
-          </dd>
-        </div>
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Status atual
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-              {comercio.status}
-            </span>
-          </dd>
-        </div>
-        <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Data de cadastro
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-            {comercio.dataCadastro}
-          </dd>
-          <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Email
-          </dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-            {comercio.email}
-          </dd>
-        </div>
-      </dl>
+      </div>
     </div>
   </div>
 </div>
-  
-
- 
-  
-  
