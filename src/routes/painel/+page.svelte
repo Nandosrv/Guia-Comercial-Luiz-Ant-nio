@@ -114,6 +114,7 @@
         const userData = await userResponse.json();
         console.log("es", userData);
         
+        
         // informacoes do usuario
         // if (userData) {
         //   usuario = {
