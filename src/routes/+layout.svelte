@@ -13,7 +13,10 @@
 	import img from '$lib/images/new.png';
 	import Darkmod from '$lib/componets/Darkmod.svelte';
 	import { useAuthPersistence } from '$lib/hooks/useAuthPersistence';
-	
+	import { fly } from 'svelte/transition';
+	import { toastStore } from '$lib/utils/toast';
+	import { toasts, ToastContainer, FlatToast, BootstrapToast }  from "svelte-toasts";
+
 
 	// Import Lucide icons
 	import {
@@ -136,9 +139,30 @@
 		document.removeEventListener('mousedown', handleClickOutside);
 	};
 	}
+
+
+	const showToast = () => {
+        // const toast = toasts.add({
+        //     title: 'Message title',
+        //     description: 'Message body',
+        //     duration: 10000, // 0 or negative to avoid auto-remove
+        //     placement: 'bottom-right',
+        //     type: 'success',
+        //     theme: 'dark',
+        //     onClick: () => {},
+        //     onRemove: () => {}
+        //     // component: BootstrapToast, // allows to override toast component/template per toast
+        // });
+        // toast.remove()
+		toasts.success('teste')
+		
+    };
 </script>
 
+<!-- Toast Notifications Container -->
+
 <div class="relative z-0 m-auto h-full min-h-screen w-full justify-between bg-secondary dark:bg-secondary">
+
 	<!-- Background com foto para mobile e desktop -->
 	<div class="absolute left-0 top-0 -z-10 w-full bg-header-gradient">
 		<!-- Imagem de fundo para mobile e desktop -->
@@ -219,7 +243,7 @@
 					<!-- Mobile Menu Button -->
 				<!-- svelte-ignore event_directive_deprecated -->
 				<button
-					on:click={toggleMenu}
+					onclick={toggleMenu}
 						class="inline-flex items-center justify-center p-2 rounded-lg text-white dark:text-gray-300 hover:bg-gray-100/20 dark:hover:bg-gray-800/60 focus:outline-none md:hidden"
 						aria-label="Menu"
 				>
@@ -243,7 +267,7 @@
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<!-- svelte-ignore event_directive_deprecated -->
-			<div class="fixed inset-0 z-40 bg-gray-900/50 backdrop-blur-sm md:hidden" on:click={closeMenu}></div>
+			<div class="fixed inset-0 z-40 bg-gray-900/50 backdrop-blur-sm md:hidden" onclick={closeMenu}></div>
 		{/if}
 		
 		<!-- Mobile Navigation Menu -->
@@ -262,8 +286,8 @@
 								class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-base font-medium transition-all duration-200
 								{$page.url.pathname === item.href
 									? 'bg-blue-100/30 text-white dark:bg-blue-900/40 dark:text-blue-300'
-									: 'text-white hover:bg-gray-100/20 dark:text-gray-300 dark:hover:bg-gray-800/60'}"
-								on:click={closeMenu}
+									: 'text-black hover:bg-gray-100/20 dark:text-gray-300 dark:hover:bg-gray-800/60'}"
+								onclick={closeMenu}
 							>
 								<!-- svelte-ignore svelte_component_deprecated -->
 								<svelte:component this={item.icon} class="h-5 w-5" />
@@ -289,6 +313,7 @@
 
 	<Footer />
 </div>
+
 
 <style>
 	/* Gradiente para o cabeçalho no desktop */

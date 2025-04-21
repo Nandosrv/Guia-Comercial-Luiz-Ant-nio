@@ -11,22 +11,21 @@
 	import { userStore } from '../../stores/userStore.svelte';
 	import { goto } from '$app/navigation';
 
-	let isAuthenticated = false;
-
+	// svelte-ignore non_reactive_update
+		let isAuthenticated = false;
 	let currentUser = $derived(userStore.value);
-	onMount(async () => {
+
+	onMount(() => {
 		setLastPathUrl($page.url.pathname);
-		checkAuthState({});
-		onAuthStateChanged(auth, async (user) => {
+		const unsubscribe = onAuthStateChanged(auth, async (user) => {
 			if (!user) {
-				// 		// Se não estiver autenticado, redirecione para a página de login
 				goto('/login');
 			} else {
-				isAuthenticated = true;
 				await persistenciaUser(user as never);
-				goto('/inicio');
 			}
 		});
+
+		return () => unsubscribe();
 	});
 
 	let photoURL: string = '';

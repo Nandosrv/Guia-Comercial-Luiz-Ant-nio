@@ -65,7 +65,6 @@
     // Estado da UI
     let isLoading = true;
     let activeTab = 'dashboard';
-    let isMobileMenuOpen = false;
     let isEditingPerfil = false;
     let errorMessage = '';
     let successMessage = '';

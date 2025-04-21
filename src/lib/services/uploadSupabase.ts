@@ -74,4 +74,37 @@ async function uploadPicturesAnnounce(file: File, userId: string) {
 	}
 }
 
-export { uploadProfilePicture, uploadPicturesAnnounce };
+async function uploadImagemPromocao(file: File, userId: string) {
+	// Sanitiza o nome do arquivo
+	const sanitizedFileName = `${userId}-${Date.now()}-${file.name?.replace(/[^a-zA-Z0-9.-_]/g, '')}`;
+	
+	try {
+		// Upload do arquivo para o bucket 'anuncio-promocao'
+		const { data, error: uploadError } = await supabase.storage
+			.from('anuncio-promocao')
+			.upload(sanitizedFileName, file);
+
+		if (uploadError) {
+			console.error('Erro no upload da imagem da promoção:', uploadError);
+			throw new Error(`Erro ao fazer upload da imagem da promoção: ${uploadError.message}`);
+		}
+
+		// Obtendo a URL pública do arquivo
+		const { data: urlData } = supabase.storage
+			.from('anuncio-promocao')
+			.getPublicUrl(sanitizedFileName);
+			
+		// Verificando se a URL foi obtida corretamente
+		if (!urlData || !urlData.publicUrl) {
+			console.error('Erro ao obter a URL pública da imagem da promoção');
+			throw new Error('Erro ao obter a URL pública da imagem');
+		}
+
+		return urlData.publicUrl;
+	} catch (error: any) {
+		console.error('Erro ao fazer upload da imagem da promoção:', error);
+		throw new Error(`Erro ao fazer upload da imagem: ${error.message}`);
+	}
+}
+
+export { uploadProfilePicture, uploadPicturesAnnounce, uploadImagemPromocao };

@@ -1,8 +1,11 @@
 <script lang="ts">
 	import  supabase  from '$lib/supabaseClient';
+    import { page } from '$app/stores';
     import { onMount, type Snippet } from 'svelte';
     import { goto } from '$app/navigation';
     import { getAuth, type User, onAuthStateChanged } from 'firebase/auth';
+    import { writable } from 'svelte/store';
+    import { slide } from 'svelte/transition';
     // import { userStore } from '../../../stores/userStore.svelte';
     import { subscribeToAuthState, checkAuthState, logout } from '$lib/services/authService.svelte';
     
@@ -47,7 +50,14 @@
 	// import type { LayoutData } from './$types';
     // Estado do usuário e comércio
     let { children } = $props();
-    let usuario = { nome: '', email: '', foto: '' , telefone: ''};
+    // svelte-ignore non_reactive_update
+        let usuario = { 
+      nome: '', 
+      email: '', 
+      foto: '', 
+      telefone: '',
+      ['photo-comercio']: '' 
+    };
     let comercio = {
       id: '',
       nome: '',
@@ -64,21 +74,16 @@
     };
     
     // Estado da UI
-    // svelte-ignore non_reactive_update
-        let isLoading = false;
-    // svelte-ignore non_reactive_update
-        let activeTab = 'Planos';
-    // svelte-ignore non_reactive_update
-        let isMobileMenuOpen = false;
+    let isLoading = false;
+    let activeTab = '';
+    let isMobileMenuOpen = false;
     let isEditingPerfil = false;
-    // svelte-ignore non_reactive_update
-        let errorMessage = '';
-    // svelte-ignore non_reactive_update
-        let successMessage = '';
+    let errorMessage = '';
+    let successMessage = '';
     
     // Dados para o dashboard
     // svelte-ignore non_reactive_update
-        let estatisticas = {
+    let estatisticas = {
       visualizacoes: { total: 0, percentual: 0 },
       contatos: { total: 0, percentual: 0 },
       produtos: { total: 0, percentual: 0 },
@@ -109,42 +114,69 @@
     const auth = getAuth();
     let authUser: User | null = null;
     
+    // Criando uma store para o estado do menu mobile
+    const mobileMenu = writable(false);
+    
+    // Atualiza a aba ativa baseado na rota atual
+    $effect(() => {
+        const path = $page.url.pathname;
+        if (path === '/painel') activeTab = 'dashboard';
+        else if (path === '/painel/meu-comercio') activeTab = 'perfil';
+        else if (path === '/painel/produtos') activeTab = 'produtos';
+        else if (path === '/painel/mensagens') activeTab = 'mensagens';
+        else if (path === '/painel/promocoes') activeTab = 'promocoes';
+        else if (path === '/painel/configuracoes') activeTab = 'configuracoes';
+        else if (path === '/painel/planos') activeTab = 'Planos';
+    });
+    
     async function carregarDadosComercio(userId: string) {
       try {
-        // Carregar dados do usuário
-        const userResponse = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
-        const userData = await userResponse.json();
-        console.log("es", userData);
-        
-        // informacoes do usuario
-        // if (userData) {
-        //   usuario = {
-        //     nome: userData.comerciante.nome || 'Comerciante',
-        //     email: userData.comerciante.email || 'email@exemplo.com',
-        //     foto: userData.comerciante.foto || '/placeholder.svg?height=40&width=40',
-        //     telefone: userData.comerciante.telefone || 'Telefone não cadastrados'
-        //   };
-        //   console.log("usuario", userData.comerciante.telefone);
-        // }
-        
-        // Carregar dados do comércio
+        // Carregar dados do usuário/comércio
         const comercioResponse = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
         const comercioData = await comercioResponse.json();
+        console.log("Dados recebidos da API:", comercioData);
         
-        if (comercioData) {
+        // Informações do usuário
+        if (comercioData && comercioData.comerciante) {
+          const comercianteData = comercioData.comerciante;
+          
+          // Verifica qual campo está sendo usado para a foto do comércio
+          let photoComercio = null;
+          if (comercianteData['photo-comercio']) {
+            photoComercio = comercianteData['photo-comercio'];
+            console.log("Foto do comércio encontrada em photo-comercio:", photoComercio);
+          } else if (comercianteData.fotos && comercianteData.fotos.length > 0) {
+            photoComercio = comercianteData.fotos[0];
+            console.log("Usando primeira foto do array fotos:", photoComercio);
+          } else if (comercianteData.foto) {
+            photoComercio = comercianteData.foto;
+            console.log("Usando foto do perfil:", photoComercio);
+          }
+          
+          // Atualiza os dados do usuário
+          usuario = {
+            nome: comercianteData.nome || 'Comerciante',
+            email: comercianteData.email || 'email@exemplo.com',
+            foto: comercianteData.foto || null,
+            telefone: comercianteData.telefone || 'Telefone não cadastrado',
+            ['photo-comercio']: photoComercio
+          };
+          
+          console.log("Dados do usuário atualizados:", usuario);
+          
+          // Atualiza dados do comércio
           comercio = {
             ...comercio,
-            id: comercioData.comerciante.id || '',
-            nome: comercioData.comerciante.nome || 'Meu Comércio',
-            endereco: comercioData.comerciante.endereco || 'Endereço não cadastrado',
-            telefone: comercioData.comerciante.telefone || 'Telefone não cadastrado',
-            categoria: comercioData.comerciante.categoria || 'Categoria não definida',
-            descricao: comercioData.comerciante.descricao || 'Sem descrição',
-            email: comercioData.comerciante.email || 'email@exemplo.com',
-            dataCadastro: formatarData(comercioData.comerciante.criado_em) || formatarData(new Date()),
-            visualizacoes: comercioData.comerciante.visualizacoes || Math.floor(Math.random() * 100),
+            id: comercianteData.id || '',
+            nome: comercianteData.nome || 'Meu Comércio',
+            endereco: comercianteData.endereco || 'Endereço não cadastrado',
+            telefone: comercianteData.telefone || 'Telefone não cadastrado',
+            categoria: comercianteData.categoria || 'Categoria não definida',
+            descricao: comercianteData.descricao || 'Sem descrição',
+            email: comercianteData.email || 'email@exemplo.com',
+            dataCadastro: formatarData(comercianteData.criado_em) || formatarData(new Date()),
+            visualizacoes: comercianteData.visualizacoes || Math.floor(Math.random() * 100),
           };
-          console.log("comercio", comercioData.comerciante.telefone);
         }
         
         // Carregar estatísticas
@@ -466,7 +498,37 @@
         }, 5000);
       }
     }
-  </script>
+
+    // Função para navegar entre as páginas
+    function navigateTo(path: string) {
+        goto(path);
+        mobileMenu.set(false); // Fecha o menu mobile após navegar
+    }
+
+    // Função para alternar o menu mobile
+    function toggleMobileMenu() {
+        mobileMenu.update((value: boolean) => !value);
+    }
+
+    // Função para obter a URL do avatar
+    function getAvatarUrl(nome: string = 'C') {
+      return `https://ui-avatars.com/api/?name=${encodeURIComponent(nome)}&background=6d28d9&color=ffffff&size=128`;
+    }
+
+    // Função para obter a foto do comerciante
+    function getFotoComercio(usuario: any): string {
+      // Verificando a propriedade 'photo-comercio'
+      if (usuario && usuario['photo-comercio']) {
+        return usuario['photo-comercio'];
+      }
+      // Fallback para a propriedade 'foto'
+      if (usuario && usuario.foto) {
+        return usuario.foto;
+      }
+      // Gerar avatar como último recurso
+      return getAvatarUrl(usuario?.nome);
+    }
+</script>
   
   <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
     <!-- Header -->
@@ -494,7 +556,9 @@
               <div>
                 <button class="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500" id="user-menu" aria-expanded="false" aria-haspopup="true">
                   <span class="sr-only">Abrir menu do usuário</span>
-                  <img class="h-8 w-8 rounded-full object-cover" src={usuario.foto || "/placeholder.svg"} alt="Foto do perfil" />
+                  <img class="h-8 w-8 rounded-full object-cover" 
+                    src={getFotoComercio(usuario)} 
+                    alt="Foto do comércio" />
                 </button>
               </div>
             </div>
@@ -502,13 +566,12 @@
           
           <div class="-mr-2 flex items-center sm:hidden">
             <!-- Mobile menu button -->
-            <!-- svelte-ignore event_directive_deprecated -->
             <button 
-              on:click={() => isMobileMenuOpen = !isMobileMenuOpen}
+              on:click={toggleMobileMenu}
               class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500"
             >
               <span class="sr-only">Abrir menu principal</span>
-              {#if isMobileMenuOpen}
+              {#if $mobileMenu}
                 <X class="block h-6 w-6" />
               {:else}
                 <Menu class="block h-6 w-6" />
@@ -520,71 +583,79 @@
     </header>
   
     <!-- Mobile menu, show/hide based on menu state -->
-    {#if isMobileMenuOpen}
-      <div class="sm:hidden bg-white dark:bg-gray-800 pt-2 pb-3 space-y-1">
-        <!-- svelte-ignore event_directive_deprecated -->
-        <a 
-          href="#dashboard" 
-          on:click|preventDefault={() => { activeTab = 'dashboard'; isMobileMenuOpen = false; }}
-          class={`${activeTab === 'dashboard' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+    {#if $mobileMenu}
+      <div 
+        class="sm:hidden bg-white dark:bg-gray-800 pt-2 pb-3 space-y-1 shadow-lg rounded-b-lg border-t border-gray-100 dark:border-gray-700"
+        transition:slide={{ duration: 300, easing: (t: number) => t * (2 - t) }}
+      >
+        <button 
+          on:click={() => navigateTo('/painel')}
+          class={`w-full ${activeTab === 'dashboard' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
         >
-          Dashboard
-        </a>
-        <!-- svelte-ignore event_directive_deprecated -->
-        <a 
-          href="#perfil" 
-          on:click={() => {
-            goto('/painel')
-        }} 
-          class={`${activeTab === 'perfil' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+          <Home class="h-5 w-5 mr-3 {activeTab === 'dashboard' ? 'text-purple-500' : 'text-gray-400'}" />
+          <span>Dashboard</span>
+        </button>
+        
+        <button 
+          on:click={() => navigateTo('/painel/meu-comercio')}
+          class={`w-full ${activeTab === 'perfil' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
         >
-       
-        Meu Comércio
-        </a>
-        <!-- svelte-ignore event_directive_deprecated -->
-        <a 
-          href="#produtos" 
-          on:click|preventDefault={() => { activeTab = 'produtos'; isMobileMenuOpen = false; }}
-          class={`${activeTab === 'produtos' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+          <Store class={`${activeTab === 'perfil' ? 'text-purple-500' : 'text-gray-400'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+          <span>Meu Comércio</span>
+        </button>
+        
+        <button 
+          on:click={() => navigateTo('/painel/produtos')}
+          class={`w-full ${activeTab === 'produtos' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
         >
-          Produtos/Serviços
-        </a>
-        <!-- svelte-ignore event_directive_deprecated -->
-        <!-- svelte-ignore event_directive_deprecated -->
-        <a 
-          href="#mensagens" 
-          on:click|preventDefault={() => { activeTab = 'mensagens'; isMobileMenuOpen = false; }}
-          class={`${activeTab === 'mensagens' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+          <Package class={`${activeTab === 'produtos' ? 'text-purple-500' : 'text-gray-400'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+          <span>Produtos/Serviços</span>
+        </button>
+        
+        <button 
+          on:click={() => navigateTo('/painel/mensagens')}
+          class={`w-full ${activeTab === 'mensagens' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
         >
-          Mensagens
+          <MessageSquare class={`${activeTab === 'mensagens' ? 'text-purple-500' : 'text-gray-400'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+          <span>Mensagens</span>
           {#if estatisticas.mensagens.novas > 0}
             <span class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
               {estatisticas.mensagens.novas}
             </span>
           {/if}
-        <!-- svelte-ignore event_directive_deprecated -->
-        </a>
-        <!-- svelte-ignore event_directive_deprecated -->
-        <a 
-          href="#promocoes" 
-          on:click|preventDefault={() => { activeTab = 'promocoes'; isMobileMenuOpen = false; }}
-          class={`${activeTab === 'promocoes' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+        </button>
+        
+        <button 
+          on:click={() => navigateTo('/painel/promocoes')}
+          class={`w-full ${activeTab === 'promocoes' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
         >
-          Promoções
-        </a>
-        <!-- svelte-ignore event_directive_deprecated -->
-        <!-- svelte-ignore event_directive_deprecated -->
-        <a 
-          href="#configuracoes" 
-          on:click|preventDefault={() => { activeTab = 'configuracoes'; isMobileMenuOpen = false; }}
-          class={`${activeTab === 'configuracoes' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+          <Tag class={`${activeTab === 'promocoes' ? 'text-purple-500' : 'text-gray-400'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+          <span>Promoções</span>
+        </button>
+        
+        <button 
+          on:click={() => navigateTo('/painel/configuracoes')}
+          class={`w-full ${activeTab === 'configuracoes' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
         >
-          Configurações
-        </a>
+          <Settings class={`${activeTab === 'configuracoes' ? 'text-purple-500' : 'text-gray-400'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+          <span>Configurações</span>
+        </button>
+
+        <button 
+          on:click={() => navigateTo('/painel/planos')}
+          class={`w-full ${activeTab === 'Planos' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
+        >
+          <Tag class={`${activeTab === 'Planos' ? 'text-purple-500' : 'text-gray-400'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+          <span>Planos</span>
+        </button>
+
         <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
           <div class="flex items-center px-4">
             <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" src={usuario.foto || "/placeholder.svg"} alt="Foto do perfil" />
+              <img class="h-8 w-8 rounded-full object-cover" 
+                src={getFotoComercio(usuario)} 
+                alt="Foto do comércio" 
+              />
             </div>
             <div class="ml-3">
               <div class="text-base font-medium text-gray-800 dark:text-white">{usuario.nome}</div>
@@ -592,14 +663,12 @@
             </div>
           </div>
           <div class="mt-3 space-y-1">
-            <!-- svelte-ignore a11y_invalid_attribute -->
-            <!-- svelte-ignore event_directive_deprecated -->
-            <!-- svelte-ignore event_directive_deprecated -->
             <a 
               href="#" 
               on:click|preventDefault={handleLogout}
-              class="block px-4 py-2 text-base font-medium text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              class="block px-4 py-2 text-base font-medium text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
             >
+              <LogOut class="h-5 w-5 mr-3" />
               Sair
             </a>
           </div>
@@ -621,45 +690,33 @@
                 <!-- svelte-ignore event_directive_deprecated -->
                 <!-- svelte-ignore event_directive_deprecated -->
               <nav class="space-y-1 border-r border-gray-200 dark:border-gray-700">
-                <a 
-                  href="#dashboard"                   
-                  on:click={() => {
-                    goto('/painel')
-                }} 
-                  class={`${activeTab === 'dashboard' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                <button 
+                  on:click={() => navigateTo('/painel')}
+                  class={`w-full ${activeTab === 'dashboard' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Home class={`${activeTab === 'dashboard' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Dashboard</span>
-                </a>
+                </button>
                 
-                <a 
-                  href="#perfil" 
-                  on:click={() => {
-                    goto('/painel/meu-comercio')
-                }} 
-                  class={`${activeTab === 'perfil' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                <button 
+                  on:click={() => navigateTo('/painel/meu-comercio')}
+                  class={`w-full ${activeTab === 'perfil' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Store class={`${activeTab === 'perfil' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Meu Comércio</span>
-                </a>
+                </button>
                 
-                <a 
-                  href="#produtos"                   
-                  on:click={() => {
-                    goto('/painel/produtos')
-                }}
-                  class={`${activeTab === 'produtos' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                <button 
+                  on:click={() => navigateTo('/painel/produtos')}
+                  class={`w-full ${activeTab === 'produtos' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Package class={`${activeTab === 'produtos' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Produtos/Serviços</span>
-                </a>
+                </button>
                 
-                <a 
-                  href="#mensagens"                   
-                  on:click={() => {
-                    goto('/painel/mensagens')
-                }}
-                  class={`${activeTab === 'mensagens' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                <button 
+                  on:click={() => navigateTo('/painel/mensagens')}
+                  class={`w-full ${activeTab === 'mensagens' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <MessageSquare class={`${activeTab === 'mensagens' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Mensagens</span>
@@ -668,38 +725,31 @@
                       {estatisticas.mensagens.novas}
                     </span>
                   {/if}
-                </a>
+                </button>
                 
-                <a 
-                  href="#promocoes"                   
-                  on:click={() => {
-                    goto('/painel/promocoes')
-                }}
-                  class={`${activeTab === 'promocoes' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                <button 
+                  on:click={() => navigateTo('/painel/promocoes')}
+                  class={`w-full ${activeTab === 'promocoes' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Tag class={`${activeTab === 'promocoes' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Promoções</span>
-                </a>
+                </button>
                 
-                <a 
-                  href="#configuracoes"                   
-                  on:click={() => {
-                    goto('/painel/configuracoes')
-                }}
-                  class={`${activeTab === 'configuracoes' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                <button 
+                  on:click={() => navigateTo('/painel/configuracoes')}
+                  class={`w-full ${activeTab === 'configuracoes' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
                   <Settings class={`${activeTab === 'configuracoes' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
                   <span class="truncate">Configurações</span>
-                </a>
-              <a 
-                href="#Planos" 
-                on:click={() => {
-                  goto('/painel/planos')
-              }} 
-                class={`${activeTab === 'Planos' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
-              >
-                Planos
-              </a>
+                </button>
+                
+                <button 
+                  on:click={() => navigateTo('/painel/planos')}
+                  class={`w-full ${activeTab === 'Planos' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+                >
+                  <Tag class={`${activeTab === 'Planos' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+                  <span class="truncate">Planos</span>
+                </button>
                 
                 <div class="pt-8">
                   <button 

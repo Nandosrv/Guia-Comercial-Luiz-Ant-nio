@@ -80,22 +80,23 @@
 
 <main class="bg-white dark:bg-gray-900 ">
 	<!-- Hero Section com Imagem Grande -->
-	<div class="relative w-full h-[75vh] lg:h-[80vh] overflow-hidden bg-gray-900">
+	<div class="relative w-full h-[60vh] lg:h-[70vh] overflow-hidden bg-gray-900">
 		<!-- Banner Image -->
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<img
 			src={product?.image}
 			alt={product?.title}
-			class="w-full h-full object-cover object-center opacity-90 cursor-pointer"
+			class="w-full h-full object-cover object-center opacity-90 cursor-pointer transition-transform duration-300 hover:scale-105"
 			onclick={openImageModal}
+			loading="lazy"
 		/>
 		
 		<!-- Overlay Gradient -->
-		<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80"></div>
+		<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70"></div>
 		
 		<!-- Content Over Image -->
-		<div class="absolute bottom-0 left-0 w-full p-6 lg:p-12 pb-24">
+		<div class="absolute bottom-0 left-0 w-full p-6 lg:p-12">
 			<div class="container mx-auto">
 				<div class="flex flex-col lg:flex-row items-end justify-between">
 					<!-- Title and Basic Info -->
@@ -108,7 +109,7 @@
 							<Star class="fill-current h-5 w-5" />
 							<span class="text-white text-sm font-medium">5.0</span>
 						</div>
-						<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 text-shadow-sm">
+						<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 text-shadow-lg">
 							{product?.title}
 						</h1>
 						<div class="flex flex-wrap items-center text-gray-200 gap-4">
@@ -146,18 +147,21 @@
 				</div>
 			</div>
 		</div>
-		
-		<!-- Profile Picture Overlay -->
-		<div class="absolute -bottom-28 left-1/2 transform -translate-x-1/2 lg:left-12 lg:translate-x-0">
-			<div class="bg-white dark:bg-gray-800 p-3 rounded-xl shadow-xl">
-				<div class="w-48 h-48 sm:w-52 sm:h-52 rounded-lg overflow-hidden">
+	</div>
+	
+	<!-- Profile Picture Section -->
+	<div class="relative -mt-24 mb-8 px-4">
+		<div class="container mx-auto">
+			<div class="bg-white dark:bg-gray-800 p-3 rounded-xl shadow-xl inline-block">
+				<div class="w-40 h-40 sm:w-48 sm:h-48 rounded-lg overflow-hidden">
 					<!-- svelte-ignore a11y_click_events_have_key_events -->
 					<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 					<img
 						src={product?.image}
 						alt={product?.title}
-						class="w-full h-full object-contain cursor-pointer"
+						class="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
 						onclick={openImageModal}
+						loading="lazy"
 					/>
 				</div>
 			</div>
@@ -584,6 +588,10 @@
 	
 	.animate-fade-in {
 		animation: fadeIn 0.3s ease-in-out;
+	}
+	
+	.text-shadow-lg {
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	}
 	
 	@keyframes fadeIn {

@@ -7,6 +7,7 @@
 	import Footer from '$lib/footer/+page.svelte';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { showSuccess, showError, showInfo, showWarning } from '$lib/utils/toast';
 	
 	// Import Lucide icons
 	import { 
@@ -71,9 +72,11 @@
 	import icons10 from '$lib/images/icons8-shop-50.png';
 	import odontolon from '$lib/images/odontologia.jpg';
 	import odon from '$lib/images/ond.jpg';
+	import { toasts } from 'svelte-toasts';
 
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);
+		toasts.success('Pagina carregada com sucesso!')
 	});
 
 	interface SliderItem {
@@ -122,7 +125,37 @@
 	function prevSlide() {
 		currentSlide.update((prevSlide) => (prevSlide - 1 + sliderItems.length) % sliderItems.length);
 	}
+
+	// Função para testar os toasts
+	function testarToasts() {
+		showSuccess('Operação realizada com sucesso!');
+		
+		setTimeout(() => {
+			showError('Ocorreu um erro na operação.');
+		}, 1500);
+		
+		setTimeout(() => {
+			showInfo('Esta é uma mensagem informativa.');
+		}, 3000);
+		
+		setTimeout(() => {
+			showWarning('Atenção! Esta é uma mensagem de aviso.');
+		}, 4500);
+	}
+
 </script>
+
+<!-- Botão de teste escondido para desenvolvedores -->
+<!-- {#if import.meta.env.DEV}
+<div class="fixed bottom-4 right-4 z-40">
+	<button 
+		class="bg-gray-800 text-white p-2 rounded shadow hover:bg-gray-700"
+		on:click={testarToasts}
+	>
+		Testar Toasts
+	</button>
+</div>
+{/if} -->
 
 <div class="hidden">
 	<div class="min-h-screen bg-gradient-to-br from-blue-900 to-blue-800">

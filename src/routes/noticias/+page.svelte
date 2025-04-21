@@ -1,8 +1,11 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+	import { toasts } from 'svelte-toasts';
     
     let currentSlide = 0;
-    
+    const testGets = () => {
+         toasts.warning('pagina de noticias carregada com sucesso!')
+     }
     const slides = [
         {
             title: 'Nova Experiência',
@@ -112,6 +115,7 @@
 
     onMount(() => {
 
+        testGets()
         const interval = setInterval(nextSlide, 5000);
         return () => clearInterval(interval);
     });

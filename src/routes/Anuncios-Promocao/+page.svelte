@@ -2,13 +2,29 @@
 	// Importe as imagens (você precisará adicionar estas imagens ao seu projeto)
 	import ScrollTo from '$lib/componets/scrollTo.svelte';
 	import avatardep1 from '$lib/images/avatardep1.jpg';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { userStore } from '../../stores/userStore.svelte';
 	import { getCookie } from '$lib/utils/cookies';
 	import { onAuthStateChanged } from 'firebase/auth';
 	import { persistenciaUser } from '$lib/services/authService.svelte';
 	import Assinatura from '$lib/componets/Assinatura.svelte';
 	import { getAuth } from 'firebase/auth';
+
+	interface Plan {
+		name: string;
+		description: string;
+		price: string;
+		planoId: string;
+		valor: number;
+		features: string[];
+		buttonText: string;
+	}
+
+	interface QRCodeData {
+		qrCode: string;
+		qrCodeBase64: string;
+		paymentUrl: string;
+	}
 
 	let token = '';
 	let auth = getAuth();
@@ -27,7 +43,7 @@
         })
         .then(response => response.json())
         .then(data => {
-           console.log(data);
+        //    console.log(data);
         })
         .catch(error => {
            console.error('Erro ao buscar planos:', error);
@@ -74,12 +90,21 @@
 		return () => unsubscribe();
 	});
 
+	let loading = false;
+	let error: string | null = null;
+	let qrCodeData: QRCodeData | null = null;
+	let checkPaymentInterval: number;
+	let checkAttempts = 0;
+	const MAX_CHECK_ATTEMPTS = 60; // 5 minutos (a cada 5 segundos)
+
 	// Constantes e estados
-	const plans = [
+	const plans: Plan[] = [
 		{
 			name: 'Plano Básico',
 			description: 'Ideal para pequenos negócios que desejam testar a plataforma.',
 			price: 'Grátis',
+			planoId: 'basico',
+			valor: 0,
 			features: [
 				'Anúncio por 7 dias',
 				'Exposição na página de Anúncios',
@@ -87,32 +112,31 @@
 				'Sem destaques adicionais',
 				'Descrição Simples'
 			],
-			buttonText: 'Começar Agora',
-			link: 'https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Grátis%20no%20Guia%20Comercial'
-
-			// link: "/Anuncios-Promocao/planos/plano/basico"
+			buttonText: 'Começar Agora'
 		},
 		{
 			name: 'Plano Premium',
 			description: 'Para negócios em crescimento',
 			price: 'R$ 29,99/mês',
+			planoId: 'premium',
+			valor: 1,
 			features: [
 				'Anúncio por 30 dias',
 				'Destaque na página principal',
 				'Contato completo',
 				'Link para redes sociais',
-				'Descrição detalhada  do serviço',
+				'Descrição detalhada do serviço',
 				'Anuncio personalizado',
 				'Contato direto com o programador'
 			],
-			buttonText: 'Assinar Premium',
-			// link: "/Anuncios-Promocao/planos/plano/premium"
-			link: 'https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%20Premium%20no%20Guia%20Comercial'
+			buttonText: 'Assinar Premium'
 		},
 		{
 			name: 'Plano Empresarial',
 			description: 'Máxima visibilidade para empresas que desejam se destacar.',
 			price: 'R$ 39,99/mês',
+			planoId: 'empresarial',
+			valor: 39.99,
 			features: [
 				'Anúncio por 30 dias',
 				'Posição de destaque na página principal',
@@ -121,13 +145,9 @@
 				'Descrição detalhada do serviço',
 				'Suporte prioritário 24/7',
 				'Anuncio personalizado',
-
 				'Contato direto com o programador'
 			],
-			buttonText: 'Contratar Agora',
-			// link: "https://wa.me/5516996151725?text=Olá,%20gostaria%20de%20contratar%20o%20Plano%Empresarial%20no%20Guia%20Comercial"
-
-			link: '/Anuncios-Promocao/planos/plano/empresarial'
+			buttonText: 'Contratar Agora'
 		}
 	];
 
@@ -302,6 +322,207 @@
 	//     };
 	// }
 	let showConstructionModal = false;
+
+	async function checkPaymentStatus(paymentId: string) {
+		try {
+			checkAttempts++;
+			console.log(`Verificando status do pagamento (tentativa ${checkAttempts}/${MAX_CHECK_ATTEMPTS})...`);
+			
+			const user = auth.currentUser;
+			if (!user) return;
+
+			const token = await user.getIdToken();
+			const response = await fetch(`http://localhost:3000/mercadopago/payment/${paymentId}`, {
+				headers: {
+					'Authorization': `Bearer ${token}`
+				}
+			});
+
+			if (!response.ok) {
+				throw new Error('Erro ao verificar status do pagamento');
+			}
+
+			const data = await response.json();
+			console.log('Status do pagamento:', data);
+
+			if (data.payment?.status === 'approved') {
+				// Limpar o intervalo
+				if (checkPaymentInterval) {
+					clearInterval(checkPaymentInterval);
+				}
+				
+				// Fechar modal do QR Code
+				qrCodeData = null;
+				
+				// Atualizar status da assinatura no banco de dados
+				try {
+					const updateResponse = await fetch('http://localhost:3000/mercadopago/test-webhook', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${token}`
+						},
+						body: JSON.stringify({ payment_id: paymentId })
+					});
+					
+					if (updateResponse.ok) {
+						console.log('Status da assinatura atualizado com sucesso');
+					} else {
+						console.error('Falha ao atualizar status da assinatura');
+					}
+				} catch (updateErr) {
+					console.error('Erro ao atualizar status da assinatura:', updateErr);
+				}
+				
+				// Redirecionar para o painel
+				window.location.href = '/painel';
+			} else if (checkAttempts >= MAX_CHECK_ATTEMPTS) {
+				// Parar de verificar após o número máximo de tentativas
+				if (checkPaymentInterval) {
+					clearInterval(checkPaymentInterval);
+				}
+				console.log('Número máximo de tentativas alcançado. Parando verificação automática.');
+				error = 'Tempo limite de verificação excedido. Por favor, verifique sua assinatura na área do cliente.';
+			}
+		} catch (err) {
+			console.error('Erro ao verificar status:', err);
+		}
+	}
+
+	async function handleAssinatura(plan: Plan): Promise<void> {
+		try {
+			loading = true;
+			error = null;
+			
+			if (!auth.currentUser) {
+				error = 'Você precisa estar logado para assinar um plano';
+				return;
+			}
+
+			const user = auth.currentUser;
+			const token = await user.getIdToken();
+
+			// Se for plano básico, criar assinatura gratuita primeiro
+			if (plan.planoId === 'basico') {
+				try {
+					const response = await fetch('http://localhost:3000/mercadopago/pix', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${token}`
+						},
+						body: JSON.stringify({
+							plano: 'basico',
+							userId: user.uid,
+							transaction_amount: 0,
+							description: 'Plano Básico - Guia Comercial',
+							payer: {
+								email: user.email || '',
+								first_name: user.displayName?.split(' ')[0] || 'Cliente',
+								last_name: user.displayName?.split(' ').slice(1).join(' ') || 'Guia Comercial'
+							}
+						})
+					});
+
+					const data = await response.json();
+					
+					if (data.success) {
+						// Se a assinatura foi criada com sucesso, redirecionar para o formulário
+						window.location.href = '/formulario-comercio';
+						return;
+					} else {
+						error = data.error || 'Erro ao criar assinatura gratuita';
+						loading = false;
+						return;
+					}
+				} catch (err) {
+					console.error('Erro ao criar assinatura gratuita:', err);
+					error = 'Erro ao criar assinatura gratuita. Tente novamente.';
+					loading = false;
+					return;
+				}
+			}
+
+			// Preparar dados do pagamento para planos pagos
+			const paymentData = {
+				transaction_amount: Math.max(0.01, plan.valor),
+				description: `Assinatura ${plan.name}`,
+				plano: plan.planoId,
+				userId: user.uid,
+				payer: {
+					email: user.email || '',
+					first_name: user.displayName?.split(' ')[0] || 'Cliente',
+					last_name: user.displayName?.split(' ').slice(1).join(' ') || 'Guia Comercial',
+					identification: {
+						type: 'CPF',
+						number: '19119119100'
+					}
+				}
+			};
+
+			console.log('Enviando dados:', JSON.stringify(paymentData, null, 2));
+
+			const response = await fetch('http://localhost:3000/mercadopago/pix', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
+				},
+				body: JSON.stringify(paymentData)
+			});
+
+			if (!response.ok) {
+				const errorText = await response.text();
+				console.error('Erro na resposta:', {
+					status: response.status,
+					statusText: response.statusText,
+					errorText
+				});
+				throw new Error(`Erro ao processar pagamento: ${errorText}`);
+			}
+
+			const data = await response.json();
+			console.log('Resposta do servidor:', data);
+
+			if (!data.success) {
+				throw new Error(data.error || 'Erro ao processar pagamento');
+			}
+
+			if (plan.planoId === 'basico') {
+				window.location.href = '/formulario-comercio';
+			} else {
+				qrCodeData = {
+					qrCode: data.qr_code,
+					qrCodeBase64: data.qr_code_base64,
+					paymentUrl: data.payment_url
+				};
+
+				// Iniciar verificação periódica do status do pagamento
+				if (checkPaymentInterval) {
+					clearInterval(checkPaymentInterval);
+				}
+				checkAttempts = 0; // Resetar contador de tentativas
+				checkPaymentInterval = window.setInterval(() => checkPaymentStatus(data.payment_id), 5000);
+			}
+		} catch (err) {
+			console.error('Erro ao processar assinatura:', err);
+			if (err instanceof Error) {
+				error = err.message;
+			} else {
+				error = 'Erro desconhecido ao processar assinatura';
+			}
+		} finally {
+			loading = false;
+		}
+	}
+
+	// Limpar o intervalo quando o componente for destruído
+	onDestroy(() => {
+		if (checkPaymentInterval) {
+			clearInterval(checkPaymentInterval);
+			checkPaymentInterval = 0;
+		}
+	});
 </script>
 
 <!-- <button class="bg-red-800 w-full h-full">
@@ -375,17 +596,13 @@
 							</ul>
 						</div>
 
-						<!-- <button 
-                            on:click={() => handleContact(plan.name)}
-                            class="mt-8 block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md py-3 px-4 text-center transition-colors">
-                            {plan.buttonText}
-                        </button> -->
-
-						<div
-							class="mt-8 block w-full rounded-md bg-blue-600 px-4 py-3 text-center font-semibold text-white transition-colors hover:bg-blue-700"
+						<button 
+							on:click={() => handleAssinatura(plan)}
+							class="mt-8 block w-full rounded-md bg-blue-600 px-4 py-3 text-center font-semibold text-white transition-colors hover:bg-blue-700 disabled:bg-gray-400"
+							disabled={loading}
 						>
-							<Assinatura />
-						</div>
+							{plan.buttonText}
+						</button>
 					</div>
 				{/each}
 			</div>
@@ -637,4 +854,75 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal de QR Code -->
+	{#if qrCodeData}
+		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+			<div class="w-full max-w-md rounded-lg bg-white p-8">
+				<h2 class="mb-4 text-2xl font-bold">Pagamento via PIX</h2>
+				<div class="mb-4 text-center">
+					<img src={`data:image/png;base64,${qrCodeData?.qrCodeBase64}`} alt="QR Code" class="mx-auto" />
+				</div>
+				<p class="mb-4 text-center">
+					Escaneie o QR Code acima com seu aplicativo bancário para realizar o pagamento
+				</p>
+				<div class="mb-4">
+					<p class="mb-2 font-semibold">Código PIX:</p>
+					<div class="relative">
+						<input
+							type="text"
+							value={qrCodeData?.qrCode}
+							readonly
+							class="w-full rounded-md border p-2 pr-20"
+						/>
+						<button
+							on:click={() => qrCodeData && navigator.clipboard.writeText(qrCodeData.qrCode)}
+							class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-blue-600 px-4 py-1 text-white hover:bg-blue-700"
+						>
+							Copiar
+						</button>
+					</div>
+				</div>
+				<div class="flex justify-end space-x-3">
+					<button
+						on:click={() => (qrCodeData = null)}
+						class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300"
+					>
+						Fechar
+					</button>
+					<a
+						href={qrCodeData.paymentUrl}
+						target="_blank"
+						class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+					>
+						Abrir no navegador
+					</a>
+				</div>
+			</div>
+		</div>
+	{/if}
+
+	<!-- Mensagem de erro -->
+	{#if error}
+		<div class="fixed inset-x-0 top-4 z-50 mx-auto max-w-md">
+			<div class="rounded-lg bg-red-100 p-4 text-red-700">
+				<p>{error}</p>
+				<button
+					on:click={() => (error = null)}
+					class="absolute right-2 top-2 text-red-500 hover:text-red-700"
+				>
+					✕
+				</button>
+			</div>
+		</div>
+	{/if}
+
+	<!-- Loading -->
+	{#if loading}
+		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+			<div class="rounded-lg bg-white p-8">
+				<div class="h-12 w-12 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
+			</div>
+		</div>
+	{/if}
 </div>
