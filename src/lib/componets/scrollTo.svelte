@@ -5,7 +5,7 @@
   };
 </script>
 
-<div class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2">
+<div class="fixed bottom-20 md:bottom-5 right-5 z-50 flex flex-col space-y-2">
   <!-- Botão principal de rolar para o topo -->
   <button
       class="rounded-full bg-gradient-to-r from-blue-500 to-purple-500 p-3 text-white shadow-md hover:scale-105 hover:from-purple-600 hover:to-blue-600 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"

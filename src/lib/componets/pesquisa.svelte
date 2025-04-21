@@ -210,53 +210,87 @@
 </script>
 
 <div class="relative mx-auto flex w-full justify-center" bind:this={searchBox}>
-	<div>
-		<span class="absolute inset-y-0 flex h-[40px] items-center pl-3">
-			<svg
-				class="mb-2 flex h-5 w-5 items-center text-blue-500"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-			>
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.134 17 3 13.866 3 10C3 6.134 6.134 3 10 3C13.866 3 17 6.134 17 10Z"
-				/>
-			</svg>
-		</span>
+	<div class="w-full max-w-md">
+		<div class="relative">
+			<!-- Ícone de pesquisa -->
+			<span class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+				<svg
+					class="h-5 w-5 text-blue-500"
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.134 17 3 13.866 3 10C3 6.134 6.134 3 10 3C13.866 3 17 6.134 17 10Z"
+					/>
+				</svg>
+			</span>
 
-		<input
-			type="text"
-			bind:value={searchQuery}
-			on:input={filterComercios}
-			on:focus={() => (isDropdownOpen = true)}
-			class="h-[30px] rounded-[12px] border border-gray-300 bg-white py-2 pl-10 pr-4 text-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 sm:w-[350px] dark:border-blue-600 dark:bg-secondary dark:text-white dark:focus:border-blue-500"
-			placeholder="Busca Rápida"
-		/>
+			<!-- Campo de busca -->
+			<input
+				type="text"
+				bind:value={searchQuery}
+				on:input={filterComercios}
+				on:focus={() => (isDropdownOpen = true)}
+				class="h-12 w-full rounded-full border-0 bg-white/90 py-2 pl-12 pr-4 text-gray-700 shadow-lg ring-1 ring-inset ring-blue-300 backdrop-blur-sm transition-all duration-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800/90 dark:text-white dark:ring-blue-800 dark:placeholder:text-gray-500"
+				placeholder="Encontre comércios e serviços..."
+			/>
+			
+			<!-- Botão de limpar pesquisa -->
+			{#if searchQuery}
+				<!-- svelte-ignore a11y_consider_explicit_label -->
+				<button 
+					class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+					on:click={handleResetInput}
+				>
+					<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			{/if}
+		</div>
 	</div>
 
+	<!-- Resultados da pesquisa -->
 	{#if isDropdownOpen && searchQuery}
 		<div
-			class="absolute z-10 mt-8 max-h-60 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg sm:w-[60%] dark:border-gray-700 dark:bg-gray-800"
+			class="absolute top-12 z-10 mt-1 w-full max-w-md overflow-hidden rounded-2xl bg-white/95 shadow-xl ring-1 ring-gray-200 backdrop-blur-sm transition-all duration-300 dark:bg-gray-800/95 dark:ring-gray-700"
 		>
-			{#if filteredComercios.length > 0}
-				{#each filteredComercios as comercio}
-					<a
-						on:click={handleResetInput}
-						href={comercio.href}
-						class="block p-4 hover:bg-gray-100 dark:hover:bg-gray-700"
-					>
-						<h3 class="font-semibold text-gray-800 dark:text-gray-200">{comercio.nome}</h3>
-					</a>
-				{/each}
-			{:else}
-				<div class="p-4 text-center">
-					<p class="text-gray-500 dark:text-gray-400">Nenhum comércio encontrado.</p>
-				</div>
-			{/if}
+			<div class="max-h-[60vh] overflow-y-auto">
+				{#if filteredComercios.length > 0}
+					<!-- Resultados agrupados por categorias -->
+					<div class="py-2">
+						{#each filteredComercios as comercio}
+							<a
+								on:click={handleResetInput}
+								href={comercio.href}
+								class="flex items-center px-4 py-3 transition-colors hover:bg-blue-50 dark:hover:bg-blue-900/30"
+							>
+								<div class="flex-1">
+									<p class="text-sm font-medium text-gray-900 dark:text-white">{comercio.nome}</p>
+								</div>
+								<div class="ml-3 text-blue-500">
+									<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+										<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+									</svg>
+								</div>
+							</a>
+						{/each}
+					</div>
+				{:else}
+					<div class="flex flex-col items-center justify-center p-8">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<p class="mt-2 text-center text-gray-500 dark:text-gray-400">Nenhum comércio encontrado.</p>
+						<p class="text-center text-sm text-gray-400 dark:text-gray-500">Tente outro termo de busca</p>
+					</div>
+				{/if}
+			</div>
 		</div>
 	{/if}
 </div>
