@@ -10,7 +10,7 @@ const isProduction = import.meta.env.PROD ||
 
 // URLs base da API conforme o ambiente
 export const API_URL = isProduction 
-                      ? 'https://api.encontreluizantonio.com.br' 
+                      ? 'https://api-backend-production-5b22.up.railway.app' 
                       : 'http://localhost:3000';
 
 // URLs base da aplicação conforme o ambiente

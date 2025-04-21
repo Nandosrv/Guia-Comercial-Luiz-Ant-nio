@@ -4,7 +4,7 @@
  * Execute este script antes de fazer deploy para produção:
  * node scripts/update-api-urls.js
  * 
- * Isso irá substituir todas as ocorrências de localhost:3000 por api.encontreluizantonio.com.br
+ * Isso irá substituir todas as ocorrências de localhost:3000 por api-backend-production-5b22.up.railway.app
  * e localhost:5173 por encontreluizantonio.com.br em todos os arquivos .svelte e .ts
  */
 
@@ -15,7 +15,7 @@ const path = require('path');
 const sourceDir = path.join(__dirname, '../src');
 const fileExtensions = ['.svelte', '.ts', '.js'];
 const replacements = [
-  { from: 'http://localhost:3000', to: 'https://api.encontreluizantonio.com.br' },
+  { from: 'http://localhost:3000', to: 'https://api-backend-production-5b22.up.railway.app' },
   { from: 'http://localhost:5173', to: 'https://encontreluizantonio.com.br' }
 ];
 
