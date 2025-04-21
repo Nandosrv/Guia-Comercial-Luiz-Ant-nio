@@ -34,7 +34,7 @@
 	}
   </script>
   
-  <div class="bg-gradient-to-br flex justify-center bg-secondary-foreground p-4 md:p-8">
+  <div class="dark:bg-secondary flex justify-center bg-secondary-foreground p-4 md:p-8">
 	<div class="w-full flex justify-center items-center lg:w-[49%]">
 		<Alerty />
 

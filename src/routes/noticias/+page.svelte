@@ -1,8 +1,11 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
+	import { toasts } from 'svelte-toasts';
     
     let currentSlide = 0;
-    
+    const testGets = () => {
+         toasts.warning('pagina de noticias carregada com sucesso!')
+     }
     const slides = [
         {
             title: 'Nova Experiência',
@@ -23,7 +26,47 @@
             image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80'
         }
     ];
+    const dataJson = `
+    {
+        "title": "Plano Básico",
+        "tipo_de_plano": "Grátis",
+        "dias_futuros": "Anúncio por 7 dias",
+        "valor": "R$ 0,00",
+        "descrição": "Plano básico para você começar a usar o Guia Comercial Luiz Antônio. Anúncio por 7 dias.",
+        "anuncios_diasrios": "1 anúncio por dia"
 
+    }
+    ` 
+    const dataJson2 = `
+    {
+        "title": "Plano Premium",
+        "tipo_de_plano": "29,99",
+        "dias_futuros": "Anúncio por 30 dias",
+        "valor": "R$ 29,99",
+        "descrição": "Plano premium para você começar a usar o Guia Comercial Luiz Antônio. Anúncio por 30 dias.",
+        "anuncios_diasrios": "5 anúncios por dia",
+        "anuncio_personalizado": "0",
+        "destaque": "1"
+
+    }`
+    const Grátis = `
+    {
+        "dias_de_anuncio": {
+        "7": "1 anúncio por dia",
+        "15": "2 anúncios por dia",
+        "30": "3 anúncios por dia"
+        }
+    }`
+    const dataJson3 = `
+    {
+        "title": "Plano Empresarial",
+        "tipo_de_plano": "39,99",
+        "dias_futuros": "Anúncio por 30 dias",
+        "valor": "R$ 39,99",
+        "descrição": "Plano empresarial para você começar a usar o Guia Comercial Luiz Antônio. Anúncio por 30 dias.",
+        "anuncios_diasrios": "10 anúncios por dia"
+        }`
+    
 	const features = [
     {
         title: "Nova Interface do Catálogo de Comercios",
@@ -61,6 +104,7 @@
 
 
 
+
     function nextSlide() {
         currentSlide = (currentSlide + 1) % slides.length;
     }
@@ -70,6 +114,8 @@
     }
 
     onMount(() => {
+
+        testGets()
         const interval = setInterval(nextSlide, 5000);
         return () => clearInterval(interval);
     });

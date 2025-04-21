@@ -1,53 +1,65 @@
-import { getAnalytics } from 'firebase/analytics';
-import { initializeApp } from 'firebase/app';
+import { getAnalytics, type Analytics } from 'firebase/analytics';
+import { initializeApp, getApps, type FirebaseApp } from 'firebase/app';
 import {
-	// browserSessionPersistence,
 	browserLocalPersistence,
 	getAuth,
-	setPersistence
+	setPersistence,
+	onAuthStateChanged,
+	type Auth
 } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 
-const PUBLIC_FIREBASE_API_KEY = process.env.PUBLIC_FIREBASE_API_KEY;
-const PUBLIC_FIREBASE_APP_ID = process.env.PUBLIC_FIREBASE_APP_ID;
-const PUBLIC_FIREBASE_AUTH_DOMAIN = process.env.PUBLIC_FIREBASE_AUTH_DOMAIN;
-const PUBLIC_FIREBASE_MEASUREMENT_ID = process.env.PUBLIC_FIREBASE_MEASUREMENT_ID;
-const PUBLIC_FIREBASE_MESSAGING_SENDER_ID = process.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
-const PUBLIC_FIREBASE_PROJECT_ID = process.env.PUBLIC_FIREBASE_PROJECT_ID as string;
-const PUBLIC_FIREBASE_STORAGE_BUCKET = process.env.PUBLIC_FIREBASE_STORAGE_BUCKET;
-
 // Configuração do Firebase
 const firebaseConfig = {
-	apiKey: PUBLIC_FIREBASE_API_KEY,
-	authDomain: PUBLIC_FIREBASE_AUTH_DOMAIN,
-	projectId: PUBLIC_FIREBASE_PROJECT_ID,
-	storageBucket: PUBLIC_FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-	appId: PUBLIC_FIREBASE_APP_ID,
-	measurementId: PUBLIC_FIREBASE_MEASUREMENT_ID
+	apiKey: process.env.PUBLIC_FIREBASE_API_KEY,
+	authDomain: process.env.PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.PUBLIC_FIREBASE_APP_ID,
+	measurementId: process.env.PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Agora você pode usar o Firebase, por exemplo:
-// Inicializa o Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+// Inicializar Firebase
+let firebaseApp: FirebaseApp;
+let auth: Auth;
+let analytics: Analytics | null = null;
 
-// Inicializa o Analytics apenas se estiver no lado do cliente
-let analytics;
-if (typeof window !== 'undefined') {
-	analytics = getAnalytics(app); // Somente inicializar no cliente
+// Função para inicializar o Firebase
+function initializeFirebase() {
+	try {
+		if (!getApps().length) {
+			console.log('Inicializando nova instância do Firebase');
+			firebaseApp = initializeApp(firebaseConfig);
+		} else {
+			console.log('Usando instância existente do Firebase');
+			firebaseApp = getApps()[0];
+		}
+
+		auth = getAuth(firebaseApp);
+
+		if (typeof window !== 'undefined') {
+			analytics = getAnalytics(firebaseApp);
+			
+			// Configurar persistência local apenas no cliente
+			setPersistence(auth, browserLocalPersistence)
+				.then(() => {
+					console.log('Persistência configurada com sucesso');
+				})
+				.catch((error) => {
+					console.error('Erro ao configurar persistência:', error);
+				});
+		}
+
+		return { firebaseApp, auth, analytics };
+	} catch (error) {
+		console.error('Erro ao inicializar Firebase:', error);
+		throw error;
+	}
 }
 
-// Obtém a instância de autenticação do Firebase
-const auth = getAuth(app);
+// Inicializar Firebase imediatamente
+initializeFirebase();
 
-// Define o tipo de persistência da sessão
-setPersistence(auth, browserLocalPersistence) // Use browserSessionPersistence se preferir sessão temporária
-	.then(() => {
-		console.log('Persistência de sessão configurada com sucesso.');
-	})
-	.catch((error) => {
-		console.error('Erro ao configurar persistência de sessão:', error);
-	});
-
-export { analytics, auth, app as firebaseApp };
+// Exportar instâncias já inicializadas
+export { firebaseApp, auth, analytics };

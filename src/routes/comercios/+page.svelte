@@ -10,11 +10,19 @@
 	let filteredItems = data.items;
 	let selectedCategory = 'Todos';
 	let selectedSubcategory = 'Todos';
+	let searchQuery = '';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { setLastPathUrl } from '$lib/utils/cookies';
 	import { fly } from 'svelte/transition';
 	import Generate from '$lib/componets/Generate.svelte';
+	import { Store, Search, MapPin, Star, ChevronRight, Filter, Clock, Phone, Heart } from 'lucide-svelte';
+
+	// Adiciona isFavorite para cada item
+	$: itemsWithFavorites = filteredItems.map(item => ({
+		...item,
+		isFavorite: false
+	}));
 
 	$: availableSubcategories =
 		selectedCategory === 'Todos'
@@ -32,37 +40,114 @@
 			const categoryMatch = selectedCategory === 'Todos' || item.category === selectedCategory;
 			const subcategoryMatch =
 				selectedSubcategory === 'Todos' || item.subcategory === selectedSubcategory;
-			return categoryMatch && subcategoryMatch;
+			const searchMatch = !searchQuery || 
+				item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+				(item.category && item.category.toLowerCase().includes(searchQuery.toLowerCase())) ||
+				(item.subcategory && item.subcategory.toLowerCase().includes(searchQuery.toLowerCase()));
+			
+			return categoryMatch && subcategoryMatch && searchMatch;
 		});
 	}
+	
+	/**
+	 * Toggle favorite status for a commerce item
+	 * @param {number} index - The index of the item in the itemsWithFavorites array
+	 */
+	function toggleFavorite(index) {
+		itemsWithFavorites[index].isFavorite = !itemsWithFavorites[index].isFavorite;
+		itemsWithFavorites = [...itemsWithFavorites]; // Força atualização
+	}
+	
+	function resetFilters() {
+		selectedCategory = 'Todos';
+		selectedSubcategory = 'Todos';
+		searchQuery = '';
+		filter();
+	}
+	
+	function handleSearchInput() {
+		filter();
+	}
+	
+	onMount(() => {
+		setLastPathUrl($page.url.pathname);
+	});
 </script>
 
-<section
-	class="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
->
-	<div class="flex w-full justify-center">
-		<Generate />
-	</div>
-
-	<div class="container mx-auto px-6 py-12">
-		<!-- Cabeçalho mais estilizado -->
-		<div class="mb-12 text-center">
-			<h1 class="animate-fade-in text-3xl font-bold text-gray-800 dark:text-white md:text-4xl">
-				Descubra Comércios Locais
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-blue-900 to-blue-800 py-20">
+	<!-- Overlay Pattern -->
+	<div class="absolute inset-0 opacity-10 z-0 pattern-diagonal"></div>
+	
+	<div class="container mx-auto px-4 relative z-10">
+		<div class="max-w-4xl mx-auto text-center">
+			<h1 class="text-4xl md:text-5xl font-bold text-white mb-6 slide-in-bottom">
+				Descubra os Melhores Comércios de Luiz Antônio
 			</h1>
-			<p class="mt-4 text-gray-600 dark:text-gray-300">
-				Encontre os melhores estabelecimentos comerciais da região
+			<p class="text-xl text-blue-100 mb-10 slide-in-bottom" style="animation-delay: 100ms;">
+				Encontre facilmente estabelecimentos locais, conecte-se diretamente e tenha acesso a todas as informações que você precisa.
 			</p>
+			
+			<!-- Barra de Pesquisa -->
+			<div class="max-w-2xl mx-auto slide-in-bottom" style="animation-delay: 200ms;">
+				<div class="bg-white/10 backdrop-blur-sm rounded-full p-2 flex items-center border border-white/20 shadow-lg">
+					<div class="bg-white/10 p-2 rounded-full ml-2">
+						<Search class="h-5 w-5 text-white" />
+					</div>
+					<input 
+						type="text" 
+						bind:value={searchQuery}
+						on:input={handleSearchInput}
+						placeholder="Buscar por nome, categoria ou tipo..." 
+						class="flex-1 bg-transparent border-none outline-none px-4 py-2 text-white placeholder-white/70"
+					/>
+					<button 
+						class="bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 px-6 py-2 rounded-full text-white font-medium transition-all hover:shadow-lg"
+						on:click={filter}
+					>
+						Buscar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Wave bottom effect -->
+	<div class="absolute bottom-0 left-0 w-full">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" class="w-full h-auto">
+			<path fill="#ffffff" fill-opacity="1" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" class="dark:fill-gray-900"></path>
+		</svg>
+	</div>
+</section>
+
+<!-- Conteúdo Principal -->
+<section class="py-12 bg-white dark:bg-gray-900">
+	<div class="container mx-auto px-4">
+		<div class="flex w-full justify-center mb-12">
+			<Generate />
 		</div>
 
-		<!-- Filtros em um card -->
-		<div
-			class="mx-auto mb-12 max-w-3xl transform rounded-xl bg-white p-6 shadow-lg transition-all hover:shadow-xl dark:bg-gray-800"
-		>
-			<div class="grid gap-6 md:grid-cols-2">
+		<!-- Filtros e Resultados -->
+		<div class="flex flex-col lg:flex-row gap-8">
+			<!-- Sidebar de Filtros -->
+			<div class="w-full lg:w-1/4">
+				<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 sticky top-20">
+					<div class="flex items-center justify-between mb-6">
+						<h2 class="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+							<Filter class="h-5 w-5 text-red-500" />
+							Filtros
+						</h2>
+						<button 
+							on:click={resetFilters}
+							class="text-sm text-red-500 hover:text-red-700 font-medium"
+						>
+							Limpar filtros
+						</button>
+					</div>
+					
 				<!-- Filtro por Categoria -->
-				<div>
-					<label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+					<div class="mb-6">
+						<label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 						Categoria
 					</label>
 					<select
@@ -72,9 +157,7 @@
 							selectedSubcategory = 'Todos';
 							filter();
 						}}
-						class="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 transition-colors
-                               focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-600
-                               dark:bg-gray-700 dark:text-white"
+							class="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-red-500 focus:ring-2 focus:ring-red-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
 					>
 						<option value="Todos">Todas as categorias</option>
 						{#each data.categories as category}
@@ -83,22 +166,17 @@
 					</select>
 				</div>
 
-				<!-- Filtro por Subcategoria -->
+					<!-- Filtro por Subcategoria (se disponível) -->
 				{#if availableSubcategories.length > 0}
-					<div>
-						<label
-							for="subcategory"
-							class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-						>
+						<div class="mb-6">
+							<label for="subcategory" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
 							Subcategoria
 						</label>
 						<select
 							id="subcategory"
 							bind:value={selectedSubcategory}
 							on:change={filter}
-							class="mt-2 w-full rounded-lg border border-gray-200 bg-white px-4 py-3 transition-colors
-                                   focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-600
-                                   dark:bg-gray-700 dark:text-white"
+								class="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-gray-700 transition-colors focus:border-red-500 focus:ring-2 focus:ring-red-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
 						>
 							<option value="Todos">Todas as subcategorias</option>
 							{#each availableSubcategories as subcategory}
@@ -107,55 +185,185 @@
 						</select>
 					</div>
 				{/if}
+					
+					<!-- Estatísticas Rápidas -->
+					<div class="bg-gray-50 dark:bg-gray-700/30 rounded-lg p-4 mt-8">
+						<h3 class="font-medium text-gray-700 dark:text-gray-300 mb-3">Estatísticas</h3>
+						<div class="space-y-2 text-sm">
+							<div class="flex justify-between">
+								<span class="text-gray-600 dark:text-gray-400">Total de comércios:</span>
+								<span class="font-medium text-gray-900 dark:text-white">{data.items.length}</span>
+							</div>
+							<div class="flex justify-between">
+								<span class="text-gray-600 dark:text-gray-400">Categorias:</span>
+								<span class="font-medium text-gray-900 dark:text-white">{data.categories.length}</span>
+							</div>
+							<div class="flex justify-between">
+								<span class="text-gray-600 dark:text-gray-400">Resultados encontrados:</span>
+								<span class="font-medium text-gray-900 dark:text-white">{filteredItems.length}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Lista de Comércios -->
+			<div class="w-full lg:w-3/4">
+				<!-- Cabeçalho dos Resultados -->
+				<div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+					<div>
+						<h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+							{filteredItems.length} {filteredItems.length === 1 ? 'resultado encontrado' : 'resultados encontrados'}
+						</h2>
+						{#if selectedCategory !== 'Todos' || selectedSubcategory !== 'Todos' || searchQuery}
+							<p class="text-gray-600 dark:text-gray-400 mt-1">
+								Filtros ativos: 
+								{#if selectedCategory !== 'Todos'}<span class="font-medium">{selectedCategory}</span>{/if}
+								{#if selectedSubcategory !== 'Todos'}<span class="font-medium">, {selectedSubcategory}</span>{/if}
+								{#if searchQuery}<span class="font-medium">, "{searchQuery}"</span>{/if}
+							</p>
+						{/if}
+					</div>
+					
+					<div class="flex gap-2">
+						<select
+							class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm text-gray-700 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+						>
+							<option value="relevance">Ordenar por relevância</option>
+							<option value="az">Nome (A-Z)</option>
+							<option value="za">Nome (Z-A)</option>
+						</select>
 			</div>
 		</div>
 
-		<!-- Grid de comércios com cards mais elaborados -->
-		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-			{#each filteredItems as item}
-				<div
-					class="group transform overflow-hidden rounded-xl bg-white shadow-lg transition-all
-                            duration-300 hover:-translate-y-2 hover:shadow-2xl dark:bg-gray-800"
-				>
+				<!-- Grid de Comércios -->
+				{#if filteredItems.length > 0}
+					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+						{#each itemsWithFavorites as item, index}
+							<div
+								class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700 group relative"
+							>
+								<!-- Favorito -->
+								<button 
+									class="absolute z-10 right-4 top-4 p-2 bg-white/20 backdrop-blur-sm rounded-full shadow-md hover:bg-white/30 transition-all" 
+									on:click={() => toggleFavorite(index)}
+									aria-label="Favoritar"
+								>
+									<Heart class={`h-5 w-5 ${item.isFavorite ? 'text-red-500 fill-current' : 'text-white'}`} />
+								</button>
+								
+								<!-- Imagem do Comércio -->
 					<div class="relative h-48 overflow-hidden">
-						
+									<a href={`/comercios/${item.slug}`}>
 						<img
-							class="h-full w-full transform object-cover transition-transform duration-300
-                                   group-hover:scale-110"
+											class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
 							src={item.image}
 							alt={item.title}
 						/>
-						<div
-							class="absolute inset-0 bg-black opacity-0 transition-opacity group-hover:opacity-20"
-						></div>
-					</div>
-					<div class="p-6">
-						<a
-							href={`/comercios/${item.slug}`}
-							class="mb-2 block text-xl font-bold text-gray-800
-                                   hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
-						>
-							{item.title}
-						</a>
-						<div class="flex items-center space-x-2">
-							<span
-								class="inline-block rounded-full bg-blue-100 px-3 py-1 text-sm
-                                        font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-							>
+										<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-60"></div>
+										
+										<!-- Badges sobre a imagem -->
+										<div class="absolute bottom-4 left-4 flex flex-wrap gap-2">
+											<span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
 								{item.category}
 							</span>
 							{#if item.subcategory}
-								<span
-									class="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm
-                                            font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-								>
+												<span class="bg-black/40 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-full">
 									{item.subcategory}
 								</span>
 							{/if}
+										</div>
+									</a>
+								</div>
+								
+								<!-- Conteúdo do Card -->
+								<div class="p-5">
+									<div class="flex items-start justify-between">
+										<div>
+											<a
+												href={`/comercios/${item.slug}`}
+												class="text-xl font-bold text-gray-900 dark:text-white hover:text-red-500 dark:hover:text-red-400 transition-colors line-clamp-1"
+											>
+												{item.title}
+											</a>
+											
+											<div class="flex items-center gap-2 mt-1 text-sm text-gray-600 dark:text-gray-400">
+												<MapPin class="h-4 w-4" />
+												<span>Luiz Antônio, SP</span>
+											</div>
+										</div>
+										
+										<div class="flex items-center gap-1 text-yellow-400">
+											<Star class="h-4 w-4 fill-current" />
+											<span class="font-medium">5.0</span>
+										</div>
+									</div>
+									
+									{#if item.hours}
+										<div class="flex items-center gap-2 mt-3 text-sm text-gray-600 dark:text-gray-400">
+											<Clock class="h-4 w-4" />
+											<span class="line-clamp-1">{item.hours.split('\n')[0]}</span>
+										</div>
+									{/if}
+									
+									<div class="flex gap-2 mt-4">
+										<a 
+											href={`tel:${item.telefone}`}
+											class="flex-1 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white text-sm font-medium text-center hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+										>
+											<Phone class="h-4 w-4 inline-block mr-1" />
+											Ligar
+										</a>
+										<a 
+											href={`/comercios/${item.slug}`}
+											class="flex-1 py-2 rounded-lg bg-red-500 text-white text-sm font-medium text-center hover:bg-red-600 transition-colors flex items-center justify-center"
+										>
+											Ver detalhes
+											<ChevronRight class="h-4 w-4 ml-1" />
+										</a>
 						</div>
 					</div>
 				</div>
 			{/each}
+					</div>
+				{:else}
+					<!-- Nenhum resultado -->
+					<div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg text-center">
+						<div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full mb-4">
+							<Search class="h-8 w-8 text-gray-500 dark:text-gray-400" />
+						</div>
+						<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Nenhum comércio encontrado</h3>
+						<p class="text-gray-600 dark:text-gray-400 mb-6">Não encontramos resultados com os filtros selecionados.</p>
+						<button 
+							on:click={resetFilters}
+							class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+						>
+							Limpar filtros
+						</button>
+					</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Seção de Call-to-Action -->
+<section class="bg-gradient-to-r from-red-600 to-red-500 py-16">
+	<div class="container mx-auto px-4">
+		<div class="max-w-4xl mx-auto text-center">
+			<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+				É proprietário de um comércio em Luiz Antônio?
+			</h2>
+			<p class="text-xl text-white/90 mb-8">
+				Aumente sua visibilidade e conecte-se com mais clientes. Anuncie seu estabelecimento no maior guia comercial da região.
+			</p>
+			<a 
+				href="/Anuncios-Promocao" 
+				class="inline-flex items-center px-8 py-3 bg-white text-red-600 font-bold rounded-full text-lg shadow-lg hover:bg-gray-100 hover:shadow-xl transition-all transform hover:scale-105"
+			>
+				<Store class="h-5 w-5 mr-2" />
+				Anuncie seu Comércio
+			</a>
 		</div>
 	</div>
 </section>
@@ -172,7 +380,19 @@
 		}
 	}
 
-	.animate-fade-in {
-		animation: fade-in 0.5s ease-out;
+	
+	@keyframes slide-in-bottom {
+		from { transform: translateY(50px); opacity: 0; }
+		to { transform: translateY(0); opacity: 1; }
 	}
+
+	.slide-in-bottom {
+		animation: slide-in-bottom 0.8s ease forwards;
+	}
+	
+	.pattern-diagonal {
+		background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.3" fill-rule="evenodd"%3E%3Cpath d="M0 40L40 0H20L0 20M40 40V20L20 40"/%3E%3C/g%3E%3C/svg%3E');
+	}
+	
+	
 </style>

@@ -182,6 +182,7 @@
   let emailInput: HTMLInputElement;
   onMount(() => {
     emailInput?.focus();
+    
   });
 </script>
 

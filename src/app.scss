@@ -89,3 +89,34 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+/* Animações para toast */
+@keyframes toast-enter {
+  0% { 
+    transform: translateY(-30px);
+    opacity: 0; 
+  }
+  100% { 
+    transform: translateY(0);
+    opacity: 1; 
+  }
+}
+
+@keyframes toast-exit {
+  0% { 
+    transform: translateY(0);
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateY(-30px);
+    opacity: 0; 
+  }
+}
+
+.toast-enter {
+  animation: toast-enter 0.3s ease forwards;
+}
+
+.toast-exit {
+  animation: toast-exit 0.3s ease forwards;
+}
