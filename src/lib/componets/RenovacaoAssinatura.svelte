@@ -441,12 +441,55 @@
         return true;
       }
       
+      // Se ainda estiver pendente, verificar manualmente no Mercado Pago
+      if (data.status === 'pendente' && data.payment_id) {
+        // Tentar verificar manualmente o pagamento no endpoint novo
+        try {
+          console.log(`Verificando manualmente o pagamento com ID: ${data.payment_id}`);
+          const manualCheckResponse = await fetch(`${API_BASE_URL}/painel/mercadopago/verificar-pagamento`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ payment_id: data.payment_id })
+          });
+          
+          const manualCheckData = await manualCheckResponse.json();
+          console.log('Resposta da verificação manual:', manualCheckData);
+          
+          if (manualCheckData.success) {
+            // Se o pagamento foi ativado com sucesso, atualizar status
+            statusPagamento = 'ativo';
+            limparVerificacaoPagamento();
+            success = true;
+            setTimeout(() => {
+              onSuccessRenovacao();
+            }, 3000);
+            return true;
+          } else {
+            // Mostrar mensagem sobre o status do pagamento
+            const msgElement = document.getElementById('msg-verificacao');
+            if (msgElement) {
+              msgElement.textContent = `Status do pagamento: ${manualCheckData.payment?.status || 'desconhecido'}. Tente novamente em alguns instantes.`;
+              setTimeout(() => {
+                if (msgElement) msgElement.textContent = '';
+              }, 7000);
+            }
+          }
+        } catch (manualCheckError) {
+          console.error('Erro na verificação manual:', manualCheckError);
+        }
+      }
+      
       // Se ainda estiver pendente, mostrar mensagem
-      if (data.status === 'pendente') {
+      if (statusPagamento === 'pendente') {
         // Adicionar uma mensagem temporária
         const msgElement = document.getElementById('msg-verificacao');
         if (msgElement) {
           msgElement.textContent = 'Pagamento ainda não confirmado. Se você já pagou, aguarde alguns instantes e tente novamente.';
+          
+          // Limpar a mensagem após 5 segundos
           setTimeout(() => {
             if (msgElement) msgElement.textContent = '';
           }, 5000);
@@ -455,8 +498,7 @@
       
       return false;
     } catch (err) {
-      console.error('Erro ao forçar verificação de pagamento:', err);
-      error = err instanceof Error ? err.message : 'Erro desconhecido ao verificar pagamento';
+      console.error('Erro ao forçar verificação do pagamento:', err);
       return false;
     } finally {
       loading = false;
