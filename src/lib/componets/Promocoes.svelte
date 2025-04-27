@@ -33,7 +33,7 @@
 
 		try {
 			const token = await pegarTokenUsuario(); // Pega o token do usuário
-			const response = await fetch(`http://localhost:3000/painel/promocao/promocoes`, {
+			const response = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/promocao/promocoes`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -57,7 +57,7 @@
 
 		try {
 			// Corrigindo a URL para enviar a requisição corretamente ao backend
-			const response = await fetch('http://localhost:3000/painel/promocao/promocoes', {
+			const response = await fetch('https://api-backend-production-5b22.up.railway.app/painel/promocao/promocoes', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -104,7 +104,7 @@
 			const token = await pegarTokenUsuario(); // Token de autenticação (se necessário)
 
 			// Fazendo a requisição PUT para atualizar o status da promoção
-			const response = await fetch(`http://localhost:3000/painel/promocao/promocoes/${id}`, {
+			const response = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/promocao/promocoes/${id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',

@@ -148,7 +148,7 @@
     const fetchUserData = async () => {
       try {
         // Verificar se o usuário já tem um comércio
-        const response = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
+        const response = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/meu-comercio/${userId}`);
         const data = await response.json();
 
         if (data && data.isComerciante) {
@@ -164,7 +164,7 @@
             console.log('Token obtido:', token.substring(0, 20) + '...');
             
             // Tentativa com caminho absoluto completo
-            const apiUrl = 'http://localhost:3000';
+            const apiUrl = 'https://api-backend-production-5b22.up.railway.app';
             console.log('Verificando assinatura em:', `${apiUrl}/planos/verificar-assinatura`);
             
             try {
@@ -365,7 +365,7 @@
         formData.append('fotos', foto);
       });
 
-      const response = await fetch('http://localhost:3000/cadastrar-comercio', {
+      const response = await fetch('https://api-backend-production-5b22.up.railway.app/cadastrar-comercio', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

@@ -76,7 +76,7 @@
       }
       
       console.log("Fazendo requisição GET para produtos");
-      const response = await fetch('http://localhost:3000/painel/produto/produtos', {
+      const response = await fetch('https://api-backend-production-5b22.up.railway.app/painel/produto/produtos', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -121,7 +121,7 @@
 
       console.log("Enviando dados do produto:", novoProduto);
       
-      const response = await fetch('http://localhost:3000/painel/produto/produtos', {
+      const response = await fetch('https://api-backend-production-5b22.up.railway.app/painel/produto/produtos', {
         method: 'POST',
         headers,
         body: JSON.stringify(novoProduto)
@@ -169,7 +169,7 @@
         token = await user.getIdToken();
       }
       
-      const response = await fetch(`http://localhost:3000/painel/produto/produtos/${id}`, {
+      const response = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/produto/produtos/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

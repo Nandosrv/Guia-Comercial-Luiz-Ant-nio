@@ -34,7 +34,7 @@
         const user = auth.currentUser;
         token = await user?.getIdToken() || '';
         console.log(token);
-        fetch(`http://localhost:3000/painel/planos`, {
+        fetch(`https://api-backend-production-5b22.up.railway.app/painel/planos`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -332,7 +332,7 @@
 			if (!user) return;
 
 			const token = await user.getIdToken();
-			const response = await fetch(`http://localhost:3000/mercadopago/payment/${paymentId}`, {
+			const response = await fetch(`https://api-backend-production-5b22.up.railway.app/mercadopago/payment/${paymentId}`, {
 				headers: {
 					'Authorization': `Bearer ${token}`
 				}
@@ -356,7 +356,7 @@
 				
 				// Atualizar status da assinatura no banco de dados
 				try {
-					const updateResponse = await fetch('http://localhost:3000/mercadopago/test-webhook', {
+					const updateResponse = await fetch('https://api-backend-production-5b22.up.railway.app/mercadopago/test-webhook', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -405,7 +405,7 @@
 			// Se for plano básico, criar assinatura gratuita primeiro
 			if (plan.planoId === 'basico') {
 				try {
-					const response = await fetch('http://localhost:3000/mercadopago/pix', {
+					const response = await fetch('https://api-backend-production-5b22.up.railway.app/mercadopago/pix', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -462,7 +462,7 @@
 
 			console.log('Enviando dados:', JSON.stringify(paymentData, null, 2));
 
-			const response = await fetch('http://localhost:3000/mercadopago/pix', {
+			const response = await fetch('https://api-backend-production-5b22.up.railway.app/mercadopago/pix', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
