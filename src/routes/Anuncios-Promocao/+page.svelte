@@ -33,7 +33,8 @@
     const test = async()=>{
         const user = auth.currentUser;
         token = await user?.getIdToken() || '';
-        console.log(token);
+		// token do usuario
+        // console.log(token);
         fetch(`https://api-backend-production-5b22.up.railway.app/painel/planos`, {
             headers: {
                 'Content-Type': 'application/json',
