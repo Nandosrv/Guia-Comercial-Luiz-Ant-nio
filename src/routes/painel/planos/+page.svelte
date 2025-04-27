@@ -45,7 +45,7 @@
             const token = await getIdToken(currentUser, true);
             
             // Chamada ao endpoint específico no backend
-            const apiUrl = 'http://localhost:3000'; // URL fixa do backend
+            const apiUrl = 'https://api-backend-production-5b22.up.railway.app'; // URL fixa do backend
             
             console.log('Verificando assinatura em:', `${apiUrl}/painel/planos/verificar-assinatura`);
             console.log('Token obtido com sucesso:', !!token);

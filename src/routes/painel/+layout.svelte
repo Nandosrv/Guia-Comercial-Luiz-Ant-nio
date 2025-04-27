@@ -132,7 +132,7 @@
     async function carregarDadosComercio(userId: string) {
       try {
         // Carregar dados do usuário/comércio
-        const comercioResponse = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
+        const comercioResponse = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/meu-comercio/${userId}`);
         const comercioData = await comercioResponse.json();
         console.log("Dados recebidos da API:", comercioData);
         
@@ -436,7 +436,7 @@
         });
 
         // Enviando a requisição PUT
-        const response = await fetch('http://localhost:3000/painel/meu-comercio/atualizar-comercio', {
+        const response = await fetch('https://api-backend-production-5b22.up.railway.app/painel/meu-comercio/atualizar-comercio', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

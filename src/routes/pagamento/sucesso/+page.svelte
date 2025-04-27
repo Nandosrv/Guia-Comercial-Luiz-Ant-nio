@@ -21,7 +21,7 @@
             }
 
             // Verificar status do pagamento e se usuário já tem comércio
-            const response = await axios.get(`http://localhost:3000/mercadopago/pagamento/sucesso?userId=${userId}`);
+            const response = await axios.get(`https://api-backend-production-5b22.up.railway.app/mercadopago/pagamento/sucesso?userId=${userId}`);
             
             if (response.data.success) {
                 status = 'success';

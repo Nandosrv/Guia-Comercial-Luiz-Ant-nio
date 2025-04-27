@@ -29,8 +29,8 @@
   
   // Constantes
   const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-    ? 'http://localhost:3000' 
-    : 'https://api-guia-comercial.vercel.app';  // URL real da API em produção
+    ? 'https://api-backend-production-5b22.up.railway.app' 
+    : 'https://api-backend-production-5b22.up.railway.app';  // URL real da API em produção
 
   // Debug info
   let debugInfo = '';

@@ -26,7 +26,7 @@ if (!userId) {
 const token = await pegarTokenUsuario(); // Obter o token de autenticação
 
 try {
-  const response = await fetch(`http://localhost:3000/painel/mensagens/mensagens/${userId}`, {
+  const response = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/mensagens/mensagens/${userId}`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`,
@@ -73,7 +73,7 @@ if (!emailRegex.test(novaMensagem.email)) {
 }
 
 try {
-  const response = await fetch('http://localhost:3000/painel/mensagens/mensagens', {
+  const response = await fetch('https://api-backend-production-5b22.up.railway.app/painel/mensagens/mensagens', {
 method: 'POST',
 headers: {
   'Content-Type': 'application/json',
@@ -106,10 +106,10 @@ data: new Date().toISOString()
   // Função para marcar uma mensagem como lida
   async function marcarMensagemComoLida(id: string) {
 const token = await pegarTokenUsuario();
-console.log('🔵 Enviando requisição para:', `http://localhost:3000/painel/mensagens/mensagens/${id}`);
+console.log('🔵 Enviando requisição para:', `https://api-backend-production-5b22.up.railway.app/painel/mensagens/mensagens/${id}`);
 
 try {
-  const resposta = await fetch(`http://localhost:3000/painel/mensagens/mensagens/${id}`, {
+  const resposta = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/mensagens/mensagens/${id}`, {
     method: 'PUT',  // Garante que está sendo enviado PUT
     headers: {
       'Content-Type': 'application/json',

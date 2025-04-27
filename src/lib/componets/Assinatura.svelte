@@ -98,7 +98,7 @@
 			loading = true;
 			console.log('Testando conexão com o Mercado Pago...');
 			
-			const response = await axios.get('http://localhost:3000/mercadopago/test-connection');
+			const response = await axios.get('https://api-backend-production-5b22.up.railway.app/mercadopago/test-connection');
 			console.log('Teste de conexão:', response.data);
 			
 			if (response.data.success) {
@@ -147,7 +147,7 @@
 			statusPagamento = 'verificando';
 			console.log(`Verificando status do pagamento ID ${paymentId}...`);
 			
-			const response = await axios.get(`http://localhost:3000/mercadopago/payment/${paymentId}`);
+			const response = await axios.get(`https://api-backend-production-5b22.up.railway.app/mercadopago/payment/${paymentId}`);
 			
 			if (response.data.success) {
 				const status = response.data.payment.status;
@@ -300,7 +300,7 @@
 			};
 			
 			// Usando o endpoint que utiliza o SDK do Mercado Pago
-			const endpoint = 'http://localhost:3000/mercadopago/pix';
+			const endpoint = 'https://api-backend-production-5b22.up.railway.app/mercadopago/pix';
 				
 			console.log(`Enviando requisição para ${endpoint}:`, paymentData);
 			
