@@ -26,11 +26,13 @@
 		title: string;
 		telefone: string;
 		image: string;
-		whatsapp: string;
-		facebook: string;
-		instagram: string;
-		maps: string;
-		hours: string;
+		whatsapp?: string;
+		facebook?: string;
+		instagram?: string;
+		maps?: string;
+		hours?: string;
+		category?: string;
+		subcategory?: string;
 	};
 
 	let isModalOpen = false;

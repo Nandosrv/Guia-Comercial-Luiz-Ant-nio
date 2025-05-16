@@ -8,6 +8,7 @@
     import { slide } from 'svelte/transition';
     // import { userStore } from '../../../stores/userStore.svelte';
     import { subscribeToAuthState, checkAuthState, logout } from '$lib/services/authService.svelte';
+    import { temNovoComentario, limparNotificacaoComentarios } from '../../stores/commentStore.svelte';
     
     // console.log("userStore",userStore);
     
@@ -503,6 +504,11 @@
     function navigateTo(path: string) {
         goto(path);
         mobileMenu.set(false); // Fecha o menu mobile após navegar
+        
+        // Limpar notificações de comentários se navegando para o dashboard
+        if (path === '/painel') {
+          limparNotificacaoComentarios();
+        }
     }
 
     // Função para alternar o menu mobile
@@ -592,7 +598,15 @@
           on:click={() => navigateTo('/painel')}
           class={`w-full ${activeTab === 'dashboard' ? 'bg-purple-50 dark:bg-purple-900 border-purple-500 text-purple-700 dark:text-purple-300' : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} block pl-3 pr-4 py-3 border-l-4 text-base font-medium flex items-center`}
         >
-          <Home class="h-5 w-5 mr-3 {activeTab === 'dashboard' ? 'text-purple-500' : 'text-gray-400'}" />
+          <div class="relative flex-shrink-0 -ml-1 mr-3">
+            <Home class={`${activeTab === 'dashboard' ? 'text-purple-500' : 'text-gray-400'} h-6 w-6`} />
+            {#if $temNovoComentario}
+              <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+              </span>
+            {/if}
+          </div>
           <span>Dashboard</span>
         </button>
         
@@ -694,7 +708,15 @@
                   on:click={() => navigateTo('/painel')}
                   class={`w-full ${activeTab === 'dashboard' ? 'bg-purple-50 dark:bg-purple-900 text-purple-700 dark:text-purple-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'} group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
                 >
-                  <Home class={`${activeTab === 'dashboard' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} flex-shrink-0 -ml-1 mr-3 h-6 w-6`} />
+                  <div class="relative flex-shrink-0 -ml-1 mr-3">
+                    <Home class={`${activeTab === 'dashboard' ? 'text-purple-500' : 'text-gray-400 group-hover:text-gray-500'} h-6 w-6`} />
+                    {#if $temNovoComentario}
+                      <span class="absolute -top-1 -right-1 flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                      </span>
+                    {/if}
+                  </div>
                   <span class="truncate">Dashboard</span>
                 </button>
                 
