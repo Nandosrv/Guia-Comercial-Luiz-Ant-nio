@@ -29,7 +29,7 @@
 			// Verificar status exato do pagamento se houver um payment_id
 			if (paymentId) {
 				try {
-					const response = await axios.get(`http://localhost:3000/mercadopago/payment/${paymentId}`);
+					const response = await axios.get(`https://api-backend-production-5b22.up.railway.app/mercadopago/payment/${paymentId}`);
 					if (response.data.success) {
 						console.log(`Status do pagamento verificado: ${response.data.payment.status}`);
 						// Guardar payment_id no localStorage para uso futuro

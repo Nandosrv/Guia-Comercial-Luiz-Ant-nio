@@ -70,11 +70,11 @@
 	async function carregarDadosComercio(userId: string) {
 		try {
 			// Carregar dados do usuário
-			const userResponse = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
+			const userResponse = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/meu-comercio/${userId}`);
 			const userData = await userResponse.json();
 
 			// Carregar dados do comércio
-			const comercioResponse = await fetch(`http://localhost:3000/painel/meu-comercio/${userId}`);
+			const comercioResponse = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/meu-comercio/${userId}`);
 			const comercioData = await comercioResponse.json();
 			
 			console.log('Dados do comerciante recebidos:', comercioData.comerciante);
@@ -408,7 +408,7 @@
 				metodos_pagamento: metodosPagamentoParaEnviar
 			});
 
-			const response = await fetch(`http://localhost:3000/painel/meu-comercio/atualizar-comercio/${authUser?.uid}`, {
+			const response = await fetch(`https://api-backend-production-5b22.up.railway.app/painel/meu-comercio/atualizar-comercio/${authUser?.uid}`, {
 				method: 'PUT',
 				headers: {
 					Authorization: `Bearer ${token}`
@@ -764,6 +764,7 @@
 					</div>
 
 					<div class="sm:col-span-6">
+						<!-- svelte-ignore a11y_label_has_associated_control -->
 						<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
 							Métodos de Pagamento
 						</label>
@@ -838,6 +839,7 @@
 					</div>
 
 					<div class="sm:col-span-6">
+						<!-- svelte-ignore a11y_label_has_associated_control -->
 						<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
 							Horários de Funcionamento
 						</label>

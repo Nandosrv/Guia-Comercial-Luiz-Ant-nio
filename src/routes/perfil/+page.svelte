@@ -267,7 +267,7 @@
 	// 	throw new Error('Function not implemented.');
 	// }
 	let isComerciante = false;
-  const apiUrl = 'http://localhost:3000';
+  const apiUrl = 'https://api-backend-production-5b22.up.railway.app';
 
   let isLoading = false
   // Função chamada ao clicar no botão "Sou Comerciante"

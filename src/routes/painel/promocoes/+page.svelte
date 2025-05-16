@@ -61,8 +61,8 @@
 
 	// Variáveis para configuração da API
 	const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-		? 'http://localhost:3000' 
-		: 'https://api.seudominio.com';  // Altere para seu domínio de produção
+		? 'https://api-backend-production-5b22.up.railway.app' 
+		: 'https://api-backend-production-5b22.up.railway.app';  // URL da API em produção
 
 	// Adicionar estado para controlar o modal de renovação
 	let mostrarModalRenovacao = false;

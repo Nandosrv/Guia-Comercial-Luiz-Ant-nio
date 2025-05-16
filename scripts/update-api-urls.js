@@ -8,8 +8,13 @@
  * e localhost:5173 por encontreluizantonio.com.br em todos os arquivos .svelte e .ts
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Configuração para obter o diretório atual com ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configurações
 const sourceDir = path.join(__dirname, '../src');
