@@ -30,6 +30,21 @@
     Image
   } from 'lucide-svelte';
 
+  // Definindo a URL base para uso em todo o componente
+  const baseUrl = 'https://api-backend-production-5b22.up.railway.app';
+
+  // Função para gerar slug manualmente
+  function gerarSlug(texto: string): string {
+    return texto
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+      .replace(/[^\w\s-]/g, '') // Remove caracteres especiais
+      .replace(/\s+/g, '-') // Substitui espaços por hífens
+      .replace(/--+/g, '-') // Remove múltiplos hífens
+      .trim(); // Remove espaços no início e fim
+  }
+
   // Variáveis de formulário
   let nome = '';
   let endereco = '';
@@ -118,9 +133,7 @@
   // Verifica se o usuário já tem um comércio
   onMount(async () => {
     // Adicionar um pequeno atraso para dar tempo do Firebase inicializar completamente
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Verificar se o Firebase está inicializado e se há um usuário logado
+          await new Promise(resolve => setTimeout(resolve, 1000));            // Adicionar listener para evento de correção de resposta do servidor      document.addEventListener("resposta-corrigida", ((e: CustomEvent) => {        console.log("✅ Evento de resposta corrigida recebido:", e.detail);                if (e.detail && e.detail.success && e.detail.slug) {          console.log("✅ Usando slug corrigido:", e.detail.slug);          // Atualizar o estado conforme necessário          successMessage = "Comércio cadastrado com sucesso (com correção de slug)!";                    // Redirecionar após 2 segundos          setTimeout(() => {            goto('/painel');          }, 2000);        }      }) as EventListener);            // Verificar se o Firebase está inicializado e se há um usuário logado
     const checkAuth = () => {
       console.log("Verificando autenticação...");
       if (auth.currentUser) {
@@ -339,6 +352,13 @@
     try {
       const token = await pegarTokenUsuario();
       
+      console.log('Iniciando cadastro de comércio:', { nome, categoria });
+      
+      // Garantir que temos um slug válido para diagnóstico
+      const slugTeste = gerarSlug(nome);
+      
+      console.log('Slug gerado no frontend para teste:', slugTeste);
+      
       // Criar formulário para envio dos dados incluindo as fotos
       const formData = new FormData();
       formData.append('userId', userId);
@@ -353,6 +373,7 @@
       formData.append('facebook', facebook);
       formData.append('instagram', instagram);
       formData.append('plano', plano);
+      formData.append('slug', slugTeste); // Incluindo o slug gerado no frontend
       
       // Adicionar métodos de pagamento
       formData.append('metodosPagamento', JSON.stringify(metodosPagamento));
@@ -365,6 +386,7 @@
         formData.append('fotos', foto);
       });
 
+      console.log('Enviando requisição para o servidor...');
       const response = await fetch('https://api-backend-production-5b22.up.railway.app/cadastrar-comercio', {
         method: 'POST',
         headers: {
@@ -374,6 +396,61 @@
       });
 
       const data = await response.json();
+      console.log('Resposta do servidor:', data);
+      
+      // Verificar se o slug foi gerado
+      if (data.success && data.comerciante) {
+        // Verificar slug tanto na raiz quanto no objeto comerciante
+        let slugResposta = data.slug || data.comerciante.slug;
+        
+        console.log('Slug recebido do servidor:', slugResposta);
+        
+        if (!slugResposta) {
+          console.warn('AVISO: O servidor não retornou um slug para o comércio! Usando o gerado no frontend.');
+          
+          // Usar o slug que foi gerado e enviado no formData
+          const slugLocal = slugTeste;
+          console.log('✅ Usando slug anteriormente gerado:', slugLocal);
+          
+          // Adicionar o slug à resposta
+          if (data.comerciante) {
+            data.comerciante.slug = slugLocal;
+          }
+          data.slug = slugLocal;
+          
+          // Opcional: tentar atualizar no banco de dados via chamada adicional
+          try {
+            const updateSlugUrl = `${baseUrl}/painel/meu-comercio/atualizar-comercio`;
+            console.log('🔄 Tentando atualizar slug no servidor:', updateSlugUrl);
+            
+            // Usar mesmo token já obtido anteriormente
+            fetch(updateSlugUrl, {
+              method: 'PUT',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                userId,
+                slug: slugLocal,
+                nome // Incluir nome pois é obrigatório para a atualização
+              })
+            })
+            .then(res => {
+              console.log('Resposta da atualização de slug:', res.status);
+              return res.json();
+            })
+            .then(updateData => {
+              console.log('Dados da atualização de slug:', updateData);
+            })
+            .catch(err => console.error('Erro ao atualizar slug:', err));
+          } catch (updateError) {
+            console.error('Erro ao tentar atualizar slug:', updateError);
+          }
+        } else {
+          console.log('✅ Slug recebido corretamente do servidor');
+        }
+      }
 
       if (data.success) {
         successMessage = 'Comércio cadastrado com sucesso!';
@@ -548,6 +625,9 @@
                   placeholder="Ex: Mercado São João"
                 />
               </div>
+              <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                Um endereço web único (slug) será gerado automaticamente a partir do nome do seu comércio.
+              </p>
             </div>
 
             <!-- Categoria -->

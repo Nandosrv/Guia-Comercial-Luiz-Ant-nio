@@ -6,17 +6,69 @@
 	}
 </script>
 
-<script>
-	let filteredItems = data.items;
-	let selectedCategory = 'Todos';
-	let selectedSubcategory = 'Todos';
-	let searchQuery = '';
-	import { page } from '$app/stores';
+<script lang="ts">
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import { setLastPathUrl } from '$lib/utils/cookies';
 	import { fly } from 'svelte/transition';
 	import Generate from '$lib/componets/Generate.svelte';
 	import { Store, Search, MapPin, Star, ChevronRight, Filter, Clock, Phone, Heart } from 'lucide-svelte';
+
+	// Interfaces para tipagem
+	interface Comerciante {
+		id?: string;
+		slug?: string;
+		nome: string;
+		categoria?: string;
+		subcategoria?: string;
+		telefone?: string;
+		whatsapp?: string;
+		email?: string;
+		facebook?: string;
+		instagram?: string;
+		horarios_funcionamento?: any;
+		fotos?: string[];
+		'photo-comercio'?: string;
+	}
+
+	interface ComercioItem {
+		slug: string;
+		title: string;
+		category: string;
+		subcategory?: string;
+		telefone?: string;
+		whatsapp?: string;
+		email?: string;
+		facebook?: string;
+		instagram?: string;
+		hours?: string;
+		image: string;
+		maps?: string;
+		isDynamic?: boolean;
+	}
+
+	interface ComercioItemWithFavorite extends ComercioItem {
+		isFavorite: boolean;
+	}
+
+	interface Comentario {
+		id: string;
+		nome_usuario: string;
+		comentario: string;
+		avaliacao: number;
+		criado_em: string;
+		resposta?: string;
+		data_resposta?: string;
+	}
+
+	// Estado para armazenar todos os itens (estáticos + dinâmicos)
+	let allItems: ComercioItem[] = [...data.items];
+	let filteredItems: ComercioItem[] = allItems;
+	let selectedCategory = 'Todos';
+	let selectedSubcategory = 'Todos';
+	let searchQuery = '';
+	let isLoading = false;
+	let error: string | null = null;
 
 	// Adiciona isFavorite para cada item
 	$: itemsWithFavorites = filteredItems.map(item => ({
@@ -29,14 +81,65 @@
 			? []
 			: [
 					...new Set(
-						data.items
+						allItems
 							.filter((item) => item.category === selectedCategory)
 							.map((item) => item.subcategory)
 					)
 				].filter(Boolean);
 
+	// Função para buscar comerciantes do banco de dados
+	async function fetchComerciantes() {
+		isLoading = true;
+		try {
+			// Detecta ambiente local
+			const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+			const apiUrl = isLocal
+				? 'http://localhost:3000/comerciantes'
+				: 'https://api-backend-production-5b22.up.railway.app/comerciantes';
+
+			let response = await fetch(apiUrl);
+			if (!response.ok) {
+				throw new Error(`Falha ao buscar comerciantes: ${response.status}`);
+			}
+			const responseData = await response.json();
+
+			// Transformar os comerciantes do banco para o mesmo formato dos estáticos
+			const dynamicItems = responseData.map((comerciante: Comerciante) => ({
+				slug: comerciante.slug || comerciante.id || `comercio-${comerciante.nome.toLowerCase().replace(/\s+/g, '-')}`,
+				title: comerciante.nome,
+				category: comerciante.categoria || 'Outros',
+				subcategory: comerciante.subcategoria,
+				telefone: comerciante.telefone,
+				whatsapp: comerciante.whatsapp,
+				email: comerciante.email,
+				facebook: comerciante.facebook,
+				instagram: comerciante.instagram,
+				hours: comerciante.horarios_funcionamento ? 'Veja detalhes' : 'Horário não informado',
+				image: comerciante['photo-comercio'] || (comerciante.fotos && comerciante.fotos.length > 0 ? comerciante.fotos[0] : 'https://via.placeholder.com/300x200?text=Sem+Imagem'),
+				maps: '',
+				isDynamic: true // Marcar como dinâmico para possíveis tratamentos específicos
+			}));
+
+			// Combinar com os itens estáticos
+			allItems = [...data.items, ...dynamicItems];
+			filter(); // Aplicar filtros aos novos itens
+		} catch (err: unknown) {
+			console.error('Erro ao buscar comerciantes:', err);
+			if (err instanceof Error) {
+				error = err.message;
+			} else {
+				error = 'Erro desconhecido ao buscar comerciantes';
+			}
+			// Garantir que os itens estáticos ainda sejam mostrados mesmo com erro
+			allItems = [...data.items];
+			filter();
+		} finally {
+			isLoading = false;
+		}
+	}
+
 	function filter() {
-		filteredItems = data.items.filter((item) => {
+		filteredItems = allItems.filter((item) => {
 			const categoryMatch = selectedCategory === 'Todos' || item.category === selectedCategory;
 			const subcategoryMatch =
 				selectedSubcategory === 'Todos' || item.subcategory === selectedSubcategory;
@@ -49,11 +152,7 @@
 		});
 	}
 	
-	/**
-	 * Toggle favorite status for a commerce item
-	 * @param {number} index - The index of the item in the itemsWithFavorites array
-	 */
-	function toggleFavorite(index) {
+	function toggleFavorite(index: number) {
 		itemsWithFavorites[index].isFavorite = !itemsWithFavorites[index].isFavorite;
 		itemsWithFavorites = [...itemsWithFavorites]; // Força atualização
 	}
@@ -71,6 +170,7 @@
 	
 	onMount(() => {
 		setLastPathUrl($page.url.pathname);
+		fetchComerciantes(); // Buscar comerciantes dinâmicos ao montar o componente
 	});
 </script>
 
@@ -192,7 +292,7 @@
 						<div class="space-y-2 text-sm">
 							<div class="flex justify-between">
 								<span class="text-gray-600 dark:text-gray-400">Total de comércios:</span>
-								<span class="font-medium text-gray-900 dark:text-white">{data.items.length}</span>
+								<span class="font-medium text-gray-900 dark:text-white">{allItems.length}</span>
 							</div>
 							<div class="flex justify-between">
 								<span class="text-gray-600 dark:text-gray-400">Categorias:</span>
@@ -236,6 +336,32 @@
 			</div>
 		</div>
 
+				<!-- Estado de carregamento -->
+				{#if isLoading}
+					<div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg text-center">
+						<div class="inline-flex items-center justify-center">
+							<div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
+						</div>
+						<p class="mt-4 text-gray-600 dark:text-gray-400">Carregando comércios...</p>
+					</div>
+				{:else if error}
+					<div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg text-center">
+						{#if error.includes('API indisponível')}
+							<div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full mb-4">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+								</svg>
+							</div>
+							<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Dados de Demonstração</h3>
+							<p class="text-gray-600 dark:text-gray-400 mb-4">Os servidores estão temporariamente indisponíveis. Exibindo comércios de demonstração.</p>
+							<p class="text-sm text-yellow-600 dark:text-yellow-400">Você pode continuar navegando normalmente.</p>
+						{:else}
+							<p class="text-red-500 mb-4">Erro ao carregar comércios dinâmicos: {error}</p>
+							<p class="text-gray-600 dark:text-gray-400 mb-4">Mostrando apenas comércios estáticos.</p>
+						{/if}
+					</div>
+				{/if}
+
 				<!-- Grid de Comércios -->
 				{#if filteredItems.length > 0}
 					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -251,6 +377,13 @@
 								>
 									<Heart class={`h-5 w-5 ${item.isFavorite ? 'text-red-500 fill-current' : 'text-white'}`} />
 								</button>
+								
+								<!-- Indicador de origem (apenas visual para debug) -->
+								{#if 'isDynamic' in item && item.isDynamic}
+									<div class="absolute z-10 left-4 top-4 py-1 px-2 bg-green-500/80 backdrop-blur-sm rounded-md text-xs text-white font-medium">
+										Dinâmico
+									</div>
+								{/if}
 								
 								<!-- Imagem do Comércio -->
 					<div class="relative h-48 overflow-hidden">
@@ -302,7 +435,7 @@
 									{#if item.hours}
 										<div class="flex items-center gap-2 mt-3 text-sm text-gray-600 dark:text-gray-400">
 											<Clock class="h-4 w-4" />
-											<span class="line-clamp-1">{item.hours.split('\n')[0]}</span>
+											<span class="line-clamp-1">{typeof item.hours === 'string' ? item.hours.split('\n')[0] : item.hours}</span>
 										</div>
 									{/if}
 									

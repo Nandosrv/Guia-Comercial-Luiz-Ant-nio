@@ -764,6 +764,7 @@
 					</div>
 
 					<div class="sm:col-span-6">
+						<!-- svelte-ignore a11y_label_has_associated_control -->
 						<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
 							Métodos de Pagamento
 						</label>
@@ -838,6 +839,7 @@
 					</div>
 
 					<div class="sm:col-span-6">
+						<!-- svelte-ignore a11y_label_has_associated_control -->
 						<label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
 							Horários de Funcionamento
 						</label>
