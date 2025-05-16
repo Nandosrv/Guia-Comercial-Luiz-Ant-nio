@@ -386,7 +386,6 @@
         formData.append('fotos', foto);
       });
 
-      console.log('Enviando requisição para o servidor...');
       const response = await fetch('https://api-backend-production-5b22.up.railway.app/cadastrar-comercio', {
         method: 'POST',
         headers: {
