@@ -75,7 +75,6 @@
   let error = $state('');
   let successMessage = $state('');
   let isSubmitting = $state(false);
-  let debugInfo = $state(''); // Para informações de depuração
   let usandoSimulacao = $state(false);
   let editandoComentario = $state<Comentario | null>(null);
   let comentarioEditado = $state('');
@@ -86,12 +85,6 @@
   // Obter usuário atual
   let currentUser = $derived(userStore.value);
   let isAuthenticated = $derived(userStore.isAuthenticated());
-
-  // Função auxiliar para adicionar informações de depuração
-  function addDebug(message: string) {
-    console.log(message);
-    debugInfo += message + '\n';
-  }
 
   // Função para redirecionar para a página de login
   function irParaLogin() {
@@ -114,7 +107,6 @@
   // Iniciar edição de comentário
   function iniciarEdicao(comentario: Comentario) {
     if (!comentario) {
-      addDebug('Tentativa de editar comentário inválido');
       error = 'Erro: não foi possível editar o comentário';
       return;
     }
@@ -155,8 +147,6 @@
       
       // Se estamos no modo simulado, atualizamos apenas localmente
       if (usandoSimulacao) {
-        addDebug('Editando comentário no modo simulado');
-        
         // Atualizar o comentário na lista local
         comentarios = comentarios.map(c => {
           if (c.id === comentarioId) {
@@ -181,8 +171,6 @@
         avaliacao: avaliacaoEditada
       };
       
-      addDebug(`Enviando atualização de comentário: ${JSON.stringify(dadosAtualizacao)}`);
-      
       // Tentar atualizar via API
       try {
         const response = await fetch(`${API_BASE}/comentarios/${comentarioId}`, {
@@ -194,8 +182,6 @@
         });
         
         if (response.ok) {
-          addDebug('Comentário atualizado com sucesso!');
-          
           // Atualizar o comentário na lista local
           comentarios = comentarios.map(c => {
             if (c.id === comentarioId) {
@@ -214,8 +200,6 @@
           throw new Error(`Erro ao atualizar comentário: ${response.status}`);
         }
       } catch (err) {
-        addDebug(`Erro ao atualizar comentário: ${err}`);
-        
         // Tentar com fallback
         try {
           const fallbackResponse = await fetch(`${API_BASE}/comentarioos/${comentarioId}`, {
@@ -227,8 +211,6 @@
           });
           
           if (fallbackResponse.ok) {
-            addDebug('Comentário atualizado com sucesso via fallback!');
-            
             // Atualizar o comentário na lista local
             comentarios = comentarios.map(c => {
               if (c.id === comentarioId) {
@@ -252,8 +234,6 @@
       }
     } catch (e) {
       // Se falhou, simulamos a atualização localmente
-      addDebug(`Erro ao atualizar comentário. Atualizando localmente.`);
-      
       // Atualizar o comentário na lista local
       comentarios = comentarios.map(c => {
         if (c.id === comentarioId) {
@@ -280,7 +260,6 @@
   // Confirmar exclusão de comentário
   function confirmarExclusao(comentarioId: string | undefined) {
     if (!comentarioId) {
-      addDebug('Tentativa de excluir comentário sem ID');
       error = 'Erro: não foi possível identificar o comentário para exclusão';
       return;
     }
@@ -313,8 +292,6 @@
       
       // Se estamos no modo simulado, removemos apenas localmente      
       if (usandoSimulacao) {        
-        addDebug('Excluindo comentário no modo simulado');        
-        
         // Remover o comentário da lista local        
         comentarios = comentarios.filter(c => c.id !== idParaExcluir);        
         
@@ -323,8 +300,6 @@
         return;      
       }      
       
-      addDebug(`Excluindo comentário com ID: ${idParaExcluir}`);      
-      
       // Tentar excluir via API      
       try {        
         const response = await fetch(`${API_BASE}/comentarios/${idParaExcluir}`, {          
@@ -332,8 +307,6 @@
         });        
         
         if (response.ok) {          
-          addDebug('Comentário excluído com sucesso!');          
-          
           // Remover o comentário da lista local          
           comentarios = comentarios.filter(c => c.id !== idParaExcluir);          
           
@@ -343,8 +316,6 @@
           throw new Error(`Erro ao excluir comentário: ${response.status}`);        
         }      
       } catch (err) {        
-        addDebug(`Erro ao excluir comentário: ${err}`);        
-        
         // Tentar com fallback        
         try {          
           const fallbackResponse = await fetch(`${API_BASE}/comentarioos/${idParaExcluir}`, {            
@@ -352,8 +323,6 @@
           });          
           
           if (fallbackResponse.ok) {            
-            addDebug('Comentário excluído com sucesso via fallback!');            
-            
             // Remover o comentário da lista local            
             comentarios = comentarios.filter(c => c.id !== idParaExcluir);            
             
@@ -368,8 +337,6 @@
       }    
     } catch (e) {      
       // Se falhou, simulamos a exclusão localmente      
-      addDebug(`Erro ao excluir comentário. Removendo localmente.`);      
-      
       // Remover o comentário da lista local      
       comentarios = comentarios.filter(c => c.id !== idParaExcluir);      
       
@@ -396,29 +363,20 @@
   async function carregarComentarios() {
     isLoading = true;
     try {
-      addDebug(`Iniciando busca de comentários: comercioId=${comercioId}, comercioSlug=${comercioSlug}`);
-      
       // Forçar uso da API local para testes
       const API_BASE = 'http://localhost:3000';
-      addDebug(`Usando API local: ${API_BASE}`);
       
       // Se temos o ID do comércio e ele não é o slug
       if (comercioId && comercioId !== comercioSlug) {
-        addDebug(`Tentando buscar comentários com ID: ${comercioId}`);
-        
         // Tentar diretamente na raiz da API primeiro (nova tentativa)
         try {
-          addDebug('Tentando URL direta na raiz da API local');
           const rootResponse = await fetch(`${API_BASE}/${comercioId}`);
           if (rootResponse.ok) {
             comentarios = await rootResponse.json();
-            addDebug(`Sucesso com URL na raiz! ${comentarios.length} comentários carregados`);
             return;
-          } else {
-            addDebug(`Falha com URL na raiz - Status: ${rootResponse.status}`);
           }
         } catch (err) {
-          addDebug(`Erro com URL na raiz: ${err}`);
+          // Silenciosamente ir para a próxima tentativa
         }
         
         try {
@@ -426,13 +384,10 @@
           const response = await fetch(`${API_BASE}/comentarios/${comercioId}`);
           if (response.ok) {
             comentarios = await response.json();
-            addDebug(`Sucesso! ${comentarios.length} comentários carregados`);
             return;
-          } else {
-            addDebug(`Falha com /comentarios/ - Status: ${response.status}`);
           }
         } catch (err) {
-          addDebug(`Erro ao buscar com /comentarios/: ${err}`);
+          // Silenciosamente ir para a próxima tentativa
         }
         
         try {
@@ -440,86 +395,62 @@
           const response = await fetch(`${API_BASE}/comentarioos/${comercioId}`);
           if (response.ok) {
             comentarios = await response.json();
-            addDebug(`Sucesso com /comentarioos/! ${comentarios.length} comentários carregados`);
             return;
-          } else {
-            addDebug(`Falha com /comentarioos/ - Status: ${response.status}`);
           }
         } catch (err) {
-          addDebug(`Erro ao buscar com /comentarioos/: ${err}`);
+          // Silenciosamente ir para a próxima tentativa
         }
       }
       
       // Se chegou aqui, precisamos buscar os comerciantes e encontrar o ID correto
-      addDebug('Buscando lista de comerciantes para encontrar o ID correto');
-      
       const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       const apiUrl = isLocal
         ? `http://localhost:3000/comerciantes`
         : `https://api-backend-production-5b22.up.railway.app/comerciantes`;
       
-      addDebug(`Fazendo requisição para: ${apiUrl}`);
       const comerciosResponse = await fetch(apiUrl);
       
       if (!comerciosResponse.ok) {
-        addDebug(`Erro ao buscar comerciantes: ${comerciosResponse.status}`);
         throw new Error(`Erro ao buscar lista de comércios: ${comerciosResponse.status}`);
       }
       
       let comercios = [];
       try {
         comercios = await comerciosResponse.json();
-        addDebug(`Comerciantes carregados: ${comercios.length}`);
       } catch (e) {
-        addDebug(`Erro ao parsear resposta: ${e}`);
         throw new Error('Erro ao processar resposta da API');
       }
       
       // Encontrar o comércio pelo slug
-      addDebug(`Buscando comércio com slug: ${comercioSlug}`);
       const comercio = comercios.find((c: any) => c.slug === comercioSlug);
       
       if (!comercio) {
-        addDebug(`Comércio não encontrado pelo slug: ${comercioSlug}`);
         throw new Error('Comércio não encontrado');
       }
-      
-      addDebug(`Comércio encontrado: id=${comercio.id}`);
       
       // Agora usar o ID do comércio para buscar os comentários
       try {
         // Tentar primeiro com comentarios
-        addDebug(`Tentando buscar comentários com URL: /comentarios/${comercio.id}`);
         const response = await fetch(`${API_BASE}/comentarios/${comercio.id}`);
         if (response.ok) {
           comentarios = await response.json();
-          addDebug(`Sucesso! ${comentarios.length} comentários carregados`);
           return;
-        } else {
-          addDebug(`Resposta não ok: ${response.status}`);
         }
       } catch (e) {
-        addDebug(`Erro na primeira tentativa: ${e}`);
-      }
-      
-      // Tentar com a URL antiga
-      try {
-        addDebug(`Tentando com URL fallback: /comentarioos/${comercio.id}`);
-        const fallbackResponse = await fetch(`${API_BASE}/comentarioos/${comercio.id}`);
-        if (!fallbackResponse.ok) {
-          addDebug(`Resposta fallback não ok: ${fallbackResponse.status}`);
-          throw new Error(`Erro HTTP: ${fallbackResponse.status}`);
+        // Tentar com a URL antiga
+        try {
+          const fallbackResponse = await fetch(`${API_BASE}/comentarioos/${comercio.id}`);
+          if (!fallbackResponse.ok) {
+            throw new Error(`Erro HTTP: ${fallbackResponse.status}`);
+          }
+          comentarios = await fallbackResponse.json();
+        } catch (e) {
+          throw e;
         }
-        comentarios = await fallbackResponse.json();
-        addDebug(`Sucesso com fallback! ${comentarios.length} comentários carregados`);
-      } catch (e) {
-        addDebug(`Erro também na segunda tentativa: ${e}`);
-        throw e;
       }
       
     } catch (e) {
       error = 'Não foi possível carregar os comentários do servidor. Exibindo dados simulados.';
-      addDebug(`Erro final: ${e}. Usando comentários simulados.`);
       comentarios = [...comentariosSimulados];
       usandoSimulacao = true;
     } finally {
@@ -546,11 +477,9 @@
     try {
       // Forçar uso da API local para testes
       const API_BASE = 'http://localhost:3000';
-      addDebug(`Usando API local para envio: ${API_BASE}`);
       
       // Se estamos no modo simulado, apenas adicionamos localmente
       if (usandoSimulacao) {
-        addDebug('Usando modo simulado para adicionar comentário');
         const novoItem: Comentario = {
           id: `local-${Date.now()}`,
           usuario_nome: currentUser.name || novoComentario.usuario_nome,
@@ -574,11 +503,9 @@
       }
       
       let idComercio = comercioId;
-      addDebug(`Iniciando envio de comentário para comercioId=${idComercio}`);
       
       // Se não temos o ID do comércio, vamos buscá-lo
       if (!idComercio || idComercio === comercioSlug) {
-        addDebug('ID do comércio não disponível, buscando da API');
         // Buscar todos os comerciantes e filtrar pelo slug
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const apiUrl = isLocal
@@ -587,23 +514,19 @@
         
         const comerciosResponse = await fetch(apiUrl);
         if (!comerciosResponse.ok) {
-          addDebug(`Erro ao buscar comerciantes: ${comerciosResponse.status}`);
           throw new Error('Erro ao buscar lista de comércios');
         }
         
         const comercios = await comerciosResponse.json();
-        addDebug(`${comercios.length} comerciantes carregados`);
         
         // Encontrar o comércio pelo slug
         const comercio = comercios.find((c: any) => c.slug === comercioSlug);
         
         if (!comercio || !comercio.id) {
-          addDebug(`Comércio não encontrado pelo slug: ${comercioSlug}`);
           throw new Error('Comércio não encontrado');
         }
         
         idComercio = comercio.id;
-        addDebug(`ID do comércio encontrado: ${idComercio}`);
       }
       
       // Criar objeto de comentário para envio
@@ -617,12 +540,9 @@
         usuario_photoURL: currentUser.photoURL
       };
       
-      addDebug(`Dados do comentário: ${JSON.stringify(comentarioData)}`);
-      
       // Tentar enviar o comentário com a nova URL primeiro
       try {
         // Tentar enviar para a raiz
-        addDebug('Tentando enviar para URL raiz local');
         const rootResponse = await fetch(`${API_BASE}/`, {
           method: 'POST',
           headers: {
@@ -632,7 +552,6 @@
         });
         
         if (rootResponse.ok) {
-          addDebug('Comentário enviado com sucesso (URL raiz)!');
           successMessage = 'Comentário enviado com sucesso!';
           novoComentario = {
             usuario_nome: currentUser.name || '',
@@ -642,25 +561,23 @@
           };
           await carregarComentarios();
           return;
-        } else {
-          addDebug(`Erro ao enviar para URL raiz: ${rootResponse.status}`);
         }
       } catch (err) {
-        addDebug(`Erro na requisição para URL raiz: ${err}`);
-      }
-      
-      try {
-        addDebug('Tentando enviar para /comentarios local');
-        const response = await fetch(`${API_BASE}/comentarios`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(comentarioData)
-        });
-        
-        if (response.ok) {
-          addDebug('Comentário enviado com sucesso!');
+        // Fallback: tentar com a URL antiga
+        try {
+          // Tentando enviar para /comentarioos local (fallback)
+          const fallbackResponse = await fetch(`${API_BASE}/comentarioos`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(comentarioData)
+          });
+
+          if (!fallbackResponse.ok) {
+            throw new Error(`Erro ao enviar comentário: ${fallbackResponse.status}`);
+          }
+
           successMessage = 'Comentário enviado com sucesso!';
           novoComentario = {
             usuario_nome: currentUser.name || '',
@@ -669,43 +586,13 @@
             avaliacao: 5
           };
           await carregarComentarios();
-          return;
-        } else {
-          addDebug(`Erro ao enviar para /comentarios: ${response.status}`);
+        } catch (e) {
+          throw e;
         }
-      } catch (err) {
-        addDebug(`Erro na requisição para /comentarios: ${err}`);
       }
-      
-      // Fallback: tentar com a URL antiga
-      addDebug('Tentando enviar para /comentarioos local (fallback)');
-      const fallbackResponse = await fetch(`${API_BASE}/comentarioos`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(comentarioData)
-      });
-
-      if (!fallbackResponse.ok) {
-        addDebug(`Erro no fallback: ${fallbackResponse.status}`);
-        throw new Error(`Erro ao enviar comentário: ${fallbackResponse.status}`);
-      }
-
-      addDebug('Comentário enviado com sucesso via fallback!');
-      successMessage = 'Comentário enviado com sucesso!';
-      novoComentario = {
-        usuario_nome: currentUser.name || '',
-        usuario_email: currentUser.email || '',
-        comentario: '',
-        avaliacao: 5
-      };
-      await carregarComentarios();
     } catch (e) {
       // Se falhou, usamos o modo simulado
       if (!usandoSimulacao) {
-        addDebug(`Erro ao enviar comentário para o servidor. Adicionando localmente.`);
-        
         const novoItem: Comentario = {
           id: `local-${Date.now()}`,
           usuario_nome: currentUser.name || novoComentario.usuario_nome,
@@ -728,7 +615,6 @@
         usandoSimulacao = true;
       } else {
         error = 'Erro ao enviar comentário';
-        addDebug(`Erro final ao adicionar comentário: ${e}`);
       }
     } finally {
       isSubmitting = false;
@@ -736,7 +622,6 @@
   }
 
   onMount(() => {
-    addDebug(`Componente montado. comercioId=${comercioId}, comercioSlug=${comercioSlug}, usuário logado=${isAuthenticated}`);
     carregarComentarios();
     // Preencher o formulário com dados do usuário logado se disponível
     preencherFormularioComUsuarioLogado();
@@ -753,14 +638,6 @@
     <div class="mb-4 p-3 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-lg">
       <p class="text-sm font-medium">⚠️ Exibindo dados simulados. Os dados não estão sendo salvos no servidor.</p>
     </div>
-  {/if}
-
-  <!-- Depuração oculta -->
-  {#if error && debugInfo}
-    <details class="mb-4 p-2 bg-gray-100 dark:bg-gray-900 text-xs border border-gray-300 dark:border-gray-700 rounded">
-      <summary class="cursor-pointer font-mono">Informações de depuração</summary>
-      <pre class="mt-2 p-2 overflow-auto">{debugInfo}</pre>
-    </details>
   {/if}
 
   <!-- Formulário de Novo Comentário -->
